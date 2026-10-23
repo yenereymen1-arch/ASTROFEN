@@ -3,16 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İlk Web Sitem</title>
+    <title>FENX - 5. Sınıf Fen Konuları</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="kart">
-        <h1>FENX</h1>
-        <p>BURADA 5. SINIF FEN BİLİMLERİ DERSİ İÇİN BİR SÜRÜ KONU VAR HADİ SENDE YENİ KONULAR ÖĞREN</p>
-        <a href="https://github.com" target="_blank">KONULARA GÖZ AT</a>
+        <h1>FENX 🚀</h1>
+        <p>5. Sınıf Fen Bilimleri ders konularını görmek için aşağıdaki butona tıkla!</p>
+        
+        <!-- Buton -->
+        <button onclick="konulariGoster()" class="buton">5. Sınıf Konularını Göster</button>
+
+        <!-- Tıklayınca Açılacak 5. Sınıf Konu Listesi -->
+        <div id="konuListesi" class="gizli">
+            <h2>5. Sınıf Fen Bilimleri Konuları</h2>
+
+            <div class="unite">
+                <h3>1. Ünite: Güneş, Dünya ve Ay</h3>
+                <ul>
+                    <li>☀️ Güneş'in Yapısı ve Özellikleri</li>
+                    <li>🌕 Ay'ın Yapısı ve Özellikleri</li>
+                    <li>🔄 Ay'ın Hareketleri ve Evreleri</li>
+                    <li>🌍 Güneş, Dünya ve Ay'ın Birbirine Göre Hareketleri</li>
+                </ul>
+            </div>
+
+            <div class="unite">
+                <h3>2. Ünite: Canlılar Dünyası</h3>
+                <ul>
+                    <li>🔬 Mikroskobik Canlılar</li>
+                    <li>🍄 Mantarlar</li>
+                    <li>🌱 Bitkiler</li>
+                    <li>🐾 Hayvanlar</li>
+                </ul>
+            </div>
+
+            <div class="unite">
+                <h3>3. Ünite: Kuvvetin Uygulanması</h3>
+                <ul>
+                    <li>📏 Kuvvetin Büyüklüğü ve Dinamometre</li>
+                    <li>🛷 Sürtünme Kuvveti (Hava ve Su Direnci)</li>
+                </ul>
+            </div>
+
+            <div class="unite">
+                <h3>4. Ünite: Madde ve Değişim</h3>
+                <ul>
+                    <li>🧊 Maddenin Halleri ve Hal Değişimi</li>
+                    <li>🔥 Isı ve Sıcaklık</li>
+                    <li>🌡️ Maddenin Ayırt Edici Özellikleri</li>
+                    <li>🎈 Genleşme ve Büzülme</li>
+                </ul>
+            </div>
+
+            <div class="unite">
+                <h3>5. Ünite: Işığın Yayılması</h3>
+                <ul>
+                    <li>💡 Işığın Yayılması</li>
+                    <li>🪞 Işığın Yansıması ve Yansıma Kanunları</li>
+                    <li>📦 Işığın Madde ile Etkileşimi (Saydam/Yarı Saydam/Opak)</li>
+                    <li>👥 Tam Gölge Oluşumu</li>
+                </ul>
+            </div>
+
+            <div class="unite">
+                <h3>6. Ünite: İnsan ve Çevre</h3>
+                <ul>
+                    <li>🌿 Biyoçeşitlilik</li>
+                    <li>☣️ Çevre Sorunları ve Kirlilik</li>
+                    <li>♻️ İnsan ve Çevre Etkileşimi</li>
+                </ul>
+            </div>
+
+            <div class="unite">
+                <h3>7. Ünite: Elektrik Devre Elemanları</h3>
+                <ul>
+                    <li>🔌 Basit Elektrik Devreleri</li>
+                    <li>💡 Ampul Parlaklığını Etkileyen Değişkenler</li>
+                </ul>
+            </div>
+        </div>
     </div>
 
+    <!-- Buton Tıklama Fonksiyonu -->
+    <script>
+        function konulariGoster() {
+            var liste = document.getElementById("konuListesi");
+            if (liste.style.display === "none" || liste.style.display === "") {
+                liste.style.display = "block";
+            } else {
+                liste.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
