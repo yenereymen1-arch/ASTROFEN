@@ -192,6 +192,7 @@
             var oyunAlani = document.getElementById("oyunAlani");
             oyunAlani.style.display = "block";
             document.getElementById("oyunBaslik").innerText = "🎮 " + uniteNo + ". Ünite - 20 Soruluk Fen Bilimleri Testi";
+            document.getElementById("skorYazisi").innerText = ""; // Eski skoru temizle
             
             let sorular = [
                 "Güneş'in katmanları içinde en sıcak katman hangisidir?",
@@ -219,19 +220,19 @@
             let seceneklerA = ["Işık küre", "Hilal", "Isı ve ışık yayar", "24 saat", "Teleskop", "Bitki", "Elma ağacı", "Kilogram", "Terazi", "Aynı yöndedir", "Donma", "Isı bir enerjidir", "Büzülme", "Eğrisel yolla", "Saydam madde", "Birbirine eşittir", "Geri dönüşüm kutusu kullanmak", "Erozyon", "Ampul", "Pil sayısını azaltmak"];
             let seceneklerB = ["Çekirdek", "Dolunay", "Dünyanın uydusudur", "1 hafta", "Büyüteç", "Mantar", "Eğrelti otu", "Newton (N)", "Termometre", "Zıt yöndedir", "Erime", "Sıcaklık bir enerji türüdür", "Genleşme", "Dairesel yolla", "Yarı saydam madde", "Biri diğerinden büyüktür", "Hava kirliliği", "Biyoçeşitlilik", "Kablo", "Pil sayısını artırmak"];
             let seceneklerC = ["Renk küre", "Şişkin ay", "Atmosferi çok kalındır", "29.5 gün", "Mikroskop", "Hayvan", "Gül", "Metre", "Dinamometre", "Dik yöndedir", "Buharlaşma", "Sıcaklık termometre ile ölçülür", "Donma", "Doğrusal yolla", "Opak madde", "Toplamı 90 derecedir", "Küresel ısınma", "Ekosistem", "Pil", "Ampul sayısını artırmak"];
-            let seceneklerD = ["Taç küre", "Son hilal", "Üzerinde su bulunur", "365 gün", "Dürbün", "Mikroskobik canlı", "Papatya", "Derece", "Kronometre", "Etkisi yoktur", "Yoğuşma", "Isı kalori ile ölçülür", "Erime", "Dalgalar halinde", "Esnek madde", "İlişkisi yoktur", "Su kirliliği", "Adaptasyon", "Anahtar", "Kabloyu uzatmak"];
+            let seceneklerD = ["Taç küre", "Son hilal", "Üzerinde su bulunur", "365 gün", "Dürbün", "Papatya", "Derece", "Kronometre", "Etkisi yoktur", "Yoğuşma", "Isı kalori ile ölçülür", "Erime", "Dalgalar halinde", "Esnek madde", "İlişkisi yoktur", "Su kirliliği", "Adaptasyon", "Anahtar", "Kabloyu uzatmak"];
 
             let htmlIcerik = "";
             for(let i = 0; i < 20; i++) {
-                let soruNumarasi = i + 1;
+                let soruNo = i + 1;
                 htmlIcerik += `
                     <div style="background:white; padding:15px; margin-bottom:15px; border-radius:8px; border: 1px solid #cbd5e1;">
-                        <p><strong>${soruNumarasi}. Soru: ${soruMetniKontrol(sorular, i)}</strong></p>
-                        <label><input type="radio" name="s${soruNumarasi}" value="A"> A) ${seceneklerA[i]}</label><br>
-                        <label><input type="radio" name="s${soruNumarasi}" value="B"> B) ${seceneklerB[i]}</label><br>
-                        <label><input type="radio" name="s${soruNumarasi}" value="C"> C) ${seceneklerC[i]}</label><br>
-                        <label><input type="radio" name="s${soruNumarasi}" value="D"> D) ${seceneklerD[i]}</label><br>
-                        <a href="http://www.youtube.com/watch?v=mGBJOFvH8aw" target="_blank" class="video-buton">🎥 ${soruNumarasi}. Sorunun Video Çözümünü İzle</a>
+                        <p><strong>${soruNo}. Soru: ${sorular[i]}</strong></p>
+                        <label><input type="radio" name="soru${soruNo}" value="A"> A) ${seceneklerA[i]}</label><br>
+                        <label><input type="radio" name="soru${soruNo}" value="B"> B) ${seceneklerB[i]}</label><br>
+                        <label><input type="radio" name="soru${soruNo}" value="C"> C) ${seceneklerC[i]}</label><br>
+                        <label><input type="radio" name="soru${soruNo}" value="D"> D) ${seceneklerD[i]}</label><br>
+                        <a href="http://www.youtube.com/watch?v=mGBJOFvH8aw" target="_blank" class="video-buton">🎥 ${soruNo}. Sorunun Video Çözümünü İzle</a>
                     </div>
                 `;
             }
@@ -239,21 +240,19 @@
             oyunAlani.scrollIntoView({ behavior: 'smooth' });
         }
 
-        function soruMetniKontrol(dizi, index) {
-            return dizi[index];
-        }
-
         function cevabiKontrolEt() {
             let dogruCevaplar = ["B","B","A","C","C","B","B","B","C","A","C","B","B","C","C","A","A","B","C","B"];
             let dogruSayisi = 0;
+            
             for(let i = 1; i <= 20; i++) {
-                let secilen = document.querySelector('input[name="s' + i + '"]:checked');
+                let secilen = document.querySelector('input[name="soru' + i + '"]:checked');
                 if(secilen && secilen.value === dogruCevaplar[i-1]) {
                     dogruSayisi++;
                 }
             }
+            
             let toplamPuan = dogruSayisi * 5;
-            document.getElementById("skorYazisi").innerText = "🎉 Test Bitti! Doğru Sayısı: " + dogruSayisi + " / 20 | Toplam Puanın: " + toplamPuan + " / 100 🏆";
+            document.getElementById("skorYazisi.innerText = "🎉 Test Bitti! Doğru Sayısı: " + dogruSayisi + " / 20 | Toplam Puanın: " + toplamPuan + " / 100 🏆";
             document.getElementById("skorYazisi").style.color = "#16a34a";
         }
 
