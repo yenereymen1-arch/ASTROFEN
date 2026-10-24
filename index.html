@@ -63,15 +63,15 @@
         }
         .soru-gorsel {
             width: 100%;
-            height: 180px;
+            max-height: 250px;
             object-fit: cover;
             border-radius: 8px;
-            margin: 10px 0;
+            margin: 12px 0;
             border: 1px solid #cbd5e1;
             display: block;
         }
         .sonuc-bilgi {
-            margin-top: 5px;
+            margin-top: 8px;
             font-size: 13px;
             font-weight: bold;
         }
@@ -93,10 +93,10 @@
             <div class="unite">
                 <h3>1. Ünite: Güneş, Dünya ve Ay</h3>
                 <ul>
-                    <li>☀️ Güneş'in Yapısı ve Özellikleri</li>
-                    <li>🌕 Ay'ın Yapısı ve Özellikleri</li>
-                    <li>🔄 Ay'ın Hareketleri ve Evreleri</li>
-                    <li>🌍 Güneş, Dünya ve Ay'ın Birbirine Göre Hareketleri</li>
+                    <li>Güneş'in Yapısı ve Özellikleri</li>
+                    <li>Ay'ın Yapısı ve Özellikleri</li>
+                    <li>Ay'ın Hareketleri ve Evreleri</li>
+                    <li>Güneş, Dünya ve Ay'ın Birbirine Göre Hareketleri</li>
                 </ul>
                 <button onclick="oyunuAc(1)" class="buton soru-buton">🎮 1. Ünite Testini Çöz</button>
             </div>
@@ -105,24 +105,24 @@
             <div class="unite">
                 <h3>2. Ünite: Canlılar Dünyası</h3>
                 <ul>
-                    <li>🔬 Mikroskobik Canlılar</li>
-                    <li>🍄 Mantarlar</li>
-                    <li>🌱 Bitkiler</li>
-                    <li>🐾 Hayvanlar</li>
+                    <li>Mikroskobik Canlılar</li>
+                    <li>Mantarlar</li>
+                    <li>Bitkiler</li>
+                    <li>Hayvanlar</li>
                 </ul>
                 <button onclick="oyunuAc(2)" class="buton soru-buton">🎮 2. Ünite Testini Çöz</button>
             </div>
 
             <!-- 20 SORULUK OYUN TESTİ ALANI -->
             <div id="oyunAlani" class="gizli oyun-kutu">
-                <h3 id="oyunBaslik" style="color: #2563eb;">🏆 20 Soruluk Fen Bilimleri Testi</h3>
-                <div id="soruKutusu" style="max-height: 500px; overflow-y: auto; padding-right: 10px;">
-                    <!-- Sorular buraya yüklenecek -->
+                <h3 id="oyunBaslik" style="color: #2563eb;">20 Soruluk Fen Bilimleri Testi</h3>
+                <div id="soruKutusu" style="max-height: 550px; overflow-y: auto; padding-right: 10px;">
+                    <!-- Sorular ve görseller buraya yüklenecek -->
                 </div>
                 <button onclick="cevabiKontrolEt()" class="buton" style="background-color: #10b981; margin-top: 15px;">Sonuçları Gör ve Puanını Hesapla 🎯</button>
                 <button onclick="oyunuKapat()" class="buton" style="background-color: #64748b; margin-top: 10px;">Testi Kapat ↩️</button>
                 
-                <!-- Özet Sonuç Ekranı -->
+                <!-- Özet Sonuc Ekranı -->
                 <div id="skorYazisi" style="font-weight: bold; margin-top: 20px; font-size: 16px; line-height: 1.6; background: white; padding: 15px; border-radius: 8px; border: 2px solid #10b981; display: none;"></div>
             </div>
         </div>
@@ -143,7 +143,7 @@
         function oyunuAc(uniteNo) {
             var oyunAlani = document.getElementById("oyunAlani");
             oyunAlani.style.display = "block";
-            document.getElementById("oyunBaslik").innerText = "🎮 " + uniteNo + ". Ünite - 20 Soruluk Fen Bilimleri Testi";
+            document.getElementById("oyunBaslik").innerText = uniteNo + ". Ünite - 20 Soruluk Fen Bilimleri Testi";
             let skorKutusu = document.getElementById("skorYazisi");
             skorKutusu.style.display = "none";
             skorKutusu.innerHTML = "";
@@ -172,7 +172,7 @@
                     "Ay'ın atmosferi ile ilgili aşağıdakilerden hangisi söylenebilir?",
                     "Güneş'in büyüklüğü Dünya ile karşılaştırıldığında nasıldır?",
                     "İlk dördün evresinden yaklaşık bir hafta sonra hangi evre görülür?",
-                    "Ay'ın ışık kaynakı durumu nasıldir?",
+                    "Ay'ın ışık kaynakı durumu nasıldır?",
                     "Güneş tutulması hangi evrede gerçekleşir?",
                     "Ay'ın Dünya'dan bakıldığında hep aynı yüzünün görülmesinin sebebi nedir?",
                     "Yeni ay evresinden sonra görülen ilk ana evre hangisidir?",
@@ -185,28 +185,28 @@
                 seceneklerD = ["Taç küre", "Son hilal", "Üzerinde su bulunur", "365 gün", "Düz", "Tepe", "Meteor", "12 saat", "Mars", "Hiçbiri", "Hareketsizdir", "Hava tabakası yoktur", "Dünya'dan küçüktür", "Hilal", "Hiç ışık yaymaz", "İlk dördün", "Dünya'nın uydusu olmaması", "Son dördün", "Karbondioksit", "365 gün"];
                 dogruCevaplar = ["B","B","A","C","B","A","A","B","C","A","B","B","B","A","B","A","A","B","B","A"];
                 
-                // 1. Üniteye özel gerçek fotoğraf bağlantıları
+                // 1. Ünite - Güneş, Ay ve Uzay Konulu Gerçek Fotoğraflar
                 gorseller = [
-                    "https://images.unsplash.com/photo-1532693322450-2cb5c511064d?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1532693322450-2cb5c511064d?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=600&auto=format&fit=crop&q=80"
+                    "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=800&auto=format&fit=crop&q=80", // Güneş katmanları
+                    "https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=800&auto=format&fit=crop&q=80", // Ay evreleri
+                    "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=800&auto=format&fit=crop&q=80", // Güneş ışığı
+                    "https://images.unsplash.com/photo-1532693322450-2cb5c511064d?w=800&auto=format&fit=crop&q=80", // Dünya ve Ay dolanımı
+                    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80", // Küresel Güneş
+                    "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=800&auto=format&fit=crop&q=80", // Ay Kraterleri
+                    "https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=800&auto=format&fit=crop&q=80", // Güneş Yıldız
+                    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&auto=format&fit=crop&q=80", // Ay dönme
+                    "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&auto=format&fit=crop&q=80", // Dünya ve Uydusu Ay
+                    "https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=800&auto=format&fit=crop&q=80", // Hilal
+                    "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=800&auto=format&fit=crop&q=80", // Güneş Dönüşü
+                    "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=800&auto=format&fit=crop&q=80", // Atmosfer
+                    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80", // Güneş & Dünya Kıyaslama
+                    "https://images.unsplash.com/photo-1532693322450-2cb5c511064d?w=800&auto=format&fit=crop&q=80", // Dolunay
+                    "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=800&auto=format&fit=crop&q=80", // Yansıyan Işık
+                    "https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=800&auto=format&fit=crop&q=80", // Güneş Tutulması
+                    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&auto=format&fit=crop&q=80", // Ay'ın Yüzü
+                    "https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=800&auto=format&fit=crop&q=80", // İlk Dördün
+                    "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=800&auto=format&fit=crop&q=80", // Hidrojen Gazı Güneş
+                    "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=800&auto=format&fit=crop&q=80"  // Evre Takvimi
                 ];
             } else {
                 sorular = [
@@ -237,28 +237,28 @@
                 seceneklerD = ["Dürbün", "Mikroskobik canlı", "Papatya", "Mantarlar", "Kuş", "Tek hücreli bitki", "Güneş enerjisiyle yapar", "Hepsi", "Parazit mantarlar", "Gövde", "İnek", "Buzulların üzerinde", "Mantarlar", "Karanlık", "Kuşlar", "Amip", "Ağaç", "Aslan mantarı", "Yarasa", "Sistem"];
                 dogruCevaplar = ["C","B","B","B","B","B","B","D","C","B","B","A","A","D","C","B","B","D","B","C"];
                 
-                // 2. Üniteye özel gerçek fotoğraf bağlantıları
+                // 2. Ünite - Canlılar Dünyası Konulu Gerçek Fotoğraflar
                 gorseller = [
-                    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1508873696983-2df5c92063c7?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1557008072-7f2a7fd54d3d?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1508873696983-2df5c92063c7?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=600&auto=format&fit=crop&q=80",
-                    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&auto=format&fit=crop&q=80"
+                    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop&q=80", // Mikroskop
+                    "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=800&auto=format&fit=crop&q=80", // Şapkalı Mantarlar
+                    "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&auto=format&fit=crop&q=80", // Eğrelti Otu (Çiçeksiz)
+                    "https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?w=800&auto=format&fit=crop&q=80", // Süt ve Yoğurt Bakterisi
+                    "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=800&auto=format&fit=crop&q=80", // Balık (Omurgalı)
+                    "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=800&auto=format&fit=crop&q=80", // Çiçekli Bitki
+                    "https://images.unsplash.com/photo-1508873696983-2df5c92063c7?w=800&auto=format&fit=crop&q=80", // Mantarlar
+                    "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=800&auto=format&fit=crop&q=80", // Bakteri Hastalık
+                    "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=800&auto=format&fit=crop&q=80", // Şapkalı Mantar
+                    "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&auto=format&fit=crop&q=80", // Çiçek Yapısı
+                    "https://images.unsplash.com/photo-1557008072-7f2a7fd54d3d?w=800&auto=format&fit=crop&q=80", // Omurgasızlar
+                    "https://images.unsplash.com/photo-1508873696983-2df5c92063c7?w=800&auto=format&fit=crop&q=80", // Küf Mantarı
+                    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop&q=80", // Bakteriler
+                    "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=800&auto=format&fit=crop&q=80", // Bitkiler
+                    "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=800&auto=format&fit=crop&q=80", // Kurbağa
+                    "https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?w=800&auto=format&fit=crop&q=80", // Maya Canlısı
+                    "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&auto=format&fit=crop&q=80", // Yosunlar
+                    "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=800&auto=format&fit=crop&q=80", // Mantar
+                    "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=800&auto=format&fit=crop&q=80", // Yılan Sürüngen
+                    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop&q=80"  // Hücre Mikroskop
                 ];
             }
 
@@ -268,7 +268,7 @@
                 htmlIcerik += `
                     <div style="background:white; padding:15px; margin-bottom:15px; border-radius:8px; border: 1px solid #cbd5e1;">
                         <p><strong>${soruNo}. Soru: ${sorular[i]}</strong></p>
-                        <img src="${gorseller[i]}" alt="Soru Görseli" class="soru-gorsel">
+                        <img src="${gorseller[i]}" alt="Soru Konu Görseli" class="soru-gorsel">
                         <label><input type="radio" name="soru${soruNo}" value="A"> A) ${seceneklerA[i]}</label><br>
                         <label><input type="radio" name="soru${soruNo}" value="B"> B) ${seceneklerB[i]}</label><br>
                         <label><input type="radio" name="soru${soruNo}" value="C"> C) ${seceneklerC[i]}</label><br>
