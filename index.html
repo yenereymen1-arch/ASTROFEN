@@ -36,7 +36,6 @@
         }
         .buton:hover { opacity: 0.9; }
         .gizli { display: none; margin-top: 25px; text-align: left; }
-        .gizli.acik { display: block; }
         .unite {
             margin-bottom: 20px;
             background-color: #f8fafc;
@@ -132,7 +131,11 @@
     <script>
         function konulariAcKapat() {
             var liste = document.getElementById("konuListesi");
-            liste.classList.toggle("acik");
+            if (liste.style.display === "block") {
+                liste.style.display = "none";
+            } else {
+                liste.style.display = "block";
+            }
         }
 
         function oyunuAc(uniteNo) {
@@ -151,7 +154,6 @@
             let dogruCevaplar = [];
 
             if (uniteNo === 1) {
-                sorulasResim = "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=600&auto=format&fit=crop&q=80"; // Güneş uzay görseli
                 sorular = [
                     "Güneş'in katmanları içinde en sıcak katman hangisidir?",
                     "Ay'ın ana evrelerinden biri aşağıdakilerden hangisidir?",
@@ -209,7 +211,6 @@
                 dogruCevaplar = ["C","B","B","B","B","B","B","D","C","B","B","A","A","D","C","B","B","D","B","C"];
             }
 
-            // Her soruya özel görseller (Fen bilimleri temalı görseller)
             let gorseller = [
                 "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&auto=format&fit=crop&q=80",
                 "https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=600&auto=format&fit=crop&q=80",
@@ -243,4 +244,27 @@
                         <label><input type="radio" name="soru${soruNo}" value="A"> A) ${seceneklerA[i]}</label><br>
                         <label><input type="radio" name="soru${soruNo}" value="B"> B) ${seceneklerB[i]}</label><br>
                         <label><input type="radio" name="soru${soruNo}" value="C"> C) ${seceneklerC[i]}</label><br>
-                        <label><input type="radio" name="soru${soruNo}" value="D"> D) ${secenekler
+                        <label><input type="radio" name="soru${soruNo}" value="D"> D) ${seceneklerD[i]}</label><br>
+                        <div id="sonucSoru${soruNo}" class="sonuc-bilgi"></div>
+                    </div>
+                `;
+            }
+            window.aktifDogruCevaplar = dogruCevaplar;
+
+            document.getElementById("soruKutusu").innerHTML = htmlIcerik;
+            oyunAlani.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function cevabiKontrolEt() {
+            let dogruCevaplar = window.aktifDogruCevaplar;
+            let dogruSayisi = 0;
+            let yanlisSayisi = 0;
+            
+            for(let i = 1; i <= 20; i++) {
+                let secilen = document.querySelector('input[name="soru' + i + '"]:checked');
+                let sonucDiv = document.getElementById("sonucSoru" + i);
+                
+                let dogruHarf = dogruCevaplar[i-1];
+
+                if(secilen) {
+                    if(secilen.value ===
