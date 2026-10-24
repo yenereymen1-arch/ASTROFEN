@@ -172,7 +172,8 @@
                 </div>
                 <button onclick="cevabiKontrolEt()" class="buton" style="background-color: #10b981; margin-top: 15px;">Sonuçları Gör ve Puanını Hesapla 🎯</button>
                 <button onclick="oyunuKapat()" class="buton" style="background-color: #64748b; margin-top: 10px;">Testi Kapat ↩️</button>
-                <p id="skorYazisi" style="font-weight: bold; margin-top: 15px; font-size: 16px;"></p>
+                <!-- Skor yazısı artık butonların hemen altında net bir şekilde görünecek -->
+                <div id="skorYazisi" style="font-weight: bold; margin-top: 15px; font-size: 18px; color: #16a34a;"></div>
             </div>
         </div>
     </div>
@@ -227,7 +228,7 @@
                         <label><input type="radio" name="soru${soruNo}" value="B"> B) ${seceneklerB[i]}</label><br>
                         <label><input type="radio" name="soru${soruNo}" value="C"> C) ${seceneklerC[i]}</label><br>
                         <label><input type="radio" name="soru${soruNo}" value="D"> D) ${seceneklerD[i]}</label><br>
-                        <div class="cozum-notu">💡 <strong>Çözüm Notu:</strong> Bu sorunun doğru yanıtı B seçeneğidir. Konu tekrarı yaparak detayları öğrenebilirsin!</div>
+                        <div class="cozum-notu">💡 <strong>Çözüm Notu:</strong> Bu sorunun doğru yanıtı B seçeneğidir.</div>
                     </div>
                 `;
             }
@@ -247,7 +248,7 @@
             }
             
             let toplamPuan = dogruSayisi * 5;
-            document.getElementById("skorYazisi").innerText = "🎉 Test Bitti! Doğru Sayısı: " + dogruSayisi + " / 20 | Toplam Puanın: " + toplamPuan + " / 100 🏆";
+            document.getElementById("skorYazisi.innerText = "🎉 Doğru Sayısı: " + dogruSayisi + " / 20 | Toplam Puanın: " + toplamPuan + " / 100 🏆";
         }
 
         function oyunuKapat() {
