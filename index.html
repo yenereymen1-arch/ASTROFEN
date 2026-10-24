@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FENX - 5. Sınıf Fen Konuları</title>
+    <title>FENX - 5. Sınıf Fen Bilimleri ve Oyun Testi</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="kart">
         <h1>FENX 🚀</h1>
-        <p>5. Sınıf Fen Bilimleri ders konularını görmek için aşağıdaki butona tıkla!</p>
+        <p>5. Sınıf Fen Bilimleri ders konularını görmek için aşağıdaki ana butona tıkla!</p>
         
-        <!-- Buton -->
-        <button onclick="konulariGoster()" class="buton">5. Sınıf Konularını Göster</button>
+        <!-- Ana Konuları Açma Butonu -->
+        <button onclick="konulariGoster()" class="buton ana-buton">5. Sınıf Konularını Göster</button>
 
-        <!-- Tıklayınca Açılacak 5. Sınıf Konu Listesi -->
+        <!-- Tıklayınca Açılacak Tüm Üniteler Alanı -->
         <div id="konuListesi" class="gizli">
-            <h2>5. Sınıf Fen Bilimleri Konuları</h2>
+            <h2>5. Sınıf Fen Bilimleri Konuları ve Testleri</h2>
 
+            <!-- 1. ÜNİTE -->
             <div class="unite">
                 <h3>1. Ünite: Güneş, Dünya ve Ay</h3>
                 <ul>
@@ -26,8 +27,10 @@
                     <li>🔄 Ay'ın Hareketleri ve Evreleri</li>
                     <li>🌍 Güneş, Dünya ve Ay'ın Birbirine Göre Hareketleri</li>
                 </ul>
+                <button onclick="oyunuAc(1)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
             </div>
 
+            <!-- 2. ÜNİTE -->
             <div class="unite">
                 <h3>2. Ünite: Canlılar Dünyası</h3>
                 <ul>
@@ -36,16 +39,20 @@
                     <li>🌱 Bitkiler</li>
                     <li>🐾 Hayvanlar</li>
                 </ul>
+                <button onclick="oyunuAc(2)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
             </div>
 
+            <!-- 3. ÜNİTE -->
             <div class="unite">
                 <h3>3. Ünite: Kuvvetin Uygulanması</h3>
                 <ul>
                     <li>📏 Kuvvetin Büyüklüğü ve Dinamometre</li>
                     <li>🛷 Sürtünme Kuvveti (Hava ve Su Direnci)</li>
                 </ul>
+                <button onclick="oyunuAc(3)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
             </div>
 
+            <!-- 4. ÜNİTE -->
             <div class="unite">
                 <h3>4. Ünite: Madde ve Değişim</h3>
                 <ul>
@@ -54,18 +61,22 @@
                     <li>🌡️ Maddenin Ayırt Edici Özellikleri</li>
                     <li>🎈 Genleşme ve Büzülme</li>
                 </ul>
+                <button onclick="oyunuAc(4)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
             </div>
 
+            <!-- 5. ÜNİTE -->
             <div class="unite">
                 <h3>5. Ünite: Işığın Yayılması</h3>
                 <ul>
                     <li>💡 Işığın Yayılması</li>
                     <li>🪞 Işığın Yansıması ve Yansıma Kanunları</li>
-                    <li>📦 Işığın Madde ile Etkileşimi (Saydam/Yarı Saydam/Opak)</li>
+                    <li>📦 Işığın Madde ile Etkileşimi</li>
                     <li>👥 Tam Gölge Oluşumu</li>
                 </ul>
+                <button onclick="oyunuAc(5)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
             </div>
 
+            <!-- 6. ÜNİTE -->
             <div class="unite">
                 <h3>6. Ünite: İnsan ve Çevre</h3>
                 <ul>
@@ -73,27 +84,71 @@
                     <li>☣️ Çevre Sorunları ve Kirlilik</li>
                     <li>♻️ İnsan ve Çevre Etkileşimi</li>
                 </ul>
+                <button onclick="oyunuAc(6)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
             </div>
 
+            <!-- 7. ÜNİTE -->
             <div class="unite">
                 <h3>7. Ünite: Elektrik Devre Elemanları</h3>
                 <ul>
                     <li>🔌 Basit Elektrik Devreleri</li>
                     <li>💡 Ampul Parlaklığını Etkileyen Değişkenler</li>
                 </ul>
+                <button onclick="oyunuAc(7)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
+            </div>
+
+            <!-- OYUN VE SORU EKRANI (BAŞLANGIÇTA GİZLİ) -->
+            <div id="oyunAlani" class="gizli oyun-kutu">
+                <h3 id="oyunBaslik" style="color: #2563eb;">🏆 Fen Bilimleri Yarışması</h3>
+                <div id="soruKutusu">
+                    <!-- Sorular buraya otomatik gelecek -->
+                </div>
+                <button onclick="cevabiKontrolEt()" class="buton" style="background-color: #10b981; margin-top: 15px;">Cevabı Kontrol Et 🎯</button>
+                <button onclick="oyunuKapat()" class="buton" style="background-color: #64748b; margin-top: 10px;">Geri Dön ↩️</button>
+                <p id="skorYazisi" style="font-weight: bold; margin-top: 15px;"></p>
             </div>
         </div>
     </div>
 
-    <!-- Buton Tıklama Fonksiyonu -->
+    <!-- JavaScript Oyun ve Etkileşim Kodları -->
     <script>
         function konulariGoster() {
             var liste = document.getElementById("konuListesi");
-            if (liste.style.display === "none" || liste.style.display === "") {
-                liste.style.display = "block";
-            } else {
-                liste.style.display = "none";
+            liste.classList.toggle("acik");
+        }
+
+        function oyunuAc(uniteNo) {
+            var oyunAlani = document.getElementById("oyunAlani");
+            oyunAlani.style.display = "block";
+            document.getElementById("oyunBaslik").innerText = "🎮 " + uniteNo + ". Ünite - 20 Soruluk Fen Oyunu";
+            
+            // Örnek oyun soruları yükleme alanı
+            document.getElementById("soruKutusu").innerHTML = `
+                <p><strong>Soru 1:</strong> Aşağıdakilerden hangisi 5. sınıf Fen Bilimleri kapsamında öğrenilen konulardan biridir?</p>
+                <label><input type="radio" name="soru" value="A"> A) Hücre bölünmesi (8. sınıf)</label><br>
+                <label><input type="radio" name="soru" value="B"> B) Güneş, Dünya ve Ay'ın Hareketleri</label><br>
+                <label><input type="radio" name="soru" value="C"> C) Kuantum fiziği</label><br>
+                <label><input type="radio" name="soru" value="D"> D) Organik kimya</label>
+            `;
+        }
+
+        function cevabiKontrolEt() {
+            let secilen = document.querySelector('input[name="soru"]:checked');
+            if(!secilen) {
+                alert("Lütfen bir şık seç!");
+                return;
             }
+            if(secilen.value === "B") {
+                document.getElementById("skorYazisi").innerText = "🎉 Tebrikler! Doğru Cevap! Puanın: 100 🏆";
+                document.getElementById("skorYazisi").style.color = "#16a34a";
+            } else {
+                document.getElementById("skorYazisi").innerText = "❌ Yanlış cevap, tekrar dene!";
+                document.getElementById("skorYazisi").style.color = "#dc2626";
+            }
+        }
+
+        function oyunuKapat() {
+            document.getElementById("oyunAlani").style.display = "none";
         }
     </script>
 </body>
