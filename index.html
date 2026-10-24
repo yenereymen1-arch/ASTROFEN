@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FENX - 5. Sınıf Fen Bilimleri Oyunu</title>
+    <title>FENX - 5. Sınıf Fen Bilimleri</title>
     <style>
         body {
             background-color: #f4f6f9;
@@ -16,27 +16,26 @@
         }
         .kart {
             background-color: white;
-            padding: 25px;
+            padding: 30px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
-            max-width: 550px;
+            max-width: 600px;
             width: 90%;
         }
         .buton {
             background-color: #2563eb;
             color: white;
             border: none;
-            padding: 10px 20px;
-            font-size: 15px;
+            padding: 12px 24px;
+            font-size: 16px;
             border-radius: 8px;
             cursor: pointer;
+            margin-top: 15px;
             transition: background-color 0.3s;
         }
         .buton:hover { opacity: 0.9; }
-        .ana-buton { margin-top: 15px; font-size: 16px; padding: 12px 24px; }
-        .soru-buton { background-color: #0284c7; font-size: 13px; margin-top: 10px; padding: 8px 14px; }
-        .gizli { display: none; margin-top: 20px; text-align: left; }
+        .gizli { display: none; margin-top: 25px; text-align: left; }
         .gizli.acik { display: block; }
         .unite {
             margin-bottom: 20px;
@@ -45,43 +44,29 @@
             border-radius: 8px;
             border-left: 4px solid #2563eb;
         }
-        .unite h3 { margin-top: 0; color: #1e293b; font-size: 15px; }
-        ul { list-style-type: none; padding: 0; margin: 5px 0; }
-        li { color: #475569; padding: 3px 0; font-size: 13px; }
-        .oyun-kutu {
-            background-color: #eff6ff;
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px dashed #2563eb;
-            margin-top: 20px;
-            text-align: left;
+        .unite h3 { margin-top: 0; color: #1e293b; font-size: 16px; }
+        ul { list-style-type: none; padding: 0; margin: 0; }
+        li { color: #475569; padding: 4px 0; font-size: 14px; }
+        .soru-buton {
+            background-color: #0284c7;
+            font-size: 13px;
+            padding: 8px 14px;
+            margin-top: 10px;
         }
-        #soruKutusu p { font-size: 14px; color: #1e293b; }
-        #soruKutusu label { font-size: 13px; color: #334155; cursor: pointer; }
-        .video-buton {
-            display: inline-block;
-            background-color: #ef4444;
-            color: white;
-            padding: 6px 12px;
-            font-size: 12px;
-            border-radius: 5px;
-            text-decoration: none;
-            margin-top: 8px;
-        }
-        .video-buton:hover { background-color: #dc2626; }
     </style>
 </head>
 <body>
     <div class="kart">
         <h1>FENX 🚀</h1>
-        <p>5. Sınıf Fen Bilimleri ders konularını görmek için aşağıdaki ana butona tıkla!</p>
+        <p>5. Sınıf Fen Bilimleri ders konularını görmek için aşağıdaki butona tıkla!</p>
         
-        <button onclick="konulariGoster()" class="buton ana-buton">5. Sınıf Konularını Göster</button>
+        <!-- Ana Buton -->
+        <button onclick="konulariGoster()" class="buton">5. Sınıf Konularını Göster</button>
 
+        <!-- Açılacak Alan -->
         <div id="konuListesi" class="gizli">
-            <h2>5. Sınıf Fen Bilimleri Konuları ve Testleri</h2>
+            <h2>5. Sınıf Fen Bilimleri Konuları</h2>
 
-            <!-- 1. ÜNİTE -->
             <div class="unite">
                 <h3>1. Ünite: Güneş, Dünya ve Ay</h3>
                 <ul>
@@ -90,10 +75,9 @@
                     <li>🔄 Ay'ın Hareketleri ve Evreleri</li>
                     <li>🌍 Güneş, Dünya ve Ay'ın Birbirine Göre Hareketleri</li>
                 </ul>
-                <button onclick="oyunuAc(1)" class="buton soru-buton">🎮 Bu Ünitenin Testini Çöz</button>
+                <button onclick="window.open('http://www.youtube.com/watch?v=mGBJOFvH8aw', '_blank')" class="buton soru-buton">🎥 1. Ünite Soru Çözüm Videosu</button>
             </div>
 
-            <!-- 2. ÜNİTE -->
             <div class="unite">
                 <h3>2. Ünite: Canlılar Dünyası</h3>
                 <ul>
@@ -102,120 +86,24 @@
                     <li>🌱 Bitkiler</li>
                     <li>🐾 Hayvanlar</li>
                 </ul>
-                <button onclick="oyunuAc(2)" class="buton soru-buton">🎮 Bu Ünitenin Testini Çöz</button>
+                <button onclick="window.open('http://www.youtube.com/watch?v=1c3-XkWcbQA', '_blank')" class="buton soru-buton">🎥 2. Ünite Soru Çözüm Videosu</button>
             </div>
 
-            <!-- 3. ÜNİTE -->
             <div class="unite">
                 <h3>3. Ünite: Kuvvetin Uygulanması</h3>
                 <ul>
                     <li>📏 Kuvvetin Büyüklüğü ve Dinamometre</li>
                     <li>🛷 Sürtünme Kuvveti (Hava ve Su Direnci)</li>
                 </ul>
-                <button onclick="oyunuAc(3)" class="buton soru-buton">🎮 Bu Ünitenin Testini Çöz</button>
-            </div>
-
-            <!-- 4. ÜNİTE -->
-            <div class="unite">
-                <h3>4. Ünite: Madde ve Değişim</h3>
-                <ul>
-                    <li>🧊 Maddenin Halleri ve Hal Değişimi</li>
-                    <li>🔥 Isı ve Sıcaklık</li>
-                    <li>🌡️ Maddenin Ayırt Edici Özellikleri</li>
-                    <li>🎈 Genleşme ve Büzülme</li>
-                </ul>
-                <button onclick="oyunuAc(4)" class="buton soru-buton">🎮 Bu Ünitenin Testini Çöz</button>
-            </div>
-
-            <!-- 5. ÜNİTE -->
-            <div class="unite">
-                <h3>5. Ünite: Işığın Yayılması</h3>
-                <ul>
-                    <li>💡 Işığın Yayılması</li>
-                    <li>🪞 Işığın Yansıması ve Yansıma Kanunları</li>
-                    <li>📦 Işığın Madde ile Etkileşimi</li>
-                    <li>👥 Tam Gölge Oluşumu</li>
-                </ul>
-                <button onclick="oyunuAc(5)" class="buton soru-buton">🎮 Bu Ünitenin Testini Çöz</button>
-            </div>
-
-            <!-- 6. ÜNİTE -->
-            <div class="unite">
-                <h3>6. Ünite: İnsan ve Çevre</h3>
-                <ul>
-                    <li>🌿 Biyoçeşitlilik</li>
-                    <li>☣️ Çevre Sorunları ve Kirlilik</li>
-                    <li>♻️ İnsan ve Çevre Etkileşimi</li>
-                </ul>
-                <button onclick="oyunuAc(6)" class="buton soru-buton">🎮 Bu Ünitenin Testini Çöz</button>
-            </div>
-
-            <!-- 7. ÜNİTE -->
-            <div class="unite">
-                <h3>7. Ünite: Elektrik Devre Elemanları</h3>
-                <ul>
-                    <li>🔌 Basit Elektrik Devreleri</li>
-                    <li>💡 Ampul Parlaklığını Etkileyen Değişkenler</li>
-                </ul>
-                <button onclick="oyunuAc(7)" class="buton soru-buton">🎮 Bu Ünitenin Testini Çöz</button>
-            </div>
-
-            <!-- OYUN ALANI -->
-            <div id="oyunAlani" class="gizli oyun-kutu">
-                <h3 id="oyunBaslik" style="color: #2563eb;">🏆 Fen Bilimleri Yarışması</h3>
-                <div id="soruKutusu"></div>
-                <button onclick="cevabiKontrolEt()" class="buton" style="background-color: #10b981; margin-top: 15px;">Sonuçları Gör 🎯</button>
-                <button onclick="oyunuKapat()" class="buton" style="background-color: #64748b; margin-top: 10px;">Geri Dön ↩️</button>
-                <p id="skorYazisi" style="font-weight: bold; margin-top: 15px;"></p>
+                <button onclick="window.open('http://www.youtube.com/watch?v=nWDJKkxhIro', '_blank')" class="buton soru-buton">🎥 3. Ünite Soru Çözüm Videosu</button>
             </div>
         </div>
     </div>
 
     <script>
         function konulariGoster() {
-            document.getElementById("konuListesi").classList.toggle("acik");
-        }
-
-        function oyunuAc(uniteNo) {
-            var oyunAlani = document.getElementById("oyunAlani");
-            oyunAlani.style.display = "block";
-            document.getElementById("oyunBaslik").innerText = "🎮 " + uniteNo + ". Ünite - Fen Bilimleri Oyunu";
-            
-            document.getElementById("soruKutusu").innerHTML = `
-                <div style="max-height: 400px; overflow-y: auto; padding-right: 10px;">
-                    <p><strong>1. Güneş'in katmanları içinde en sıcak katman hangisidir?</strong></p>
-                    <label><input type="radio" name="s1" value="A"> A) Işık küre</label><br>
-                    <label><input type="radio" name="s1" value="B"> B) Çekirdek</label><br>
-                    <label><input type="radio" name="s1" value="C"> C) Renk küre</label><br>
-                    <label><input type="radio" name="s1" value="D"> D) Taç küre</label><br>
-                    <a href="http://www.youtube.com/watch?v=mGBJOFvH8aw" target="_blank" class="video-buton">🎥 1. Sorunun Video Çözümünü İzle</a><br><hr>
-
-                    <p><strong>2. Ay'ın ana evrelerinden biri hangisidir?</strong></p>
-                    <label><input type="radio" name="s2" value="A"> A) Hilal</label><br>
-                    <label><input type="radio" name="s2" value="B"> B) Dolunay</label><br>
-                    <label><input type="radio" name="s2" value="C"> C) Şişkin ay</label><br>
-                    <label><input type="radio" name="s2" value="D"> D) Son hilal</label><br>
-                    <a href="http://www.youtube.com/watch?v=1c3-XkWcbQA" target="_blank" class="video-buton">🎥 2. Sorunun Video Çözümünü İzle</a><br><hr>
-                </div>
-            `;
-            oyunAlani.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function cevabiKontrolEt() {
-            let s1 = document.querySelector('input[name="s1"]:checked');
-            let s2 = document.querySelector('input[name="s2"]:checked');
-            let dogruSayisi = 0;
-
-            if(s1 && s1.value === "B") dogruSayisi++;
-            if(s2 && s2.value === "B") dogruSayisi++;
-
-            let puan = dogruSayisi * 50;
-            document.getElementById("skorYazisi").innerText = "🎉 Test Bitti! Doğru Sayısı: " + dogruSayisi + " | Toplam Puanın: " + puan + " / 100 🏆";
-            document.getElementById("skorYazisi").style.color = "#16a34a";
-        }
-
-        function oyunuKapat() {
-            document.getElementById("oyunAlani").style.display = "none";
+            var liste = document.getElementById("konuListesi");
+            liste.classList.toggle("acik");
         }
     </script>
 </body>
