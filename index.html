@@ -192,7 +192,7 @@
             var oyunAlani = document.getElementById("oyunAlani");
             oyunAlani.style.display = "block";
             document.getElementById("oyunBaslik").innerText = "🎮 " + uniteNo + ". Ünite - 20 Soruluk Fen Bilimleri Testi";
-            document.getElementById("skorYazisi").innerText = ""; // Eski skoru temizle
+            document.getElementById("skorYazisi").innerText = "";
             
             let sorular = [
                 "Güneş'in katmanları içinde en sıcak katman hangisidir?",
@@ -252,7 +252,7 @@
             }
             
             let toplamPuan = dogruSayisi * 5;
-            document.getElementById("skorYazisi.innerText = "🎉 Test Bitti! Doğru Sayısı: " + dogruSayisi + " / 20 | Toplam Puanın: " + toplamPuan + " / 100 🏆";
+            document.getElementById("skorYazisi").innerText = "🎉 Test Bitti! Doğru Sayısı: " + dogruSayisi + " / 20 | Toplam Puanın: " + toplamPuan + " / 100 🏆";
             document.getElementById("skorYazisi").style.color = "#16a34a";
         }
 
