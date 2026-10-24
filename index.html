@@ -85,7 +85,7 @@
 
         <!-- Açılacak Ana Liste -->
         <div id="konuListesi" class="gizli">
-            <h2>5. Sınıf Fen Bilimleri Üniteleri</h2>
+            <h2>5. Sınıf Fen Bilimleri Tüm Üniteler</h2>
 
             <!-- 1. ÜNİTE -->
             <div class="unite">
@@ -121,11 +121,56 @@
                 <button onclick="oyunuAc(3)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz ve Videoları Gör</button>
             </div>
 
+            <!-- 4. ÜNİTE -->
+            <div class="unite">
+                <h3>4. Ünite: Madde ve Değişim</h3>
+                <ul>
+                    <li>🧊 Maddenin Halleri ve Hal Değişimi</li>
+                    <li>🔥 Isı ve Sıcaklık</li>
+                    <li>🌡️ Maddenin Ayırt Edici Özellikleri</li>
+                    <li>🎈 Genleşme ve Büzülme</li>
+                </ul>
+                <button onclick="oyunuAc(4)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz ve Videoları Gör</button>
+            </div>
+
+            <!-- 5. ÜNİTE -->
+            <div class="unite">
+                <h3>5. Ünite: Işığın Yayılması</h3>
+                <ul>
+                    <li>💡 Işığın Yayılması</li>
+                    <li>🪞 Işığın Yansıması ve Yansıma Kanunları</li>
+                    <li>📦 Işığın Madde ile Etkileşimi</li>
+                    <li>👥 Tam Gölge Oluşumu</li>
+                </ul>
+                <button onclick="oyunuAc(5)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz ve Videoları Gör</button>
+            </div>
+
+            <!-- 6. ÜNİTE -->
+            <div class="unite">
+                <h3>6. Ünite: İnsan ve Çevre</h3>
+                <ul>
+                    <li>🌿 Biyoçeşitlilik</li>
+                    <li>☣️ Çevre Sorunları ve Kirlilik</li>
+                    <li>♻️ İnsan ve Çevre Etkileşimi</li>
+                </ul>
+                <button onclick="oyunuAc(6)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz ve Videoları Gör</button>
+            </div>
+
+            <!-- 7. ÜNİTE -->
+            <div class="unite">
+                <h3>7. Ünite: Elektrik Devre Elemanları</h3>
+                <ul>
+                    <li>🔌 Basit Elektrik Devreleri</li>
+                    <li>💡 Ampul Parlaklığını Etkileyen Değişkenler</li>
+                </ul>
+                <button onclick="oyunuAc(7)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz ve Videoları Gör</button>
+            </div>
+
             <!-- 20 SORULUK OYUN TESTİ ALANI -->
             <div id="oyunAlani" class="gizli oyun-kutu">
                 <h3 id="oyunBaslik" style="color: #2563eb;">🏆 20 Soruluk Fen Bilimleri Yarışması</h3>
                 <div id="soruKutusu" style="max-height: 450px; overflow-y: auto; padding-right: 10px;">
-                    <!-- 20 Soru buraya otomatik yüklenecek -->
+                    <!-- 20 Soru buraya yüklenecek -->
                 </div>
                 <button onclick="cevabiKontrolEt()" class="buton" style="background-color: #10b981; margin-top: 15px;">Sonuçları Gör ve Puanını Hesapla 🎯</button>
                 <button onclick="oyunuKapat()" class="buton" style="background-color: #64748b; margin-top: 10px;">Testi Kapat ↩️</button>
@@ -146,7 +191,6 @@
             document.getElementById("oyunBaslik").innerText = "🎮 " + uniteNo + ". Ünite - 20 Soruluk Fen Bilimleri Testi";
             
             let htmlIcerik = "";
-            // Döngü ile 20 soruyu ve video butonlarını ekliyoruz
             for(let i = 1; i <= 20; i++) {
                 htmlIcerik += `
                     <div style="background:white; padding:12px; margin-bottom:12px; border-radius:6px;">
@@ -167,13 +211,12 @@
             let dogruSayisi = 0;
             for(let i = 1; i <= 20; i++) {
                 let secilen = document.querySelector('input[name="s' + i + '"]:checked');
-                // Örnek olarak B şıkkını doğru kabul ediyoruz
                 if(secilen && secilen.value === "B") {
                     dogruSayisi++;
                 }
             }
             let toplamPuan = dogruSayisi * 5;
-            document.getElementById("skorYazisi.innerText = "🎉 Test Bitti! Doğru Sayısı: " + dogruSayisi + " / 20 | Toplam Puanın: " + toplamPuan + " / 100 🏆";
+            document.getElementById("skorYazisi").innerText = "🎉 Test Bitti! Doğru Sayısı: " + dogruSayisi + " / 20 | Toplam Puanın: " + toplamPuan + " / 100 🏆";
             document.getElementById("skorYazisi").style.color = "#16a34a";
         }
 
