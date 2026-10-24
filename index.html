@@ -169,7 +169,7 @@
             <div id="oyunAlani" class="gizli oyun-kutu">
                 <h3 id="oyunBaslik" style="color: #2563eb;">🏆 20 Soruluk Fen Bilimleri Yarışması</h3>
                 <div id="soruKutusu" style="max-height: 450px; overflow-y: auto; padding-right: 10px;">
-                    <!-- 20 Soru buraya yüklenecek -->
+                    <!-- Sorular buraya yüklenecek -->
                 </div>
                 <button onclick="cevabiKontrolEt()" class="buton" style="background-color: #10b981; margin-top: 15px;">Sonuçları Gör ve Puanını Hesapla 🎯</button>
                 <button onclick="oyunuKapat()" class="buton" style="background-color: #64748b; margin-top: 10px;">Testi Kapat ↩️</button>
@@ -179,7 +179,7 @@
     </div>
 
     <script>
-        // Butona tıklandığında menüyü açıp kapatan kesin çözüm fonksiyonu
+        // Ana menü açma kapama butonunun çalışmasını sağlayan kod
         document.getElementById("anaButon").addEventListener("click", function() {
             var liste = document.getElementById("konuListesi");
             if (liste.style.display === "block") {
@@ -189,20 +189,45 @@
             }
         });
 
+        // 20 Soruyu ve video çözümlerini üreten fonksiyon
         function oyunuAc(uniteNo) {
             var oyunAlani = document.getElementById("oyunAlani");
             oyunAlani.style.display = "block";
             document.getElementById("oyunBaslik").innerText = "🎮 " + uniteNo + ". Ünite - 20 Soruluk Fen Bilimleri Testi";
             
+            let sorularMetni = [
+                "Güneş'in katmanları içinde en sıcak katman hangisidir?",
+                "Ay'ın ana evrelerinden biri hangisidir?",
+                "Aşağıdakilerden hangisi Güneş'in özelliklerinden biridir?",
+                "Ay'ın Dünya etrafındaki dolanım süresi yaklaşık ne kadardır?",
+                "Mikroskobik canlılar hangi araçla gözlemlenebilir?",
+                "Şapkalı mantarlar canlıların hangi grubuna girer?",
+                "Aşağıdakilerden hangisi çiçeksiz bir bitkidir?",
+                "Kuvvetin birimi aşağıdakilerden hangisidir?",
+                "Kuvveti ölçmek için kullanılan araç hangisidir?",
+                "Sürtünme kuvveti hareket yönüne göre nasıldır?",
+                "Maddenin ısı alarak sıvı halden gaz haline geçmesine ne denir?",
+                "Isı ve sıcaklık için aşağıdakilerden hangisi yanlıştır?",
+                "Tren raylarının yaz aylarında uzaması olayı hangi kavramla ilgilidir?",
+                "Işık hangi yolla yayılır?",
+                "Arkasından gelen ışığı hiç geçirmeyen maddelere ne ad verilir?",
+                "Düzgün yansıma kanununa göre gelen ışın ile yansıyan ışının açısı nasıldır?",
+                "Aşağıdakilerden hangisi bir çevre sorunu değildir?",
+                "Canlı çeşitliliğini ifade eden terim aşağıdakilerden hangisidir?",
+                "Basit bir elektrik devresinde enerji kaynağı hangisidir?",
+                "Elektrik devresinde ampulün parlaklığını artırmak için ne yapılabilir?"
+            ];
+
             let htmlIcerik = "";
             for(let i = 1; i <= 20; i++) {
+                let soruMetni = sorularMetni[i-1] || (i + ". Ünite ile ilgili fen bilimleri sorusudur?");
                 htmlIcerik += `
                     <div style="background:white; padding:12px; margin-bottom:12px; border-radius:6px;">
-                        <p><strong>${i}. Soru: Bu soru ${uniteNo}. ünite fen bilimleri kazanımlarına uygundur. Doğru şıkkı seçiniz?</strong></p>
-                        <label><input type="radio" name="s${i}" value="A"> A) Birinci seçenek</label><br>
-                        <label><input type="radio" name="s${i}" value="B"> B) Doğru olan seçenek</label><br>
-                        <label><input type="radio" name="s${i}" value="C"> C) Üçüncü seçenek</label><br>
-                        <label><input type="radio" name="s${i}" value="D"> D) Dördüncü seçenek</label><br>
+                        <p><strong>${i}. Soru: ${soruMetni}</strong></p>
+                        <label><input type="radio" name="s${i}" value="A"> A) Seçenek A</label><br>
+                        <label><input type="radio" name="s${i}" value="B"> B) Seçenek B (Doğru Cevap)</label><br>
+                        <label><input type="radio" name="s${i}" value="C"> C) Seçenek C</label><br>
+                        <label><input type="radio" name="s${i}" value="D"> D) Seçenek D</label><br>
                         <a href="http://www.youtube.com/watch?v=mGBJOFvH8aw" target="_blank" class="video-buton">🎥 ${i}. Sorunun Video Çözümünü İzle</a>
                     </div>
                 `;
