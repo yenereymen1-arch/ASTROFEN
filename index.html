@@ -4,17 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FENX - 5. Sınıf Fen Bilimleri Oyunu</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #f4f6f9;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 20px 0;
+        }
+        .kart {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 550px;
+            width: 90%;
+        }
+        .buton {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .buton:hover { opacity: 0.9; }
+        .ana-buton { margin-top: 15px; font-size: 16px; padding: 12px 24px; }
+        .soru-buton { background-color: #0284c7; font-size: 13px; margin-top: 10px; padding: 8px 14px; }
+        .gizli { display: none; margin-top: 20px; text-align: left; }
+        .gizli.acik { display: block; }
+        .unite {
+            margin-bottom: 20px;
+            background-color: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #2563eb;
+        }
+        .unite h3 { margin-top: 0; color: #1e293b; font-size: 15px; }
+        ul { list-style-type: none; padding: 0; margin: 5px 0; }
+        li { color: #475569; padding: 3px 0; font-size: 13px; }
+        .oyun-kutu {
+            background-color: #eff6ff;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px dashed #2563eb;
+            margin-top: 20px;
+            text-align: left;
+        }
+        #soruKutusu p { font-size: 14px; color: #1e293b; }
+        #soruKutusu label { font-size: 13px; color: #334155; cursor: pointer; }
+        .video-buton {
+            display: inline-block;
+            background-color: #ef4444;
+            color: white;
+            padding: 6px 12px;
+            font-size: 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 8px;
+        }
+        .video-buton:hover { background-color: #dc2626; }
+    </style>
 </head>
 <body>
     <div class="kart">
         <h1>FENX 🚀</h1>
         <p>5. Sınıf Fen Bilimleri ders konularını görmek için aşağıdaki ana butona tıkla!</p>
         
-        <!-- Ana Konuları Açma Butonu -->
         <button onclick="konulariGoster()" class="buton ana-buton">5. Sınıf Konularını Göster</button>
 
-        <!-- Tıklayınca Açılacak Tüm Üniteler Alanı -->
         <div id="konuListesi" class="gizli">
             <h2>5. Sınıf Fen Bilimleri Konuları ve Testleri</h2>
 
@@ -27,7 +90,7 @@
                     <li>🔄 Ay'ın Hareketleri ve Evreleri</li>
                     <li>🌍 Güneş, Dünya ve Ay'ın Birbirine Göre Hareketleri</li>
                 </ul>
-                <button onclick="oyunuAc(1)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
+                <button onclick="oyunuAc(1)" class="buton soru-buton">🎮 Bu Ünitenin Testini Çöz</button>
             </div>
 
             <!-- 2. ÜNİTE -->
@@ -39,7 +102,7 @@
                     <li>🌱 Bitkiler</li>
                     <li>🐾 Hayvanlar</li>
                 </ul>
-                <button onclick="oyunuAc(2)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
+                <button onclick="oyunuAc(2)" class="buton soru-buton">🎮 Bu Ünitenin Testini Çöz</button>
             </div>
 
             <!-- 3. ÜNİTE -->
@@ -49,7 +112,7 @@
                     <li>📏 Kuvvetin Büyüklüğü ve Dinamometre</li>
                     <li>🛷 Sürtünme Kuvveti (Hava ve Su Direnci)</li>
                 </ul>
-                <button onclick="oyunuAc(3)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
+                <button onclick="oyunuAc(3)" class="buton soru-buton">🎮 Bu Ünitenin Testini Çöz</button>
             </div>
 
             <!-- 4. ÜNİTE -->
@@ -61,7 +124,7 @@
                     <li>🌡️ Maddenin Ayırt Edici Özellikleri</li>
                     <li>🎈 Genleşme ve Büzülme</li>
                 </ul>
-                <button onclick="oyunuAc(4)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
+                <button onclick="oyunuAc(4)" class="buton soru-buton">🎮 Bu Ünitenin Testini Çöz</button>
             </div>
 
             <!-- 5. ÜNİTE -->
@@ -73,7 +136,7 @@
                     <li>📦 Işığın Madde ile Etkileşimi</li>
                     <li>👥 Tam Gölge Oluşumu</li>
                 </ul>
-                <button onclick="oyunuAc(5)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
+                <button onclick="oyunuAc(5)" class="buton soru-buton">🎮 Bu Ünitenin Testini Çöz</button>
             </div>
 
             <!-- 6. ÜNİTE -->
@@ -84,7 +147,7 @@
                     <li>☣️ Çevre Sorunları ve Kirlilik</li>
                     <li>♻️ İnsan ve Çevre Etkileşimi</li>
                 </ul>
-                <button onclick="oyunuAc(6)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
+                <button onclick="oyunuAc(6)" class="buton soru-buton">🎮 Bu Ünitenin Testini Çöz</button>
             </div>
 
             <!-- 7. ÜNİTE -->
@@ -94,15 +157,13 @@
                     <li>🔌 Basit Elektrik Devreleri</li>
                     <li>💡 Ampul Parlaklığını Etkileyen Değişkenler</li>
                 </ul>
-                <button onclick="oyunuAc(7)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
+                <button onclick="oyunuAc(7)" class="buton soru-buton">🎮 Bu Ünitenin Testini Çöz</button>
             </div>
 
-            <!-- OYUN VE SORU EKRANI -->
+            <!-- OYUN ALANI -->
             <div id="oyunAlani" class="gizli oyun-kutu">
                 <h3 id="oyunBaslik" style="color: #2563eb;">🏆 Fen Bilimleri Yarışması</h3>
-                <div id="soruKutusu">
-                    <!-- Sorular buraya gelecek -->
-                </div>
+                <div id="soruKutusu"></div>
                 <button onclick="cevabiKontrolEt()" class="buton" style="background-color: #10b981; margin-top: 15px;">Sonuçları Gör 🎯</button>
                 <button onclick="oyunuKapat()" class="buton" style="background-color: #64748b; margin-top: 10px;">Geri Dön ↩️</button>
                 <p id="skorYazisi" style="font-weight: bold; margin-top: 15px;"></p>
@@ -110,17 +171,15 @@
         </div>
     </div>
 
-    <!-- JavaScript Oyun ve Etkileşim Kodları -->
     <script>
         function konulariGoster() {
-            var liste = document.getElementById("konuListesi");
-            liste.classList.toggle("acik");
+            document.getElementById("konuListesi").classList.toggle("acik");
         }
 
         function oyunuAc(uniteNo) {
             var oyunAlani = document.getElementById("oyunAlani");
             oyunAlani.style.display = "block";
-            document.getElementById("oyunBaslik").innerText = "🎮 " + uniteNo + ". Ünite - 20 Soruluk Fen Bilimleri Oyunu";
+            document.getElementById("oyunBaslik").innerText = "🎮 " + uniteNo + ". Ünite - Fen Bilimleri Oyunu";
             
             document.getElementById("soruKutusu").innerHTML = `
                 <div style="max-height: 400px; overflow-y: auto; padding-right: 10px;">
