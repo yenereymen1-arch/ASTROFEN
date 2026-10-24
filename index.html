@@ -36,7 +36,6 @@
         }
         .buton:hover { opacity: 0.9; }
         .gizli { display: none; margin-top: 25px; text-align: left; }
-        .gizli.acik { display: block; }
         .unite {
             margin-bottom: 20px;
             background-color: #f8fafc;
@@ -81,7 +80,7 @@
         <p>5. Sınıf Fen Bilimleri ders konularını ve interaktif testleri görmek için tıkla!</p>
         
         <!-- Ana Konuları Göster Butonu -->
-        <button onclick="konulariGoster()" class="buton">5. Sınıf Konularını Göster</button>
+        <button id="anaButon" class="buton">5. Sınıf Konularını Göster</button>
 
         <!-- Açılacak Ana Liste -->
         <div id="konuListesi" class="gizli">
@@ -180,10 +179,15 @@
     </div>
 
     <script>
-        function konulariGoster() {
+        // Butona tıklandığında menüyü açıp kapatan kesin çözüm fonksiyonu
+        document.getElementById("anaButon").addEventListener("click", function() {
             var liste = document.getElementById("konuListesi");
-            liste.classList.toggle("acik");
-        }
+            if (liste.style.display === "block") {
+                liste.style.display = "none";
+            } else {
+                liste.style.display = "block";
+            }
+        });
 
         function oyunuAc(uniteNo) {
             var oyunAlani = document.getElementById("oyunAlani");
