@@ -111,7 +111,6 @@
     </div>
 
     <!-- JavaScript Oyun ve Etkileşim Kodları -->
-        <!-- JavaScript Oyun ve Etkileşim Kodları -->
     <script>
         function konulariGoster() {
             var liste = document.getElementById("konuListesi");
@@ -121,37 +120,40 @@
         function oyunuAc(uniteNo) {
             var oyunAlani = document.getElementById("oyunAlani");
             oyunAlani.style.display = "block";
-            document.getElementById("oyunBaslik").innerText = "🎮 " + uniteNo + ". Ünite - 20 Soruluk Fen Oyunu";
+            document.getElementById("oyunBaslik").innerText = "🎮 " + uniteNo + ". Ünite - 20 Soruluk Fen Bilimleri Oyunu";
             
-            // 20 Soruluk test alanını buraya yüklüyoruz
+            // 4 şıklı tam soru formatı
             document.getElementById("soruKutusu").innerHTML = `
-                <div style="max-height: 300px; overflow-y: auto; padding-right: 10px;">
-                    <p><strong>1. Güneş'in katmanları içinde en sıcak katman hangisidir?</strong></p>
-                    <label><input type="radio" name="s1" value="A"> A) Işık küre</label><br>
-                    <label><input type="radio" name="s1" value="B"> B) Çekirdek</label><br>
-                    <label><input type="radio" name="s1" value="C"> C) Renk küre</label><br>
-                    
-                    <p><strong>2. Ay'ın ana evrelerinden biri hangisidir?</strong></p>
-                    <label><input type="radio" name="s2" value="A"> A) Hilal</label><br>
-                    <label><input type="radio" name="s2" value="B"> B) Dolunay</label><br>
-                    <label><input type="radio" name="s2" value="C"> C) Şişkin ay</label><br>
-                    
-                    <p><em>(Not: 20 soruyu buraya ekleyerek testini tamamlayabilirsin!)</em></p>
+                <div style="max-height: 350px; overflow-y: auto; padding-right: 10px;">
+                    <p><strong>1. Güneş'in katmanları içinde en dışta yer alan ve gözle görülen katman hangisidir?</strong></p>
+                    <label><input type="radio" name="s1" value="A"> A) Çekirdek</label><br>
+                    <label><input type="radio" name="s1" value="B"> B) Işık küre</label><br>
+                    <label><input type="radio" name="s1" value="C"> C) Taç küre</label><br>
+                    <label><input type="radio" name="s1" value="D"> D) Renk küre</label><br><hr>
+
+                    <p><strong>2. Aşağıdakilerden hangisi Ay'ın ana evrelerinden biri değildir?</strong></p>
+                    <label><input type="radio" name="s2" value="A"> A) Yeni Ay</label><br>
+                    <label><input type="radio" name="s2" value="B"> B) Hilal</label><br>
+                    <label><input type="radio" name="s2" value="C"> C) İlk Dördün</label><br>
+                    <label><input type="radio" name="s2" value="D"> D) Dolunay</label><br><hr>
+
+                    <p><em>(Soruları 20'ye tamamlamak için bu yapıyı çoğaltabilirsin!)</em></p>
                 </div>
             `;
-            // Ekranı oyun alanına kaydır
             oyunAlani.scrollIntoView({ behavior: 'smooth' });
         }
 
         function cevabiKontrolEt() {
             let s1 = document.querySelector('input[name="s1"]:checked');
-            let skor = 0;
-            if(s1 && s1.value === "B") skor += 50;
-            
             let s2 = document.querySelector('input[name="s2"]:checked');
-            if(s2 && s2.value === "B") skor += 50;
+            let dogruSayisi = 0;
 
-            document.getElementById("skorYazisi").innerText = "🎉 Test Bitti! Toplam Puanın: " + skor + " / 100 🏆";
+            if(s1 && s1.value === "B") dogruSayisi++;
+            if(s2 && s2.value === "B") dogruSayisi++;
+
+            let puan = dogruSayisi * 50; // 2 soru için örnek puanlama
+
+            document.getElementById("skorYazisi").innerText = "🎉 Test Bitti! Doğru Sayısı: " + dogruSayisi + " | Toplam Puanın: " + puan + " / 100 🏆";
             document.getElementById("skorYazisi").style.color = "#16a34a";
         }
 
