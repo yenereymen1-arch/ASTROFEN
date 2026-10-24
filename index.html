@@ -83,7 +83,7 @@
         <p>5. Sınıf Fen Bilimleri 1. ve 2. Ünite ders konularını ve interaktif testleri görmek için tıkla!</p>
         
         <!-- Ana Konuları Göster Butonu -->
-        <button onclick="konulariAcKapat()" class="buton">Konuları Göster</button>
+        <button id="anaButon" class="buton">Konuları Göster</button>
 
         <!-- Açılacak Ana Liste -->
         <div id="konuListesi" class="gizli">
@@ -129,14 +129,16 @@
     </div>
 
     <script>
-        function konulariAcKapat() {
+        document.getElementById("anaButon").addEventListener("click", function() {
             var liste = document.getElementById("konuListesi");
             if (liste.style.display === "block") {
                 liste.style.display = "none";
+                this.innerText = "Konuları Göster";
             } else {
                 liste.style.display = "block";
+                this.innerText = "Konuları Gizle";
             }
-        }
+        });
 
         function oyunuAc(uniteNo) {
             var oyunAlani = document.getElementById("oyunAlani");
@@ -267,4 +269,38 @@
                 let dogruHarf = dogruCevaplar[i-1];
 
                 if(secilen) {
-                    if(secilen.value ===
+                    if(secilen.value === dogruHarf) {
+                        dogruSayisi++;
+                        sonucDiv.innerHTML = "✅ Doğru! (Doğru Cevap: " + dogruHarf + ")";
+                        sonucDiv.style.color = "#16a34a";
+                    } else {
+                        yanlisSayisi++;
+                        sonucDiv.innerHTML = "❌ Yanlış! Doğru Cevap: " + dogruHarf;
+                        sonucDiv.style.color = "#dc2626";
+                    }
+                } else {
+                    yanlisSayisi++;
+                    sonucDiv.innerHTML = "⚠️ Boş bırakıldı! Doğru Cevap: " + dogruHarf;
+                    sonucDiv.style.color = "#ca8a04";
+                }
+            }
+            
+            let yuzdePuan = (dogruSayisi / 20) * 100;
+
+            let skorKutusu = document.getElementById("skorYazisi");
+            skorKutusu.style.display = "block";
+            skorKutusu.innerHTML = `
+                🎉 <strong>Test Tamamlandı!</strong><br>
+                ✅ Doğru Sayısı: ${dogruSayisi}<br>
+                ❌ Yanlış/Boş Sayısı: ${yanlisSayisi}<br>
+                🏆 Başarı Yüzdesi: %${yuzdePuan} (100 üzerinden ${dogruSayisi * 5} Puan)
+            `;
+            skorKutusu.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function oyunuKapat() {
+            document.getElementById("oyunAlani").style.display = "none";
+        }
+    </script>
+</body>
+</html>
