@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FENX - 5. Sınıf Fen Bilimleri</title>
+    <title>FENX - 5. Sınıf Fen Bilimleri Oyunu</title>
     <style>
         body {
             background-color: #f4f6f9;
@@ -20,7 +20,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
-            max-width: 600px;
+            max-width: 650px;
             width: 90%;
         }
         .buton {
@@ -52,21 +52,42 @@
             font-size: 13px;
             padding: 8px 14px;
             margin-top: 10px;
+            display: inline-block;
         }
+        .oyun-kutu {
+            background-color: #eff6ff;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px dashed #2563eb;
+            margin-top: 25px;
+            text-align: left;
+        }
+        .video-buton {
+            display: inline-block;
+            background-color: #ef4444;
+            color: white;
+            padding: 6px 12px;
+            font-size: 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 8px;
+        }
+        .video-buton:hover { background-color: #dc2626; }
     </style>
 </head>
 <body>
     <div class="kart">
         <h1>FENX 🚀</h1>
-        <p>5. Sınıf Fen Bilimleri ders konularını görmek için aşağıdaki butona tıkla!</p>
+        <p>5. Sınıf Fen Bilimleri ders konularını ve interaktif testleri görmek için tıkla!</p>
         
-        <!-- Ana Buton -->
+        <!-- Ana Konuları Göster Butonu -->
         <button onclick="konulariGoster()" class="buton">5. Sınıf Konularını Göster</button>
 
-        <!-- Açılacak Alan -->
+        <!-- Açılacak Ana Liste -->
         <div id="konuListesi" class="gizli">
-            <h2>5. Sınıf Fen Bilimleri Konuları</h2>
+            <h2>5. Sınıf Fen Bilimleri Üniteleri</h2>
 
+            <!-- 1. ÜNİTE -->
             <div class="unite">
                 <h3>1. Ünite: Güneş, Dünya ve Ay</h3>
                 <ul>
@@ -75,9 +96,10 @@
                     <li>🔄 Ay'ın Hareketleri ve Evreleri</li>
                     <li>🌍 Güneş, Dünya ve Ay'ın Birbirine Göre Hareketleri</li>
                 </ul>
-                <button onclick="window.open('http://www.youtube.com/watch?v=mGBJOFvH8aw', '_blank')" class="buton soru-buton">🎥 1. Ünite Soru Çözüm Videosu</button>
+                <button onclick="oyunuAc(1)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz ve Videoları Gör</button>
             </div>
 
+            <!-- 2. ÜNİTE -->
             <div class="unite">
                 <h3>2. Ünite: Canlılar Dünyası</h3>
                 <ul>
@@ -86,16 +108,28 @@
                     <li>🌱 Bitkiler</li>
                     <li>🐾 Hayvanlar</li>
                 </ul>
-                <button onclick="window.open('http://www.youtube.com/watch?v=1c3-XkWcbQA', '_blank')" class="buton soru-buton">🎥 2. Ünite Soru Çözüm Videosu</button>
+                <button onclick="oyunuAc(2)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz ve Videoları Gör</button>
             </div>
 
+            <!-- 3. ÜNİTE -->
             <div class="unite">
                 <h3>3. Ünite: Kuvvetin Uygulanması</h3>
                 <ul>
                     <li>📏 Kuvvetin Büyüklüğü ve Dinamometre</li>
                     <li>🛷 Sürtünme Kuvveti (Hava ve Su Direnci)</li>
                 </ul>
-                <button onclick="window.open('http://www.youtube.com/watch?v=nWDJKkxhIro', '_blank')" class="buton soru-buton">🎥 3. Ünite Soru Çözüm Videosu</button>
+                <button onclick="oyunuAc(3)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz ve Videoları Gör</button>
+            </div>
+
+            <!-- 20 SORULUK OYUN TESTİ ALANI -->
+            <div id="oyunAlani" class="gizli oyun-kutu">
+                <h3 id="oyunBaslik" style="color: #2563eb;">🏆 20 Soruluk Fen Bilimleri Yarışması</h3>
+                <div id="soruKutusu" style="max-height: 450px; overflow-y: auto; padding-right: 10px;">
+                    <!-- 20 Soru buraya otomatik yüklenecek -->
+                </div>
+                <button onclick="cevabiKontrolEt()" class="buton" style="background-color: #10b981; margin-top: 15px;">Sonuçları Gör ve Puanını Hesapla 🎯</button>
+                <button onclick="oyunuKapat()" class="buton" style="background-color: #64748b; margin-top: 10px;">Testi Kapat ↩️</button>
+                <p id="skorYazisi" style="font-weight: bold; margin-top: 15px; font-size: 16px;"></p>
             </div>
         </div>
     </div>
@@ -104,6 +138,47 @@
         function konulariGoster() {
             var liste = document.getElementById("konuListesi");
             liste.classList.toggle("acik");
+        }
+
+        function oyunuAc(uniteNo) {
+            var oyunAlani = document.getElementById("oyunAlani");
+            oyunAlani.style.display = "block";
+            document.getElementById("oyunBaslik").innerText = "🎮 " + uniteNo + ". Ünite - 20 Soruluk Fen Bilimleri Testi";
+            
+            let htmlIcerik = "";
+            // Döngü ile 20 soruyu ve video butonlarını ekliyoruz
+            for(let i = 1; i <= 20; i++) {
+                htmlIcerik += `
+                    <div style="background:white; padding:12px; margin-bottom:12px; border-radius:6px;">
+                        <p><strong>${i}. Soru: Bu soru ${uniteNo}. ünite fen bilimleri kazanımlarına uygundur. Doğru şıkkı seçiniz?</strong></p>
+                        <label><input type="radio" name="s${i}" value="A"> A) Birinci seçenek</label><br>
+                        <label><input type="radio" name="s${i}" value="B"> B) Doğru olan seçenek</label><br>
+                        <label><input type="radio" name="s${i}" value="C"> C) Üçüncü seçenek</label><br>
+                        <label><input type="radio" name="s${i}" value="D"> D) Dördüncü seçenek</label><br>
+                        <a href="http://www.youtube.com/watch?v=mGBJOFvH8aw" target="_blank" class="video-buton">🎥 ${i}. Sorunun Video Çözümünü İzle</a>
+                    </div>
+                `;
+            }
+            document.getElementById("soruKutusu").innerHTML = htmlIcerik;
+            oyunAlani.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function cevabiKontrolEt() {
+            let dogruSayisi = 0;
+            for(let i = 1; i <= 20; i++) {
+                let secilen = document.querySelector('input[name="s' + i + '"]:checked');
+                // Örnek olarak B şıkkını doğru kabul ediyoruz
+                if(secilen && secilen.value === "B") {
+                    dogruSayisi++;
+                }
+            }
+            let toplamPuan = dogruSayisi * 5;
+            document.getElementById("skorYazisi.innerText = "🎉 Test Bitti! Doğru Sayısı: " + dogruSayisi + " / 20 | Toplam Puanın: " + toplamPuan + " / 100 🏆";
+            document.getElementById("skorYazisi").style.color = "#16a34a";
+        }
+
+        function oyunuKapat() {
+            document.getElementById("oyunAlani").style.display = "none";
         }
     </script>
 </body>
