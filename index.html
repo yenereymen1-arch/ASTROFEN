@@ -62,6 +62,15 @@
             margin-top: 25px;
             text-align: left;
         }
+        .soru-gorsel {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #cbd5e1;
+        }
         .sonuc-bilgi {
             margin-top: 5px;
             font-size: 13px;
@@ -72,14 +81,14 @@
 <body>
     <div class="kart">
         <h1>FENX 🚀</h1>
-        <p>5. Sınıf Fen Bilimleri ders konularını ve interaktif testleri görmek için tıkla!</p>
+        <p>5. Sınıf Fen Bilimleri 1. ve 2. Ünite ders konularını ve interaktif testleri görmek için tıkla!</p>
         
         <!-- Ana Konuları Göster Butonu -->
-        <button onclick="konulariAcKapat()" class="buton">5. Sınıf Konularını Göster</button>
+        <button onclick="konulariAcKapat()" class="buton">Konuları Göster</button>
 
         <!-- Açılacak Ana Liste -->
         <div id="konuListesi" class="gizli">
-            <h2>5. Sınıf Fen Bilimleri Tüm Üniteler</h2>
+            <h2>5. Sınıf Fen Bilimleri - İlk 2 Ünite</h2>
 
             <!-- 1. ÜNİTE -->
             <div class="unite">
@@ -90,7 +99,7 @@
                     <li>🔄 Ay'ın Hareketleri ve Evreleri</li>
                     <li>🌍 Güneş, Dünya ve Ay'ın Birbirine Göre Hareketleri</li>
                 </ul>
-                <button onclick="oyunuAc(1)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz</button>
+                <button onclick="oyunuAc(1)" class="buton soru-buton">🎮 1. Ünite Testini Çöz</button>
             </div>
 
             <!-- 2. ÜNİTE -->
@@ -102,69 +111,14 @@
                     <li>🌱 Bitkiler</li>
                     <li>🐾 Hayvanlar</li>
                 </ul>
-                <button onclick="oyunuAc(2)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz</button>
-            </div>
-
-            <!-- 3. ÜNİTE -->
-            <div class="unite">
-                <h3>3. Ünite: Kuvvetin Uygulanması</h3>
-                <ul>
-                    <li>📏 Kuvvetin Büyüklüğü ve Dinamometre</li>
-                    <li>🛷 Sürtünme Kuvveti (Hava ve Su Direnci)</li>
-                </ul>
-                <button onclick="oyunuAc(3)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz</button>
-            </div>
-
-            <!-- 4. ÜNİTE -->
-            <div class="unite">
-                <h3>4. Ünite: Madde ve Değişim</h3>
-                <ul>
-                    <li>🧊 Maddenin Halleri ve Hal Değişimi</li>
-                    <li>🔥 Isı ve Sıcaklık</li>
-                    <li>🌡️ Maddenin Ayırt Edici Özellikleri</li>
-                    <li>🎈 Genleşme ve Büzülme</li>
-                </ul>
-                <button onclick="oyunuAc(4)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz</button>
-            </div>
-
-            <!-- 5. ÜNİTE -->
-            <div class="unite">
-                <h3>5. Ünite: Işığın Yayılması</h3>
-                <ul>
-                    <li>💡 Işığın Yayılması</li>
-                    <li>🪞 Işığın Yansıması ve Yansıma Kanunları</li>
-                    <li>📦 Işığın Madde ile Etkileşimi</li>
-                    <li>👥 Tam Gölge Oluşumu</li>
-                </ul>
-                <button onclick="oyunuAc(5)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz</button>
-            </div>
-
-            <!-- 6. ÜNİTE -->
-            <div class="unite">
-                <h3>6. Ünite: İnsan ve Çevre</h3>
-                <ul>
-                    <li>🌿 Biyoçeşitlilik</li>
-                    <li>☣️ Çevre Sorunları ve Kirlilik</li>
-                    <li>♻️ İnsan ve Çevre Etkileşimi</li>
-                </ul>
-                <button onclick="oyunuAc(6)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz</button>
-            </div>
-
-            <!-- 7. ÜNİTE -->
-            <div class="unite">
-                <h3>7. Ünite: Elektrik Devre Elemanları</h3>
-                <ul>
-                    <li>🔌 Basit Elektrik Devreleri</li>
-                    <li>💡 Ampul Parlaklığını Etkileyen Değişkenler</li>
-                </ul>
-                <button onclick="oyunuAc(7)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz</button>
+                <button onclick="oyunuAc(2)" class="buton soru-buton">🎮 2. Ünite Testini Çöz</button>
             </div>
 
             <!-- 20 SORULUK OYUN TESTİ ALANI -->
             <div id="oyunAlani" class="gizli oyun-kutu">
-                <h3 id="oyunBaslik" style="color: #2563eb;">🏆 20 Soruluk Fen Bilimleri Yarışması</h3>
-                <div id="soruKutusu" style="max-height: 450px; overflow-y: auto; padding-right: 10px;">
-                    <!-- Sorular buraya yüklenecek -->
+                <h3 id="oyunBaslik" style="color: #2563eb;">🏆 20 Soruluk Fen Bilimleri Testi</h3>
+                <div id="soruKutusu" style="max-height: 500px; overflow-y: auto; padding-right: 10px;">
+                    <!-- Sorular ve görseller buraya yüklenecek -->
                 </div>
                 <button onclick="cevabiKontrolEt()" class="buton" style="background-color: #10b981; margin-top: 15px;">Sonuçları Gör ve Puanını Hesapla 🎯</button>
                 <button onclick="oyunuKapat()" class="buton" style="background-color: #64748b; margin-top: 10px;">Testi Kapat ↩️</button>
@@ -189,33 +143,95 @@
             skorKutusu.style.display = "none";
             skorKutusu.innerHTML = "";
             
-            let sorular = [
-                "Güneş'in katmanları içinde en sıcak katman hangisidir?",
-                "Ay'ın ana evrelerinden biri aşağıdakilerden hangisidir?",
-                "Aşağıdakilerden hangisi Güneş'in özelliklerinden biridir?",
-                "Ay'ın Dünya etrafındaki dolanım süresi yaklaşık ne kadardır?",
-                "Mikroskobik canlılar hangi araçla gözlemlenebilir?",
-                "Şapkalı mantarlar canlıların hangi grubuna girer?",
-                "Aşağıdakilerden hangisi çiçeksiz bir bitkidir?",
-                "Kuvvetin birimi aşağıdakilerden hangisidir?",
-                "Kuvveti ölçmek için kullanılan araç hangisidir?",
-                "Sürtünme kuvveti hareket yönüne göre nasıldır?",
-                "Maddenin ısı alarak sıvı halden gaz haline geçmesine ne denir?",
-                "Isı ve sıcaklık birimleri veya kavramları için hangisi yanlıştır?",
-                "Tren raylarının yaz aylarında uzaması olayı hangi kavramla ilgilidir?",
-                "Işık hangi yolla yayılır?",
-                "Arkasından gelen ışığı hiç geçirmeyen maddelere ne ad verilir?",
-                "Düzgün yansıma kanununa göre gelen ışın ile yansıyan ışının açısı nasıldır?",
-                "Aşağıdakilerden hangisi bir çevre sorunu değildir?",
-                "Canlı çeşitliliğini ifade eden terim aşağıdakilerden hangisidir?",
-                "Basit bir elektrik devresinde enerji kaynağı hangisidir?",
-                "Elektrik devresinde ampulün parlaklığını artırmak için ne yapılabilir?"
-            ];
+            let sorular = [];
+            let seceneklerA = [];
+            let seceneklerB = [];
+            let seceneklerC = [];
+            let seceneklerD = [];
+            let dogruCevaplar = [];
 
-            let seceneklerA = ["Işık küre", "Hilal", "Isı ve ışık yayar", "24 saat", "Teleskop", "Bitki", "Elma ağacı", "Kilogram", "Terazi", "Aynı yöndedir", "Donma", "Isı bir enerjidir", "Büzülme", "Eğrisel yolla", "Saydam madde", "Birbirine eşittir", "Geri dönüşüm kutusu kullanmak", "Erozyon", "Ampul", "Pil sayısını azaltmak"];
-            let seceneklerB = ["Çekirdek", "Dolunay", "Dünyanın uydusudur", "1 hafta", "Büyüteç", "Mantar", "Eğrelti otu", "Newton (N)", "Termometre", "Zıt yöndedir", "Erime", "Sıcaklık bir enerji türüdür", "Genleşme", "Dairesel yolla", "Yarı saydam madde", "Biri diğerinden büyüktür", "Hava kirliliği", "Biyoçeşitlilik", "Kablo", "Pil sayısını artırmak"];
-            let seceneklerC = ["Renk küre", "Şişkin ay", "Atmosferi çok kalındır", "29.5 gün", "Mikroskop", "Hayvan", "Gül", "Metre", "Dinamometre", "Dik yöndedir", "Buharlaşma", "Sıcaklık termometre ile ölçülür", "Donma", "Doğrusal yolla", "Opak madde", "Toplamı 90 derecedir", "Küresel ısınma", "Ekosistem", "Pil", "Ampul sayısını artırmak"];
-            let seceneklerD = ["Taç küre", "Son hilal", "Üzerinde su bulunur", "365 gün", "Dürbün", "Papatya", "Derece", "Kronometre", "Etkisi yoktur", "Yoğuşma", "Isı kalori ile ölçülür", "Erime", "Dalgalar halinde", "Esnek madde", "İlişkisi yoktur", "Su kirliliği", "Adaptasyon", "Anahtar", "Kabloyu uzatmak"];
+            if (uniteNo === 1) {
+                sorulasResim = "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=600&auto=format&fit=crop&q=80"; // Güneş uzay görseli
+                sorular = [
+                    "Güneş'in katmanları içinde en sıcak katman hangisidir?",
+                    "Ay'ın ana evrelerinden biri aşağıdakilerden hangisidir?",
+                    "Aşağıdakilerden hangisi Güneş'in özelliklerinden biridir?",
+                    "Ay'ın Dünya etrafındaki dolanım süresi yaklaşık ne kadardır?",
+                    "Güneş'in şekli aşağıdakilerden hangisine benzer?",
+                    "Ay yüzeyindeki büyük çukurlara ne ad verilir?",
+                    "Güneş, Dünya'mıza en yakın nedir?",
+                    "Ay kendi etrafındaki dönme hareketini ne kadar sürede tamamlar?",
+                    "Dünya'nın tek doğal uydusu hangisidir?",
+                    "Aşağıdakilerden hangisi Ay'ın ara evresidir?",
+                    "Güneş kendi ekseni etrafında hangi yöne döner?",
+                    "Ay'ın atmosferi ile ilgili aşağıdakilerden hangisi söylenebilir?",
+                    "Güneş'in büyüklüğü Dünya ile karşılaştırıldığında nasıldır?",
+                    "İlk dördün evresinden yaklaşık bir hafta sonra hangi evre görülür?",
+                    "Ay'ın ışık kaynakı durumu nasıldir?",
+                    "Güneş tutulması hangi evrede gerçekleşir?",
+                    "Ay'ın Dünya'dan bakıldığında hep aynı yüzünün görülmesinin sebebi nedir?",
+                    "Yeni ay evresinden sonra görülen ilk ana evre hangisidir?",
+                    "Güneş'in yapısında en çok bulunan gaz hangisidir?",
+                    "Ay'ın ana evrelerinin tamamı kaç günde bir tekrarlanır?"
+                ];
+                seceneklerA = ["Işık küre", "Hilal", "Isı ve ışık yayar", "24 saat", "Küp", "Krater", "Yıldız", "24 saat", "Güneş", "Hilal", "Doğudan batıya", "Çok kalındır", "Dünya'dan küçüktür", "Dolunay", "Kendi ışığı vardır", "Yeni ay", "Kendi etrafında dönmez", "Hilal", "Oksijen", "29.5 gün"];
+                seceneklerB = ["Çekirdek", "Dolunay", "Dünyanın uydusudur", "1 hafta", "Küre", "Dağ", "Gezegen", "1 ay", "Yıldız", "Şişkin ay", "Batıdan doğuya", "Yok denecek kadar azdır", "Dünya'dan çok büyüktür", "Son dördün", "Güneş'ten aldığı ışığı yansıtır", "Dolunay", "Dönme ve dolanma sürelerinin eşit olması", "İlk dördün", "Hidrojen", "7 gün"];
+                seceneklerC = ["Renk küre", "Şişkin ay", "Atmosferi kalındır", "29.5 gün", "Silindir", "Vadi", "Uydu", "1 yıl", "Ay", "Yeni ay", "Kuzeyden güneye", "Su buharı doludur", "Dünya ile aynı boyuttadır", "Yeni ay", "Soğuk bir ışıktır", "Son dördün", "Sadece dolunayda görünmesi", "Dolunay", "Helyum", "15 gün"];
+                seceneklerD = ["Taç küre", "Son hilal", "Üzerinde su bulunur", "365 gün", "Düz", "Tepe", "Meteor", "12 saat", "Mars", "Hiçbiri", "Hareketsizdir", "Hava tabakası yoktur", "Dünya'dan küçüktür", "Hilal", "Hiç ışık yaymaz", "İlk dördün", "Dünya'nın uydusu olmaması", "Son dördün", "Karbondioksit", "365 gün"];
+                dogruCevaplar = ["B","B","A","C","B","A","A","B","C","A","B","B","B","A","B","A","A","B","B","A"];
+            } else {
+                sorular = [
+                    "Mikroskobik canlılar hangi araçla gözlemlenebilir?",
+                    "Şapkalı mantarlar canlıların hangi grubuna girer?",
+                    "Aşağıdakilerden hangisi çiçeksiz bir bitkidir?",
+                    "Sütten yoğurt ve peynir yapımını sağlayan canlı türü hangisidir?",
+                    "Aşağıdakilerden hangisi omurgalı bir hayvandır?",
+                    "Kök, gövde ve yaprakları gelişmiş bitkilere ne ad verilir?",
+                    "Mantarlar kendi besinlerini üretebilir mi?",
+                    "Aşağıdakilerden hangisi mikroskobik canlıların yol açtığı bir hastalıktır?",
+                    "Kara mantarları veya şapkalı mantarlar hangi gruba dahildir?",
+                    "Çiçekli bitkilerin üremesini sağlayan temel yapı nedir?",
+                    "Aşağıdakilerden hangisi omurgasız bir hayvandır?",
+                    "Küf mantarları nerede yetişir?",
+                    "Bakteriler hangi canlı grubuna girer?",
+                    "Aşağıdakilerden hangisi bitkilerin yaşaması için gerekli değildir?",
+                    "Kurbağalar hangi omurgalı grubuna dahildir?",
+                    "Mayalanma olayını gerçekleştiren mikroskobik canlı hangisidir?",
+                    "Yosunlar hangi bitki grubuna girer?",
+                    "Hangisi mantar türlerinden biri değildir?",
+                    "Sürüngenler grubuna giren hayvan hangisidir?",
+                    "Canlıların en küçük yapı birimi nedir?"
+                ];
+                seceneklerA = ["Teleskop", "Bitki", "Elma ağacı", "Bakteri", "Kelebek", "Çiçeksiz bitki", "Evet, üretir", "Grip", "Maya mantarları", "Kök", "Kedi", "Nemli ve besin olan yerlerde", "Mikroskobik canlılar", "Güneş ışığı", "Memeliler", "Maya mantarı", "Çiçekli bitki", "Maya mantarı", "Kurbağa", "Organ"];
+                seceneklerB = ["Büyüteç", "Mantar", "Eğrelti otu", "Sütten yoğurt yapan yararlı bakteri", "Balık", "Çiçekli bitki", "Hayır, hazır alır", "Nezle", "Şapkalı mantarlar", "Çiçek", "Solucan", "Kurak ve sıcak çöllerde", "Bitkiler", "Su", "Sürüngenler", "Bakteri", "Çiçeksiz bitki", "Şapkalı mantar", "Yılan", "Doku"];
+                seceneklerC = ["Mikroskop", "Hayvan", "Gül", "Virüs", "Yılan", "Tohumlu bitki", "Kendi ışığıyla beslenir", "Verem", "Küf mantarları", "Yaprak", "Serçe", "Derin okyanus tabanında", "Hayvanlar", "Toprak", "Amfibiler (İki yaşamlılar)", "Virüs", "Tohumlu bitki", "Küf mantarı", "Balina", "Hücre"];
+                seceneklerD = ["Dürbün", "Mikroskobik canlı", "Papatya", "Mantarlar", "Kuş", "Tek hücreli bitki", "Güneş enerjisiyle yapar", "Hepsi", "Parazit mantarlar", "Gövde", "İnek", "Buzulların üzerinde", "Mantarlar", "Karanlık", "Kuşlar", "Amip", "Ağaç", "Aslan mantarı", "Yarasa", "Sistem"];
+                dogruCevaplar = ["C","B","B","B","B","B","B","D","C","B","B","A","A","D","C","B","B","D","B","C"];
+            }
+
+            // Her soruya özel görseller (Fen bilimleri temalı görseller)
+            let gorseller = [
+                "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=600&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=600&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=600&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1532693322450-2cb5c511064d?w=600&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=600&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=600&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1517976487132-f75aacb92444?w=600&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1532693322450-2cb5c511064d?w=600&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1507668077129-56e32842fceb?w=600&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=600&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=600&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=600&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1517976487132-f75aacb92444?w=600&auto=format&fit=crop&q=80",
+                "https://images.unsplash.com/photo-1507668077129-56e32842fceb?w=600&auto=format&fit=crop&q=80"
+            ];
 
             let htmlIcerik = "";
             for(let i = 0; i < 20; i++) {
@@ -223,62 +239,8 @@
                 htmlIcerik += `
                     <div style="background:white; padding:15px; margin-bottom:15px; border-radius:8px; border: 1px solid #cbd5e1;">
                         <p><strong>${soruNo}. Soru: ${sorular[i]}</strong></p>
+                        <img src="${gorseller[i]}" alt="Soru Görseli ${soruNo}" class="soru-gorsel">
                         <label><input type="radio" name="soru${soruNo}" value="A"> A) ${seceneklerA[i]}</label><br>
                         <label><input type="radio" name="soru${soruNo}" value="B"> B) ${seceneklerB[i]}</label><br>
                         <label><input type="radio" name="soru${soruNo}" value="C"> C) ${seceneklerC[i]}</label><br>
-                        <label><input type="radio" name="soru${soruNo}" value="D"> D) ${seceneklerD[i]}</label><br>
-                        <div id="sonucSoru${soruNo}" class="sonuc-bilgi"></div>
-                    </div>
-                `;
-            }
-            document.getElementById("soruKutusu").innerHTML = htmlIcerik;
-            oyunAlani.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function cevabiKontrolEt() {
-            let dogruCevaplar = ["B","B","A","C","C","B","B","B","C","A","C","B","B","C","C","A","A","B","C","B"];
-            let dogruSayisi = 0;
-            let yanlisSayisi = 0;
-            
-            for(let i = 1; i <= 20; i++) {
-                let secilen = document.querySelector('input[name="soru' + i + '"]:checked');
-                let sonucDiv = document.getElementById("sonucSoru" + i);
-                
-                let dogruHarf = dogruCevaplar[i-1];
-
-                if(secilen) {
-                    if(secilen.value === dogruHarf) {
-                        dogruSayisi++;
-                        sonucDiv.innerHTML = "✅ Doğru! (Doğru Cevap: " + dogruHarf + ")";
-                        sonucDiv.style.color = "#16a34a";
-                    } else {
-                        yanlisSayisi++;
-                        sonucDiv.innerHTML = "❌ Yanlış! Doğru Cevap: " + dogruHarf;
-                        sonucDiv.style.color = "#dc2626";
-                    }
-                } else {
-                    yanlisSayisi++;
-                    sonucDiv.innerHTML = "⚠️ Boş bırakıldı! Doğru Cevap: " + dogruHarf;
-                    sonucDiv.style.color = "#ca8a04";
-                }
-            }
-            
-            let yuzdePuan = (dogruSayisi / 20) * 100;
-
-            let skorKutusu = document.getElementById("skorYazisi");
-            skorKutusu.style.display = "block";
-            skorKutusu.innerHTML = `
-                🎉 <strong>Test Tamamlandı!</strong><br>
-                ✅ Doğru Sayısı: ${dogruSayisi}<br>
-                ❌ Yanlış/Boş Sayısı: ${yanlisSayisi}<br>
-                🏆 Başarı Yüzdesi: %${yuzdePuan} (100 üzerinden ${dogruSayisi * 5} Puan)
-            `;
-            skorKutusu.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function oyunuKapat() {
-            document.getElementById("oyunAlani").style.display = "none";
-        }
-    </script>
-</body>
-</html>
+                        <label><input type="radio" name="soru${soruNo}" value="D"> D) ${secenekler
