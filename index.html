@@ -117,7 +117,7 @@
             <div id="oyunAlani" class="gizli oyun-kutu">
                 <h3 id="oyunBaslik" style="color: #2563eb;">🏆 20 Soruluk Fen Bilimleri Testi</h3>
                 <div id="soruKutusu" style="max-height: 500px; overflow-y: auto; padding-right: 10px;">
-                    <!-- Sorular ve görseller buraya yüklenecek -->
+                    <!-- Sorular buraya yüklenecek -->
                 </div>
                 <button onclick="cevabiKontrolEt()" class="buton" style="background-color: #10b981; margin-top: 15px;">Sonuçları Gör ve Puanını Hesapla 🎯</button>
                 <button onclick="oyunuKapat()" class="buton" style="background-color: #64748b; margin-top: 10px;">Testi Kapat ↩️</button>
@@ -154,6 +154,7 @@
             let seceneklerC = [];
             let seceneklerD = [];
             let dogruCevaplar = [];
+            let gorseller = [];
 
             if (uniteNo === 1) {
                 sorular = [
@@ -183,6 +184,30 @@
                 seceneklerC = ["Renk küre", "Şişkin ay", "Atmosferi kalındır", "29.5 gün", "Silindir", "Vadi", "Uydu", "1 yıl", "Ay", "Yeni ay", "Kuzeyden güneye", "Su buharı doludur", "Dünya ile aynı boyuttadır", "Yeni ay", "Soğuk bir ışıktır", "Son dördün", "Sadece dolunayda görünmesi", "Dolunay", "Helyum", "15 gün"];
                 seceneklerD = ["Taç küre", "Son hilal", "Üzerinde su bulunur", "365 gün", "Düz", "Tepe", "Meteor", "12 saat", "Mars", "Hiçbiri", "Hareketsizdir", "Hava tabakası yoktur", "Dünya'dan küçüktür", "Hilal", "Hiç ışık yaymaz", "İlk dördün", "Dünya'nın uydusu olmaması", "Son dördün", "Karbondioksit", "365 gün"];
                 dogruCevaplar = ["B","B","A","C","B","A","A","B","C","A","B","B","B","A","B","A","A","B","B","A"];
+                
+                // 1. Ünite için Güneş, Ay ve Uzay temalı nokta atışı görseller
+                gorseller = [
+                    "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=600&auto=format&fit=crop&q=80", // Güneş
+                    "https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=600&auto=format&fit=crop&q=80", // Ay evreleri
+                    "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=600&auto=format&fit=crop&q=80", // Güneş ışığı
+                    "https://images.unsplash.com/photo-1532693322450-2cb5c511064d?w=600&auto=format&fit=crop&q=80", // Ay dolanım
+                    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&auto=format&fit=crop&q=80", // Uzay küre
+                    "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=600&auto=format&fit=crop&q=80", // Krater / Ay yüzeyi
+                    "https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=600&auto=format&fit=crop&q=80", // Güneş yıldız
+                    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop&q=80", // Ay dönme
+                    "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&auto=format&fit=crop&q=80", // Dünya ve Ay
+                    "https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=600&auto=format&fit=crop&q=80", // Hilal
+                    "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=600&auto=format&fit=crop&q=80", // Güneş eksen
+                    "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=600&auto=format&fit=crop&q=80", // Atmosfer
+                    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&auto=format&fit=crop&q=80", // Boyut karşılaştırma
+                    "https://images.unsplash.com/photo-1532693322450-2cb5c511064d?w=600&auto=format&fit=crop&q=80", // Evreler
+                    "https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=600&auto=format&fit=crop&q=80", // Işık yansıtma
+                    "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&auto=format&fit=crop&q=80", // Tutulma
+                    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop&q=80", // Aynı yüz
+                    "https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=600&auto=format&fit=crop&q=80", // İlk dördün
+                    "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=600&auto=format&fit=crop&q=80", // Hidrojen gazı (Güneş)
+                    "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=600&auto=format&fit=crop&q=80"  // Tekrarlanan evreler
+                ];
             } else {
                 sorular = [
                     "Mikroskobik canlılar hangi araçla gözlemlenebilir?",
@@ -211,30 +236,31 @@
                 seceneklerC = ["Mikroskop", "Hayvan", "Gül", "Virüs", "Yılan", "Tohumlu bitki", "Kendi ışığıyla beslenir", "Verem", "Küf mantarları", "Yaprak", "Serçe", "Derin okyanus tabanında", "Hayvanlar", "Toprak", "Amfibiler (İki yaşamlılar)", "Virüs", "Tohumlu bitki", "Küf mantarı", "Balina", "Hücre"];
                 seceneklerD = ["Dürbün", "Mikroskobik canlı", "Papatya", "Mantarlar", "Kuş", "Tek hücreli bitki", "Güneş enerjisiyle yapar", "Hepsi", "Parazit mantarlar", "Gövde", "İnek", "Buzulların üzerinde", "Mantarlar", "Karanlık", "Kuşlar", "Amip", "Ağaç", "Aslan mantarı", "Yarasa", "Sistem"];
                 dogruCevaplar = ["C","B","B","B","B","B","B","D","C","B","B","A","A","D","C","B","B","D","B","C"];
+                
+                // 2. Ünite için Mikroskop, Mantar, Bitki, Hayvan ve Hücre temalı nokta atışı görseller
+                gorseller = [
+                    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&auto=format&fit=crop&q=80", // Mikroskop
+                    "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=600&auto=format&fit=crop&q=80", // Mantar
+                    "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=600&auto=format&fit=crop&q=80", // Bitki / Eğrelti
+                    "https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?w=600&auto=format&fit=crop&q=80", // Yoğurt / Süt
+                    "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=600&auto=format&fit=crop&q=80", // Balık / Omurgalı
+                    "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=600&auto=format&fit=crop&q=80", // Çiçekli bitki
+                    "https://images.unsplash.com/photo-1508873696983-2df5c92063c7?w=600&auto=format&fit=crop&q=80", // Mantar doğa
+                    "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=600&auto=format&fit=crop&q=80", // Mikroorganizma / Hastalık
+                    "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=600&auto=format&fit=crop&q=80", // Şapkalı mantar
+                    "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=600&auto=format&fit=crop&q=80", // Çiçek yapısı
+                    "https://images.unsplash.com/photo-1557008072-7f2a7fd54d3d?w=600&auto=format&fit=crop&q=80", // Solucan / Omurgasız
+                    "https://images.unsplash.com/photo-1508873696983-2df5c92063c7?w=600&auto=format&fit=crop&q=80", // Küf mantarı
+                    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&auto=format&fit=crop&q=80", // Bakteri
+                    "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=600&auto=format&fit=crop&q=80", // Bitki yaşamı
+                    "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=600&auto=format&fit=crop&q=80", // Kurbağa
+                    "https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?w=600&auto=format&fit=crop&q=80", // Mayalanma
+                    "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=600&auto=format&fit=crop&q=80", // Yosun
+                    "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=600&auto=format&fit=crop&q=80", // Mantar türü
+                    "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=600&auto=format&fit=crop&q=80", // Yılan / Sürüngen
+                    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&auto=format&fit=crop&q=80"  // Hücre
+                ];
             }
-
-            let gorseller = [
-                "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&auto=format&fit=crop&q=80",
-                "https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=600&auto=format&fit=crop&q=80",
-                "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=600&auto=format&fit=crop&q=80",
-                "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=600&auto=format&fit=crop&q=80",
-                "https://images.unsplash.com/photo-1532693322450-2cb5c511064d?w=600&auto=format&fit=crop&q=80",
-                "https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=600&auto=format&fit=crop&q=80",
-                "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&auto=format&fit=crop&q=80",
-                "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop&q=80",
-                "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=600&auto=format&fit=crop&q=80",
-                "https://images.unsplash.com/photo-1517976487132-f75aacb92444?w=600&auto=format&fit=crop&q=80",
-                "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&auto=format&fit=crop&q=80",
-                "https://images.unsplash.com/photo-1532693322450-2cb5c511064d?w=600&auto=format&fit=crop&q=80",
-                "https://images.unsplash.com/photo-1507668077129-56e32842fceb?w=600&auto=format&fit=crop&q=80",
-                "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop&q=80",
-                "https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=600&auto=format&fit=crop&q=80",
-                "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&auto=format&fit=crop&q=80",
-                "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=600&auto=format&fit=crop&q=80",
-                "https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=600&auto=format&fit=crop&q=80",
-                "https://images.unsplash.com/photo-1517976487132-f75aacb92444?w=600&auto=format&fit=crop&q=80",
-                "https://images.unsplash.com/photo-1507668077129-56e32842fceb?w=600&auto=format&fit=crop&q=80"
-            ];
 
             let htmlIcerik = "";
             for(let i = 0; i < 20; i++) {
