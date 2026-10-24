@@ -61,17 +61,24 @@
             margin-top: 25px;
             text-align: left;
         }
-        .soru-sema {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            color: white;
-            padding: 15px;
+        .soru-gorsel-kutu {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border: 2px solid #cbd5e1;
             border-radius: 8px;
+            padding: 12px;
             text-align: center;
+            font-size: 28px;
             font-weight: bold;
-            font-size: 14px;
+            color: #1e293b;
             margin: 10px 0;
-            box-shadow: inset 0 2px 4px rgba(255,255,255,0.1);
-            letter-spacing: 0.5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .soru-gorsel-kutu span {
+            display: block;
+            font-size: 13px;
+            color: #475569;
+            margin-top: 4px;
+            font-weight: normal;
         }
         .sonuc-bilgi {
             margin-top: 5px;
@@ -157,7 +164,7 @@
             let seceneklerC = [];
             let seceneklerD = [];
             let dogruCevaplar = [];
-            let semalar = [];
+            let soruIkonlari = [];
 
             if (uniteNo === 1) {
                 sorular = [
@@ -188,27 +195,28 @@
                 seceneklerD = ["Taç küre", "Son hilal", "Üzerinde su bulunur", "365 gün", "Düz", "Tepe", "Meteor", "12 saat", "Mars", "Hiçbiri", "Hareketsizdir", "Hava tabakası yoktur", "Dünya'dan küçüktür", "Hilal", "Hiç ışık yaymaz", "İlk dördün", "Dünya'nın uydusu olmaması", "Son dördün", "Karbondioksit", "365 gün"];
                 dogruCevaplar = ["B","B","A","C","B","A","A","B","C","A","B","B","B","A","B","A","A","B","B","A"];
                 
-                semalar = [
-                    "☀️ GÜNEŞ KATMANLARI MODELİ (Çekirdek > Işık Küre > Renk Küre > Taç Küre)",
-                    "🌑 AY'IN ANA EVRELERİ (Yeni Ay ➔ İlk Dördün ➔ Dolunay ➔ Son Dördün)",
-                    "☀️ GÜNEŞ: Orta büyüklükte bir yıldızdır, ısı ve ışık yayar.",
-                    "🔄 AY'IN DOLANIMI: Dünya etrafında yaklaşık 29.5 günde (1 ay) döner.",
-                    "🌐 GEOMETRİ: Güneş, Dünya ve Ay küresel şekle sahiptir.",
-                    "🕳️ AY YÜZEYİ: Göktaşlarının çarpmasıyla oluşan çukurlara krater denir.",
-                    "🌟 UZAY BİLİMİ: Güneş sistemimizdeki tek yıldız ve bize en yakın yıldızdır.",
-                    "🌀 AY'IN HAREKETİ: Kendi etrafında dönme süresi ile Dünya etrafında dolanma süresi eşittir.",
-                    "🌍 UYDU SİSTEMİ: Dünya'nın uzaydaki tek doğal uydusu Ay'dır.",
-                    "🌙 ARA EVRELER: Hilal ve Şişkin Ay Ay'ın ara evreleridir.",
-                    "🔄 DÖNÜN YÖNÜ: Güneş ve Dünya batıdan doğuya doğru döner.",
-                    "🌌 ATMOSFER: Ay'ın atmosferi yok denecek kadar incedir/azdır.",
-                    "📏 BOYUT KIYASLAMASI: Güneş, Dünya'dan milyonlarca kat daha büyüktür.",
-                    "🌕 EVRELER DÖNGÜSÜ: İlk dördünden bir hafta sonra Dolunay görülür.",
-                    "💡 IŞIK KAYNAĞI: Güneş ısı/ışık kaynağıdır, Ay ise sadece yansıtıcıdır.",
-                    "🌑 TUTULMA: Güneş tutulması Yeni Ay evresinde gerçekleşir.",
-                    "👥 KİLİTLİ HAREKET: Ay'ın hep aynı yüzü görünür çünkü dönme = dolanma süresidir.",
-                    "🌙 ANA EVRE: Yeni aydan sonra görülen ilk ana evre İlk Dördün'dür.",
-                    "⚛️ KİMYASAL YAPI: Güneş'in yapısında en çok Hidrojen ve Helyum gazları bulunur.",
-                    "📅 TAKVİM: Ay'ın ana evreleri döngüsü 29.5 günde tamamlanır."
+                // 1. Üniteye özel tam eşleşen görsel öğeler (Güneş, Ay, Dünya)
+                soruIkonlari = [
+                    "☀️ <span>Güneş Katmanları Modeli</span>",
+                    "🌕 <span>Ay'ın Ana Evreleri</span>",
+                    "☀️ <span>Güneş (Isı ve Işık Kaynağı)</span>",
+                    "🔄 <span>Ay'ın Dünya Etrafındaki Dolanımı</span>",
+                    "🌐 <span>Güneş'in Küresel Şekli</span>",
+                    "🕳️ <span>Ay Yüzeyindeki Kraterler</span>",
+                    "⭐ <span>Güneş (Gezegenimize En Yakın Yıldız)</span>",
+                    "🌀 <span>Ay'ın Kendi Eksenindeki Dönüşü</span>",
+                    "🌍 <span>Dünya ve Doğal Uydusu Ay</span>",
+                    "🌙 <span>Ay'ın Ara Evreleri (Hilal / Şişkin Ay)</span>",
+                    "🔄 <span>Güneş'in Kendi Ekseni Etrafındaki Dönüş Yönü</span>",
+                    "🌌 <span>Ay'ın Atmosfer Yapısı</span>",
+                    "📏 <span>Güneş ve Dünya Boyut Kıyaslaması</span>",
+                    "🌕 <span>İlk Dördün ve Sonraki Evreler</span>",
+                    "💡 <span>Güneş (Işık Kaynağı) ve Ay (Yansıtıcı)</span>",
+                    "🌑 <span>Güneş Tutulması Olayı (Yeni Ay Evresi)</span>",
+                    "👥 <span>Ay'ın Hep Aynı Yüzünün Görünmesi</span>",
+                    "🌙 <span>Yeni Ay ve İlk Dördün Evresi</span>",
+                    "⚛️ <span>Güneş'in Gaz Yapısı (Hidrojen & Helyum)</span>",
+                    "📅 <span>Ay'ın Evreleri Döngü Süresi</span>"
                 ];
             } else {
                 sorular = [
@@ -239,27 +247,28 @@
                 seceneklerD = ["Dürbün", "Mikroskobik canlı", "Papatya", "Mantarlar", "Kuş", "Tek hücreli bitki", "Güneş enerjisiyle yapar", "Hepsi", "Parazit mantarlar", "Gövde", "İnek", "Buzulların üzerinde", "Mantarlar", "Karanlık", "Kuşlar", "Amip", "Ağaç", "Aslan mantarı", "Yarasa", "Sistem"];
                 dogruCevaplar = ["C","B","B","B","B","B","B","D","C","B","B","A","A","D","C","B","B","D","B","C"];
                 
-                semalar = [
-                    "🔬 MİKROSKOP: Çıplak gözle görülemeyen küçük canlıları büyütmeye yarar.",
-                    "🍄 MANTARLAR GRUBU: Şapkalı mantarlar, Küf mantarları, Maya mantarları, Parazit mantarlar",
-                    "🌱 BİTKİLER: Çiçekli (Tohumlu) ve Çiçeksiz (Eğrelti otu, yosun) olarak ayrılır.",
-                    "🥛 BİYOLOJİK SÜREÇ: Yararlı bakteriler sütten yoğurt ve peynir mayalar.",
-                    "🦴 İSKELET SİSTEMİ: Omurgalılar (Balık, Kurbağa, Sürüngen, Kuş, Memeli)",
-                    "🌿 GELİŞMİŞ BİTKİ: Kök, gövde, yaprak ve çiçek bulunduranlar tohumlu bitkilerdir.",
-                    "🍄 BESLENME: Mantarlar kendi besinini üretemez, dışarıdan hazır alır.",
-                    "🦠 HASTALIKLAR: Grip, nezle, verem ve zatürree mikroskobik canlılar (bakteri/virüs) yüzünden olur.",
-                    "🍄 MANTAR ÇEŞİDİ: Besin olarak tükettiğimiz mantarlar Şapkalı Mantarlar sınıfındadır.",
-                    "🌸 ÜREME ORGANI: Çiçekli bitkilerde üremeyi ve tohum oluşumunu çiçek sağlar.",
-                    "🐛 OMRUGASIZLAR: Solucan, sinek, arı, yengeç gibi iskeleti olmayan canlılardır.",
-                    "🍞 KÜF MANTARI: Nemli, besinli ve sıcak ortamlarda (örneğin ekmek üstünde) ürer.",
-                    "🦠 BAKTERİLER: Tek hücreli mikroskobik canlılar grubunda incelenir.",
-                    "🌱 BİTKİ İHTİYAÇLARI: Bitkiler yaşamak için suya, ışığa, karbondioksite ve minerallere ihtiyaç duyar.",
-                    "🐸 KURBAĞA: Hem suda hem karada yaşayan (Amfibiler / İki yaşamlılar) omurgalıdır.",
-                    "🍞 MAYALANMA: Maya mantarları hamurun kabarmasını ve sütten yoğurt olmasını sağlar.",
-                    "🌿 ÇİÇEKSİZ BİTKİ: Yosunlar ve eğrelti otları çiçek ve tohumu olmayan bitkilerdir.",
-                    "❌ MANTAR OLMAYAN: Aslan mantarı diye bir mantar türü yoktur.",
-                    "🐍 SÜRÜNGENLER: Sürünerek hareket eden, pullu hayvanlar (Yılan, kertenkele, timsah)",
-                    "🧬 HÜCRE: Canlıların yapı taşı ve en küçük yapı birimi hücredir."
+                // 2. Üniteye özel tam eşleşen görsel öğeler (Mikroskop, Mantar, Bitki, Hayvan, Hücre)
+                soruIkonlari = [
+                    "🔬 <span>Mikroskop ve Mikroskobik Canlılar</span>",
+                    "🍄 <span>Şapkalı Mantarlar Sınıfı</span>",
+                    "🌿 <span>Çiçeksiz Bitkiler (Eğrelti Otu)</span>",
+                    "🥛 <span>Yoğurt ve Peynir Mayalama (Yararlı Bakteri)</span>",
+                    "🐟 <span>Omurgalı Hayvanlar (Balık / İskelet Sistemi)</span>",
+                    "🌱 <span>Gelişmiş Bitkiler (Kök, Gövde, Yaprak)</span>",
+                    "🍄 <span>Mantarların Beslenme Özelliği</span>",
+                    "🦠 <span>Mikroskobik Canlıların Yol Açtığı Hastalıklar</span>",
+                    "🍄 <span>Kara ve Şapkalı Mantarlar</span>",
+                    "🌸 <span>Çiçekli Bitkiler ve Üreme Yapısı</span>",
+                    "🐛 <span>Omurgasız Hayvanlar (Solucan / Böcek)</span>",
+                    "🍞 <span>Küf Mantarı ve Üreme Ortamı</span>",
+                    "🦠 <span>Bakteriler (Tek Hücreli Canlılar)</span>",
+                    "🌱 <span>Bitkilerin Yaşam Alanı ve İhtiyaçları</span>",
+                    "🐸 <span>Kurbağalar (Amfibiler / İki Yaşamlılar)</span>",
+                    "🍞 <span>Maya Mantarları ve Mayalanma</span>",
+                    "🌿 <span>Yosunlar ve Çiçeksiz Bitki Yapısı</span>",
+                    "❌ <span>Mantar Çeşitleri Analizi</span>",
+                    "🐍 <span>Sürüngenler Grubu Hayvanlar</span>",
+                    "🧬 <span>Hücre (Canlıların En Küçük Yapı Birimi)</span>"
                 ];
             }
 
@@ -269,7 +278,7 @@
                 htmlIcerik += `
                     <div style="background:white; padding:15px; margin-bottom:15px; border-radius:8px; border: 1px solid #cbd5e1;">
                         <p><strong>${soruNo}. Soru: ${sorular[i]}</strong></p>
-                        <div class="soru-sema">📌 Konu Özeti & Şema: ${semalar[i]}</div>
+                        <div class="soru-gorsel-kutu">${soruIkonlari[i]}</div>
                         <label><input type="radio" name="soru${soruNo}" value="A"> A) ${seceneklerA[i]}</label><br>
                         <label><input type="radio" name="soru${soruNo}" value="B"> B) ${seceneklerB[i]}</label><br>
                         <label><input type="radio" name="soru${soruNo}" value="C"> C) ${seceneklerC[i]}</label><br>
