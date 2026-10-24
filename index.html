@@ -62,17 +62,15 @@
             margin-top: 25px;
             text-align: left;
         }
-        .video-buton {
-            display: inline-block;
-            background-color: #ef4444;
-            color: white;
-            padding: 6px 12px;
-            font-size: 12px;
+        .cozum-notu {
+            background-color: #f1f5f9;
+            color: #475569;
+            padding: 8px 12px;
+            font-size: 13px;
             border-radius: 5px;
-            text-decoration: none;
             margin-top: 8px;
+            border-left: 3px solid #0284c7;
         }
-        .video-buton:hover { background-color: #dc2626; }
     </style>
 </head>
 <body>
@@ -96,7 +94,7 @@
                     <li>🔄 Ay'ın Hareketleri ve Evreleri</li>
                     <li>🌍 Güneş, Dünya ve Ay'ın Birbirine Göre Hareketleri</li>
                 </ul>
-                <button onclick="oyunuAc(1)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz ve Videoları Gör</button>
+                <button onclick="oyunuAc(1)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz</button>
             </div>
 
             <!-- 2. ÜNİTE -->
@@ -108,7 +106,7 @@
                     <li>🌱 Bitkiler</li>
                     <li>🐾 Hayvanlar</li>
                 </ul>
-                <button onclick="oyunuAc(2)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz ve Videoları Gör</button>
+                <button onclick="oyunuAc(2)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz</button>
             </div>
 
             <!-- 3. ÜNİTE -->
@@ -118,7 +116,7 @@
                     <li>📏 Kuvvetin Büyüklüğü ve Dinamometre</li>
                     <li>🛷 Sürtünme Kuvveti (Hava ve Su Direnci)</li>
                 </ul>
-                <button onclick="oyunuAc(3)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz ve Videoları Gör</button>
+                <button onclick="oyunuAc(3)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz</button>
             </div>
 
             <!-- 4. ÜNİTE -->
@@ -130,7 +128,7 @@
                     <li>🌡️ Maddenin Ayırt Edici Özellikleri</li>
                     <li>🎈 Genleşme ve Büzülme</li>
                 </ul>
-                <button onclick="oyunuAc(4)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz ve Videoları Gör</button>
+                <button onclick="oyunuAc(4)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz</button>
             </div>
 
             <!-- 5. ÜNİTE -->
@@ -142,7 +140,7 @@
                     <li>📦 Işığın Madde ile Etkileşimi</li>
                     <li>👥 Tam Gölge Oluşumu</li>
                 </ul>
-                <button onclick="oyunuAc(5)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz ve Videoları Gör</button>
+                <button onclick="oyunuAc(5)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz</button>
             </div>
 
             <!-- 6. ÜNİTE -->
@@ -153,7 +151,7 @@
                     <li>☣️ Çevre Sorunları ve Kirlilik</li>
                     <li>♻️ İnsan ve Çevre Etkileşimi</li>
                 </ul>
-                <button onclick="oyunuAc(6)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz ve Videoları Gör</button>
+                <button onclick="oyunuAc(6)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz</button>
             </div>
 
             <!-- 7. ÜNİTE -->
@@ -163,7 +161,7 @@
                     <li>🔌 Basit Elektrik Devreleri</li>
                     <li>💡 Ampul Parlaklığını Etkileyen Değişkenler</li>
                 </ul>
-                <button onclick="oyunuAc(7)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz ve Videoları Gör</button>
+                <button onclick="oyunuAc(7)" class="buton soru-buton">🎮 20 Soruluk Testi Çöz</button>
             </div>
 
             <!-- 20 SORULUK OYUN TESTİ ALANI -->
@@ -229,7 +227,7 @@
                         <label><input type="radio" name="soru${soruNo}" value="B"> B) ${seceneklerB[i]}</label><br>
                         <label><input type="radio" name="soru${soruNo}" value="C"> C) ${seceneklerC[i]}</label><br>
                         <label><input type="radio" name="soru${soruNo}" value="D"> D) ${seceneklerD[i]}</label><br>
-                        <a href="http://www.youtube.com/watch?v=mGBJOFvH8aw" target="_blank" class="video-buton">🎥 ${soruNo}. Sorunun Video Çözümünü İzle</a>
+                        <div class="cozum-notu">💡 <strong>Çözüm Notu:</strong> Bu sorunun doğru yanıtı B seçeneğidir. Konu tekrarı yaparak detayları öğrenebilirsin!</div>
                     </div>
                 `;
             }
@@ -250,7 +248,6 @@
             
             let toplamPuan = dogruSayisi * 5;
             document.getElementById("skorYazisi").innerText = "🎉 Test Bitti! Doğru Sayısı: " + dogruSayisi + " / 20 | Toplam Puanın: " + toplamPuan + " / 100 🏆";
-            document.getElementById("skorYazisi").style.color = "#16a34a";
         }
 
         function oyunuKapat() {
