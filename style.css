@@ -10,11 +10,11 @@ body {
 
 .kart {
     background-color: white;
-    padding: 30px;
+    padding: 25px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
-    max-width: 600px;
+    max-width: 550px;
     width: 90%;
 }
 
@@ -22,11 +22,10 @@ body {
     background-color: #2563eb;
     color: white;
     border: none;
-    padding: 12px 24px;
-    font-size: 16px;
+    padding: 10px 20px;
+    font-size: 15px;
     border-radius: 8px;
     cursor: pointer;
-    margin-top: 15px;
     transition: background-color 0.3s;
 }
 
@@ -34,14 +33,26 @@ body {
     opacity: 0.9;
 }
 
-/* Başlangıçta her şey gizli */
+.ana-buton {
+    margin-top: 15px;
+    font-size: 16px;
+    padding: 12px 24px;
+}
+
+.soru-buton {
+    background-color: #0284c7;
+    font-size: 13px;
+    margin-top: 10px;
+    padding: 8px 14px;
+}
+
+/* Başlangıçta gizli elementler */
 .gizli {
     display: none;
-    margin-top: 25px;
+    margin-top: 20px;
     text-align: left;
 }
 
-/* Butona basılınca açılır */
 .gizli.acik {
     display: block;
 }
@@ -49,7 +60,7 @@ body {
 .unite {
     margin-bottom: 20px;
     background-color: #f8fafc;
-    padding: 12px 16px;
+    padding: 15px;
     border-radius: 8px;
     border-left: 4px solid #2563eb;
 }
@@ -57,43 +68,36 @@ body {
 .unite h3 {
     margin-top: 0;
     color: #1e293b;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 ul {
     list-style-type: none;
     padding: 0;
-    margin-bottom: 0;
+    margin: 5px 0;
 }
 
 li {
     color: #475569;
-    padding: 4px 0;
-    font-size: 14px;
+    padding: 3px 0;
+    font-size: 13px;
 }
 
-.oyun-alani {
-    margin-top: 30px;
+.oyun-kutu {
     background-color: #eff6ff;
     padding: 20px;
     border-radius: 10px;
     border: 2px dashed #2563eb;
+    margin-top: 20px;
+    text-align: left;
 }
 
-.soru-item {
-    background-color: white;
-    padding: 12px;
-    margin-bottom: 15px;
-    border-radius: 6px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.soru-item p {
+#soruKutusu p {
     font-size: 14px;
     color: #1e293b;
 }
 
-.soru-item label {
+#soruKutusu label {
     font-size: 13px;
     color: #334155;
     cursor: pointer;
