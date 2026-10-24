@@ -1,4 +1,116 @@
-<!-- JavaScript Oyun ve Etkileşim Kodları -->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FENX - 5. Sınıf Fen Bilimleri Oyunu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="kart">
+        <h1>FENX 🚀</h1>
+        <p>5. Sınıf Fen Bilimleri ders konularını görmek için aşağıdaki ana butona tıkla!</p>
+        
+        <!-- Ana Konuları Açma Butonu -->
+        <button onclick="konulariGoster()" class="buton ana-buton">5. Sınıf Konularını Göster</button>
+
+        <!-- Tıklayınca Açılacak Tüm Üniteler Alanı -->
+        <div id="konuListesi" class="gizli">
+            <h2>5. Sınıf Fen Bilimleri Konuları ve Testleri</h2>
+
+            <!-- 1. ÜNİTE -->
+            <div class="unite">
+                <h3>1. Ünite: Güneş, Dünya ve Ay</h3>
+                <ul>
+                    <li>☀️ Güneş'in Yapısı ve Özellikleri</li>
+                    <li>🌕 Ay'ın Yapısı ve Özellikleri</li>
+                    <li>🔄 Ay'ın Hareketleri ve Evreleri</li>
+                    <li>🌍 Güneş, Dünya ve Ay'ın Birbirine Göre Hareketleri</li>
+                </ul>
+                <button onclick="oyunuAc(1)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
+            </div>
+
+            <!-- 2. ÜNİTE -->
+            <div class="unite">
+                <h3>2. Ünite: Canlılar Dünyası</h3>
+                <ul>
+                    <li>🔬 Mikroskobik Canlılar</li>
+                    <li>🍄 Mantarlar</li>
+                    <li>🌱 Bitkiler</li>
+                    <li>🐾 Hayvanlar</li>
+                </ul>
+                <button onclick="oyunuAc(2)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
+            </div>
+
+            <!-- 3. ÜNİTE -->
+            <div class="unite">
+                <h3>3. Ünite: Kuvvetin Uygulanması</h3>
+                <ul>
+                    <li>📏 Kuvvetin Büyüklüğü ve Dinamometre</li>
+                    <li>🛷 Sürtünme Kuvveti (Hava ve Su Direnci)</li>
+                </ul>
+                <button onclick="oyunuAc(3)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
+            </div>
+
+            <!-- 4. ÜNİTE -->
+            <div class="unite">
+                <h3>4. Ünite: Madde ve Değişim</h3>
+                <ul>
+                    <li>🧊 Maddenin Halleri ve Hal Değişimi</li>
+                    <li>🔥 Isı ve Sıcaklık</li>
+                    <li>🌡️ Maddenin Ayırt Edici Özellikleri</li>
+                    <li>🎈 Genleşme ve Büzülme</li>
+                </ul>
+                <button onclick="oyunuAc(4)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
+            </div>
+
+            <!-- 5. ÜNİTE -->
+            <div class="unite">
+                <h3>5. Ünite: Işığın Yayılması</h3>
+                <ul>
+                    <li>💡 Işığın Yayılması</li>
+                    <li>🪞 Işığın Yansıması ve Yansıma Kanunları</li>
+                    <li>📦 Işığın Madde ile Etkileşimi</li>
+                    <li>👥 Tam Gölge Oluşumu</li>
+                </ul>
+                <button onclick="oyunuAc(5)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
+            </div>
+
+            <!-- 6. ÜNİTE -->
+            <div class="unite">
+                <h3>6. Ünite: İnsan ve Çevre</h3>
+                <ul>
+                    <li>🌿 Biyoçeşitlilik</li>
+                    <li>☣️ Çevre Sorunları ve Kirlilik</li>
+                    <li>♻️ İnsan ve Çevre Etkileşimi</li>
+                </ul>
+                <button onclick="oyunuAc(6)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
+            </div>
+
+            <!-- 7. ÜNİTE -->
+            <div class="unite">
+                <h3>7. Ünite: Elektrik Devre Elemanları</h3>
+                <ul>
+                    <li>🔌 Basit Elektrik Devreleri</li>
+                    <li>💡 Ampul Parlaklığını Etkileyen Değişkenler</li>
+                </ul>
+                <button onclick="oyunuAc(7)" class="buton soru-buton">🎮 Bu Ünitenin 20 Soruluk Testini Çöz</button>
+            </div>
+
+            <!-- OYUN VE SORU EKRANI -->
+            <div id="oyunAlani" class="gizli oyun-kutu">
+                <h3 id="oyunBaslik" style="color: #2563eb;">🏆 Fen Bilimleri Yarışması</h3>
+                <div id="soruKutusu">
+                    <!-- Sorular buraya gelecek -->
+                </div>
+                <button onclick="cevabiKontrolEt()" class="buton" style="background-color: #10b981; margin-top: 15px;">Sonuçları Gör 🎯</button>
+                <button onclick="oyunuKapat()" class="buton" style="background-color: #64748b; margin-top: 10px;">Geri Dön ↩️</button>
+                <p id="skorYazisi" style="font-weight: bold; margin-top: 15px;"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Oyun ve Etkileşim Kodları -->
     <script>
         function konulariGoster() {
             var liste = document.getElementById("konuListesi");
@@ -10,7 +122,6 @@
             oyunAlani.style.display = "block";
             document.getElementById("oyunBaslik").innerText = "🎮 " + uniteNo + ". Ünite - 20 Soruluk Fen Bilimleri Oyunu";
             
-            // Her soruya özel video çözüm butonlu 20 soruluk yapı
             document.getElementById("soruKutusu").innerHTML = `
                 <div style="max-height: 400px; overflow-y: auto; padding-right: 10px;">
                     <p><strong>1. Güneş'in katmanları içinde en sıcak katman hangisidir?</strong></p>
@@ -26,32 +137,21 @@
                     <label><input type="radio" name="s2" value="C"> C) Şişkin ay</label><br>
                     <label><input type="radio" name="s2" value="D"> D) Son hilal</label><br>
                     <a href="http://www.youtube.com/watch?v=1c3-XkWcbQA" target="_blank" class="video-buton">🎥 2. Sorunun Video Çözümünü İzle</a><br><hr>
-
-                    <p><strong>3. Aşağıdakilerden hangisi Güneş'in özelliklerinden biridir?</strong></p>
-                    <label><input type="radio" name="s3" value="A"> A) Isı ve ışık yayar</label><br>
-                    <label><input type="radio" name="s3" value="B"> B) Dünyanın uydusudur</label><br>
-                    <label><input type="radio" name="s3" value="C"> C) Atmosferi çok kalındır</label><br>
-                    <label><input type="radio" name="s3" value="D"> D) Üzerinde su bulunur</label><br>
-                    <a href="http://www.youtube.com/watch?v=nWDJKkxhIro" target="_blank" class="video-buton">🎥 3. Sorunun Video Çözümünü İzle</a><br><hr>
-
-                    <p><em>(Diğer sorular için aynı video buton yapısını 20'ye kadar çoğaltabilirsin!)</em></p>
                 </div>
             `;
             oyunAlani.scrollIntoView({ behavior: 'smooth' });
         }
 
         function cevabiKontrolEt() {
-            let dogruCevaplar = { s1: "B", s2: "B", s3: "A" };
+            let s1 = document.querySelector('input[name="s1"]:checked');
+            let s2 = document.querySelector('input[name="s2"]:checked');
             let dogruSayisi = 0;
 
-            for (let i = 1; i <= 3; i++) {
-                let secilen = document.querySelector('input[name="s' + i + '"]:checked');
-                if (secilen && secilen.value === dogruCevaplar['s' + i]) {
-                    dogruSayisi++;
-                }
-            }
+            if(s1 && s1.value === "B") dogruSayisi++;
+            if(s2 && s2.value === "B") dogruSayisi++;
 
-            document.getElementById("skorYazisi").innerText = "🎉 Test Bitti! Doğru Sayısı: " + dogruSayisi;
+            let puan = dogruSayisi * 50;
+            document.getElementById("skorYazisi").innerText = "🎉 Test Bitti! Doğru Sayısı: " + dogruSayisi + " | Toplam Puanın: " + puan + " / 100 🏆";
             document.getElementById("skorYazisi").style.color = "#16a34a";
         }
 
@@ -59,3 +159,5 @@
             document.getElementById("oyunAlani").style.display = "none";
         }
     </script>
+</body>
+</html>
