@@ -62,14 +62,10 @@
             margin-top: 25px;
             text-align: left;
         }
-        .cozum-notu {
-            background-color: #f1f5f9;
-            color: #475569;
-            padding: 8px 12px;
+        .sonuc-bilgi {
+            margin-top: 5px;
             font-size: 13px;
-            border-radius: 5px;
-            margin-top: 8px;
-            border-left: 3px solid #0284c7;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -172,8 +168,9 @@
                 </div>
                 <button onclick="cevabiKontrolEt()" class="buton" style="background-color: #10b981; margin-top: 15px;">Sonuçları Gör ve Puanını Hesapla 🎯</button>
                 <button onclick="oyunuKapat()" class="buton" style="background-color: #64748b; margin-top: 10px;">Testi Kapat ↩️</button>
-                <!-- Skor yazısı artık butonların hemen altında net bir şekilde görünecek -->
-                <div id="skorYazisi" style="font-weight: bold; margin-top: 15px; font-size: 18px; color: #16a34a;"></div>
+                
+                <!-- Özet Sonuç Ekranı -->
+                <div id="skorYazisi" style="font-weight: bold; margin-top: 20px; font-size: 16px; line-height: 1.6; background: white; padding: 15px; border-radius: 8px; border: 2px solid #10b981; display: none;"></div>
             </div>
         </div>
     </div>
@@ -188,7 +185,8 @@
             var oyunAlani = document.getElementById("oyunAlani");
             oyunAlani.style.display = "block";
             document.getElementById("oyunBaslik").innerText = "🎮 " + uniteNo + ". Ünite - 20 Soruluk Fen Bilimleri Testi";
-            document.getElementById("skorYazisi").innerText = "";
+            document.getElementById("skorYazisi.style.display = "none";
+            document.getElementById("skorYazisi").innerHTML = "";
             
             let sorular = [
                 "Güneş'in katmanları içinde en sıcak katman hangisidir?",
@@ -228,7 +226,7 @@
                         <label><input type="radio" name="soru${soruNo}" value="B"> B) ${seceneklerB[i]}</label><br>
                         <label><input type="radio" name="soru${soruNo}" value="C"> C) ${seceneklerC[i]}</label><br>
                         <label><input type="radio" name="soru${soruNo}" value="D"> D) ${seceneklerD[i]}</label><br>
-                        <div class="cozum-notu">💡 <strong>Çözüm Notu:</strong> Bu sorunun doğru yanıtı B seçeneğidir.</div>
+                        <div id=" sonucSoru${soruNo}" class="sonuc-bilgi"></div>
                     </div>
                 `;
             }
@@ -239,16 +237,40 @@
         function cevabiKontrolEt() {
             let dogruCevaplar = ["B","B","A","C","C","B","B","B","C","A","C","B","B","C","C","A","A","B","C","B"];
             let dogruSayisi = 0;
+            let yanlisSayisi = 0;
             
             for(let i = 1; i <= 20; i++) {
                 let secilen = document.querySelector('input[name="soru' + i + '"]:checked');
-                if(secilen && secilen.value === dogruCevaplar[i-1]) {
-                    dogruSayisi++;
+                let sonucDiv = document.getElementById("sonucSoru" + i);
+                
+                let dogruHarf = dogruCevaplar[i-1];
+
+                if(secilen) {
+                    if(secilen.value === dogruHarf) {
+                        dogruSayisi++;
+                        sonucDiv.innerHTML = "✅ Doğru! (Seçtiğin şık: " + secilen.value + ")";
+                        sonucDiv.style.color = "#16a34a";
+                    } else {
+                        yanlisSayisi++;
+                        sonucDiv.style.color = "#dc2626";
+                    }
+                } else {
+                    yanlisSayisi++;
+                    sonucDiv.style.color = "#ca8a04";
                 }
             }
             
-            let toplamPuan = dogruSayisi * 5;
-            document.getElementById("skorYazisi.innerText = "🎉 Doğru Sayısı: " + dogruSayisi + " / 20 | Toplam Puanın: " + toplamPuan + " / 100 🏆";
+            let yuzdePuan = (dogruSayisi / 20) * 100;
+
+            let skorKutusu = document.getElementById("skorYazisi");
+            skorKutusu.style.display = "block";
+            skorKutusu.innerHTML = `
+                🎉 <strong>Test Tamamlandı!</strong><br>
+                ✅ Doğru Sayısı: ${dogruSayisi}<br>
+                ❌ Yanlış Sayısı: ${yanlisSayisi}<br>
+                🏆 Başarı Yüzdesi: %${yuzdePuan} (100 üzerinden ${dogruSayisi * 5} Puan)
+            `;
+            skorKutusu.scrollIntoView({ behavior: 'smooth' });
         }
 
         function oyunuKapat() {
