@@ -61,14 +61,15 @@
             margin-top: 25px;
             text-align: left;
         }
-        .soru-gorsel {
-            width: 100%;
-            max-height: 250px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin: 12px 0;
-            border: 1px solid #cbd5e1;
-            display: block;
+        .konu-kutu {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            color: #ffffff;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 10px 0;
+            border-left: 5px solid #38bdf8;
         }
         .sonuc-bilgi {
             margin-top: 8px;
@@ -117,12 +118,12 @@
             <div id="oyunAlani" class="gizli oyun-kutu">
                 <h3 id="oyunBaslik" style="color: #2563eb;">20 Soruluk Fen Bilimleri Testi</h3>
                 <div id="soruKutusu" style="max-height: 550px; overflow-y: auto; padding-right: 10px;">
-                    <!-- Sorular ve görseller buraya yüklenecek -->
+                    <!-- Sorular buraya yüklenecek -->
                 </div>
                 <button onclick="cevabiKontrolEt()" class="buton" style="background-color: #10b981; margin-top: 15px;">Sonuçları Gör ve Puanını Hesapla 🎯</button>
                 <button onclick="oyunuKapat()" class="buton" style="background-color: #64748b; margin-top: 10px;">Testi Kapat ↩️</button>
                 
-                <!-- Özet Sonuc Ekranı -->
+                <!-- Özet Sonuç Ekranı -->
                 <div id="skorYazisi" style="font-weight: bold; margin-top: 20px; font-size: 16px; line-height: 1.6; background: white; padding: 15px; border-radius: 8px; border: 2px solid #10b981; display: none;"></div>
             </div>
         </div>
@@ -154,7 +155,7 @@
             let seceneklerC = [];
             let seceneklerD = [];
             let dogruCevaplar = [];
-            let gorseller = [];
+            let konuBasliklari = [];
 
             if (uniteNo === 1) {
                 sorular = [
@@ -185,28 +186,28 @@
                 seceneklerD = ["Taç küre", "Son hilal", "Üzerinde su bulunur", "365 gün", "Düz", "Tepe", "Meteor", "12 saat", "Mars", "Hiçbiri", "Hareketsizdir", "Hava tabakası yoktur", "Dünya'dan küçüktür", "Hilal", "Hiç ışık yaymaz", "İlk dördün", "Dünya'nın uydusu olmaması", "Son dördün", "Karbondioksit", "365 gün"];
                 dogruCevaplar = ["B","B","A","C","B","A","A","B","C","A","B","B","B","A","B","A","A","B","B","A"];
                 
-                // 1. Ünite - Güneş, Ay ve Uzay Konulu Gerçek Fotoğraflar
-                gorseller = [
-                    "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=800&auto=format&fit=crop&q=80", // Güneş katmanları
-                    "https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=800&auto=format&fit=crop&q=80", // Ay evreleri
-                    "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=800&auto=format&fit=crop&q=80", // Güneş ışığı
-                    "https://images.unsplash.com/photo-1532693322450-2cb5c511064d?w=800&auto=format&fit=crop&q=80", // Dünya ve Ay dolanımı
-                    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80", // Küresel Güneş
-                    "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=800&auto=format&fit=crop&q=80", // Ay Kraterleri
-                    "https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=800&auto=format&fit=crop&q=80", // Güneş Yıldız
-                    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&auto=format&fit=crop&q=80", // Ay dönme
-                    "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&auto=format&fit=crop&q=80", // Dünya ve Uydusu Ay
-                    "https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=800&auto=format&fit=crop&q=80", // Hilal
-                    "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=800&auto=format&fit=crop&q=80", // Güneş Dönüşü
-                    "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=800&auto=format&fit=crop&q=80", // Atmosfer
-                    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80", // Güneş & Dünya Kıyaslama
-                    "https://images.unsplash.com/photo-1532693322450-2cb5c511064d?w=800&auto=format&fit=crop&q=80", // Dolunay
-                    "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=800&auto=format&fit=crop&q=80", // Yansıyan Işık
-                    "https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=800&auto=format&fit=crop&q=80", // Güneş Tutulması
-                    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&auto=format&fit=crop&q=80", // Ay'ın Yüzü
-                    "https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=800&auto=format&fit=crop&q=80", // İlk Dördün
-                    "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=800&auto=format&fit=crop&q=80", // Hidrojen Gazı Güneş
-                    "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=800&auto=format&fit=crop&q=80"  // Evre Takvimi
+                // 1. Ünite - Soruyla Birebir Eşleşen Konu Başlıkları
+                konuBasliklari = [
+                    "Soru Konusu: Güneş'in Katmanları ve Sıcaklık Bölgeleri",
+                    "Soru Konusu: Ay'ın Ana Evreleri (Yeni Ay, İlk Dördün, Dolunay, Son Dördün)",
+                    "Soru Konusu: Güneş'in Temel Özellikleri ve Yapısı",
+                    "Soru Konusu: Ay'ın Dünya Etrafındaki Dolanım Süresi",
+                    "Soru Konusu: Güneş'in Küresel Geometrik Şekli",
+                    "Soru Konusu: Ay Yüzeyindeki Krater Çukurları",
+                    "Soru Konusu: Güneş'in Yıldız Olma Özelliği",
+                    "Soru Konusu: Ay'ın Kendi Eksenindeki Dönüş Hareketi",
+                    "Soru Konusu: Dünya'nın Doğal Uydusu Ay",
+                    "Soru Konusu: Ay'ın Ara Evreleri (Hilal ve Şişkin Ay)",
+                    "Soru Konusu: Güneş'in Kendi Ekseni Etrafındaki Dönüş Yönü",
+                    "Soru Konusu: Ay'ın Atmosfer ve Hava Tabakası Durumu",
+                    "Soru Konusu: Güneş ile Dünya'nın Boyut Kıyaslaması",
+                    "Soru Konusu: Ay'ın Evreler Döngüsü (İlk Dördün ve Sonrası)",
+                    "Soru Konusu: Işık Kaynağı (Güneş) ve Yansıtıcı (Ay)",
+                    "Soru Konusu: Güneş Tutulması Olayının Gerçekleştiği Evre",
+                    "Soru Konusu: Ay'ın Hep Aynı Yüzünün Görülme Sebebi",
+                    "Soru Konusu: Yeni Ay Evresinden Sonraki İlk Ana Evre",
+                    "Soru Konusu: Güneş'in Yapısındaki Temel Gazlar (Hidrojen & Helyum)",
+                    "Soru Konusu: Ay'ın Ana Evrelerinin Tekrarlanma Süresi"
                 ];
             } else {
                 sorular = [
@@ -237,28 +238,28 @@
                 seceneklerD = ["Dürbün", "Mikroskobik canlı", "Papatya", "Mantarlar", "Kuş", "Tek hücreli bitki", "Güneş enerjisiyle yapar", "Hepsi", "Parazit mantarlar", "Gövde", "İnek", "Buzulların üzerinde", "Mantarlar", "Karanlık", "Kuşlar", "Amip", "Ağaç", "Aslan mantarı", "Yarasa", "Sistem"];
                 dogruCevaplar = ["C","B","B","B","B","B","B","D","C","B","B","A","A","D","C","B","B","D","B","C"];
                 
-                // 2. Ünite - Canlılar Dünyası Konulu Gerçek Fotoğraflar
-                gorseller = [
-                    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop&q=80", // Mikroskop
-                    "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=800&auto=format&fit=crop&q=80", // Şapkalı Mantarlar
-                    "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&auto=format&fit=crop&q=80", // Eğrelti Otu (Çiçeksiz)
-                    "https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?w=800&auto=format&fit=crop&q=80", // Süt ve Yoğurt Bakterisi
-                    "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=800&auto=format&fit=crop&q=80", // Balık (Omurgalı)
-                    "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=800&auto=format&fit=crop&q=80", // Çiçekli Bitki
-                    "https://images.unsplash.com/photo-1508873696983-2df5c92063c7?w=800&auto=format&fit=crop&q=80", // Mantarlar
-                    "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=800&auto=format&fit=crop&q=80", // Bakteri Hastalık
-                    "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=800&auto=format&fit=crop&q=80", // Şapkalı Mantar
-                    "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&auto=format&fit=crop&q=80", // Çiçek Yapısı
-                    "https://images.unsplash.com/photo-1557008072-7f2a7fd54d3d?w=800&auto=format&fit=crop&q=80", // Omurgasızlar
-                    "https://images.unsplash.com/photo-1508873696983-2df5c92063c7?w=800&auto=format&fit=crop&q=80", // Küf Mantarı
-                    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop&q=80", // Bakteriler
-                    "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=800&auto=format&fit=crop&q=80", // Bitkiler
-                    "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=800&auto=format&fit=crop&q=80", // Kurbağa
-                    "https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?w=800&auto=format&fit=crop&q=80", // Maya Canlısı
-                    "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&auto=format&fit=crop&q=80", // Yosunlar
-                    "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=800&auto=format&fit=crop&q=80", // Mantar
-                    "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=800&auto=format&fit=crop&q=80", // Yılan Sürüngen
-                    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop&q=80"  // Hücre Mikroskop
+                // 2. Ünite - Soruyla Birebir Eşleşen Konu Başlıkları
+                konuBasliklari = [
+                    "Soru Konusu: Mikroskobik Canlılar ve Gözlem Araçları",
+                    "Soru Konusu: Mantarlar Çeşitleri ve Şapkalı Mantarlar",
+                    "Soru Konusu: Çiçekli ve Çiçeksiz Bitki Türleri",
+                    "Soru Konusu: Yararlı Bakteriler ve Sütten Yoğurt Yapımı",
+                    "Soru Konusu: Omurgalı Hayvanlar Sınıflandırması",
+                    "Soru Konusu: Gelişmiş Bitkilerin Yapı Organları (Kök, Gövde, Yaprak)",
+                    "Soru Konusu: Mantarların Beslenme Şekli (Hazır Besin)",
+                    "Soru Konusu: Mikroskobik Canlıların Neden Olduğu Hastalıklar",
+                    "Soru Konusu: Kara ve Şapkalı Mantarların Sınıfı",
+                    "Soru Konusu: Çiçekli Bitkilerde Üreme Organı (Çiçek)",
+                    "Soru Konusu: Omurgasız Hayvanlar Grubu",
+                    "Soru Konusu: Küf Mantarlarının Üreme ve Yetişme Ortamı",
+                    "Soru Konusu: Bakterilerin Canlılar Dünyasındaki Yeri",
+                    "Soru Konusu: Bitkilerin Yaşam İçin Gereksinimleri",
+                    "Soru Konusu: Kurbağaların Sınıfı (Amfibiler / İki Yaşamlılar)",
+                    "Soru Konusu: Maya Mantarları ve Mayalanma Olayı",
+                    "Soru Konusu: Yosunlar ve Çiçeksiz Bitki Yapısı",
+                    "Soru Konusu: Mantar Türleri Analizi ve Bilgisi",
+                    "Soru Konusu: Sürüngenler Grubu Hayvanlar (Yılan vb.)",
+                    "Soru Konusu: Hücre (Canlıların En Küçük Yapı Birimi)"
                 ];
             }
 
@@ -268,7 +269,7 @@
                 htmlIcerik += `
                     <div style="background:white; padding:15px; margin-bottom:15px; border-radius:8px; border: 1px solid #cbd5e1;">
                         <p><strong>${soruNo}. Soru: ${sorular[i]}</strong></p>
-                        <img src="${gorseller[i]}" alt="Soru Konu Görseli" class="soru-gorsel">
+                        <div class="konu-kutu">${konuBasliklari[i]}</div>
                         <label><input type="radio" name="soru${soruNo}" value="A"> A) ${seceneklerA[i]}</label><br>
                         <label><input type="radio" name="soru${soruNo}" value="B"> B) ${seceneklerB[i]}</label><br>
                         <label><input type="radio" name="soru${soruNo}" value="C"> C) ${seceneklerC[i]}</label><br>
