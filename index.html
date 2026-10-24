@@ -185,8 +185,9 @@
             var oyunAlani = document.getElementById("oyunAlani");
             oyunAlani.style.display = "block";
             document.getElementById("oyunBaslik").innerText = "🎮 " + uniteNo + ". Ünite - 20 Soruluk Fen Bilimleri Testi";
-            document.getElementById("skorYazisi.style.display = "none";
-            document.getElementById("skorYazisi").innerHTML = "";
+            let skorKutusu = document.getElementById("skorYazisi");
+            skorKutusu.style.display = "none";
+            skorKutusu.innerHTML = "";
             
             let sorular = [
                 "Güneş'in katmanları içinde en sıcak katman hangisidir?",
@@ -226,7 +227,7 @@
                         <label><input type="radio" name="soru${soruNo}" value="B"> B) ${seceneklerB[i]}</label><br>
                         <label><input type="radio" name="soru${soruNo}" value="C"> C) ${seceneklerC[i]}</label><br>
                         <label><input type="radio" name="soru${soruNo}" value="D"> D) ${seceneklerD[i]}</label><br>
-                        <div id=" sonucSoru${soruNo}" class="sonuc-bilgi"></div>
+                        <div id="sonucSoru${soruNo}" class="sonuc-bilgi"></div>
                     </div>
                 `;
             }
@@ -248,14 +249,16 @@
                 if(secilen) {
                     if(secilen.value === dogruHarf) {
                         dogruSayisi++;
-                        sonucDiv.innerHTML = "✅ Doğru! (Seçtiğin şık: " + secilen.value + ")";
+                        sonucDiv.innerHTML = "✅ Doğru! (Doğru Cevap: " + dogruHarf + ")";
                         sonucDiv.style.color = "#16a34a";
                     } else {
                         yanlisSayisi++;
+                        sonucDiv.innerHTML = "❌ Yanlış! Doğru Cevap: " + dogruHarf;
                         sonucDiv.style.color = "#dc2626";
                     }
                 } else {
                     yanlisSayisi++;
+                    sonucDiv.innerHTML = "⚠️ Boş bırakıldı! Doğru Cevap: " + dogruHarf;
                     sonucDiv.style.color = "#ca8a04";
                 }
             }
@@ -267,7 +270,7 @@
             skorKutusu.innerHTML = `
                 🎉 <strong>Test Tamamlandı!</strong><br>
                 ✅ Doğru Sayısı: ${dogruSayisi}<br>
-                ❌ Yanlış Sayısı: ${yanlisSayisi}<br>
+                ❌ Yanlış/Boş Sayısı: ${yanlisSayisi}<br>
                 🏆 Başarı Yüzdesi: %${yuzdePuan} (100 üzerinden ${dogruSayisi * 5} Puan)
             `;
             skorKutusu.scrollIntoView({ behavior: 'smooth' });
