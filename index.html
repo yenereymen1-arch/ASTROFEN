@@ -61,14 +61,17 @@
             margin-top: 25px;
             text-align: left;
         }
-        .soru-gorsel {
-            width: 100%;
-            height: 190px;
-            object-fit: cover;
+        .gorsel-kutu {
+            background: linear-gradient(135deg, #0284c7, #1e40af);
+            color: white;
+            padding: 15px;
             border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
             margin: 12px 0;
-            border: 2px solid #cbd5e1;
-            display: block;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            letter-spacing: 0.5px;
         }
         .sonuc-bilgi {
             margin-top: 8px;
@@ -154,7 +157,7 @@
             let seceneklerC = [];
             let seceneklerD = [];
             let dogruCevaplar = [];
-            let gorseller = [];
+            let gorselMetinleri = [];
 
             if (uniteNo === 1) {
                 sorular = [
@@ -185,28 +188,28 @@
                 seceneklerD = ["Taç küre", "Son hilal", "Üzerinde su bulunur", "365 gün", "Düz", "Tepe", "Meteor", "12 saat", "Mars", "Hiçbiri", "Hareketsizdir", "Hava tabakası yoktur", "Dünya'dan küçüktür", "Hilal", "Hiç ışık yaymaz", "İlk dördün", "Dünya'nın uydusu olmaması", "Son dördün", "Karbondioksit", "365 gün"];
                 dogruCevaplar = ["B","B","A","C","B","A","A","B","C","A","B","B","B","A","B","A","A","B","B","A"];
                 
-                // 1. Ünite: Soruların kelimeleriyle (Güneş, Ay, Krater, Dünya, Tutulma) BİREBİR eşleşen görseller
-                gorseller = [
-                    "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=800&auto=format&fit=crop&q=80", // 1. Güneş katmanları
-                    "https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=800&auto=format&fit=crop&q=80", // 2. Ay evreleri
-                    "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=800&auto=format&fit=crop&q=80", // 3. Güneş
-                    "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?w=800&auto=format&fit=crop&q=80", // 4. Ay dolanım
-                    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80", // 5. Güneş küre
-                    "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=800&auto=format&fit=crop&q=80", // 6. Ay kraterleri
-                    "https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=800&auto=format&fit=crop&q=80", // 7. Güneş yıldız
-                    "https://images.unsplash.com/photo-1532693322450-2cb5c511064d?w=800&auto=format&fit=crop&q=80", // 8. Ay dönüşü
-                    "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&auto=format&fit=crop&q=80", // 9. Dünya ve Ay
-                    "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&auto=format&fit=crop&q=80", // 10. Hilal ara evre
-                    "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=800&auto=format&fit=crop&q=80", // 11. Güneş eksen
-                    "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=800&auto=format&fit=crop&q=80", // 12. Ay atmosfer
-                    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80", // 13. Güneş büyüklük
-                    "https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=800&auto=format&fit=crop&q=80", // 14. İlk dördün dolunay
-                    "https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=800&auto=format&fit=crop&q=80", // 15. Ay ışık kaynağı
-                    "https://images.unsplash.com/photo-1507668077129-56e32842fceb?w=800&auto=format&fit=crop&q=80", // 16. Güneş tutulması
-                    "https://images.unsplash.com/photo-1532693322450-2cb5c511064d?w=800&auto=format&fit=crop&q=80", // 17. Ay'ın yüzü
-                    "https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=800&auto=format&fit=crop&q=80", // 18. Yeni ay ilk dördün
-                    "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=800&auto=format&fit=crop&q=80", // 19. Güneş gazları
-                    "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?w=800&auto=format&fit=crop&q=80"  // 20. Ay evreleri döngü
+                // 1. Ünite - Birebir Konu Görsel Kutuları
+                gorselMetinleri = [
+                    "☀️ GÜNEŞ: Çekirdek ve Sıcaklık Katmanları Şeması",
+                    "🌕 AY: Yeni Ay, İlk Dördün, Dolunay, Son Dördün Evreleri",
+                    "☀️ GÜNEŞ: Isı ve Işık Yayan Büyük Yıldız",
+                    "🔄 AY: Dünya Etrafındaki Dolanım Yörüngesi",
+                    "🌐 GÜNEŞ & DÜNYA: Küresel Geometrik Şekil",
+                    "🕳️ AY YÜZEYİ: Göktaşı Çukurları (Kraterler)",
+                    "⭐ UZAY: Güneş Sistemi'nin Merkezindeki Yıldız",
+                    "🌀 AY: Kendi Eksenindeki Dönüş Hareketi",
+                    "🌍 DÜNYA VE AY: Gezegen ve Doğal Uydu Sistemi",
+                    "🌙 AY EVRELERİ: Hilal ve Şişkin Ay (Ara Evreler)",
+                    "🔄 GÜNEŞ: Kendi Ekseni Etrafında Batıdan Doğuya Dönüş",
+                    "🌌 AY ATMOSFERİ: Yok Denecek Kadar İnce Hava Katmanı",
+                    "📏 BOYUT KIYASLAMASI: Güneş ve Dünya Büyüklük Oranı",
+                    "🌕 AY EVRELERİ: İlk Dördünden Dolunay'a Geçiş",
+                    "💡 IŞIK KAYNAĞI: Güneş (Asıl Kaynak) ve Ay (Yansıtıcı)",
+                    "🌑 GÜNEŞ TUTULMASI: Yeni Ay Evresinde Hizalanma",
+                    "👥 AY'IN HAREKETİ: Dönme ve Dolanma Sürelerinin Eşitliği",
+                    "🌙 ANA EVRELER: Yeni Ay Sonrası İlk Dördün",
+                    "⚛️ GÜNEŞ'İN YAPISI: Hidrojen ve Helyum Gazları",
+                    "📅 AY TAKVİMİ: 29.5 Günde Tamamlanan Ana Evreler"
                 ];
             } else {
                 sorular = [
@@ -237,28 +240,28 @@
                 seceneklerD = ["Dürbün", "Mikroskobik canlı", "Papatya", "Mantarlar", "Kuş", "Tek hücreli bitki", "Güneş enerjisiyle yapar", "Hepsi", "Parazit mantarlar", "Gövde", "İnek", "Buzulların üzerinde", "Mantarlar", "Karanlık", "Kuşlar", "Amip", "Ağaç", "Aslan mantarı", "Yarasa", "Sistem"];
                 dogruCevaplar = ["C","B","B","B","B","B","B","D","C","B","B","A","A","D","C","B","B","D","B","C"];
                 
-                // 2. Ünite: Soruların kelimeleriyle (Mikroskop, Mantar, Bitki, Yoğurt, Balık, Kurbağa, Hücre) BİREBİR eşleşen görseller
-                gorseller = [
-                    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop&q=80", // 1. Mikroskop
-                    "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=800&auto=format&fit=crop&q=80", // 2. Şapkalı mantar
-                    "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&auto=format&fit=crop&q=80", // 3. Eğrelti otu (Çiçeksiz)
-                    "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800&auto=format&fit=crop&q=80", // 4. Yoğurt / Süt ürünleri
-                    "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=800&auto=format&fit=crop&q=80", // 5. Omurgalı balık
-                    "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=800&auto=format&fit=crop&q=80", // 6. Gelişmiş bitki
-                    "https://images.unsplash.com/photo-1508873696983-2df5c92063c7?w=800&auto=format&fit=crop&q=80", // 7. Mantar doğa
-                    "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=800&auto=format&fit=crop&q=80", // 8. Mikroskobik hastalık
-                    "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=800&auto=format&fit=crop&q=80", // 9. Şapkalı mantar sınıfı
-                    "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&auto=format&fit=crop&q=80", // 10. Çiçekli bitki çiçeği
-                    "https://images.unsplash.com/photo-1557008072-7f2a7fd54d3d?w=800&auto=format&fit=crop&q=80", // 11. Omurgasız solucan/böcek
-                    "https://images.unsplash.com/photo-1508873696983-2df5c92063c7?w=800&auto=format&fit=crop&q=80", // 12. Küf mantarı
-                    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop&q=80", // 13. Bakteriler
-                    "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=800&auto=format&fit=crop&q=80", // 14. Bitki yaşamı
-                    "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=800&auto=format&fit=crop&q=80", // 15. Kurbağa
-                    "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800&auto=format&fit=crop&q=80", // 16. Mayalanma süreci
-                    "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&auto=format&fit=crop&q=80", // 17. Yosunlar
-                    "https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=800&auto=format&fit=crop&q=80", // 18. Mantar türleri
-                    "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=800&auto=format&fit=crop&q=80", // 19. Sürüngen yılan
-                    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop&q=80"  // 20. Hücre ve doku
+                // 2. Ünite - Birebir Konu Görsel Kutuları
+                gorselMetinleri = [
+                    "🔬 MİKROSKOP: Çıplak Gözle Görülmeyen Canlıları Büyütme Aracı",
+                    "🍄 MANTARLAR: Şapkalı Mantarlar Sınıfı",
+                    "🌿 ÇİÇEKSİZ BİTKİLER: Eğrelti Otu ve Yosunlar",
+                    "🥛 YARARLI BAKTERİLER: Sütten Yoğurt ve Peynir Yapımı",
+                    "🐟 OMURGALİ HAYVANLAR: Balıklar ve İskelet Sistemi",
+                    "🌱 GELİŞMİŞ BİTKİLER: Kök, Gövde ve Yaprak Yapısı",
+                    "🍄 MANTARLARIN BESLENMESİ: Hazır Besin Alan Canlılar",
+                    "🦠 MİKROSKOBİK HASTALIKLAR: Grip, Nezle ve Verem",
+                    "🍄 MANTAR ÇEŞİTLERİ: Şapkalı ve Kara Mantarlar",
+                    "🌸 ÇİÇEKLİ BİTKİLER: Üremeyi Sağlayan Temel Çiçek Yapısı",
+                    "🐛 OMURGASIZ HAYVANLAR: Solucan, Böcek ve Eklembacaklılar",
+                    "🍞 KÜF MANTARI: Nemli ve Besinli Ortamlarda Üreme",
+                    "🦠 BAKTERİLER: Tek Hücreli Mikroskobik Canlılar Grubu",
+                    "🌱 BİTKİ YAŞAMI: Su, Işık, Mineral ve Karbondioksit İhtiyacı",
+                    "🐸 OMURGALILAR: Kurbağalar (Amfibiler / İki Yaşamlılar)",
+                    "🍞 MAYALANMA: Maya Mantarlarının Hamur ve Süt Etkisi",
+                    "🌿 ÇİÇEKSİZ BİTKİLER: Yosun Türleri ve Özellikleri",
+                    "❌ MANTAR ANALİZİ: Mantar Olmayan Canlı Türleri Sınıflaması",
+                    "🐍 SÜRÜNGENLER: Yılan, Kertenkele ve Sürünen Hayvanlar",
+                    "🧬 HÜCRE: Canlıların Yapı Taşı ve En Küçük Birimi"
                 ];
             }
 
@@ -268,7 +271,7 @@
                 htmlIcerik += `
                     <div style="background:white; padding:15px; margin-bottom:15px; border-radius:8px; border: 1px solid #cbd5e1;">
                         <p><strong>${soruNo}. Soru: ${sorular[i]}</strong></p>
-                        <img src="${gorseller[i]}" alt="Soru Konu Görseli" class="soru-gorsel">
+                        <div class="gorsel-kutu">${gorselMetinleri[i]}</div>
                         <label><input type="radio" name="soru${soruNo}" value="A"> A) ${seceneklerA[i]}</label><br>
                         <label><input type="radio" name="soru${soruNo}" value="B"> B) ${seceneklerB[i]}</label><br>
                         <label><input type="radio" name="soru${soruNo}" value="C"> C) ${seceneklerC[i]}</label><br>
