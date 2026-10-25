@@ -124,10 +124,10 @@
     <!-- 1. ANA MENÜ KARTI -->
     <div class="kart" id="anaKart">
         <h1>ASTROFEN 🚀</h1>
-        <p>5. Sınıf Uzay dan Fen Bilimleri Portalı</p>
+        <p>5. Sınıf Uzay ve Fen Bilimleri Portalı</p>
 
         <button class="buton" onclick="kartOyununuAc()">🃏 30 Kartlı Uzay Çevirmece Oyunu</button>
-        <button class="buton buton-quiz" onclick="quiziBaslat()">🧠 Genel Uzay Bilgi Yarışması (Quiz)</button>
+        <button class="buton buton-quiz" onclick="quiziBaslat()">🧠 Süper Eğlenceli Uzay Quizi ⚡</button>
         <button class="buton buton-unite" onclick="uniteleriAc()">📚 5. Sınıf Ünite Testleri (20'şer Soru)</button>
     </div>
 
@@ -139,18 +139,21 @@
         <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 20px;">⬅️ Ana Menüye Dön</button>
     </div>
 
-    <!-- 3. GENEL QUIZ EKRANI -->
+    <!-- 3. SÜPER EĞLENCELİ QUIZ EKRANI -->
     <div class="kart" id="quizKart" style="display: none; text-align: left;">
-        <h2 style="color: #00f0ff; text-align: center;">🚀 Uzay Bilgi Yarışması</h2>
-        <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 15px; color: #ff0080;">
-            <span id="puanYazisi">Puan: 0</span>
-            <span id="unvanYazisi">Unvan: Çaylak Astronot 👨‍🚀</span>
+        <h2 style="color: #00f0ff; text-align: center;">⚡ Uzay Macera Quizi 🚀</h2>
+        <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 10px; color: #ff0080;">
+            <span id="puanYazisi">Puan: ⏰ 0</span>
+            <span id="sureYazisi" style="color: #ffcc00;">Süre: 15 sn</span>
+        </div>
+        <div style="text-align: center; margin-bottom: 12px;">
+            <span id="unvanYazisi" style="color: #38ef7d; font-weight: bold; background: rgba(56,239,125,0.1); padding: 4px 12px; border-radius: 8px;">Unvan: Çaylak Astronot 👨‍🚀</span>
         </div>
         
         <p id="soruMetni" style="font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #ffffff;"></p>
         <div id="seceneklerAlani" style="display: flex; flex-direction: column;"></div>
         
-        <div style="display: flex; gap: 10px; margin-top: 20px;">
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
             <button onclick="jokerKullan()" id="jokerBtn" class="buton" style="background: #e6a23c; margin: 0;">💡 İpucu Jokeri (1)</button>
             <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin: 0;">⬅️ Ana Menüye Dön</button>
         </div>
@@ -187,13 +190,13 @@
     </div>
 
     <script>
-        // --- MENÜ GEÇİŞLERİ ---
         function tumKartlariGizle() {
             document.getElementById('anaKart').style.display = 'none';
             document.getElementById('kartOyunKart').style.display = 'none';
             document.getElementById('quizKart').style.display = 'none';
             document.getElementById('uniteSecimKart').style.display = 'none';
             document.getElementById('uniteTestKart').style.display = 'none';
+            clearInterval(timerInterval);
         }
 
         function anaMenuyeDon() {
@@ -206,7 +209,7 @@
             document.getElementById('uniteSecimKart').style.display = 'block';
         }
 
-        // --- 30 KARTLI EŞLEŞTİRME OYUNU (15 ÇİFT) ---
+        // --- 30 KARTLI EŞLEŞTİRME OYUNU ---
         const semboller30 = ['🚀', '🪐', '🌙', '☀️', '⭐', '👨‍🚀', '☄️', '🛸', '🛰️', '🌌', '👽', '🔭', '🌍', '🌠', '⚡'];
         let acikKartlar = [];
         
@@ -243,7 +246,7 @@
             });
         }
 
-        // --- GENEL QUIZ MANTIĞI ---
+        // --- SÜPER EĞLENCELİ QUIZ MANTIĞI & SÜRE SİSTEMİ ---
         const sorular = [
             { soru: "Güneş Sistemindeki Güneş'e en yakın gezegen hangisidir?", secenekler: ["Venüs", "Merkür", "Mars", "Dünya"], dogru: 1, ipucu: "En küçük gezegendir." },
             { soru: "Ay'ın ana evrelerinden biri olmayan hangisidir?", secenekler: ["Yeni Ay", "Mavi Ay", "İlk Dördün", "Dolunay"], dogru: 1, ipucu: "Gökyüzünde renk isimleriyle bilinen evre ana evre değildir." },
@@ -255,6 +258,8 @@
         let aktifSoru = 0;
         let puan = 0;
         let jokerHakki = 1;
+        let kalanSure = 15;
+        let timerInterval;
 
         function quiziBaslat() {
             tumKartlariGizle();
@@ -267,7 +272,24 @@
             soruyuGoster();
         }
 
-            function unvanGuncelle() {
+        function sureyiBaslat() {
+            clearInterval(timerInterval);
+            kalanSure = 15;
+            document.getElementById('sureYazisi').innerText = `Süre: ${kalanSure} sn`;
+            
+            timerInterval = setInterval(() => {
+                kalanSure--;
+                document.getElementById('sureYazisi').innerText = `Süre: ${kalanSure} sn`;
+                if (kalanSure <= 0) {
+                    clearInterval(timerInterval);
+                    alert("⏰ Süre bitti! Maalesef bu soruyu kaçırdın.");
+                    aktifSoru++;
+                    soruyuGoster();
+                }
+            }, 1000);
+        }
+
+        function unvanGuncelle() {
             let unvan = "Çaylak Astronot 👨‍🚀";
             if(puan >= 20) unvan = "Uzay Kaşifi 🛰️";
             if(puan >= 40) unvan = "Galaksi Kaptanı 🚀";
@@ -276,9 +298,10 @@
         }
 
         function soruyuGoster() {
+            clearInterval(timerInterval);
             if (aktifSoru < sorular.length) {
                 let q = sorular[aktifSoru];
-                document.getElementById('soruMetni').innerText = (aktifSoru + 1) + ". " + q.soru;
+                document.getElementById('soruMetni').innerText = `Soru ${aktifSoru + 1}: ${q.soru}`;
                 let alan = document.getElementById('seceneklerAlani');
                 alan.innerHTML = "";
                 
@@ -289,19 +312,24 @@
                     btn.onclick = () => cevapVer(index);
                     alan.appendChild(btn);
                 });
-                document.getElementById('puanYazisi').innerText = "Puan: " + puan;
+                document.getElementById('puanYazisi').innerText = `Puan: ${puan}`;
                 unvanGuncelle();
+                sureyiBaslat();
             } else {
                 document.getElementById('quizKart').innerHTML = `
-                    <h2 style="color: #00f0ff; text-align: center;">🎉 Tebrikler! Yarışmayı Bitirdin!</h2>
-                    <p style="text-align: center; font-size: 20px; color: #fff;">Toplam Puanın: <strong>${puan}</strong></p>
-                    <p style="text-align: center; font-size: 18px; color: #00f0ff;">Son Unvanın: ${document.getElementById('unvanYazisi').innerText.replace('Unvan: ', '')}</p>
-                    <button onclick="anaMenuyeDon()" class="buton">🔄 Ana Menüye Dön</button>
+                    <h2 style="color: #00f0ff; text-align: center;">🎉 Tebrikler! Uzay Görevini Tamamladın! 🚀</h2>
+                    <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; font-size: 18px; margin: 15px 0; text-align: center;">
+                        <p style="color: #00f0ff;"><strong>Toplam Puanın:</strong> ${puan}</p>
+                        <p style="color: #38ef7d;"><strong>Final Unvanın:</strong> ${document.getElementById('unvanYazisi').innerText.replace('Unvan: ', '')}</p>
+                    </div>
+                    <button onclick="quiziBaslat()" class="buton" style="background: #38ef7d;">🔄 Tekrar Oyna</button>
+                    <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 10px;">⬅️ Ana Menüye Dön</button>
                 `;
             }
         }
 
         function cevapVer(secim) {
+            clearInterval(timerInterval);
             if (secim === sorular[aktifSoru].dogru) {
                 puan += 10;
                 alert("Harika! Doğru cevap! 🚀 (+10 Puan)");
@@ -321,7 +349,7 @@
             }
         }
 
-        // --- ÜNİTE TESTLERİ (20'ŞER GERÇEK SORU BANKASI) ---
+        // --- ÜNİTE TESTLERİ (20'ŞER SORU) ---
         const uniteSoruBankasi = {
             1: [
                 { soru: "Güneş'in şekli hangi gök cismine benzer?", secenekler: ["A) Küre", "B) Silindir", "C) Kare", "D) Üçgen"], dogru: 0 },
@@ -538,7 +566,7 @@
 
         function uniteCevapVer(secim) {
             if (secim === secilenUniteSoruListesi[uSoruIdx].dogru) {
-                uPuan += 5; // 20 soru x 5 puan = 100 Puan
+                uPuan += 5;
                 uDogru++;
                 alert("Doğru Cevap! (+5 Puan) 👏");
             } else {
