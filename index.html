@@ -121,13 +121,10 @@
         <h1>FENX 🚀</h1>
         <p>5. Sınıf Uzay ve Fen Bilimleri Dünyası</p>
         
-        <!-- Uzay Oyunu Aç Butonu -->
         <button id="uzayOyunButon" class="buton buton-uzay">🚀 Uzay Keşif Oyununu Oyna</button>
-
-        <!-- Ana Konuları Göster Butonu -->
         <button id="anaButon" class="buton">📚 Fen Bilimleri Ünitelerini Göster</button>
 
-        <!-- UZAY KEŞİF OYUNU ALANI -->
+        <!-- UZAY KEŞİF OYUNU -->
         <div id="uzayOyunAlani" class="gizli uzay-oyun-kutu">
             <h2 style="color: #ff0080; margin-top: 0;">🌌 Uzay ve Gezegenler Oyunu</h2>
             <p>Soruları doğru cevapla, uzay roketinle puanları topla!</p>
@@ -137,35 +134,28 @@
             <div id="uzaySkor" style="margin-top: 15px; font-weight: bold; font-size: 18px; color: #00f0ff;"></div>
         </div>
 
-        <!-- Açılacak Ünite Listesi -->
+        <!-- ÜNİTE LİSTESİ -->
         <div id="konuListesi" class="gizli">
-            <h2>5. Sınıf Fen Bilimleri - Tüm Üniteler</h2>
+            <h2>5. Sınıf Fen Bilimleri - Tüm Üniteler (1'den 7'ye)</h2>
 
-            <!-- 1. ÜNİTE -->
             <div class="unite">
                 <h3>1. Ünite: Güneş, Dünya ve Ay</h3>
                 <ul>
                     <li>Güneş'in Yapısı ve Özellikleri</li>
-                    <li>Ay'ın Yapısı ve Özellikleri</li>
-                    <li>Ay'ın Hareketleri ve Evreleri</li>
-                    <li>Güneş, Dünya ve Ay'ın Birbirine Göre Hareketleri</li>
+                    <li>Ay'ın Yapısı, Hareketleri ve Evreleri</li>
                 </ul>
                 <button onclick="oyunuAc(1)" class="buton soru-buton">🎮 1. Ünite Testini Çöz</button>
             </div>
 
-            <!-- 2. ÜNİTE -->
             <div class="unite">
                 <h3>2. Ünite: Canlılar Dünyası</h3>
                 <ul>
-                    <li>Mikroskobik Canlılar</li>
-                    <li>Mantarlar</li>
-                    <li>Bitkiler</li>
-                    <li>Hayvanlar</li>
+                    <li>Mikroskobik Canlılar ve Mantarlar</li>
+                    <li>Bitkiler ve Hayvanlar</li>
                 </ul>
                 <button onclick="oyunuAc(2)" class="buton soru-buton">🎮 2. Ünite Testini Çöz</button>
             </div>
 
-            <!-- 3. ÜNİTE -->
             <div class="unite">
                 <h3>3. Ünite: Kuvvetin Uygulanması</h3>
                 <ul>
@@ -175,18 +165,15 @@
                 <button onclick="oyunuAc(3)" class="buton soru-buton">🎮 3. Ünite Testini Çöz</button>
             </div>
 
-            <!-- 4. ÜNİTE -->
             <div class="unite">
                 <h3>4. Ünite: Madde ve Değişim</h3>
                 <ul>
                     <li>Maddenin Halleri ve Hal Değişimi</li>
-                    <li>Isı ve Sıcaklık</li>
-                    <li>Genleşme ve Büzülme</li>
+                    <li>Isı, Sıcaklık, Genleşme ve Büzülme</li>
                 </ul>
                 <button onclick="oyunuAc(4)" class="buton soru-buton">🎮 4. Ünite Testini Çöz</button>
             </div>
 
-            <!-- 5. ÜNİTE -->
             <div class="unite">
                 <h3>5. Ünite: Işığın Yayılması</h3>
                 <ul>
@@ -196,7 +183,6 @@
                 <button onclick="oyunuAc(5)" class="buton soru-buton">🎮 5. Ünite Testini Çöz</button>
             </div>
 
-            <!-- 6. ÜNİTE -->
             <div class="unite">
                 <h3>6. Ünite: İnsan ve Çevre</h3>
                 <ul>
@@ -206,7 +192,6 @@
                 <button onclick="oyunuAc(6)" class="buton soru-buton">🎮 6. Ünite Testini Çöz</button>
             </div>
 
-            <!-- 7. ÜNİTE -->
             <div class="unite">
                 <h3>7. Ünite: Elektrik Devre Elemanları</h3>
                 <ul>
@@ -216,7 +201,7 @@
                 <button onclick="oyunuAc(7)" class="buton soru-buton">🎮 7. Ünite Testini Çöz</button>
             </div>
 
-            <!-- 20 SORULUK TEST ALANI -->
+            <!-- TEST ÇÖZME ALANI -->
             <div id="oyunAlani" class="gizli oyun-kutu">
                 <h3 id="oyunBaslik" style="color: #00f0ff;">20 Soruluk Fen Bilimleri Testi</h3>
                 <div id="soruKutusu" style="max-height: 500px; overflow-y: auto; padding-right: 10px;"></div>
@@ -229,7 +214,6 @@
     </div>
 
     <script>
-        // Ünite Göster / Gizle
         document.getElementById("anaButon").onclick = function() {
             var liste = document.getElementById("konuListesi");
             if (liste.style.display === "block") {
@@ -241,7 +225,6 @@
             }
         };
 
-        // Uzay Oyunu Göster / Gizle
         document.getElementById("uzayOyunButon").onclick = function() {
             var alan = document.getElementById("uzayOyunAlani");
             if (alan.style.display === "block") {
@@ -252,7 +235,6 @@
             }
         };
 
-        // UZAY OYUNU MANTIĞI
         let uzaySorular = [
             { s: "Güneş Sistemindeki en büyük gezegen hangisidir?", a: "Dünya", b: "Jüpiter", c: "Mars", d: "Venüs", dC: "B" },
             { s: "Güneş'e en yakın gezegen hangisidir?", a: "Merkür", b: "Venüs", c: "Dünya", d: "Mars", dC: "A" },
@@ -293,7 +275,6 @@
             document.getElementById("uzayOyunAlani").style.display = "none";
         }
 
-        // ÜNİTE TESTLERİ MANTIĞI
         function oyunuAc(uniteNo) {
             var oyunAlani = document.getElementById("oyunAlani");
             oyunAlani.style.display = "block";
@@ -327,7 +308,7 @@
                     "Ay'ın atmosferi ile ilgili aşağıdakilerden hangisi söylenebilir?",
                     "Güneş'in büyüklüğü Dünya ile karşılaştırıldığında nasıldır?",
                     "İlk dördün evresinden yaklaşık bir hafta sonra hangi evre görülür?",
-                    "Ay'ın ışık kaynakı durumu nasıldır?",
+                    "Ay'ın ışık kaynağı durumu nasıldır?",
                     "Güneş tutulması hangi evrede gerçekleşir?",
                     "Ay'ın Dünya'dan bakıldığında hep aynı yüzünün görülmesinin sebebi nedir?",
                     "Yeni ay evresinden sonra görülen ilk ana evre hangisidir?",
@@ -369,16 +350,151 @@
                 seceneklerD = ["Dürbün", "Mikroskobik canlı", "Papatya", "Mantarlar", "Kuş", "Tek hücreli bitki", "Güneş enerjisiyle yapar", "Hepsi", "Parazit mantarlar", "Gövde", "İnek", "Buzulların üzerinde", "Mantarlar", "Karanlık", "Kuşlar", "Amip", "Ağaç", "Aslan mantarı", "Yarasa", "Sistem"];
                 dogruCevaplar = ["C","B","B","B","B","B","B","D","C","B","B","A","A","D","C","B","B","D","B","C"];
                 gorselMetinleri = Array(20).fill("🍄 2. Ünite: Canlılar Dünyası");
+            } else if (uniteNo === 3) {
+                sorular = [
+                    "Kuvvetin büyüklüğünü ölçmek için kullanılan araç hangisidir?",
+                    "Dinamometrelerin yapısında esneklik özelliği nedeniyle ne kullanılır?",
+                    "Kuvvetin birimi aşağıdakilerden hangisidir?",
+                    "Aşağıdakilerden hangisi bir kuvvet birimidir?",
+                    "Dinamometreler hangi kanuna dayanarak çalışır?",
+                    "Dinamometreye ölçebileceğinden çok büyük bir kuvvet uygulanırsa ne olur?",
+                    "Sürtünme kuvveti hareket yönüne göre nasıldır?",
+                    "Aşağıdakilerden hangisinde sürtünme kuvveti işimizi kolaylaştırır?",
+                    "Aşağıdakilerden hangisi sürtünmeyi azaltmak için yapılır?",
+                    "Buzlu yollara kum serpilmesinin temel amacı nedir?",
+                    "Hangi yüzeyde sürtünme kuvveti en azdır?",
+                    "Dinamometrede kullanılan yayların esneklik özelliğinin bozulmaması için neye dikkat edilmelidir?",
+                    "Aşağıdaki durumlardan hangisinde sürtünme kuvveti zararlıdır?",
+                    "Yazı yazarken kalemin kağıt üzerinde tutunabilmesini sağlayan kuvvet nedir?",
+                    "Aşağıdakilerden hangisi temas gerektiren bir kuvvet örneğidir?",
+                    "Aşağıdakilerden hangisi temas gerektirmeyen bir kuvvettir?",
+                    "Hava direnci hareket yönüne göre hangi yöndedir?",
+                    "Su direnci ile ilgili aşağıdakilerden hangisi yanlıştır?",
+                    "Aşağıdaki araçlardan hangisi akışkan direncini (hava/su direncini) azaltacak şekilde tasarlanmıştır?",
+                    "Kuvvet cisimler üzerinde hangi etkiyi yapamaz?"
+                ];
+                seceneklerA = ["Termometre", "Çelik yay", "Joule", "Kilogram", "Kütlenin korunumu", "Yay esnekliğini kaybeder (bozulur)", "Aynı yöndedir", "Yazı yazmak", "Makinelerin parçalarını yağlamak", "Sürtünmeyi azaltmak", "Toprak zemin", "Kuvvet sınırı aşılmamalıdır", "Yürümek", "Sürtünme kuvveti", "Mıknatısın demiri çekmesi", "Rüzgarın yelkenliyi itmesi", "Zıt yöndedir", "Su içinde hareket eden cisimleri yavaşlatır", "Uçak burunları", "Kütleyi değiştirmek"];
+                seceneklerB = ["Dinamometre", "Bakır tel", "Newton", "Metre", "Yayların esneklik özelliği", "Hiçbir şey olmaz", "Zıt yöndedir", "Kaymak", "Ağır kutuların altına tekerlek takmak", "Sürtünmeyi artırmak", "Halı kaplı zemin", "Çok hızlı sallamak", "Araba motor parçalarının aşınması", "Yerçekimi kuvveti", "Yerçekimi kuvveti", "Dünyanın aya uyguladığı çekim", "Aynı yöndedir", "Sadece katı cisimlerde görülür", "Gemi tabanları", "Şekil değiştirmek"];
+                seceneklerC = ["Baskül", "İp", "Kilogram", "Newton", "Yerçekimi kanunu", "Daha hassas ölçer", "Dik açıdır", "Buzda kayıp düşmek", "Yol pürüzlerini artırmak", "Arabanın kaymasını engellemek", "Buz zemin", "Rengi değiştirilmelidir", "Fren yapmak", "Manyetik kuvvet", "Dünyanın elmayı çekmesi", "Elimizle topu fırlatmak", "Dikey yöndedir", "Gemi ve balinaların hareketini zorlaştırır", "Kütükler", "Hızlandırmak"];
+                seceneklerD = ["Metre", "Plastik çubuk", "Metre", "Joule", "Sürtünme kanunu", "Dinamometre küçülür", "Hareketsizdir", "Paraşüt açmak", "Fren balatalarını aşındırmak", "Hızı artırmak", "Beton zemin", "Yağmurda bırakmak", "Uçağın havada uçması", "Esneklik kuvveti", "Mıknatısın mıknatısı itmesi", "Futbol topuna vurmak", "Yere doğrudur", "Akışkanlar da direnç uygular", "Kare kutular", "Yön değiştirmek"];
+                dogruCevaplar = ["B","A","B","C","B","A","B","A","B","B","C","A","C","A","D","B","A","B","A","A"];
+                gorselMetinleri = Array(20).fill("📏 3. Ünite: Kuvvetin Uygulanması ve Dinamometre");
+            } else if (uniteNo === 4) {
+                sorular = [
+                    "Maddenin doğada en yaygın halleri hangileridir?",
+                    "Bir maddenin katı halden sıvı hale geçmesine ne ad verilir?",
+                    "Aşağıdakilerden hangisi erime olayına örnektir?",
+                    "Sıvı bir maddenin ısı alarak gaz haline geçmesine ne denir?",
+                    "Isı kaybeden bir gazın sıvı hale geçmesine ne denir?",
+                    "Naftalinin sıvılaşmadan doğrudan gaz hale geçmesine ne denir?",
+                    "Aşağıdakilerden hangisi donma olayına örnektir?",
+                    "Isı ve sıcaklık aynı kavramlar mıdır?",
+                    "Sıcaklık ölçmek için kullanılan araç hangisidir?",
+                    "Sıcaklık birimi olarak aşağıdakilerden hangisi kullanılır?",
+                    "Isı alışverişi hangi maddeler arasında gerçekleşir?",
+                    "Katı maddelerin ısı alarak hacimlerinin artmasına ne ad verilir?",
+                    "Isı kaybeden maddelerin hacminin azalmasına ne denir?",
+                    "Aşağıdakilerden hangisi genleşmeye örnektir?",
+                    "Termometredeki sıvının yükselmesi hangi olaya örnektir?",
+                    "Gözlük çerçevesine cam takılırken metal çerçevenin ısıtılması hangi prensipten yararlanılır?",
+                    "Elektrik direklerindeki tellerin yaz aylarında sarkması neden olur?",
+                    "Katı maddelerin doğrudan gaz hale geçmesinin tersine ne denir?",
+                    "Kaynama ile buharlaşma arasındaki fark aşağıdakilerden hangisidir?",
+                    "Aşağıdakilerden hangisi hal değişimi sırasında gerçekleşmez?"
+                ];
+                seceneklerA = ["Katı, Sıvı, Gaz", "Donma", "Dondurmanın erimesi", "Buharlaşma", "Yoğunlaşma", "Süblimleşme", "Suyun buz tutması", "Evet, aynıdır", "Dinamometre", "Celsius (°C)", "Sadece sıcaklıkları farklı maddeler", "Genleşme", "Büzülme", "Termometre cıvasının yükselmesi", "Genleşme", "Genleşme", "Büzülme", "Kırağılaşma", "Kaynama belirli sıcaklıkta ve her yerde olur", "Sıcaklık değişimi"];
+                seceneklerB = ["Plazma", "Erime", "Suyun buharlaşması", "Yoğunlaşma", "Buharlaşma", "Yoğunlaşma", "Demirin erimesi", "Hayır, farklıdır", "Termometre", "Joule", "Aynı sıcaklıktaki maddeler", "Büzülme", "Genleşme", "Kışın telefon hatlarının gerilmesi", "Donma", "Büzülme", "Genleşme", "Erime", "Buharlaşma her sıcaklıkta ve yüzeydedir", "Madde miktarının değişmesi"];
+                seceneklerC = ["Sadece katı", "Buharlaşma", "Naftalinin uçması", "Erime", "Erime", "Donma", "Tereyağının erimesi", "İkisi de enerjidir", "Barometre", "Newton", "Farklı türdeki maddeler", "Erime", "Erime", "Yazın elektrik tellerinin sarkması", "Buharlaşma", "Yoğunlaşma", "Erime", "Buharlaşma", "İkisi de aynıdır", "Hal değişimi"];
+                seceneklerD = ["Sadece gaz", "Yoğunlaşma", "Yağmur yağması", "Donma", "Süblimleşme", "Erime", "Kolonyanın uçması", "Sıcaklık bir enerjidir", "Metre", "Kilogram", "Temas eden tüm maddeler", "Donma", "Donma", "Gözlük camı takılması", "Yoğunlaşma", "Süblimleşme", "Donma", "Yoğunlaşma", "Sadece katılaşma", "Madde cinsinin değişmesi"];
+                dogruCevaplar = ["A","B","A","A","A","A","A","B","B","A","D","A","B","C","A","A","A","A","A","D"];
+                gorselMetinleri = Array(20).fill("🔥 4. Ünite: Madde ve Değişim / Isı ve Sıcaklık");
+            } else if (uniteNo === 5) {
+                sorular = [
+                    "Işık nasıl yayılır?",
+                    "Aşağıdakilerden hangisi ışık kaynağı değildir?",
+                    "Işığın her yöne ve doğrudan yayıldığını gösteren çizgilere ne denir?",
+                    "Işığı geçirmeyen maddelere ne denir?",
+                    "Işığın tamamını geçiren maddelere ne denir?",
+                    "Işığın bir kısmını geçiren maddelere ne denir?",
+                    "Aşağıdakilerden hangisi saydam maddedir?",
+                    "Aşağıdakilerden hangisi opak (saydam olmayan) maddedir?",
+                    "Işığın pürüzlü yüzeylerden farklı yönlere yansımasına ne denir?",
+                    "Işığın pürüzsüz ve parlak yüzeylerden belli bir kurala göre yansımasına ne denir?",
+                    "Ayna karşısına geçtiğimizde oluşan görüntü hangi yansıma türü ile oluşur?",
+                    "Işık bir engelle karşılaştığında arkasında oluşan karanlık bölgeye ne ad verilir?",
+                    "Tam gölgenin oluşabilmesi için aşağıdakilerden hangisi gereklidir?",
+                    "Perdeye yaklaştırılan bir cismin tam gölgesinin boyutu nasıl değişir?",
+                    "Işık kaynağına yaklaştırılan bir cismin gölgesi nasıl değişir?",
+                    "Güneş ve Ay tutulmaları hangi olayın doğadaki en büyük örnekleridir?",
+                    "Aşağıdakilerden hangisi doğal ışık kaynağıdır?",
+                    "Aşağıdakilerden hangisi yapay ışık kaynağıdır?",
+                    "Işığın yayılma hızı sesin yayılma hızından nasıldır?",
+                    "Yansıma kanunlarına göre gelme açısı neye eşittir?"
+                ];
+                seceneklerA = ["Doğrusal yollarla", "Ay", "Işık ışını", "Opak (Saydam olmayan)", "Saydam", "Yarı saydam", "Penceremizin camı", "Tahta parça", "Dağınık yansıma", "Düzgün yansıma", "Düzgün yansıma", "Tam gölge", "Işık kaynağı, opak cisim ve perde", "Küçülür", "Büyür", "Tam gölge", "Güneş", "El feneri", "Çok daha fazladır (hızlıdır)", "Yansıma açısına"];
+                seceneklerB = ["Eğrisel yollarla", "Güneş", "Işık demeti", "Saydam", "Yarı saydam", "Opak", "Tahta kapı", "Temiz su", "Düzgün yansıma", "Dağınık yansıma", "Dağınık yansıma", "Yarım gölge", "Sadece opak cisim", "Büyür", "Küçülür", "Yansıma", "Ampur", "Yıldız", "Daha yavaştır", "Geldiği açıya"];
+                seceneklerC = ["Dairesel yollarla", "El feneri", "Işık dalgası", "Yarı saydam", "Opak", "Saydam", "Karton kutu", "Hava", "Soğurma", "Kırılma", "Kırılma", "Yansıma", "Sadece ışık kaynağı", "Değişmez", "Değişmez", "Kırılma", "Mum", "Ateş böceği", "Eşittir", "Normal açısına"];
+                seceneklerD = ["Spiral yollarla", "Yanan lamba", "Işık hızı", "Renkli cam", "Renkli cam", "Opak", "Kitap", "Pencere camı", "Yansıma", "Soğurma", "Dağılma", "Işıma", "Sadece perde", "Yok olur", "Yok olur", "Genleşme", "Televizyon", "Güneş", "Sese göre değişmez", "Yüzey açısına"];
+                dogruCevaplar = ["A","A","A","A","A","B","A","A","A","A","A","A","A","A","B","A","A","A","A","A"];
+                gorselMetinleri = Array(20).fill("💡 5. Ünite: Işığın Yayılması ve Yansıması");
+            } else if (uniteNo === 6) {
+                sorular = [
+                    "Bir bölgedeki bitki ve hayvan türlerinin zenginliğine ne ad verilir?",
+                    "Aşağıdakilerden hangisi biyoçeşitliliği olumsuz etkiler?",
+                    "Ülkemizde nesli tükenmiş olan bir hayvan hangisidir?",
+                    "Aşağıdakilerden hangisi koruma altında olan endemik bir bitkimizdir?",
+                    "Aşağıdakilerden hangisi çevre kirliliğine neden olur?",
+                    "Geri dönüşümün temel amacı nedir?",
+                    "Aşağıdakilerden hangisi yenilenebilir (temiz) enerji kaynağıdır?",
+                    "Ormanların yok edilmesine ne denir?",
+                    "Küresel ısınmanın en büyük sebebi aşağıdakilerden hangisidir?",
+                    "Aşağıdakilerden hangisi su kirliliğini önlemek için yapılmalıdır?",
+                    "Plastik ve cam atıkların doğada yok olma süresi nasıldır?",
+                    "Aşağıdakilerden hangisi biyoçeşitliliğin korunması için alınabilecek önlemlerdendir?",
+                    "Ülkemizde nesli tükenme tehlikesi altında olan deniz canlısı hangisidir?",
+                    "Aşağıdaki hayvanlardan hangisinin ülkemizde koruma altında olan türü vardır?",
+                    "Toprak kirliliğini önlemek için ne yapılmalıdır?",
+                    "Aşağıdakilerden hangisi hava kirliliğini azaltır?",
+                    "Endemik tür ne demektir?",
+                    "Aşağıdakilerden hangisi evsel atık türlerinden biridir?",
+                    "Sanayi atıklarının arıtılmadan akarsulara verilmesi neye yol açar?",
+                    "Doğal dengenin bozulmasında en büyük pay sahibi kimdir?"
+                ];
+                seceneklerA = ["Biyoçeşitlilik", "Ağaç dikmek", "Anadolu parsı", "Ters lale", "Fabrika filtreleri takmak", "Atıkları azaltmak ve yeniden değerlendirmek", "Güneş enerjisi", "Ormansızlaşma (Erozyon/Tahribat)", "Ağaç dikmek", "Fabrika atıklarını arıtmak", "Çok kısadır", "Aşırı avlanmayı yasaklamak", "Akdeniz fokları", "Kelaynak", "Kimyasal gübre kullanmak", "Kömür kullanımı", "Sadece bizim ülkemizde yetişen canlı", "Plastik şişe", "Su kirliliği", "İnsanlar"];
+                seceneklerB = ["Ekosistem", "Milli park açmak", "Dinozor", "Gül", "Geri dönüşüm yapmak", "Çöp yığınlarını artırmak", "Kömür", "Ağaçlandırma", "Güneş enerjisi", "Çöpleri suya atmak", "Çok uzundur (yıllarca sürer)", "Milli parkları azaltmak", "Köpekbalığı", "Serçe", "Plastik poşet gömmek", "Toplu taşıma kullanmamak", "Dünyada her yerde olan", "Cam bardak", "Hava kirliliği", "Hayvanlar"];
+                seceneklerC = ["Popülasyon", "Aşırı avlanma", "Kutup ayısı", "Papatya", "Çevre temizliği", "Doğayı kirletmek", "Petrol", "Ağaç dikimi", "Geri dönüşüm", "Tarım ilaçlarını artırmak", "Hemen kaybolur", "Fabrika kurmak", "Yunus", "Kedi", "Pilleri çöpe atmak", "Fabrika dumanı", "Evcil hayvan", "Karton kutu", "Toprak kirliliği", "Bitkiler"];
+                seceneklerD = ["Habitat", "Bilinçli avlanma", "Mamut", "Lale", "Yenilenebilir enerji", "Hammaddeyi tüketmek", "Doğalgaz", "Park yapmak", "Bisiklet sürmek", "Plastik üretmek", "Hemen erir", "Ormanları kesmek", "Balina", "Karga", "Naylon yakmak", "Özel araç kullanımı", "Yabancı tür", "Metal kutu", "Gürültü kirliliği", "Doğa olayları"];
+                dogruCevaplar = ["A","C","A","A","C","A","A","A","C","A","B","A","A","B","B","B","A","A","A","A"];
+                gorselMetinleri = Array(20).fill("🌿 6. Ünite: İnsan ve Çevre / Biyoçeşitlilik");
             } else {
-                for(let i=1; i<=20; i++) {
-                    sorular.push(uniteNo + ". Ünite Sorusu " + i + ": Lütfen bu konudaki doğru şıkkı seçiniz.");
-                    seceneklerA.push("A Şıkkı (Doğru)");
-                    seceneklerB.push("B Şıkkı");
-                    seceneklerC.push("C Şıkkı");
-                    seceneklerD.push("D Şıkkı");
-                    dogruCevaplar.push("A");
-                    gorselMetinleri.push("📌 " + uniteNo + ". Ünite Fen Konusu");
-                }
+                sorular = [
+                    "Basit bir elektrik devresinde enerji kaynağı nedir?",
+                    "Devredeki anahtarın görevi nedir?",
+                    "Ampulün ışık vermesini sağlayan içindeki ince kıvrımlı telin adı nedir?",
+                    "Aşağıdakilerden hangisi devre elemanlarından biri değildir?",
+                    "Elektrik devresindeki kablonun görevi nedir?",
+                    "Bir elektrik devresinde pil sayısı artırılırsa ampul parlaklığı nasıl değişir?",
+                    "Bir elektrik devresinde özdeş ampul sayısı artırılırsa ampul parlaklığı nasıl değişir?",
+                    "Aşağıdakilerden hangisi iletken maddeye örnektir?",
+                    "Aşağıdakilerden hangisi yalıtkan maddeye örnektir?",
+                    "Elektrik düğmeleri ve kablo dışındaki plastik kaplamalar hangi amaçla yalıtkandan yapılır?",
+                    "Devre test cihazı yapılırken iletken maddeler araya konduğunda lamba ne yapar?",
+                    "Basit bir elektrik devresinde pilin artı (+) ve eksi (-) kutupları vardır. Kablolar nereye bağlanmalıdır?",
+                    "Aşağıdakilerden hangisi elektrik çarpmalarından korunmak için alınacak önlemlerdendir?",
+                    "Aşağıdaki malzemelerden hangisi elektrik akımını iletmez?",
+                    "Ampul parlaklığını etkileyen değişkenler nelerdir?",
+                    "Devredeki pil sayısı sabit tutulup ampul sayısı 2 katına çıkarılırsa parlaklık ne olur?",
+                    "Devredeki ampul sayısı sabit tutulup pil sayısı 2 katına çıkarılırsa parlaklık ne olur?",
+                    "Elektrik anahtarı açık konumdayken devreden elektrik akımı geçer mi?",
+                    "Elektrik enerjisini üreten ve depolayan eleman hangisidir?",
+                    "Limon veya patates kullanarak basit bir pil (elektrik kaynağı) yapılabilir mi?"
+                ];
+                seceneklerA = ["Pil", "Devreyi açıp kapatmak", "Flaman (Tel)", "Pil yatağı", "Elektrik enerjisini taşımak", "Artar", "Azalır", "Demir çivi", "Tahta", "Güvenliği sağlamak", "Işık verir", "Kutuplara", "Islak elle dokunmamak", "Bakır tel", "Pil ve ampul sayısı", "Yarıya iner (azalır)", "Artar", "Geçmez (Devre açık)", "Pil", "Evet, yapılabilir"];
+                seceneklerB = ["Kablo", "Işık vermek", "Duy", "Ampul", "Işık yaymak", "Azalır", "Artar", "Plastik", "Bakır", "Estetik durmak", "Işık vermez", "Sadece artı kutba", "Prizlere çivi sokmak", "Gümüş", "Sadece kablo boyu", "Artar", "Azalır", "Geçer", "Anahtar", "Hayır, asla yapılamaz"];
+                seceneklerC = ["Ampul", "Enerji üretmek", "Cam", "Pil", "Direnç oluşturmak", "Değişmez", "Değişmez", "Cam", "Demir", "Isınmayı önlemek", "Bazen yanar", "Sadece eksi kutba", "Ampulü değiştirmek", "Alüminyum folyo", "Sadece pil markası", "Değişmez", "Değişmez", "Kısa devre olur", "Kablo", "Sadece pille olur"];
+                seceneklerD = ["Anahtar", "Direnci ölçmek", "Duy", "Duy", "Ses çıkarmak", "Önce artar sonra biter", "Hiç yanmaz", "Tahta", "Alüminyum", "Parlaklığı artırmak", "Patlar", "Rastgele bağlanır", "Fişi çekmek", "Demir çivi", "Ampul cinsi", "Yok olur", "Söner", "Ateş çıkar", "Ampul", "Sadece patatesle olur"];
+                dogruCevaplar = ["A","A","A","D","A","A","A","A","B","A","A","A","A","B","A","A","A","A","A","A"];
+                gorselMetinleri = Array(20).fill("🔌 7. Ünite: Elektrik Devre Elemanları");
             }
 
             let htmlIcerik = "";
