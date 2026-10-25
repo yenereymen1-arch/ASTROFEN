@@ -124,7 +124,7 @@
     <!-- 1. ANA MENÜ KARTI -->
     <div class="kart" id="anaKart">
         <h1>ASTROFEN 🚀</h1>
-        <p>5. Sınıf Uzay ve Fen Bilimleri Portalı</p>
+        <p>5. Sınıf Uzay dan Fen Bilimleri Portalı</p>
 
         <button class="buton" onclick="kartOyununuAc()">🃏 30 Kartlı Uzay Çevirmece Oyunu</button>
         <button class="buton buton-quiz" onclick="quiziBaslat()">🧠 Genel Uzay Bilgi Yarışması (Quiz)</button>
@@ -267,7 +267,7 @@
             soruyuGoster();
         }
 
-        function unvanGuncelle() {
+            function unvanGuncelle() {
             let unvan = "Çaylak Astronot 👨‍🚀";
             if(puan >= 20) unvan = "Uzay Kaşifi 🛰️";
             if(puan >= 40) unvan = "Galaksi Kaptanı 🚀";
@@ -321,31 +321,176 @@
             }
         }
 
-        // --- ÜNİTE TESTLERİ (20'ŞER SORU) ---
+        // --- ÜNİTE TESTLERİ (20'ŞER GERÇEK SORU BANKASI) ---
+        const uniteSoruBankasi = {
+            1: [
+                { soru: "Güneş'in şekli hangi gök cismine benzer?", secenekler: ["A) Küre", "B) Silindir", "C) Kare", "D) Üçgen"], dogru: 0 },
+                { soru: "Güneş, Dünya'mıza en yakın nedir?", secenekler: ["A) Yıldız", "B) Gezegen", "C) Uydu", "D) Meteor"], dogru: 0 },
+                { soru: "Ay'ın Dünya'ya göre konumu sürekli değiştiği için ne gözlenir?", secenekler: ["A) Mevsimler", "B) Ay'ın Evreleri", "C) Gece ve Gündüz", "D) Yıllar"], dogru: 1 },
+                { soru: "Aşağıdakilerden hangisi Ay'ın ana evrelerinden biri değildir?", secenekler: ["A) Yeni Ay", "B) Mavi Ay", "C) Dolunay", "D) İlk Dördün"], dogru: 1 },
+                { soru: "Yeni ay ile ilk dördün arasında hangi ara evre görülür?", secenekler: ["A) Şişkin Ay", "B) Son Dördün", "C) Hilal", "D) Dolunay"], dogru: 2 },
+                { soru: "Güneş kendi etrafında hangi yöne doğru döner?", secenekler: ["A) Doğudan Batıya", "B) Batıdan Doğuya", "C) Kuzeyden Güneye", "D) Dönmez"], dogru: 1 },
+                { soru: "Dünya'nın kendi etrafındaki bir tam turu ne kadar sürer?", secenekler: ["A) 1 yıl", "B) 1 ay", "C) 1 gün (24 saat)", "D) 1 hafta"], dogru: 2 },
+                { soru: "Ay'ın yüzeyindeki çukurlara ne ad verilir?", secenekler: ["A) Krater", "B) Dağ", "C) Vadi", "D) Tepe"], dogru: 0 },
+                { soru: "Ay'da atmosferin durumu nasıldır?", secenekler: ["A) Çok kalındır", "B) Yok denecek kadar azdır", "C) Yağmurludur", "D) Bulutludur"], dogru: 1 },
+                { soru: "İlk dördün evresinden yaklaşık 1 hafta sonra hangi evre görülür?", secenekler: ["A) Yeni Ay", "B) Hilal", "C) Dolunay", "D) Son Dördün"], dogru: 2 },
+                { soru: "Güneş, Dünya ve Ay büyüklükleri karşılaştırıldığında en büyüğü hangisidir?", secenekler: ["A) Güneş", "B) Dünya", "C) Ay", "D) Hepsi eşittir"], dogru: 0 },
+                { soru: "Ay'ın ana evrelerinin tamamlanması süreci (bir döngü) ne kadardır?", secenekler: ["A) 24 saat", "B) 29,5 gün", "C) 1 yıl", "D) 7 gün"], dogru: 1 },
+                { soru: "Dünya'nın Güneş etrafında dolanması sonucunda ne oluşur?", secenekler: ["A) Gece ve gündüz", "B) Mevsimler", "C) Ay evreleri", "D) Rüzgar"], dogru: 1 },
+                { soru: "Aşağıdakilerden hangisi Ay'ın hareketlerinden biri değildir?", secenekler: ["A) Kendi etrafında dönme", "B) Dünya etrafında dolanma", "C) Güneş etrafında dolanma", "D) Dünya ile birlikte Güneş etrafında dolanma"], dogru: 2 },
+                { soru: "Son dördün evresinden sonra hangi ana evreye geçilir?", secenekler: ["A) Dolunay", "B) Yeni Ay", "C) İlk Dördün", "D) Şişkin Ay"], dogru: 1 },
+                { soru: "Güneş'in katmanları var mıdır? Güneş hangi yapıdadır?", secenekler: ["A) Katı taş", "B) Gaz bulutu", "C) Buz kütlesi", "D) Sıvı okyanus"], dogru: 1 },
+                { soru: "Ay kendi etrafındaki ve Dünya etrafındaki turunu yaklaşık ne kadarda tamamlar?", secenekler: ["A) 1 günde", "B) 27 gün 8 saatte", "C) 1 yılda", "D) 6 ayda"], dogru: 1 },
+                { soru: "Geceleri gökyüzünde Ay'ı parlak görmemizin sebebi nedir?", secenekler: ["A) Kendi ışığını üretmesi", "B) Güneş'ten aldığı ışığı yansıtması", "C) Yıldız olması", "D) Elektrik üretmesi"], dogru: 1 },
+                { soru: "Dünya'dan bakıldığında Ay'ın hep aynı yüzünün görülmesinin nedeni nedir?", secenekler: ["A) Dönme sürelerinin eşit olması", "B) Ay'ın hiç dönmemesi", "C) Dünya'nın dönmemesi", "D) Şeklinin yuvarlak olması"], dogru: 0 },
+                { soru: "Aşağıdakilerden hangisi gök cismi değildir?", secenekler: ["A) Yıldız", "B) Bulut", "C) Gezegen", "D) Uydu"], dogru: 1 }
+            ],
+            2: [
+                { soru: "Aşağıdakilerden hangisi canlıları incelediğimiz gruplardan biri değildir?", secenekler: ["A) Mikroskobik canlılar", "B) Mantarlar", "C) Plastikler", "D) Bitkiler"], dogru: 2 },
+                { soru: "Sütten yoğurt yapılmasını sağlayan canlı grubu hangisidir?", secenekler: ["A) Mikroskobik canlılar", "B) Çiçekli bitkiler", "C) Omurgasızlar", "D) Kuşlar"], dogru: 0 },
+                { soru: "Aşağıdakilerden hangisi bir mantar türü değildir?", secenekler: ["A) Şapkalı mantar", "B) Küf mantarı", "C) Maya mantarı", "D) Güneş mantarı"], dogru: 3 },
+                { soru: "Hamurun kabarmasını sağlayan mantar hangisidir?", secenekler: ["A) Küf mantarı", "B) Maya mantarı", "C) Şapkalı mantar", "D) Zehirli mantar"], dogru: 1 },
+                { soru: "Bitkilerin besin ürettiği temel yapı organı hangisidir?", secenekler: ["A) Kök", "B) Gövde", "C) Yaprak", "D) Çiçek"], dogru: 2 },
+                { soru: "Aşağıdakilerden hangisi çiçeksiz bir bitkidir?", secenekler: ["A) Elma ağacı", "B) Papatya", "C) Eğrelti otu", "D) Gül"], dogru: 2 },
+                { soru: "Omurgalı hayvanlar grubuna girmeyen hangisidir?", secenekler: ["A) Kurbağa", "B) Yılan", "C) Sinek", "D) Balık"], dogru: 2 },
+                { soru: "Aşağıdaki hayvanlardan hangisi doğurarak çoğalır?", secenekler: ["A) Tavuk", "B) İnek", "C) Yılan", "D) Kurbağa"], dogru: 1 },
+                { soru: "Kuşlar ve sürüngenler ortak olarak nasıl çoğalırlar?", secenekler: ["A) Yumurtayla", "B) Doğurarak", "C) İkiye bölünerek", "D) Sporla"], dogru: 0 },
+                { soru: "Suda yaşayan, solungaç solunumu yapan omurgalı canlılar hangileridir?", secenekler: ["A) Memeliler", "B) Balıklar", "C) Kuşlar", "D) Sürüngenler"], dogru: 1 },
+                { soru: "Aşağıdakilerden hangisi mikroskobik canlıların zararlarından biridir?", secenekler: ["A) Sütten peynir yapılması", "B) Hamurun mayalanması", "C) Besinlerin bozulmasına (küflenmesine) yol açması", "D) Turşu yapılması"], dogru: 2 },
+                { soru: "Bitkinin toprağa bağlanmasını ve su almasını sağlayan kısım nedir?", secenekler: ["A) Yaprak", "B) Çiçek", "C) Kök", "D) Meyve"], dogru: 2 },
+                { soru: "Aşağıdakilerden hangisi memeli bir hayvandır?", secenekler: ["A) Yarasa", "B) Serçe", "C) Alabalık", "D) Timsah"], dogru: 0 },
+                { soru: "Mantarlar hangi canlı grubuna daha çok benzerler?", secenekler: ["A) Bitkilere", "B) Hayvanlara", "C) Kendi başlarına ayrı bir gruba", "D) Cansız varlıklara"], dogru: 2 },
+                { soru: "Aşağıdakilerden hangisi çiçekli bir bitkinin üreme organıdır?", secenekler: ["A) Kök", "B) Çiçek", "C) Gövde", "D) Yaprak"], dogru: 1 },
+                { soru: "Akciğer solunumu yapan, vücudu tüylerle kaplı canlı grubu hangisidir?", secenekler: ["A) Memeliler", "B) Kuşlar", "C) Sürüngenler", "D) Kurbağalar"], dogru: 1 },
+                { soru: "Sütün mayalanmasında ve sütten yoğurt elde edilmesinde hangi canlı rol oynar?", secenekler: ["A) Bakteri (Mikroskobik canlı)", "B) Şapkalı mantar", "C) Kara yosunu", "D) Çam ağacı"], dogru: 0 },
+                { soru: "Aşağıdakilerden hangisi omurgasız bir hayvandır?", secenekler: ["A) Kedi", "B) Solucan", "C) Güvercin", "D) Hamsi"], dogru: 1 },
+                { soru: "Karasal ortamlarda yaşayan bitkilerin besin ve su taşınmasını sağlayan yapı hangisidir?", secenekler: ["A) Gövde", "B) Kök", "C) Çiçek", "D) Tohum"], dogru: 0 },
+                { soru: "Mikroskobik canlılar gözle görülebilir mi?", secenekler: ["A) Evet, çok net görülür", "B) Hayır, sadece mikroskopla görülür", "C) Sadece geceleri görülür", "D) Büyüteç yeterlidir"], dogru: 1 }
+            ],
+            3: [
+                { soru: "Kuvvetin büyüklüğünü ölçmek için kullanılan araç nedir?", secenekler: ["A) Terazi", "B) Dinamometre", "C) Cetvel", "D) Termometre"], dogru: 1 },
+                { soru: "Dinamometrelerin içinde ne bulunur?", secenekler: ["A) Esnek yay", "B) Su borusu", "C) Pil", "D) Mıknatıs"], dogru: 0 },
+                { soru: "Kuvvetin birimi nedir?", secenekler: ["A) Kilogram", "B) Newton (N)", "C) Metre", "D) Celsius"], dogru: 1 },
+                { soru: "Sürtünme kuvveti hareket yönüne nasıl etki eder?", secenekler: ["A) Aynı yöndedir", "B) Zıt yöndedir", "C) Dik açıdır", "D) Etki etmez"], dogru: 1 },
+                { soru: "Aşağıdaki yüzeylerden hangisinde sürtünme kuvveti en azdır?", secenekler: ["A) Buzlu yol", "B) Toprak yol", "C) Halı", "D) Zımpara kağıdı"], dogru: 0 },
+                { soru: "Dinamometrenin ölçebileceği maksimum kuvvet sınırı neye bağlıdır?", secenekler: ["A) Boyuna", "B) Yayın esneklik özelliğine", "C) Rengine", "D) Dıştaki plastiğe"], dogru: 1 },
+                { soru: "Hangisi sürtünme kuvvetinin faydalı olduğu durumlardandır?", secenekler: ["A) Yürüyebilmemiz", "B) Makinelerin aşınması", "C) Kapıların gıcırdaması", "D) Bisiklet zincirinin eskimesi"], dogru: 0 },
+                { soru: "Hava direnci hareket eden cisimleri nasıl etkiler?", secenekler: ["A) Hızlandırır", "B) Yavaşlatır", "C) Havaya uçurur", "D) Değiştirmez"], dogru: 1 },
+                { soru: "Su direnci en çok hangi araçlarda hissedilir?", secenekler: ["A) Uçaklar", "B) Gemiler ve denizaltılar", "C) Trenler", "D) Arabalar"], dogru: 1 },
+                { soru: "Yazı yazarken kalemin kağıda tutunmasını sağlayan nedir?", secenekler: ["A) Yer çekimi", "B) Sürtünme kuvveti", "C) Manyetik kuvvet", "D) Rüzgar"], dogru: 1 },
+                { soru: "Aşağıdakilerden hangisi temas gerektiren bir kuvvettir?", secenekler: ["A) Mıknatısın demiri çekmesi", "B) Futbol topuna vurmak", "C) Yer çekimi", "D) Saçın tarandıktan sonra kağıdı çekmesi"], dogru: 1 },
+                { soru: "Dinamometreye çok büyük bir kuvvet uygulanırsa ne olur?", secenekler: ["A) Daha iyi ölçer", "B) Yay bozulur (esneklik özelliğini yitirir)", "C) Kendi kendine tamir olur", "D) Hiçbir şey olmaz"], dogru: 1 },
+                { soru: "Kışın karlı yollarda araba lastiklerine zincir takılmasının sebebi nedir?", secenekler: ["A) Sürtünmeyi azaltmak", "B) Sürtünmeyi artırıp kaymayı önlemek", "C) Arabayı hafifletmek", "D) Yakıt tasarrufu yapmak"], dogru: 1 },
+                { soru: "Pürüzlü yüzeylerde sürtünme kuvveti nasıldır?", secenekler: ["A) Azdır", "B) Fazladır", "C) Sıfırdır", "D) Yoktur"], dogru: 1 },
+                { soru: "Hızlı hareket eden uçakların burun kısımlarının sivri yapılması neyi azaltmak içindir?", secenekler: ["A) Hava direncini", "B) Su direncini", "C) Yer çekimini", "D) Ağırlığı"], dogru: 0 },
+                { soru: "Aşağıdakilerden hangisi kuvvetin etkilerinden biri değildir?", secenekler: ["A) Cisimleri hareket ettirme", "B) Cisimlerin şeklini değiştirme", "C) Cisimlerin rengini kalıcı değiştirme", "D) Cisimleri durdurma"], dogru: 2 },
+                { soru: "Kalın yaylı bir dinamometre mi, ince yaylı bir dinamometre mi daha büyük kuvvetleri ölçer?", secenekler: ["A) Kalın yaylı", "B) İnce yaylı", "C) İkisi de aynı", "D) Yay kalınlığı etkilemez"], dogru: 0 },
+                { soru: "Hareket halindeki bir bisikletin frenine basıldığında hangi kuvvet devreye girer?", secenekler: ["A) İtme kuvveti", "B) Sürtünme kuvveti", "C) Yer çekimi", "D) Manyetik kuvvet"], dogru: 1 },
+                { soru: "Aşağıdakilerden hangisinde sürtünmeyi azaltmak amaçlanmıştır?", secenekler: ["A) Halı saha ayakkabısının çivili olması", "B) Kapı menteşelerinin yağlanması", "C) Araba lastiklerine diş açılması", "D) Futbolcuların eldiven takması"], dogru: 1 },
+                { soru: "Hangi ortamda hava direnci en azdır?", secenekler: ["A) Su altı", "B) Hava", "C) Boşluk (Hava olmayan ortam)", "D) Orman"], dogru: 2 }
+            ],
+            4: [
+                { soru: "Katı bir maddenin ısı alarak sıvı hale geçmesine ne denir?", secenekler: ["A) Donma", "B) Erime", "C) Buharlaşma", "D) Yoğuşma"], dogru: 1 },
+                { soru: "Suyun donma sıcaklığı kaç derecedir?", secenekler: ["A) 0 °C", "B) 50 °C", "C) 100 °C", "D) -10 °C"], dogru: 0 },
+                { soru: "Sıvı bir maddenin ısı vererek katı hale geçmesine ne denir?", secenekler: ["A) Erime", "B) Donma", "C) Buharlaşma", "D) Süblimleşme"], dogru: 1 },
+                { soru: "Suyun kaynama noktası kaç derecedir?", secenekler: ["A) 0 °C", "B) 50 °C", "C) 100 °C", "D) 200 °C"], dogru: 2 },
+                { soru: "Çamaşırların kuruması hangi olaya örnektir?", secenekler: ["A) Yoğuşma", "B) Buharlaşma", "C) Donma", "D) Erime"], dogru: 1 },
+                { soru: "Soğuk bir günde pencere camlarında su damlacıklarının oluşması hangi olaydır?", secenekler: ["A) Buharlaşma", "B) Yoğuşma", "C) Erime", "D) Süblimleşme"], dogru: 1 },
+                { soru: "Katı bir maddenin sıvı hale geçmeden doğrudan gaz hale geçmesine ne denir?", secenekler: ["A) Erime", "B) Süblimleşme", "C) Donma", "D) Yoğuşma"], dogru: 1 },
+                { soru: "Aşağıdakilerden hangisi ısı alarak gerçekleşen bir hal değişimidir?", secenekler: ["A) Donma", "B) Yoğuşma", "C) Erime", "D) Kırağılaşma"], dogru: 2 },
+                { soru: "Saf maddelerin erime ve kaynama noktaları için ne söylenebilir?", secenekler: ["A) Her madde için sabittir", "B) Miktarına göre sürekli değişir", "C) Zamana göre değişir", "D) Rastgeledir"], dogru: 0 },
+                { soru: "Buzdolabından çıkarılan buzun bir süre sonra su olması hangi olaydır?", secenekler: ["A) Donma", "B) Erime", "C) Buharlaşma", "D) Kırağılaşma"], dogru: 1 },
+                { soru: "Gazi ve buhar halindeki suyun soğuk hava ile karşılaşarak sıvıya dönmesi nedir?", secenekler: ["A) Buharlaşma", "B) Yoğuşma", "C) Erime", "D) Süblimleşme"], dogru: 1 },
+                { soru: "Aşağıdakilerden hangisi ısı vererek gerçekleşen hal değişimidir?", secenekler: ["A) Erime", "B) Buharlaşma", "C) Donma", "D) Süblimleşme"], dogru: 2 },
+                { soru: "Naftalinin katı halde iken koku vererek gaz haline geçmesi hangi olaydır?", secenekler: ["A) Süblimleşme", "B) Yoğuşma", "C) Donma", "D) Erime"], dogru: 0 },
+                { soru: "Suyun buharlaşması sadece 100 °C'de mi gerçekleşir?", secenekler: ["A) Evet, sadece 100'de", "B) Hayır, her sıcaklıkta buharlaşma olur", "C) Sadece kışın olur", "D) Sadece kaynarken olur"], dogru: 1 },
+                { soru: "Kışın sabahları yapraklarda buz kristalleri (kırağı) oluşması hangi olaydır?", secenekler: ["A) Kırağılaşma", "B) Erime", "C) Buharlaşma", "D) Donma"], dogru: 0 },
+                { soru: "Aşağıdaki maddelerden hangisi ısı etkisiyle eriyebilir?", secenekler: ["A) Demir", "B) Çikolata", "C) Taş", "D) Tahta"], dogru: 1 },
+                { soru: "Erime süresince saf maddelerin sıcaklığı nasıldır?", secenekler: ["A) Sürekli artar", "B) Sürekli azalır", "C) Sabit kalır", "D) Önce artar sonra düşer"], dogru: 2 },
+                { soru: "Yeryüzündeki suların buharlaşıp gökyüzünde bulut olmasındaki olaylar sırasıyla nedir?", secenekler: ["A) Buharlaşma ve yoğuşma", "B) Donma ve erime", "C) Süblimleşme ve donma", "D) Erime ve buharlaşma"], dogru: 0 },
+                { soru: "Kolonya sürülen elin serinlemesi hangi olayla ilgilidir?", secenekler: ["A) Kolonya ısı vererek donar", "B) Kolonya buharlaşırken elden ısı alır", "C) Yoğuşma gerçekleşir", "D) Kırağılaşma olur"], dogru: 1 },
+                { soru: "Saf su 1 atm basınç altında kaç derecede kaynar?", secenekler: ["A) 0 °C", "B) 50 °C", "C) 100 °C", "D) 150 °C"], dogru: 2 }
+            ],
+            5: [
+                { soru: "Işık hangi yollarla yayılır?", secenekler: ["A) Eğri yollarla", "B) Doğrusal yollarla", "C) Dairesel yollarla", "D) Rastgele"], dogru: 1 },
+                { soru: "Aşağıdakilerden hangisi doğal ışık kaynağıdır?", secenekler: ["A) El feneri", "B) Mum", "C) Güneş", "D) Gaz lambası"], dogru: 2 },
+                { soru: "Işığı hiç geçirmeyen maddelere ne denir?", secenekler: ["A) Saydam madde", "B) Yarı saydam madde", "C) Opak (Saydam olmayan) madde", "D) Cam"], dogru: 2 },
+                { soru: "Aşağıdakilerden hangisi yarı saydam maddedir?", secenekler: ["A) Tahta", "B) Buzlu cam", "C) Pencere camı", "D) Alüminyum folyo"], dogru: 1 },
+                { soru: "Işığı büyük oranda geçiren maddelere ne ad verilir?", secenekler: ["A) Saydam madde", "B) Opak madde", "C) Yarı saydam", "D) Taş"], dogru: 0 },
+                { soru: "Işık ışınlarının önünü opak bir cisim kestiğinde ne oluşur?", secenekler: ["A) Gökkuşağı", "B) Gölge", "C) Ayna görüntüsü", "D) Işık demeti"], dogru: 1 },
+                { soru: "Aşağıdakilerden hangisi yapay ışık kaynağıdır?", secenekler: ["A) Yıldızlar", "B) Şimşek", "C) Ampul", "D) Güneş"], dogru: 2 },
+                { soru: "Gölgenin boyunu büyütmek için cisim ile perde ne yapılmalıdır?", secenekler: ["A) Cisim ışık kaynağına yaklaştırılmalıdır", "B) Cisim perdeye yaklaştırılmalıdır", "C) Işık kaynağı uzaklaştırılmalıdır", "D) Hiçbiri"], dogru: 0 },
+                { soru: "Aşağıdakilerden hangisi saydam maddedir?", secenekler: ["A) Tahta kapı", "B) Temiz su", "C) Duvar", "D) Karton kutu"], dogru: 1 },
+                { soru: "Gölge ile ilgili aşağıdakilerden hangisi doğrudur?", secenekler: ["A) Gölgenin şekli cisme benzer", "B) Gölge renkli olur", "C) Gölge ışık üretir", "D) Gölge cisimden hep küçüktür"], dogru: 0 },
+                { soru: "Ayna karşısına geçildiğinde görülen olay nedir?", secenekler: ["A) Işığın yansıması", "B) Işığın kırılması", "C) Gölge oluşumu", "D) Işığın emilmesi"], dogru: 0 },
+                { soru: "Düz bir aynaya gelen ışın ile yansıyan ışın arasındaki açı nasıldır?", secenekler: ["A) Eşittir", "B) Farklıdır", "C) Biri büyüktür", "D) Alakası yoktur"], dogru: 0 },
+                { soru: "Aşağıdakilerden hangisinde ışık ışınlarının doğrusal yayıldığı kanıtlanamaz?", secenekler: ["A) Gölge oluşumu", "B) Güneş tutulması", "C) Gökkuşağı oluşumu", "D) Karanlık odada ışık demeti görünmesi"], dogru: 2 },
+                { soru: "Işık yılı neyi ifade eder?", secenekler: ["A) Zaman ölçüsünü", "B) Uzaklık (mesafe) ölçüsünü", "C) Hız ölçüsünü", "D) Işık miktarını"], dogru: 1 },
+                { soru: "Hangisi opak maddeye örnektir?", secenekler: ["A) Yağlı kağıt", "B) Kitap", "C) Hava", "D) Su"], dogru: 1 },
+                { soru: "Işık boşlukta yayılabilir mi?", secenekler: ["A) Hayır, yayılmaz", "B) Evet, yayılır", "C) Sadece suda yayılır", "D) Sadece havada yayılır"], dogru: 1 },
+                { soru: "Işık kaynağına yakınlaştırılan bir cismin duvardaki gölgesi nasıl olur?", secenekler: ["A) Küçülür", "B) Büyür", "C) Boyutu değişmez", "D) Kaybolur"], dogru: 1 },
+                { soru: "Aşağıdakilerden hangisi aydınlık bir ortamda net görülmez?", secenekler: ["A) Kitap", "B) Uzaktaki sönük yıldızlar", "C) Masa", "D) Ağaç"], dogru: 1 },
+                { soru: "Pencerelerde kullanılan tül perde hangi madde sınıfına girer?", secenekler: ["A) Saydam", "B) Yarı saydam", "C) Opak", "D) Metal"], dogru: 1 },
+                { soru: "Ay'ın kendi ışığı var mıdır?", secenekler: ["A) Vardır, çok parlaktır", "B) Yoktur, Güneş'ten alır", "C) Kısmen vardır", "D) Kendi kendine yanar"], dogru: 1 },
+            ],
+            6: [
+                { soru: "Basit bir elektrik devresinde enerji kaynağı hangisidir?", secenekler: ["A) Ampul", "B) Pil", "C) Kablo", "D) Anahtar"], dogru: 1 },
+                { soru: "Devrede elektrik enerjisini ışık enerjisine çeviren eleman nedir?", secenekler: ["A) Pil", "B) Anahtar", "C) Ampul", "D) Kablo"], dogru: 2 },
+                { soru: "Devrede akımın geçişini kontrol eden (açıp kapatan) eleman hangisidir?", secenekler: ["A) Pil", "B) Anahtar", "C) Duy", "D) Ampul"], dogru: 1 },
+                { soru: "Ampulün takıldığı yuvaya ne ad verilir?", secenekler: ["A) Duy", "B) Pil yatağı", "C) Kablo", "D) Şalter"], dogru: 0 },
+                { soru: "Basit bir elektrik devresinde kablonun görevi nedir?", secenekler: ["A) Işık saçmak", "B) Elektrik enerjisini iletmek", "C) Enerji üretmek", "D) Devreyi durdurmak"], dogru: 1 },
+                { soru: "Bir elektrik devresinde pilin artı (+) kutbu hangi harfle gösterilir?", secenekler: ["A) -", "B) +", "C) x", "D) ="], dogru: 1 },
+                { soru: "Kurulumu yapılan bir devrede ampul neden ışık vermez?", secenekler: ["A) Pil bittiyse", "B) Kablo koptuysa", "C) Anahtar açıksa", "D) Hepsi"], dogru: 3 },
+                { soru: "Evlerimizde kullandığımız elektrik enerjisinin kaynağı nedir?", secenekler: ["A) Kalem pil", "B) Şebeke elektriği (Priz)", "C) Saat pili", "D) Dinamo"], dogru: 1 },
+                { soru: "Aşağıdakilerden hangisi devre elemanı değildir?", secenekler: ["A) Ampul", "B) Pil", "C) Defter", "D) Kablo"], dogru: 2 },
+                { soru: "Devre anahtarı açık olduğunda ampul yanar mı?", secenekler: ["A) Yanar", "B) Yanmaz", "C) Parlak yanar", "D) Yanıp söner"], dogru: 1 },
+                { soru: "Ampulün telinin adı nedir?", secenekler: ["A) Filament (Flaman)", "B) Duy", "C) Kablo", "D) Cam"], dogru: 0 },
+                { soru: "Pillerin kutupları nelerdir?", secenekler: ["A) Kuzey - Güney", "B) Artı (+) ve Eksi (-)", "C) İçi ve Dışı", "D) Büyük ve Küçük"], dogru: 1 },
+                { soru: "Elektrik devrelerinde iletkenliği sağlayan tel genellikle hangi malzemeden yapılır?", secenekler: ["A) Tahta", "B) Bakır", "C) Plastik", "D) Cam"], dogru: 1 },
+                { soru: "Aşağıdakilerden hangisi yalıtkan bir maddedir?", secenekler: ["A) Demir çivi", "B) Bakır tel", "C) Plastik cetvel", "D) Alüminyum folyo"], dogru: 2 },
+                { soru: "Pil yatağı ne işe yarar?", secenekler: ["A) Pili yerinde sabitlemeye yarar", "B) Ampulü parlatır", "C) Elektrik üretir", "D) Kabloyu keser"], dogru: 0 },
+                { soru: "Aşağıdakilerden hangisi iletken maddedir?", secenekler: ["A) Tahta kaşık", "B) Gümüş yüzük", "C) Plastik bardak", "D) Silgi"], dogru: 1 },
+                { soru: "Bir devrede ampul parlaklığını artırmak için ne yapılabilir?", secenekler: ["A) Pil sayısı artırılabilir", "B) Pil sayısı azaltılabilir", "C) Kablo uzatılabilir", "D) Anahtar kapatılabilir"], dogru: 0 },
+                { soru: "El fenerlerinin içinde enerji kaynağı olarak ne kullanılır?", secenekler: ["A) Pil", "B) Güneş paneli", "C) Kömür", "D) Benzin"], dogru: 0 },
+                { soru: "Elektrik çarpmalarından korunmak için kabloların dışı neyle kaplanır?", secenekler: ["A) Bakır ile", "B) Plastik/Kauçuk yalıtkanla", "C) Demir ile", "D) Alüminyum ile"], dogru: 1 },
+                { soru: "Devre anahtarı kapalı konumdayken devreye ne olur?", secenekler: ["A) Elektrik akımı geçer, ampul yanar", "B) Akım geçmez", "C) Pil patlar", "D) Kablo yanar"], dogru: 0 }
+            ],
+            7: [
+                { soru: "Bir bölgedeki canlı türlerinin zenginliğine ne ad verilir?", secenekler: ["A) Biyoçeşitlilik", "B) Ekosistem", "C) Çevre kirliliği", "D) Erozyon"], dogru: 0 },
+                { soru: "Aşağıdakilerden hangisi biyoçeşitliliği olumlu etkiler?", secenekler: ["A) Orman yangınları", "B) Aşırı avlanma", "C) Ağaçlandırma (Fidan dikme)", "D) Tarım ilaçlarının aşırı kullanımı"], dogru: 2 },
+                { soru: "Aşağıdakilerden hangisi ülkemizde nesli tükenmiş bir canlıdır?", secenekler: ["A) Anadolu parsı", "B) Karaca", "C) Van kedisi", "D) Kanguru"], dogru: 0 },
+                { soru: "Çevre kirliliğine sebep olan etkenlerden biri değildir?", secenekler: ["A) Geri dönüşüm kutuları kullanmak", "B) Fabrika atıklarını arıtmadan suya vermek", "C) Plastik çöpleri doğaya atmak", "D) Kömür dumanları"], dogru: 0 },
+                { soru: "Aşağıdaki canlılardan hangisinin nesli tehlike altındadır?", secenekler: ["A) Caretta caretta (Deniz kaplumbağası)", "B) Serçe", "C) Karınca", "D) Sinek"], dogru: 0 },
+                { soru: "Toprak örtüsünün yağmur ve rüzgarla süpürülmesine ne denir?", secenekler: ["A) Heyelan", "B) Erozyon", "C) Deprem", "D) Çığ"], dogru: 1 },
+                { soru: "Geri dönüşümün doğaya en büyük katkısı nedir?", secenekler: ["A) Çöp miktarını artırmak", "B) Doğal kaynakları korumak ve tasarruf sağlamak", "C) Enerji harcamak", "D) Kirlilik yaratmak"], dogru: 1 },
+                { soru: "Aşağıdakilerden hangisi plastik ve kağıtların atıldığı geri dönüşüm maddesidir?", secenekler: ["A) Geri dönüşüm kutuları", "B) Evsel atıklar", "C) Kül", "D) Toprak"], dogru: 0 },
+                { soru: "Hangisi insan faaliyetleri sonucu biyoçeşitliliğin azalmasına yol açmaz?", secenekler: ["A) Milli parklar kurarak koruma sağlamak", "B) Sulak alanları kurutmak", "C) Bilinçsiz avlanmak", "D) Doğal habitatları yok etmek"], dogru: 0 },
+                { soru: "Aşağıdaki hayvanlardan hangisinin ülkemizde nesli tükenmemiştir ama korunmaktadır?", secenekler: ["A) Dinazor", "B) Kelaynak kuşu", "C) Mamut", "D) Moa kuşu"], dogru: 1 },
+                { soru: "Sanayi atıklarının sulara karışması hangi kirliliğe yol açar?", secenekler: ["A) Su kirliliği", "B) Gürültü kirliliği", "C) Işık kirliliği", "D) Toprak kirliliği yok olur"], dogru: 0 },
+                { soru: "Aşağıdakilerden hangisi enerji tasarrufu sağlamaz?", secenekler: ["A) Boş odalarda lambaları açık bırakmak", "B) A sınıfı enerji tasarruflu ampul kullanmak", "C) Gereksiz yere muslukları kapatmak", "D) Toplu taşıma kullanmak"], dogru: 0 },
+                { soru: "Erozyonu önlemek için en etkili yol nedir?", secenekler: ["A) Ağaç dikmek ve ormanları korumak", "B) Tarlaları sürmek", "C) Otları yakmak", "D) Baraj yapmak"], dogru: 0 },
+                { soru: "Aşağıdakilerden hangisi küresel ısınmaya ve iklim değişikliğine sebep olur?", secenekler: ["A) Fosil yakıtların (kömür, petrol) aşırı kullanımı", "B) Ağaç dikmek", "C) Bisiklete binmek", "D) Geri dönüşüm yapmak"], dogru: 0 },
+                { soru: "Canlıların doğal olarak yaşayıp ürediği yerlere ne ad verilir?", secenekler: ["A) Habitat (Yaşam alanı)", "B) Fabrika", "C) Şehir", "D) Yol"], dogru: 0 },
+                { soru: "Cam şişeler doğada kaç yılda kaybolur?", secenekler: ["A) 10 yılda", "B) 100 yılda", "C) Yüzlerce hatta binlerce yılda kaybolmaz", "D) 1 ayda"], dogru: 2 },
+                { soru: "Aşağıdakilerden hangisi çevre dostu bir davranıştır?", secenekler: ["A) Pilleri doğrudan çöpe atmak", "B) Plastik poşet yerine bez torba kullanmak", "C) Suyu boşa akıtmak", "D) Kağıtları israf etmek"], dogru: 1 },
+                { soru: "Aşağıdakilerden hangisi hava kirliliğini artırır?", secenekler: ["A) Güneş enerjisi kullanmak", "B) Kalitesiz kömür yakılması ve fabrika bacaları", "C) Ağaçlandırma", "D) Elektrikli araçlar"], dogru: 1 },
+                { soru: "Atık pillerin doğaya atılması ne tür kirliliğe yol açar?", secenekler: ["A) Toprak ve su kirliliği", "B) Gürültü kirliliği", "C) Işık kirliliği", "D) Hava kirliliği"], dogru: 0 },
+                { soru: "Ülkemizde nesli tükenme tehlikesi altında olan deniz kaplumbağasının adı nedir?", secenekler: ["A) Balina", "B) Caretta caretta", "C) Köpekbalığı", "D) Yunus"], dogru: 1 }
+            ]
+        };
+
         let secilenUniteSoruListesi = [];
         let uSoruIdx = 0;
         let uPuan = 0;
         let uDogru = 0;
         let uYanlis = 0;
 
-        function soruUret(uniteNo) {
-            let liste = [];
-            for(let i=1; i<=20; i++) {
-                liste.push({
-                    soru: `[Ünite ${uniteNo} - Soru ${i}] 5. Sınıf ${uniteNo}. Ünite ile ilgili ${i}. pekiştirme sorusunun doğru şıkkı nedir?`,
-                    secenekler: ["A) Doğru Seçenek 1", "B) Doğru Seçenek 2", "C) Doğru Seçenek 3", "D) Doğru Seçenek 4"],
-                    dogru: (i % 4) // Şıklar arasında dağılım yapması için
-                });
-            }
-            return liste;
-        }
-
         function uniteTestiBaslat(uniteNo) {
             tumKartlariGizle();
             document.getElementById('uniteTestKart').style.display = 'block';
             document.getElementById('uniteBaslik').innerText = `${uniteNo}. Ünite Testi`;
             
-            secilenUniteSoruListesi = soruUret(uniteNo);
+            secilenUniteSoruListesi = uniteSoruBankasi[uniteNo];
             uSoruIdx = 0;
             uPuan = 0;
             uDogru = 0;
@@ -355,7 +500,7 @@
         }
 
         function uniteSorusuGoster() {
-            if (uSoruIdx < 20) {
+            if (uSoruIdx < secilenUniteSoruListesi.length) {
                 let q = secilenUniteSoruListesi[uSoruIdx];
                 document.getElementById('uniteSoruNo').innerText = `Soru: ${uSoruIdx + 1} / 20`;
                 document.getElementById('unitePuanYazisi').innerText = `Puan: ${uPuan}`;
@@ -372,7 +517,6 @@
                     alan.appendChild(btn);
                 });
             } else {
-                // TEST BİTTİĞİNDE PUANI VE SONUCU SÖYLE
                 let basari = "Geliştirilebilir 🎯";
                 if(uPuan >= 50) basari = "İyi 👍";
                 if(uPuan >= 80) basari = "Harika! 🌟";
