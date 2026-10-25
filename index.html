@@ -25,7 +25,7 @@
             backdrop-filter: blur(8px);
             border: 1px solid rgba(0, 240, 255, 0.3);
             text-align: center;
-            max-width: 700px;
+            max-width: 750px;
             width: 100%;
         }
         h1 {
@@ -115,17 +115,26 @@
             justify-content: space-between;
             align-items: center;
             background: rgba(255, 255, 255, 0.05);
-            padding: 10px;
+            padding: 10px 15px;
             margin-bottom: 8px;
-            border-radius: 6px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 240, 255, 0.2);
         }
         select {
-            background: #1e293b;
+            background: #0f172a;
             color: #00f0ff;
-            border: 1px solid #00f0ff;
-            padding: 6px 12px;
+            border: 2px solid #00f0ff;
+            padding: 8px 12px;
             border-radius: 6px;
             font-weight: bold;
+            font-size: 14px;
+            outline: none;
+            cursor: pointer;
+            max-width: 250px;
+        }
+        select option {
+            background: #0f172a;
+            color: #ffffff;
         }
         label { color: #f1f5f9; display: block; margin: 6px 0; cursor: pointer; }
     </style>
@@ -135,14 +144,14 @@
         <h1>FENX 🚀</h1>
         <p>5. Sınıf Uzay ve Fen Bilimleri Oyunu</p>
         
-        <button id="uzayOyunButon" class="buton buton-uzay">🪐 10 Sorulu Uzay Eşleştirme Oyunu</button>
+        <button id="uzayOyunButon" class="buton buton-uzay">🪐 15 Sorulu Uzay Eşleştirme Oyunu</button>
         <button id="anaButon" class="buton">📚 Fen Bilimleri Ünitelerini Göster</button>
 
-        <!-- 10 SORULU UZAY EŞLEŞTİRME OYUNU -->
+        <!-- 15 SORULU UZAY EŞLEŞTİRME OYUNU -->
         <div id="uzayOyunAlani" class="gizli uzay-oyun-kutu">
-            <h2 style="color: #ff0080; margin-top: 0;">🌌 Uzay Terimleri Eşleştirme Oyunu (10 Soru)</h2>
-            <p>Sol taraftaki uzay kavramını doğru tanımıyla seçip eşleştir!</p>
-            <div id="uzayEslestirmeAlani" style="text-align: left; margin-top: 15px;"></div>
+            <h2 style="color: #ff0080; margin-top: 0;">🌌 Uzay Terimleri Eşleştirme Oyunu (15 Soru)</h2>
+            <p>Sol taraftaki uzay tanımını sağ taraftaki doğru kavramla eşleştir!</p>
+            <div id="uzayEslestirmeAlani" style="text-align: left; margin-top: 15px; max-height: 450px; overflow-y: auto; padding-right: 10px;"></div>
             <button onclick="uzayEslestirmeKontrol()" class="buton" style="margin-top: 15px;">Eşleştirmeleri Kontrol Et 🎯</button>
             <button onclick="uzayOyunKapat()" class="buton" style="background: #475569; margin-top: 10px;">Oyundan Çık ↩️</button>
             <div id="uzaySkor" style="margin-top: 15px; font-weight: bold; font-size: 18px; color: #00f0ff;"></div>
@@ -228,7 +237,7 @@
             }
         };
 
-        // 10 SORULU EŞLEŞTİRME OYUNU VERİLERİ
+        // 15 SORULU EŞLEŞTİRME OYUNU VERİLERİ
         let eslestirmeSorulari = [
             { id: 1, terim: "Kızıl Gezegen", dogru: "Mars" },
             { id: 2, terim: "Isı ve Işık Kaynağımız", dogru: "Güneş" },
@@ -237,28 +246,33 @@
             { id: 5, terim: "Belirgin Halkaları Olan Gezegen", dogru: "Satürn" },
             { id: 6, terim: "Güneş'e En Yakın Gezegen", dogru: "Merkür" },
             { id: 7, terim: "Ay Yüzeyindeki Büyük Çukurlar", dogru: "Krater" },
-            { id: 8, terim: "Kendi Etrafında Batıdan Doğuya Dönüş", dogru: "Güneş'in Dönüş Yönü" },
-            { id: 9, terim: "Dünya'dan Bakıldığında Ay'ın Hep Aynı Yüzünün Görünmesi", dogru: "Dönme ve Dolanma Sürelerinin Eşitliği" },
-            { id: 10, terim: "Ay'ın Tamamen Karanlık Göründüğü Evre", dogru: "Yeni Ay" }
+            { id: 8, terim: "Güneş'in Kendi Ekseni Etrafındaki Yönü", dogru: "Batıdan Doğuya" },
+            { id: 9, terim: "Ay'ın Hep Aynı Yüzünün Görünme Sebebi", dogru: "Eşit Dönme Süresi" },
+            { id: 10, terim: "Ay'ın Tamamen Karanlık Göründüğü Evre", dogru: "Yeni Ay" },
+            { id: 11, terim: "Güneş'in En Sıcak Katmanı", dogru: "Çekirdek" },
+            { id: 12, terim: "Dünya'ya En Yakın Yıldız", dogru: "Güneş" },
+            { id: 13, terim: "Ay'ın D Harfi Şeklindeki Evresi", dogru: "İlk Dördün" },
+            { id: 14, terim: "Güneş Tutulmasının Gerçekleştiği Evre", dogru: "Yeni Ay Evresi" },
+            { id: 15, terim: "Ay'ın Ana Evrelerinin Dönüşüm Süresi", dogru: "29.5 Gün" }
         ];
 
         let secenekHavuzu = [
             "Mars", "Güneş", "Ay", "Jüpiter", "Satürn", 
-            "Merkür", "Krater", "Güneş'in Dönüş Yönü", 
-            "Dönme ve Dolanma Sürelerinin Eşitliği", "Yeni Ay"
+            "Merkür", "Krater", "Batıdan Doğuya", "Eşit Dönme Süresi", 
+            "Yeni Ay", "Çekirdek", "İlk Dördün", "Yeni Ay Evresi", "29.5 Gün"
         ];
 
         function uzayEslestirmeYukle() {
             let html = "";
             eslestirmeSorulari.forEach((s, idx) => {
-                let secenekHTML = `<option value="">-- Seçiniz --</option>`;
+                let secenekHTML = `<option value="">-- Eşleştir --</option>`;
                 secenekHavuzu.forEach(opt => {
                     secenekHTML += `<option value="${opt}">${opt}</option>`;
                 });
 
                 html += `
                     <div class="eslestirme-satir">
-                        <span><strong>${idx+1}. ${s.terim}</strong></span>
+                        <span style="font-size: 14px;"><strong>${idx+1}. ${s.terim}</strong></span>
                         <select id="eslesSelect${s.id}">${secenekHTML}</select>
                     </div>
                 `;
@@ -274,8 +288,8 @@
                     dogruSayisi++;
                 }
             });
-            let puan = dogruSayisi * 10;
-            document.getElementById("uzaySkor").innerHTML = `🎯 Eşleştirme Tamamlandı! Doğru: ${dogruSayisi} / 10 | Puanın: ${puan} / 100`;
+            let puan = Math.round((dogruSayisi / 15) * 100);
+            document.getElementById("uzaySkor").innerHTML = `🎯 Eşleştirme Tamamlandı! Doğru: ${dogruSayisi} / 15 | Puanın: ${puan} / 100`;
         }
 
         function uzayOyunKapat() {
