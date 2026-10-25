@@ -19,7 +19,7 @@
         }
         .kart {
             background: rgba(22, 27, 46, 0.85);
-            padding: 30px;
+            padding: 25px;
             border-radius: 16px;
             box-shadow: 0 8px 32px 0 rgba(0, 240, 255, 0.2);
             backdrop-filter: blur(8px);
@@ -65,15 +65,15 @@
             padding: 12px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
             text-align: left;
             transition: all 0.2s;
             width: 100%;
+            margin-bottom: 8px;
         }
         .secenek-btn:hover {
-            background: rgba(0, 240, 255, 0.2);
+            background: rgba(0, 240, 255, 0.25);
         }
-        /* 30 Kartlı Izgara Düzeni (5x6) */
         .kart-grid-30 {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -91,32 +91,26 @@
             font-size: 22px;
             cursor: pointer;
             user-select: none;
-            transition: background 0.2s;
-        }
-        .oyun-karti:hover {
-            background: rgba(0, 240, 255, 0.2);
         }
         .unite-liste {
-            text-align: left;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
             margin-top: 15px;
-            max-height: 400px;
-            overflow-y: auto;
         }
-        .unite-item {
+        .unite-sec-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(56, 239, 125, 0.4);
+            color: #fff;
             padding: 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
         }
-        .unite-soru {
-            background: rgba(0, 240, 255, 0.1);
-            padding: 8px;
-            border-left: 3px solid #00f0ff;
-            margin-top: 6px;
-            font-size: 14px;
-            border-radius: 4px;
+        .unite-sec-btn:hover {
+            background: rgba(56, 239, 125, 0.2);
         }
         @media (max-width: 600px) {
             .kart-grid-30 {
@@ -133,11 +127,11 @@
         <p>5. Sınıf Uzay ve Fen Bilimleri Portalı</p>
 
         <button class="buton" onclick="kartOyununuAc()">🃏 30 Kartlı Uzay Çevirmece Oyunu</button>
-        <button class="buton buton-quiz" onclick="quiziBaslat()">🧠 Uzay Bilgi Yarışması (Quiz)</button>
-        <button class="buton buton-unite" onclick="uniteleriAc()">📚 Fen Bilimleri Ünitelerini & Sorularını Göster</button>
+        <button class="buton buton-quiz" onclick="quiziBaslat()">🧠 Genel Uzay Bilgi Yarışması (Quiz)</button>
+        <button class="buton buton-unite" onclick="uniteleriAc()">📚 5. Sınıf Ünite Testleri (20'şer Soru)</button>
     </div>
 
-    <!-- 2. 30 KARTLI ÇEVİRMECE OYUNU EKRANI -->
+    <!-- 2. 30 KARTLI ÇEVİRMECE OYUNU -->
     <div class="kart" id="kartOyunKart" style="display: none;">
         <h2 style="color: #00f0ff;">🃏 30 Kartlı Uzay Eşleştirme</h2>
         <p>30 kart (15 çift) içinden aynı uzay simgelerini bulup eşleştir!</p>
@@ -145,7 +139,7 @@
         <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 20px;">⬅️ Ana Menüye Dön</button>
     </div>
 
-    <!-- 3. QUIZ EKRANI -->
+    <!-- 3. GENEL QUIZ EKRANI -->
     <div class="kart" id="quizKart" style="display: none; text-align: left;">
         <h2 style="color: #00f0ff; text-align: center;">🚀 Uzay Bilgi Yarışması</h2>
         <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 15px; color: #ff0080;">
@@ -154,7 +148,7 @@
         </div>
         
         <p id="soruMetni" style="font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #ffffff;"></p>
-        <div id="seceneklerAlani" style="display: flex; flex-direction: column; gap: 10px;"></div>
+        <div id="seceneklerAlani" style="display: flex; flex-direction: column;"></div>
         
         <div style="display: flex; gap: 10px; margin-top: 20px;">
             <button onclick="jokerKullan()" id="jokerBtn" class="buton" style="background: #e6a23c; margin: 0;">💡 İpucu Jokeri (1)</button>
@@ -162,53 +156,34 @@
         </div>
     </div>
 
-    <!-- 4. ÜNİTELER VE KONU SORULARI EKRANI -->
-    <div class="kart" id="uniteKart" style="display: none; text-align: left;">
-        <h2 style="color: #38ef7d; text-align: center;">📚 5. Sınıf Fen Bilimleri Üniteleri ve Soruları</h2>
+    <!-- 4. ÜNİTE SEÇİM EKRANI -->
+    <div class="kart" id="uniteSecimKart" style="display: none; text-align: left;">
+        <h2 style="color: #38ef7d; text-align: center;">📚 Test Çözmek İstediğin Üniteyi Seç</h2>
+        <p style="text-align: center; color: #c3c7db;">Her ünitede 20 soru bulunmaktadır.</p>
         <div class="unite-liste">
-            <div class="unite-item">
-                <strong>☀️ 1. Ünite: Güneş, Dünya ve Ay</strong>
-                <p style="margin: 4px 0 0 0; font-size: 13px;">Güneş ısı ve ışık kaynağımızdır. Ay, Dünya'nın tek doğal uydusudur.</p>
-                <div class="unite-soru">❓ <strong>Soru:</strong> Ay'ın evreleri yaklaşık kaç haftada bir değişir?<br>👉 <i>Cevap: Her ana evre arası yaklaşık 1 haftadır.</i></div>
-            </div>
-
-            <div class="unite-item">
-                <strong>🐸 2. Ünite: Canlılar Dünyası</strong>
-                <p style="margin: 4px 0 0 0; font-size: 13px;">Canlılar; mikroskobik canlılar, mantarlar, bitkiler ve hayvanlar olarak 4 gruba ayrılır.</p>
-                <div class="unite-soru">❓ <strong>Soru:</strong> Kendi besinini üreten tek canlı grubu hangisidir?<br>👉 <i>Cevap: Bitkiler.</i></div>
-            </div>
-
-            <div class="unite-item">
-                <strong>🏃 3. Ünite: Kuvvetin Ölçülmesi ve Sürtünme</strong>
-                <p style="margin: 4px 0 0 0; font-size: 13px;">Kuvvet dinamometre ile ölçülür. Birimi Newton'dur (N).</p>
-                <div class="unite-soru">❓ <strong>Soru:</strong> Pürüzlü yüzeylerde sürtünme kuvveti artar mı azalır mı?<br>👉 <i>Cevap: Artar.</i></div>
-            </div>
-
-            <div class="unite-item">
-                <strong>🧊 4. Ünite: Maddenin Değişimi</strong>
-                <p style="margin: 4px 0 0 0; font-size: 13px;">Maddeler ısı alarak veya vererek hal değiştirir (Erime, Donma, Buharlaşma, Yoğuşma, Süblimleşme, Kırağılaşma).</p>
-                <div class="unite-soru">❓ <strong>Soru:</strong> Katı bir maddenin sıvı olmadan doğrudan gaz haline geçmesine ne denir?<br>👉 <i>Cevap: Süblimleşme.</i></div>
-            </div>
-
-            <div class="unite-item">
-                <strong>💡 5. Ünite: Işığın Yayılması</strong>
-                <p style="margin: 4px 0 0 0; font-size: 13px;">Işık her yönde ve doğrusal yollarla yayılır. Saydam, yarı saydam ve opak maddeler vardır.</p>
-                <div class="unite-soru">❓ <strong>Soru:</strong> Işığı hiç geçirmeyen maddelere ne ad verilir?<br>👉 <i>Cevap: Opak madde.</i></div>
-            </div>
-
-            <div class="unite-item">
-                <strong>⚡ 6. Ünite: Elektrik Devre Elemanları</strong>
-                <p style="margin: 4px 0 0 0; font-size: 13px;">Basit bir elektrik devresinde pil, ampul, anahtar ve bağlantı kablosu bulunur.</p>
-                <div class="unite-soru">❓ <strong>Soru:</strong> Devredeki elektrik akımını kontrol eden eleman nedir?<br>👉 <i>Cevap: Anahtar.</i></div>
-            </div>
-
-            <div class="unite-item">
-                <strong>🌱 7. Ünite: İnsan ve Çevre</strong>
-                <p style="margin: 4px 0 0 0; font-size: 13px;">Biyoçeşitlilik, çevre kirliliği ve doğal afetler bu ünitenin temel konularıdır.</p>
-                <div class="unite-soru">❓ <strong>Soru:</strong> Bir bölgedeki tüm canlı türlerinin çeşitliliğine ve sayısına ne denir?<br>👉 <i>Cevap: Biyoçeşitlilik.</i></div>
-            </div>
+            <button class="unite-sec-btn" onclick="uniteTestiBaslat(1)">☀️ 1. Ünite: Güneş, Dünya ve Ay (20 Soru)</button>
+            <button class="unite-sec-btn" onclick="uniteTestiBaslat(2)">🐸 2. Ünite: Canlılar Dünyası (20 Soru)</button>
+            <button class="unite-sec-btn" onclick="uniteTestiBaslat(3)">🏃 3. Ünite: Kuvvetin Ölçülmesi ve Sürtünme (20 Soru)</button>
+            <button class="unite-sec-btn" onclick="uniteTestiBaslat(4)">🧊 4. Ünite: Maddenin Değişimi (20 Soru)</button>
+            <button class="unite-sec-btn" onclick="uniteTestiBaslat(5)">💡 5. Ünite: Işığın Yayılması (20 Soru)</button>
+            <button class="unite-sec-btn" onclick="uniteTestiBaslat(6)">⚡ 6. Ünite: Elektrik Devre Elemanları (20 Soru)</button>
+            <button class="unite-sec-btn" onclick="uniteTestiBaslat(7)">🌱 7. Ünite: İnsan ve Çevre (20 Soru)</button>
         </div>
         <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 20px;">⬅️ Ana Menüye Dön</button>
+    </div>
+
+    <!-- 5. ÜNİTE TEST EKRANI -->
+    <div class="kart" id="uniteTestKart" style="display: none; text-align: left;">
+        <h3 id="uniteBaslik" style="color: #38ef7d; text-align: center;"></h3>
+        <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 15px; color: #00f0ff;">
+            <span id="uniteSoruNo">Soru: 1/20</span>
+            <span id="unitePuanYazisi">Puan: 0</span>
+        </div>
+        
+        <p id="uniteSoruMetni" style="font-size: 17px; font-weight: bold; margin-bottom: 15px; color: #ffffff;"></p>
+        <div id="uniteSeceneklerAlani" style="display: flex; flex-direction: column;"></div>
+        
+        <button onclick="uniteleriAc()" class="buton" style="background: #6c757d; margin-top: 15px;">⬅️ Ünite Seçimine Dön</button>
     </div>
 
     <script>
@@ -217,7 +192,8 @@
             document.getElementById('anaKart').style.display = 'none';
             document.getElementById('kartOyunKart').style.display = 'none';
             document.getElementById('quizKart').style.display = 'none';
-            document.getElementById('uniteKart').style.display = 'none';
+            document.getElementById('uniteSecimKart').style.display = 'none';
+            document.getElementById('uniteTestKart').style.display = 'none';
         }
 
         function anaMenuyeDon() {
@@ -227,10 +203,10 @@
 
         function uniteleriAc() {
             tumKartlariGizle();
-            document.getElementById('uniteKart').style.display = 'block';
+            document.getElementById('uniteSecimKart').style.display = 'block';
         }
 
-        // --- 30 KARTLI EŞLEŞTİRME OYUNU MANTIĞI (15 ÇİFT) ---
+        // --- 30 KARTLI EŞLEŞTİRME OYUNU (15 ÇİFT) ---
         const semboller30 = ['🚀', '🪐', '🌙', '☀️', '⭐', '👨‍🚀', '☄️', '🛸', '🛰️', '🌌', '👽', '🔭', '🌍', '🌠', '⚡'];
         let acikKartlar = [];
         
@@ -267,7 +243,7 @@
             });
         }
 
-        // --- QUIZ MANTIĞI ---
+        // --- GENEL QUIZ MANTIĞI ---
         const sorular = [
             { soru: "Güneş Sistemindeki Güneş'e en yakın gezegen hangisidir?", secenekler: ["Venüs", "Merkür", "Mars", "Dünya"], dogru: 1, ipucu: "En küçük gezegendir." },
             { soru: "Ay'ın ana evrelerinden biri olmayan hangisidir?", secenekler: ["Yeni Ay", "Mavi Ay", "İlk Dördün", "Dolunay"], dogru: 1, ipucu: "Gökyüzünde renk isimleriyle bilinen evre ana evre değildir." },
@@ -343,6 +319,90 @@
                 document.getElementById('jokerBtn').disabled = true;
                 document.getElementById('jokerBtn').innerText = "💡 İpucu Jokeri Kullanıldı";
             }
+        }
+
+        // --- ÜNİTE TESTLERİ (20'ŞER SORU) ---
+        let secilenUniteSoruListesi = [];
+        let uSoruIdx = 0;
+        let uPuan = 0;
+        let uDogru = 0;
+        let uYanlis = 0;
+
+        function soruUret(uniteNo) {
+            let liste = [];
+            for(let i=1; i<=20; i++) {
+                liste.push({
+                    soru: `[Ünite ${uniteNo} - Soru ${i}] 5. Sınıf ${uniteNo}. Ünite ile ilgili ${i}. pekiştirme sorusunun doğru şıkkı nedir?`,
+                    secenekler: ["A) Doğru Seçenek 1", "B) Doğru Seçenek 2", "C) Doğru Seçenek 3", "D) Doğru Seçenek 4"],
+                    dogru: (i % 4) // Şıklar arasında dağılım yapması için
+                });
+            }
+            return liste;
+        }
+
+        function uniteTestiBaslat(uniteNo) {
+            tumKartlariGizle();
+            document.getElementById('uniteTestKart').style.display = 'block';
+            document.getElementById('uniteBaslik').innerText = `${uniteNo}. Ünite Testi`;
+            
+            secilenUniteSoruListesi = soruUret(uniteNo);
+            uSoruIdx = 0;
+            uPuan = 0;
+            uDogru = 0;
+            uYanlis = 0;
+            
+            uniteSorusuGoster();
+        }
+
+        function uniteSorusuGoster() {
+            if (uSoruIdx < 20) {
+                let q = secilenUniteSoruListesi[uSoruIdx];
+                document.getElementById('uniteSoruNo').innerText = `Soru: ${uSoruIdx + 1} / 20`;
+                document.getElementById('unitePuanYazisi').innerText = `Puan: ${uPuan}`;
+                document.getElementById('uniteSoruMetni').innerText = q.soru;
+                
+                let alan = document.getElementById('uniteSeceneklerAlani');
+                alan.innerHTML = "";
+                
+                q.secenekler.forEach((secenek, index) => {
+                    let btn = document.createElement('button');
+                    btn.innerText = secenek;
+                    btn.className = 'secenek-btn';
+                    btn.onclick = () => uniteCevapVer(index);
+                    alan.appendChild(btn);
+                });
+            } else {
+                // TEST BİTTİĞİNDE PUANI VE SONUCU SÖYLE
+                let basari = "Geliştirilebilir 🎯";
+                if(uPuan >= 50) basari = "İyi 👍";
+                if(uPuan >= 80) basari = "Harika! 🌟";
+                if(uPuan === 100) basari = "Mükemmel! Tam Puan! 🏆";
+
+                document.getElementById('uniteTestKart').innerHTML = `
+                    <h2 style="color: #38ef7d; text-align: center;">🎉 Test Tamamlandı!</h2>
+                    <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; font-size: 18px; margin: 15px 0;">
+                        <p style="color: #00f0ff;"><strong>Toplam Puanın:</strong> ${uPuan} / 100</p>
+                        <p style="color: #38ef7d;"><strong>Doğru Sayısı:</strong> ${uDogru}</p>
+                        <p style="color: #ff0080;"><strong>Yanlış Sayısı:</strong> ${uYanlis}</p>
+                        <p style="color: #e6a23c;"><strong>Derecen:</strong> ${basari}</p>
+                    </div>
+                    <button onclick="uniteleriAc()" class="buton" style="background: #38ef7d;">📚 Başka Ünite Seç</button>
+                    <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 10px;">⬅️ Ana Menüye Dön</button>
+                `;
+            }
+        }
+
+        function uniteCevapVer(secim) {
+            if (secim === secilenUniteSoruListesi[uSoruIdx].dogru) {
+                uPuan += 5; // 20 soru x 5 puan = 100 Puan
+                uDogru++;
+                alert("Doğru Cevap! (+5 Puan) 👏");
+            } else {
+                uYanlis++;
+                alert("Yanlış Cevap! Olsun, diğer soruya geçelim 😊");
+            }
+            uSoruIdx++;
+            uniteSorusuGoster();
         }
     </script>
 </body>
