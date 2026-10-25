@@ -42,501 +42,146 @@
             padding: 14px 24px;
             font-size: 16px;
             font-weight: bold;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
-            margin-top: 15px;
-            transition: all 0.3s ease;
             width: 100%;
-            box-shadow: 0 4px 15px rgba(255, 0, 128, 0.4);
+            margin-top: 12px;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
         .buton:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 0, 128, 0.6);
+            box-shadow: 0 5px 15px rgba(255, 0, 128, 0.4);
         }
-        .buton-uzay {
-            background: linear-gradient(90deg, #00f0ff, #0072ff);
-            box-shadow: 0 4px 15px rgba(0, 240, 255, 0.4);
-            margin-bottom: 15px;
+        .buton-quiz {
+            background: linear-gradient(90deg, #00f0ff, #7928ca);
         }
-        .gizli { display: none; margin-top: 25px; text-align: left; }
-        .unite {
-            margin-bottom: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 10px;
-            border-left: 4px solid #00f0ff;
-        }
-        .unite h3 { margin-top: 0; color: #00f0ff; font-size: 18px; }
-        ul { list-style-type: none; padding: 0; margin: 0; }
-        li { color: #e2e8f0; padding: 4px 0; font-size: 14px; }
-        .soru-buton {
-            background: linear-gradient(90deg, #10b981, #059669);
-            font-size: 14px;
-            padding: 10px 16px;
-            margin-top: 10px;
-            display: inline-block;
-            width: auto;
-            box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
-        }
-        .oyun-kutu {
-            background: rgba(15, 23, 42, 0.95);
-            padding: 20px;
-            border-radius: 12px;
-            border: 2px dashed #7928ca;
-            margin-top: 25px;
-            text-align: left;
-        }
-        .sonuc-bilgi {
-            margin-top: 8px;
-            font-size: 13px;
-            font-weight: bold;
-        }
-        
-        /* 30 KARTLI HAFİZA / KART ÇEVİRMECE STİLLERİ */
-        .uzay-oyun-kutu {
-            background: rgba(88, 28, 135, 0.3);
-            border: 2px solid #ff0080;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .kart-izgara {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-            max-height: 500px;
-            overflow-y: auto;
-            padding: 5px;
-        }
-        @media (max-width: 600px) {
-            .kart-izgara {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        .cevir-kart {
-            height: 90px;
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            border: 2px solid #00f0ff;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 13px;
-            font-weight: bold;
-            color: #ffffff;
+        .secenek-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.4);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
             cursor: pointer;
-            user-select: none;
-            transition: transform 0.3s, background 0.3s;
-            padding: 5px;
-            text-align: center;
+            font-size: 16px;
+            text-align: left;
+            transition: all 0.2s;
         }
-        .cevir-kart:hover {
-            transform: scale(1.05);
-            border-color: #ff0080;
+        .secenek-btn:hover {
+            background: rgba(0, 240, 255, 0.2);
         }
-        .cevir-kart.acik {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            border-color: #38bdf8;
-        }
-        .cevir-kart.eslesmis {
-            background: linear-gradient(135deg, #059669, #10b981) !important;
-            border-color: #34d399 !important;
-            cursor: default;
-            opacity: 0.8;
-        }
-        label { color: #f1f5f9; display: block; margin: 6px 0; cursor: pointer; }
     </style>
 </head>
 <body>
-    <div class="kart">
+
+    <!-- ANA MENÜ KARTI -->
+    <div class="kart" id="anaKart">
         <h1>ASTROFEN 🚀</h1>
-        <p>5. Sınıf Uzay ve Fen Bilimleri Oyunu</p>
-        
-        <button id="uzayOyunButon" class="buton buton-uzay">🃏 30 Kartlı Uzay Çevirmece Oyunu</button>
-        <button id="anaButon" class="buton">📚 Fen Bilimleri Ünitelerini Göster</button>
+        <p>5. Sınıf Uzay ve Fen Bilimleri Portalı</p>
 
-        <!-- 30 KART ÇEVİRMECE OYUNU -->
-        <div id="uzayOyunAlani" class="gizli uzay-oyun-kutu">
-            <h2 style="color: #ff0080; margin-top: 0;">🌌 30 Kartlı Uzay Çevirmece & Hafıza Oyunu</h2>
-            <p>Kartlara tıkla, uzay terimleri ile eşlerini bulup 15 çifti tamamla!</p>
-            <div id="kartIzgaraAlani" class="kart-izgara"></div>
-            <button onclick="uzayOyunSifirla()" class="buton" style="margin-top: 15px;">Oyunu Yeniden Başlat 🔄</button>
-            <button onclick="uzayOyunKapat()" class="buton" style="background: #475569; margin-top: 10px;">Oyundan Çık ↩️</button>
-            <div id="uzaySkor" style="margin-top: 15px; font-weight: bold; font-size: 18px; color: #00f0ff;"></div>
+        <!-- Oyun Butonları -->
+        <button class="buton" id="uzayOyunButon">🃏 30 Kartlı Uzay Çevirmece Oyunu</button>
+        <button class="buton buton-quiz" onclick="quiziBaslat()">🧠 Uzay Bilgi Yarışması (Quiz)</button>
+        <button class="buton">📚 Fen Bilimleri Ünitelerini Göster</button>
+    </div>
+
+    <!-- QUIZ EKRANI (Başlangıçta Gizli) -->
+    <div class="kart" id="quizKart" style="display: none; text-align: left;">
+        <h2 style="color: #00f0ff; text-align: center;">🚀 Uzay Bilgi Yarışması</h2>
+        <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 15px; color: #ff0080;">
+            <span id="puanYazisi">Puan: 0</span>
+            <span id="unvanYazisi">Unvan: Çaylak Astronot 👨‍🚀</span>
         </div>
-
-        <!-- ÜNİTE LİSTESİ -->
-        <div id="konuListesi" class="gizli">
-            <h2>5. Sınıf Fen Bilimleri - Tüm Üniteler (1'den 7'ye)</h2>
-
-            <div class="unite">
-                <h3>1. Ünite: Güneş, Dünya ve Ay</h3>
-                <ul><li>Güneş, Ay ve Dünya'nın özellikleri, evreleri ve hareketleri</li></ul>
-                <button onclick="oyunuAc(1)" class="buton soru-buton">🎮 1. Ünite Testini Çöz</button>
-            </div>
-
-            <div class="unite">
-                <h3>2. Ünite: Canlılar Dünyası</h3>
-                <ul><li>Mikroskobik canlılar, mantarlar, bitkiler ve hayvanlar</li></ul>
-                <button onclick="oyunuAc(2)" class="buton soru-buton">🎮 2. Ünite Testini Çöz</button>
-            </div>
-
-            <div class="unite">
-                <h3>3. Ünite: Kuvvetin Uygulanması</h3>
-                <ul><li>Kuvvet, dinamometre ve sürtünme kuvveti</li></ul>
-                <button onclick="oyunuAc(3)" class="buton soru-buton">🎮 3. Ünite Testini Çöz</button>
-            </div>
-
-            <div class="unite">
-                <h3>4. Ünite: Madde ve Değişim</h3>
-                <ul><li>Hal değişimi, ısı, sıcaklık, genleşme ve büzülme</li></ul>
-                <button onclick="oyunuAc(4)" class="buton soru-buton">🎮 4. Ünite Testini Çöz</button>
-            </div>
-
-            <div class="unite">
-                <h3>5. Ünite: Işığın Yayılması</h3>
-                <ul><li>Işığın yayılması, yansıması ve tam gölge</li></ul>
-                <button onclick="oyunuAc(5)" class="buton soru-buton">🎮 5. Ünite Testini Çöz</button>
-            </div>
-
-            <div class="unite">
-                <h3>6. Ünite: İnsan ve Çevre</h3>
-                <ul><li>Biyoçeşitlilik ve çevre sorunları</li></ul>
-                <button onclick="oyunuAc(6)" class="buton soru-buton">🎮 6. Ünite Testini Çöz</button>
-            </div>
-
-            <div class="unite">
-                <h3>7. Ünite: Elektrik Devre Elemanları</h3>
-                <ul><li>Basit elektrik devreleri ve ampul parlaklığı</li></ul>
-                <button onclick="oyunuAc(7)" class="buton soru-buton">🎮 7. Ünite Testini Çöz</button>
-            </div>
-
-            <!-- TEST ÇÖZME ALANI -->
-            <div id="oyunAlani" class="gizli oyun-kutu">
-                <h3 id="oyunBaslik" style="color: #00f0ff;">20 Soruluk Fen Bilimleri Testi</h3>
-                <div id="soruKutusu" style="max-height: 500px; overflow-y: auto; padding-right: 10px;"></div>
-                <button onclick="cevabiKontrolEt()" class="buton" style="background: linear-gradient(90deg, #10b981, #059669); margin-top: 15px;">Sonuçları Gör ve Puanını Hesapla 🎯</button>
-                <button onclick="oyunuKapat()" class="buton" style="background: #475569; margin-top: 10px;">Testi Kapat ↩️</button>
-                
-                <div id="skorYazisi" style="font-weight: bold; margin-top: 20px; font-size: 16px; line-height: 1.6; background: rgba(15, 23, 42, 0.9); padding: 15px; border-radius: 8px; border: 2px solid #10b981; display: none;"></div>
-            </div>
+        
+        <p id="soruMetni" style="font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #ffffff;"></p>
+        <div id="seceneklerAlani" style="display: flex; flex-direction: column; gap: 10px;"></div>
+        
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <button onclick="jokerKullan()" id="jokerBtn" class="buton" style="background: #e6a23c; margin: 0;">💡 İpucu Jokeri (1)</button>
+            <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin: 0;">⬅️ Ana Menüye Dön</button>
         </div>
     </div>
 
     <script>
-        document.getElementById("anaButon").onclick = function() {
-            var liste = document.getElementById("konuListesi");
-            if (liste.style.display === "block") {
-                liste.style.display = "none";
-                this.innerText = "📚 Fen Bilimleri Ünitelerini Göster";
-            } else {
-                liste.style.display = "block";
-                this.innerText = "📚 Üniteleri Gizle";
-            }
-        };
-
-        document.getElementById("uzayOyunButon").onclick = function() {
-            var alan = document.getElementById("uzayOyunAlani");
-            if (alan.style.display === "block") {
-                alan.style.display = "none";
-            } else {
-                alan.style.display = "block";
-                uzayOyunSifirla();
-            }
-        };
-
-        // 30 KARTLI (15 ÇİFT) ÇEVİRMECE OYUNU VERİLERİ
-        const ciftler = [
-            { id: 1, terim: "Kızıl Gezegen", es: "Mars" },
-            { id: 2, terim: "Isı & Işık Kaynağı", es: "Güneş" },
-            { id: 3, terim: "Dünya'nın Uydusu", es: "Ay" },
-            { id: 4, terim: "En Büyük Gezegen", es: "Jüpiter" },
-            { id: 5, terim: "Halkalı Gezegen", es: "Satürn" },
-            { id: 6, terim: "En Yakın Gezegen", es: "Merkür" },
-            { id: 7, terim: "Ay Çukurları", es: "Krater" },
-            { id: 8, terim: "Dönüş Yönü", es: "Batıdan Doğuya" },
-            { id: 9, terim: "Sıcak Katman", es: "Çekirdek" },
-            { id: 10, terim: "Karanlık Evre", es: "Yeni Ay" },
-            { id: 11, terim: "D Şeklindeki Evre", es: "İlk Dördün" },
-            { id: 12, terim: "Yuvarlak Işıklı Evre", es: "Dolunay" },
-            { id: 13, terim: "Ters D Evresi", es: "Son Dördün" },
-            { id: 14, terim: "Ay Döngü Süresi", es: "29.5 Gün" },
-            { id: 15, terim: "Güneş Şekli", es: "Küre" }
+        const sorular = [
+            { soru: "Güneş Sistemindeki Güneş'e en yakın gezegen hangisidir?", secenekler: ["Venüs", "Merkür", "Mars", "Dünya"], dogru: 1, ipucu: "En küçük gezegendir." },
+            { soru: "Ay'ın ana evrelerinden biri olmayan hangisidir?", secenekler: ["Yeni Ay", "Mavi Ay", "İlk Dördün", "Dolunay"], dogru: 1, ipucu: "Gökyüzünde renk isimleriyle bilinen evre ana evre değildir." },
+            { soru: "Dünya'mızın tek doğal uydusu aşağıdakilerden hangisidir?", secenekler: ["Güneş", "Ay", "Mars", "Jüpiter"], dogru: 1, ipucu: "Geceleri gökyüzünü aydınlatan komşumuz." },
+            { soru: "Güneş Sisteminin en büyük gezegeni hangisidir?", secenekler: ["Satürn", "Jüpiter", "Neptün", "Uranüs"], dogru: 1, ipucu: "Dev gaz gezegenidir." },
+            { soru: "Sürtünme kuvveti hareketi nasıl etkiler?", secenekler: ["Hızlandırır", "Yavaşlatır/Durdurur", "Etkilemez", "Yönünü değiştirmez"], dogru: 1, ipucu: "Hareketin tersi yönünde etki eder." }
         ];
 
-        let kartDizisi = [];
-        let secilenKartlar = [];
-        let eslesmeSayisi = 0;
-        let kilitli = false;
+        let aktifSoru = 0;
+        let puan = 0;
+        let jokerHakki = 1;
 
-        function uzayOyunSifirla() {
-            kartDizisi = [];
-            secilenKartlar = [];
-            eslesmeSayisi = 0;
-            kilitli = false;
-            document.getElementById("uzaySkor").innerText = "Bulunan Çift: 0 / 15";
-
-            ciftler.forEach(c => {
-                kartDizisi.push({ ciftId: c.id, metin: c.terim });
-                kartDizisi.push({ ciftId: c.id, metin: c.es });
-            });
-            kartDizisi.sort(() => Math.random() - 0.5);
-
-            let html = "";
-            kartDizisi.forEach((k, idx) => {
-                html += `<div class="cevir-kart" id="kart-${idx}" onclick="kartTikla(${idx})">❓ FENX</div>`;
-            });
-            document.getElementById("kartIzgaraAlani").innerHTML = html;
+        function quiziBaslat() {
+            document.getElementById('anaKart').style.display = 'none';
+            document.getElementById('quizKart').style.display = 'block';
+            aktifSoru = 0;
+            puan = 0;
+            jokerHakki = 1;
+            document.getElementById('jokerBtn').disabled = false;
+            document.getElementById('jokerBtn').innerText = "💡 İpucu Jokeri (1)";
+            soruyuGoster();
         }
 
-        function kartTikla(idx) {
-            if (kilitli) return;
-            let el = document.getElementById(`kart-${idx}`);
-            if (el.classList.contains("acik") || el.classList.contains("eslesmis")) return;
-
-            el.classList.add("acik");
-            el.innerText = kartDizisi[idx].metin;
-            secilenKartlar.push({ index: idx, veri: kartDizisi[idx] });
-
-            if (secilenKartlar.length === 2) {
-                kilitli = true;
-                setTimeout(kontrolEtHafiza, 800);
-            }
+        function unvanGuncelle() {
+            let unvan = "Çaylak Astronot 👨‍🚀";
+            if(puan >= 20) unvan = "Uzay Kaşifi 🛰️";
+            if(puan >= 40) unvan = "Galaksi Kaptanı 🚀";
+            if(puan >= 50) unvan = "Evrenin Profesörü 🌟";
+            document.getElementById('unvanYazisi').innerText = "Unvan: " + unvan;
         }
 
-        function kontrolEtHafiza() {
-            let [k1, k2] = secilenKartlar;
-            let el1 = document.getElementById(`kart-${k1.index}`);
-            let el2 = document.getElementById(`kart-${k2.index}`);
-
-            if (k1.veri.ciftId === k2.veri.ciftId) {
-                el1.classList.add("eslesmis");
-                el2.classList.add("eslesmis");
-                eslesmeSayisi++;
-                document.getElementById("uzaySkor").innerText = `Bulunan Çift: ${eslesmeSayisi} / 15`;
-                if (eslesmeSayisi === 15) {
-                    document.getElementById("uzaySkor").innerText = "🎉 TEBRİKLER! Tüm 30 Kartı Başarıyla Eşleştirdin! 🏆";
-                }
+        function soruyuGoster() {
+            if (aktifSoru < sorular.length) {
+                let q = sorular[aktifSoru];
+                document.getElementById('soruMetni').innerText = (aktifSoru + 1) + ". " + q.soru;
+                let alan = document.getElementById('seceneklerAlani');
+                alan.innerHTML = "";
+                
+                q.secenekler.forEach((secenek, index) => {
+                    let btn = document.createElement('button');
+                    btn.innerText = secenek;
+                    btn.className = 'secenek-btn';
+                    btn.onclick = () => cevapVer(index);
+                    alan.appendChild(btn);
+                });
+                document.getElementById('puanYazisi').innerText = "Puan: " + puan;
+                unvanGuncelle();
             } else {
-                el1.classList.remove("acik");
-                el2.classList.remove("acik");
-                el1.innerText = "❓ FENX";
-                el2.innerText = "❓ FENX";
-            }
-            secilenKartlar = [];
-            kilitli = false;
-        }
-
-        function uzayOyunKapat() {
-            document.getElementById("uzayOyunAlani").style.display = "none";
-        }
-
-        // 1'DEN 7'YE BÜTÜN ÜNİTE TESTLERİ
-        function oyunuAc(uniteNo) {
-            var oyunAlani = document.getElementById("oyunAlani");
-            oyunAlani.style.display = "block";
-            document.getElementById("oyunBaslik").innerText = uniteNo + ". Ünite - 20 Soruluk Fen Bilimleri Testi";
-            
-            var skorKutusu = document.getElementById("skorYazisi");
-            skorKutusu.style.display = "none";
-            skorKutusu.innerHTML = "";
-            
-            let sorular = [];
-            let seceneklerA = [], seceneklerB = [], seceneklerC = [], seceneklerD = [];
-            let dogruCevaplar = [];
-
-            if (uniteNo === 1) {
-                sorular = [
-                    "Güneş'in katmanları içinde en sıcak katman hangisidir?", "Ay'ın ana evrelerinden biri aşağıdakilerden hangisidir?",
-                    "Aşağıdakilerden hangisi Güneş'in özelliklerinden biridir?", "Ay'ın Dünya etrafındaki dolanım süresi yaklaşık ne kadardır?",
-                    "Güneş'in şekli aşağıdakilerden hangisine benzer?", "Ay yüzeyindeki büyük çukurlara ne ad verilir?",
-                    "Güneş, Dünya'mıza en yakın nedir?", "Ay kendi etrafındaki dönme hareketini ne kadar sürede tamamlar?",
-                    "Dünya'nın tek doğal uydusu hangisidir?", "Aşağıdakilerden hangisi Ay'ın ara evresidir?",
-                    "Güneş kendi ekseni etrafında hangi yöne döner?", "Ay'ın atmosferi ile ilgili aşağıdakilerden hangisi söylenebilir?",
-                    "Güneş'in büyüklüğü Dünya ile karşılaştırıldığında nasıldır?", "İlk dördün evresinden yaklaşık bir hafta sonra hangi evre görülür?",
-                    "Ay'ın ışık kaynağı durumu nasıldır?", "Güneş tutulması hangi evrede gerçekleşir?",
-                    "Ay'ın Dünya'dan bakıldığında hep aynı yüzünün görülmesinin sebebi nedir?", "Yeni ay evresinden sonra görülen ilk ana evre hangisidir?",
-                    "Güneş'in yapısında en çok bulunan gaz hangisidir?", "Ay'ın ana evrelerinin tamamı kaç günde bir tekrarlanır?"
-                ];
-                seceneklerA = ["Işık küre", "Hilal", "Isı ve ışık yayar", "24 saat", "Küp", "Krater", "Yıldız", "24 saat", "Güneş", "Hilal", "Doğudan batıya", "Çok kalındır", "Dünya'dan küçüktür", "Dolunay", "Kendi ışığı vardır", "Yeni ay", "Kendi etrafında dönmez", "Hilal", "Oksijen", "29.5 gün"];
-                seceneklerB = ["Çekirdek", "Dolunay", "Dünyanın uydusudur", "1 hafta", "Küre", "Dağ", "Gezegen", "1 ay", "Yıldız", "Şişkin ay", "Batıdan doğuya", "Yok denecek kadar azdır", "Dünya'dan çok büyüktür", "Son dördün", "Güneş'ten aldığı ışığı yansıtır", "Dolunay", "Dönme ve dolanma sürelerinin eşit olması", "İlk dördün", "Hidrojen", "7 gün"];
-                seceneklerC = ["Renk küre", "Şişkin ay", "Atmosferi kalındır", "29.5 gün", "Silindir", "Vadi", "Uydu", "1 yıl", "Ay", "Yeni ay", "Kuzeyden güneye", "Su buharı doludur", "Dünya ile aynı boyuttadır", "Yeni ay", "Soğuk bir ışıktır", "Son dördün", "Sadece dolunayda görünmesi", "Dolunay", "Helyum", "15 gün"];
-                seceneklerD = ["Taç küre", "Son hilal", "Üzerinde su bulunur", "365 gün", "Düz", "Tepe", "Meteor", "12 saat", "Mars", "Hiçbiri", "Hareketsizdir", "Hava tabakası yoktur", "Dünya'dan küçüktür", "Hilal", "Hiç ışık yaymaz", "İlk dördün", "Dünya'nın uydusu olmaması", "Son dördün", "Karbondioksit", "365 gün"];
-                dogruCevaplar = ["B","B","A","C","B","A","A","B","C","A","B","B","B","A","B","A","A","B","B","A"];
-            } else if (uniteNo === 2) {
-                sorular = [
-                    "Mikroskobik canlılar hangi araçla gözlemlenebilir?", "Şapkalı mantarlar canlıların hangi grubuna girer?",
-                    "Aşağıdakilerden hangisi çiçeksiz bir bitkidir?", "Sütten yoğurt ve peynir yapımını sağlayan canlı türü hangisidir?",
-                    "Aşağıdakilerden hangisi omurgalı bir hayvandır?", "Kök, gövde ve yaprakları gelişmiş bitkilere ne ad verilir?",
-                    "Mantarlar kendi besinlerini üretebilir mi?", "Aşağıdakilerden hangisi mikroskobik canlıların yol açtığı bir hastalıktır?",
-                    "Kara mantarları veya şapkalı mantarlar hangi gruba dahildir?", "Çiçekli bitkilerin üremesini sağlayan temel yapı nedir?",
-                    "Aşağıdakilerden hangisi omurgasız bir hayvandır?", "Küf mantarları nerede yetişir?",
-                    "Bakteriler hangi canlı grubuna girer?", "Aşağıdakilerden hangisi bitkilerin yaşaması için gerekli değildir?",
-                    "Kurbağalar hangi omurgalı grubuna dahildir?", "Mayalanma olayını gerçekleştiren mikroskobik canlı hangisidir?",
-                    "Yosunlar hangi bitki grubuna girer?", "Hangisi mantar türlerinden biri değildir?",
-                    "Sürüngenler grubuna giren hayvan hangisidir?", "Canlıların en küçük yapı birimi nedir?"
-                ];
-                seceneklerA = ["Teleskop", "Bitki", "Elma ağacı", "Bakteri", "Kelebek", "Çiçeksiz bitki", "Evet, üretir", "Grip", "Maya mantarları", "Kök", "Kedi", "Nemli ve besin olan yerlerde", "Mikroskobik canlılar", "Güneş ışığı", "Memeliler", "Maya mantarı", "Çiçekli bitki", "Maya mantarı", "Kurbağa", "Organ"];
-                seceneklerB = ["Büyüteç", "Mantar", "Eğrelti otu", "Sütten yoğurt yapan yararlı bakteri", "Balık", "Çiçekli bitki", "Hayır, hazır alır", "Nezle", "Şapkalı mantarlar", "Çiçek", "Solucan", "Kurak ve sıcak çöllerde", "Bitkiler", "Su", "Sürüngenler", "Bakteri", "Çiçeksiz bitki", "Şapkalı mantar", "Yılan", "Doku"];
-                seceneklerC = ["Mikroskop", "Hayvan", "Gül", "Virüs", "Yılan", "Tohumlu bitki", "Kendi ışığıyla beslenir", "Verem", "Küf mantarları", "Yaprak", "Serçe", "Derin okyanus tabanında", "Hayvanlar", "Toprak", "Amfibiler (İki yaşamlılar)", "Virüs", "Tohumlu bitki", "Küf mantarı", "Balina", "Hücre"];
-                seceneklerD = ["Dürbün", "Mikroskobik canlı", "Papatya", "Mantarlar", "Kuş", "Tek hücreli bitki", "Güneş enerjisiyle yapar", "Hepsi", "Parazit mantarlar", "Gövde", "İnek", "Buzulların üzerinde", "Mantarlar", "Karanlık", "Kuşlar", "Amip", "Ağaç", "Aslan mantarı", "Yarasa", "Sistem"];
-                dogruCevaplar = ["C","B","B","B","B","B","B","D","C","B","B","A","A","D","C","B","B","D","B","C"];
-            } else if (uniteNo === 3) {
-                sorular = [
-                    "Kuvvetin büyüklüğünü ölçmek için kullanılan araç hangisidir?", "Dinamometrelerin yapısında ne kullanılır?",
-                    "Kuvvetin birimi aşağıdakilerden hangisidir?", "Dinamometreler hangi ilkeye göre çalışır?",
-                    "Dinamometreye çok büyük bir kuvvet uygulanırsa ne olur?", "Sürtünme kuvveti hareket yönüne göre nasıldır?",
-                    "Aşağıdakilerden hangisinde sürtünme kuvveti işimizi kolaylaştırır?", "Aşağıdakilerden hangisi sürtünmeyi azaltmak için yapılır?",
-                    "Buzlu yollara kum serpilmesinin temel amacı nedir?", "Hangi yüzeyde sürtünme kuvveti en azdır?",
-                    "Dinamometredeki esneklik sınırı aşılırsa ne olur?", "Aşağıdakilerden hangisinde sürtünme kuvveti zararlıdır?",
-                    "Yazı yazarken kalemin kağıtta tutunmasını sağlayan kuvvet nedir?", "Aşağıdakilerden hangisi temas gerektiren bir kuvvettir?",
-                    "Aşağıdakilerden hangisi temas gerektirmeyen bir kuvvettir?", "Hava direnci hareket yönüne göre hangi yöndedir?",
-                    "Su direnci ile ilgili hangisi doğrudur?", "Uçakların burun kısmının sivri tasarlanması neyi sağlar?",
-                    "Kuvvet cisimler üzerinde hangi etkiyi yapamaz?", "Pürüzlü yüzeylerde sürtünme kuvveti nasıldır?"
-                ];
-                seceneklerA = ["Dinamometre", "Esnek yay", "Newton", "Yayların esnekliği", "Yay bozulur", "Zıt yöndedir", "Yazı yazmak", "Makineleri yağlamak", "Sürtünmeyi artırmak", "Buzlu zemin", "Ölçüm bozulur", "Motor parçalarının aşınması", "Sürtünme kuvveti", "Rüzgar gücü", "Yerçekimi", "Zıt yöndedir", "Hareketi yavaşlatır", "Hava direncini azaltmak", "Kütleyi değiştirmek", "Çok fazladır"];
-                seceneklerB = ["Termometre", "Bakır tel", "Kilogram", "Kütle korunumu", "Hiçbir şey olmaz", "Aynı yöndedir", "Buzda kaymak", "Zımpara yapmak", "Sürtünmeyi azaltmak", "Halı zemin", "Daha iyi ölçer", "Fren yapmak", "Yerçekimi", "Manyetik kuvvet", "Rüzgarın itmesi", "Aynı yöndedir", "Hareketi hızlandırır", "Sürtünmeyi artırmak", "Şekil değiştirmek", "Çok azdır"];
-                seceneklerC = ["Baskül", "İp", "Joule", "Yerçekimi", "Daha hassas olur", "Dik açılıdır", "Buzda düşmek", "Kum serpmek", "Hızlanmak", "Toprak zemin", "Rengi değişir", "Yürümek", "Elektrik", "Yerçekimi", "İp çekmek", "Yukarı doğrudur", "Etkisi yoktur", "Ağırlığı artırmak", "Hızlandırmak", "Sıfırdır"];
-                seceneklerD = ["Metre", "Plastik çubuk", "Metre", "Genleşme", "Genişler", "Yönü yoktur", "Kutu sürüklemek", "Pürüz artırmak", "Güzelleşmek", "Asfalt zemin", "Küçülür", "Paraşüt açmak", "Mıknatıs", "Elektrik kuvveti", "Topa vurmak", "Aşağı doğrudur", "Isı üretmez", "Ağırlığı azaltmak", "Yön değiştirmek", "Değişkendir"];
-                dogruCevaplar = ["A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A"];
-            } else if (uniteNo === 4) {
-                sorular = [
-                    "Maddenin doğada en yaygın halleri hangileridir?", "Katı maddenin sıvı hale geçmesine ne denir?",
-                    "Aşağıdakilerden hangisi erimeye örnektir?", "Sıvının ısı alarak gaz hale geçmesine ne denir?",
-                    "Gazın ısı vererek sıvı hale geçmesine ne denir?", "Katının doğrudan gaz hale geçmesine ne denir?",
-                    "Aşağıdakilerden hangisi donmaya örnektir?", "Isı ile sıcaklık aynı kavram mıdır?",
-                    "Sıcaklık ne ile ölçülür?", "Sıcaklık birimi hangisidir?",
-                    "Isı alışverişi hangi maddeler arasında olur?", "Isı alan katının hacminin artmasına ne denir?",
-                    "Isı veren maddenin hacminin azalmasına ne denir?", "Aşağıdakilerden hangisi genleşmeye örnektir?",
-                    "Termometredeki cıvanın yükselmesi neye örnektir?", "Yazın elektrik tellerinin sarkması neyin sonucudur?",
-                    "Gazın doğrudan katı hale geçmesine ne denir?", "Kaynama ile buharlaşma farkı nedir?",
-                    "Erime sırasında maddenin sıcaklığı ne olur?", "Isı alışverişi ne zamana kadar devam eder?"
-                ];
-                seceneklerA = ["Katı, Sıvı, Gaz", "Erime", "Buzun erimesi", "Buharlaşma", "Yoğunlaşma", "Süblimleşme", "Suyun buz tutması", "Farklı kavramlardır", "Termometre", "Celsius (°C)", "Sıcaklığı farklı maddelerde", "Genleşme", "Büzülme", "Elektrik tellerinin sarkması", "Genleşme", "Genleşme", "Kırağılaşma", "Kaynama belirli sıcaklıkta olur", "Sabit kalır", "Sıcaklıklar eşitleninceye kadar"];
-                seceneklerB = ["Sadece katı", "Donma", "Suyun kaynaması", "Yoğunlaşma", "Buharlaşma", "Yoğunlaşma", "Demirin erimesi", "Aynı kavramlardır", "Dinamometre", "Joule", "Sıcaklığı aynı maddelerde", "Büzülme", "Genleşme", "Tellerin gerilmesi", "Büzülme", "Büzülme", "Süblimleşme", "Fark yoktur", "Artar", "Sonsuza kadar"];
-                seceneklerC = ["Sadece sıvı", "Buharlaşma", "Naftalinin uçması", "Erime", "Erime", "Donma", "Ateş yakılması", "İkisi de kuvvettir", "Barometre", "Newton", "Katı ile gaz arasında", "Erime", "Erime", "Buz tutması", "Donma", "Donma", "Erime", "İkisi de aynıdır", "Azalır", "1 saat boyunca"];
-                seceneklerD = ["Plazma", "Yoğunlaşma", "Yağmur yağması", "Donma", "Süblimleşme", "Erime", "Kolonyanın uçması", "Sıcaklık bir enerjidir", "Metre", "Kilogram", "Tüm maddelerde", "Donma", "Donma", "Yağmur yağması", "Yoğunlaşma", "Erime", "Yoğunlaşma", "Sadece gazlarda olur", "Sıfırlanır", "Kütle eşitlenince"];
-                dogruCevaplar = ["A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A"];
-            } else if (uniteNo === 5) {
-                sorular = [
-                    "Işık nasıl yayılır?", "Aşağıdakilerden hangisi doğal ışık kaynağıdır?",
-                    "Işık ışınlarının yayıldığını gösteren çizgilere ne denir?", "Işığı geçirmeyen maddelere ne denir?",
-                    "Işığın tamamını geçiren maddelere ne denir?", "Işığın bir kısmını geçiren maddelere ne denir?",
-                    "Aşağıdakilerden hangisi saydam maddedir?", "Aşağıdakilerden hangisi opak maddedir?",
-                    "Pürüzlü yüzeyde oluşan yansımaya ne denir?", "Pürüzsüz yüzeyde oluşan yansımaya ne denir?",
-                    "Aynada oluşan görüntü hangi yansıma ile olur?", "Işığın engelle karşılaşmasıyla oluşan karanlığa ne denir?",
-                    "Tam gölge oluşumu için hangisi gereklidir?", "Cisim ışık kaynağına yaklaşırsa gölge nasıl değişir?",
-                    "Güneş tutulması neyin sonucudur?", "Aşağıdakilerden hangisi yapay ışık kaynağıdır?",
-                    "Işık hızı sese göre nasıldır?", "Yansıma kanununa göre gelme açısı neye eşittir?",
-                    "Aşağıdakilerden hangisi yarı saydam maddedir?", "Gölgenin boyu ne zaman en kısa olur?"
-                ];
-                seceneklerA = ["Doğrusal yollarla", "Güneş", "Işık ışını", "Opak", "Saydam", "Yarı saydam", "Cam", "Tahta", "Dağınık yansıma", "Düzgün yansıma", "Düzgün yansıma", "Tam gölge", "Opak cisim ve ışık kaynağı", "Büyür", "Tam gölge", "El feneri", "Çok daha hızlıdır", "Yansıma açısına", "Yağlı kağıt", "Öğle vakti"];
-                seceneklerB = ["Eğrisel yollarla", "Ampul", "Işık demeti", "Saydam", "Yarı saydam", "Opak", "Tahta", "Cam", "Düzgün yansıma", "Dağınık yansıma", "Dağınık yansıma", "Yarım gölge", "Sadece perde", "Küçülür", "Yansıma", "Güneş", "Yavaştır", "Geldiği açıya", "Cam", "Sabah vakti"];
-                seceneklerC = ["Dairesel yollarla", "Mum", "Işık dalgası", "Yarı saydam", "Opak", "Saydam", "Karton", "Hava", "Soğurma", "Kırılma", "Kırılma", "Yansıma", "Sadece su", "Değişmez", "Kırılma", "Yıldız", "Eşittir", "Normal açısına", "Tahta", "Akşam vakti"];
-                seceneklerD = ["Spiralle", "Televizyon", "Çizgi", "Renkli cam", "Renkli cam", "Opak", "Taş", "Su", "Kırılma", "Soğurma", "Soğurma", "Kırılma", "Ayna", "Sıfırlanır", "Genleşme", "Ateş böceği", "Değişkendir", "Tepe açısına", "Karton", "Gece vakti"];
-                dogruCevaplar = ["A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A"];
-            } else if (uniteNo === 6) {
-                sorular = [
-                    "Bir bölgedeki canlı türlerinin çeşitliliğine ne denir?", "Aşağıdakilerden hangisi biyoçeşitliliği olumsuz etkiler?",
-                    "Ülkemizde nesli tükenmiş canlı hangisidir?", "Hangisi ülkemizde koruma altında olan endemik bitkidir?",
-                    "Aşağıdakilerden hangisi çevre kirliliğine yol açar?", "Geri dönüşümün amacı nedir?",
-                    "Hangisi temiz (yenilenebilir) enerji kaynağıdır?", "Ormanların tahrip edilmesine ne denir?",
-                    "Küresel ısınmanın ana sebebi nedir?", "Su kirliliğini önlemek için ne yapılmalıdır?",
-                    "Plastiklerin doğada yok olma süresi nasıldır?", "Biyoçeşitliliği korumak için ne yapılmalıdır?",
-                    "Nesli tehlikede olan deniz canlımız hangisidir?", "Aşağıdakilerden hangisi toprak kirliliğini artırır?",
-                    "Hava kirliliğini azaltmak için ne yapılmalıdır?", "Sadece belirli bölgede yetişen canlıya ne denir?",
-                    "Hangisi evsel atık örneğidir?", "Sanayi atıklarının suya karışması neye sebep olur?",
-                    "Doğal dengenin bozulmasında en büyük etken kimdir?", "Ağaç dikmek çevreye nasıl katkı sağlar?"
-                ];
-                seceneklerA = ["Biyoçeşitlilik", "Aşırı avlanma", "Anadolu parsı", "Ters lale", "Fabrika atıkları", "Atıkları yeniden değerlendirmek", "Güneş enerjisi", "Ormansızlaşma", "Sera gazları ve hava kirliliği", "Arıtma tesisleri kurmak", "Çok uzundur", "Milli parklar oluşturmak", "Akdeniz foku", "Aşırı kimyasal gübre", "Toplu taşıma kullanmak", "Endemik tür", "Plastik şişe", "Su kirliliği", "İnsanlar", "Erozyonu önler ve havayı temizler"];
-                seceneklerB = ["Popülasyon", "Ağaç dikmek", "Kutup ayısı", "Gül", "Geri dönüşüm", "Çöp biriktirmek", "Kömür", "Ağaçlandırma", "Ağaç dikmek", "Çöp atmak", "Çok kısadır", "Ormanları kesmek", "Köpekbalığı", "Geri dönüşüm", "Kömür yakmak", "Yabancı tür", "Cam bardak", "Hava kirliliği", "Hayvanlar", "Toprağı bozar"];
-                seceneklerC = ["Habitat", "Park yapmak", "Dinozor", "Papatya", "Ağaç dikmek", "Israf etmek", "Petrol", "Yeşillendirme", "Geri dönüşüm", "Gübre atmak", "Hemen yok olur", "Avlanmayı serbest yapmak", "Yunus", "Ağaç dikmek", "Fabrika kurmak", "Evcil canlı", "Karton kutu", "Toprak kirliliği", "Bitkiler", "Suyu kirletir"];
-                seceneklerD = ["Ekosistem", "Koruma alanı", "Mamut", "Lale", "Filtre takmak", "Doğayı kirletmek", "Doğalgaz", "Bahçe yapmak", "Bisiklet sürmek", "Atık boşaltmak", "Sıfırdır", "Şehirleşmeyi artırmak", "Balina", "Filtre takmak", "Ağaç kesmek", "Zararlı tür", "Metal kutu", "Gürültü", "Doğa olayları", "Etkisi yoktur"];
-                dogruCevaplar = ["A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A"];
-            } else {
-                sorular = [
-                    "Basit bir elektrik devresinde enerji kaynağı nedir?", "Devrede elektrik akımını kontrol eden eleman hangisidir?",
-                    "Ampulün içinde ışık veren ince telin adı nedir?", "Devre elemanlarını birbirine bağlayan araç hangisidir?",
-                    "Pil sayısı artırılırsa ampul parlaklığı nasıl değişir?", "Ampul sayısı artırılırsa parlaklık nasıl değişir?",
-                    "Aşağıdakilerden hangisi iletken maddedir?", "Aşağıdakilerden hangisi yalıtkan maddedir?",
-                    "Kabloların dışı neden plastik ile kaplanır?", "Devre açık konumdayken ampul ışık verir mi?",
-                    "Aşağıdakilerden hangisi elektrik çarpmalarına karşı güvenlik önlemidir?", "Hangisi elektrik akımını iletmez?",
-                    "Ampul parlaklığı neye bağlıdır?", "Pil sayısı 2 katına çıkarsa parlaklık nasıl değişir?",
-                    "Ampul sayısı 2 katına çıkarsa parlaklık nasıl değişir?", "Elektrik devresinde akımı başlatan ve depolayan nedir?",
-                    "Elektrik düğmenizi açtığınızda evdeki lamba neden yanar?", "Pilin uçlarındaki (+) ve (-) simgeleri neyi ifade eder?",
-                    "Aşağıdakilerden hangisi iletkendir?", "Ampulün takıldığı yuvaya ne ad verilir?"
-                ];
-                seceneklerA = ["Pil", "Anahtar", "Flaman", "Bağlantı kablosu", "Artar", "Azalır", "Demir çivi", "Plastik", "Yalıtkanlık ve güvenlik için", "Hayır, vermez", "Islak elle dokunmamak", "Tahta kaşık", "Pil ve ampul sayısına", "Artar", "Azalır", "Pil", "Devre kapandığı için", "Kutupları", "Bakır tel", "Duy"];
-                seceneklerB = ["Ampul", "Duy", "Cam", "Pil yatağı", "Azalır", "Artar", "Tahta", "Demir", "Işık saçması için", "Evet, verir", "Prize tel sokmak", "Bakır tel", "Sadece kablo boyuna", "Azalır", "Artar", "Anahtar", "Devre açıldığı için", "Gücünü", "Plastik", "Pil yatağı"];
-                seceneklerC = ["Kablo", "Pil", "Duy", "Ampul", "Değişmez", "Değişmez", "Cam", "Bakır", "Isınması için", "Patlar", "Kabloyu kesmek", "Gümüş", "Sadece pil markasına", "Değişmez", "Değişmez", "Duy", "Pil bittiği için", "Boyutunu", "Cam", "Flaman"];
-                seceneklerD = ["Anahtar", "Kablo", "Pil", "Anahtar", "Söner", "Söner", "Plastik", "Alüminyum", "Renkli durması için", "Kısa devre olur", "Suya kablo atmak", "Demir", "Devre tipine", "Söner", "Söner", "Kablo", "Eski olduğu için", "Rengini", "Tahta", "Anahtar"];
-                dogruCevaplar = ["A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A"];
-            }
-
-            let htmlIcerik = "";
-            for(let i = 0; i < 20; i++) {
-                let soruNo = i + 1;
-                htmlIcerik += `
-                    <div style="background: rgba(255,255,255,0.05); padding:15px; margin-bottom:15px; border-radius:8px; border: 1px solid #334155;">
-                        <p><strong>${soruNo}. Soru: ${sorular[i]}</strong></p>
-                        <label><input type="radio" name="soru${soruNo}" value="A"> A) ${seceneklerA[i]}</label>
-                        <label><input type="radio" name="soru${soruNo}" value="B"> B) ${seceneklerB[i]}</label>
-                        <label><input type="radio" name="soru${soruNo}" value="C"> C) ${seceneklerC[i]}</label>
-                        <label><input type="radio" name="soru${soruNo}" value="D"> D) ${seceneklerD[i]}</label>
-                        <div id="sonucSoru${soruNo}" class="sonuc-bilgi"></div>
-                    </div>
+                document.getElementById('quizKart').innerHTML = `
+                    <h2 style="color: #00f0ff; text-align: center;">🎉 Tebrikler! Yarışmayı Bitirdin!</h2>
+                    <p style="text-align: center; font-size: 20px; color: #fff;">Toplam Puanın: <strong>${puan}</strong></p>
+                    <p style="text-align: center; font-size: 18px; color: #00f0ff;">Son Unvanın: ${document.getElementById('unvanYazisi').innerText.replace('Unvan: ', '')}</p>
+                    <button onclick="location.reload()" class="buton">🔄 Tekrar Oyna / Menüye Dön</button>
                 `;
             }
-            window.aktifDogruCevaplar = dogruCevaplar;
-
-            document.getElementById("soruKutusu").innerHTML = htmlIcerik;
-            oyunAlani.scrollIntoView({ behavior: 'smooth' });
         }
 
-        function cevabiKontrolEt() {
-            let dogruCevaplar = window.aktifDogruCevaplar;
-            let dogruSayisi = 0;
-            let yanlisSayisi = 0;
-            
-            for(let i = 1; i <= 20; i++) {
-                let secilen = document.querySelector('input[name="soru' + i + '"]:checked');
-                let sonucDiv = document.getElementById("sonucSoru" + i);
-                let dogruHarf = dogruCevaplar[i-1];
-
-                if(secilen) {
-                    if(secilen.value === dogruHarf) {
-                        dogruSayisi++;
-                        sonucDiv.innerHTML = "✅ Doğru! (Doğru Cevap: " + dogruHarf + ")";
-                        sonucDiv.style.color = "#34d399";
-                    } else {
-                        yanlisSayisi++;
-                        sonucDiv.innerHTML = "❌ Yanlış! Doğru Cevap: " + dogruHarf;
-                        sonucDiv.style.color = "#f87171";
-                    }
-                } else {
-                    yanlisSayisi++;
-                    sonucDiv.innerHTML = "⚠️ Boş bırakıldı! Doğru Cevap: " + dogruHarf;
-                    sonucDiv.style.color = "#fbbf24";
-                }
+        function cevapVer(secim) {
+            if (secim === sorular[aktifSoru].dogru) {
+                puan += 10;
+                alert("Harika! Doğru cevap! 🚀 (+10 Puan)");
+            } else {
+                alert("Yanlış cevap! Olsun, öğrenmiş olduk 😊");
             }
-            
-            let yuzdePuan = (dogruSayisi / 20) * 100;
-
-            let skorKutusu = document.getElementById("skorYazisi");
-            skorKutusu.style.display = "block";
-            skorKutusu.innerHTML = `
-                🎉 <strong>Test Tamamlandı!</strong><br>
-                ✅ Doğru Sayısı: ${dogruSayisi}<br>
-                ❌ Yanlış/Boş Sayısı: ${yanlisSayisi}<br>
-                🏆 Başarı Yüzdesi: %${yuzdePuan} (100 üzerinden ${dogruSayisi * 5} Puan)
-            `;
-            skorKutusu.scrollIntoView({ behavior: 'smooth' });
+            aktifSoru++;
+            soruyuGoster();
         }
 
-        function oyunuKapat() {
-            document.getElementById("oyunAlani").style.display = "none";
+        function jokerKullan() {
+            if(jokerHakki > 0) {
+                alert("💡 İpucu: " + sorular[aktifSoru].ipucu);
+                jokerHakki--;
+                document.getElementById('jokerBtn').disabled = true;
+                document.getElementById('jokerBtn').innerText = "💡 İpucu Jokeri Kullanıldı";
+            }
+        }
+
+        function anaMenuyeDon() {
+            document.getElementById('quizKart').style.display = 'none';
+            document.getElementById('anaKart').style.display = 'block';
         }
     </script>
 </body>
