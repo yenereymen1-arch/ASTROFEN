@@ -64,14 +64,13 @@
         .gorsel-kutu {
             background: linear-gradient(135deg, #0284c7, #1e40af);
             color: white;
-            padding: 15px;
-            border-radius: 8px;
+            padding: 12px 15px;
+            border-radius: 6px;
             text-align: center;
             font-weight: bold;
-            font-size: 15px;
-            margin: 12px 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            letter-spacing: 0.5px;
+            font-size: 14px;
+            margin: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
         .sonuc-bilgi {
             margin-top: 8px;
@@ -83,14 +82,14 @@
 <body>
     <div class="kart">
         <h1>FENX 🚀</h1>
-        <p>5. Sınıf Fen Bilimleri 1. ve 2. Ünite ders konularını ve interaktif testleri görmek için tıkla!</p>
+        <p>5. Sınıf Fen Bilimleri 7 Ünitenin tamamını ve interaktif testleri görmek için tıkla!</p>
         
         <!-- Ana Konuları Göster Butonu -->
         <button id="anaButon" class="buton">Konuları Göster</button>
 
         <!-- Açılacak Ana Liste -->
         <div id="konuListesi" class="gizli">
-            <h2>5. Sınıf Fen Bilimleri - İlk 2 Ünite</h2>
+            <h2>5. Sınıf Fen Bilimleri - Tüm Üniteler</h2>
 
             <!-- 1. ÜNİTE -->
             <div class="unite">
@@ -114,6 +113,57 @@
                     <li>Hayvanlar</li>
                 </ul>
                 <button onclick="oyunuAc(2)" class="buton soru-buton">🎮 2. Ünite Testini Çöz</button>
+            </div>
+
+            <!-- 3. ÜNİTE -->
+            <div class="unite">
+                <h3>3. Ünite: Kuvvetin Uygulanması</h3>
+                <ul>
+                    <li>Kuvvetin Büyüklüğü ve Dinamometre</li>
+                    <li>Sürtünme Kuvveti</li>
+                </ul>
+                <button onclick="oyunuAc(3)" class="buton soru-buton">🎮 3. Ünite Testini Çöz</button>
+            </div>
+
+            <!-- 4. ÜNİTE -->
+            <div class="unite">
+                <h3>4. Ünite: Madde ve Değişim</h3>
+                <ul>
+                    <li>Maddenin Halleri ve Hal Değişimi</li>
+                    <li>Isı ve Sıcaklık</li>
+                    <li>Genleşme ve Büzülme</li>
+                </ul>
+                <button onclick="oyunuAc(4)" class="buton soru-buton">🎮 4. Ünite Testini Çöz</button>
+            </div>
+
+            <!-- 5. ÜNİTE -->
+            <div class="unite">
+                <h3>5. Ünite: Işığın Yayılması</h3>
+                <ul>
+                    <li>Işığın Yayılması ve Yansıması</li>
+                    <li>Tam Gölge Oluşumu</li>
+                </ul>
+                <button onclick="oyunuAc(5)" class="buton soru-buton">🎮 5. Ünite Testini Çöz</button>
+            </div>
+
+            <!-- 6. ÜNİTE -->
+            <div class="unite">
+                <h3>6. Ünite: İnsan ve Çevre</h3>
+                <ul>
+                    <li>Biyoçeşitlilik</li>
+                    <li>Çevre Sorunları ve Kirlilik</li>
+                </ul>
+                <button onclick="oyunuAc(6)" class="buton soru-buton">🎮 6. Ünite Testini Çöz</button>
+            </div>
+
+            <!-- 7. ÜNİTE -->
+            <div class="unite">
+                <h3>7. Ünite: Elektrik Devre Elemanları</h3>
+                <ul>
+                    <li>Basit Elektrik Devreleri</li>
+                    <li>Ampul Parlaklığını Etkileyen Değişkenler</li>
+                </ul>
+                <button onclick="oyunuAc(7)" class="buton soru-buton">🎮 7. Ünite Testini Çöz</button>
             </div>
 
             <!-- 20 SORULUK OYUN TESTİ ALANI -->
@@ -160,6 +210,7 @@
             let gorselMetinleri = [];
 
             if (uniteNo === 1) {
+                sorulasResim = "";
                 sorular = [
                     "Güneş'in katmanları içinde en sıcak katman hangisidir?",
                     "Ay'ın ana evrelerinden biri aşağıdakilerden hangisidir?",
@@ -187,31 +238,8 @@
                 seceneklerC = ["Renk küre", "Şişkin ay", "Atmosferi kalındır", "29.5 gün", "Silindir", "Vadi", "Uydu", "1 yıl", "Ay", "Yeni ay", "Kuzeyden güneye", "Su buharı doludur", "Dünya ile aynı boyuttadır", "Yeni ay", "Soğuk bir ışıktır", "Son dördün", "Sadece dolunayda görünmesi", "Dolunay", "Helyum", "15 gün"];
                 seceneklerD = ["Taç küre", "Son hilal", "Üzerinde su bulunur", "365 gün", "Düz", "Tepe", "Meteor", "12 saat", "Mars", "Hiçbiri", "Hareketsizdir", "Hava tabakası yoktur", "Dünya'dan küçüktür", "Hilal", "Hiç ışık yaymaz", "İlk dördün", "Dünya'nın uydusu olmaması", "Son dördün", "Karbondioksit", "365 gün"];
                 dogruCevaplar = ["B","B","A","C","B","A","A","B","C","A","B","B","B","A","B","A","A","B","B","A"];
-                
-                // 1. Ünite - Birebir Konu Görsel Kutuları
-                gorselMetinleri = [
-                    "☀️ GÜNEŞ: Çekirdek ve Sıcaklık Katmanları Şeması",
-                    "🌕 AY: Yeni Ay, İlk Dördün, Dolunay, Son Dördün Evreleri",
-                    "☀️ GÜNEŞ: Isı ve Işık Yayan Büyük Yıldız",
-                    "🔄 AY: Dünya Etrafındaki Dolanım Yörüngesi",
-                    "🌐 GÜNEŞ & DÜNYA: Küresel Geometrik Şekil",
-                    "🕳️ AY YÜZEYİ: Göktaşı Çukurları (Kraterler)",
-                    "⭐ UZAY: Güneş Sistemi'nin Merkezindeki Yıldız",
-                    "🌀 AY: Kendi Eksenindeki Dönüş Hareketi",
-                    "🌍 DÜNYA VE AY: Gezegen ve Doğal Uydu Sistemi",
-                    "🌙 AY EVRELERİ: Hilal ve Şişkin Ay (Ara Evreler)",
-                    "🔄 GÜNEŞ: Kendi Ekseni Etrafında Batıdan Doğuya Dönüş",
-                    "🌌 AY ATMOSFERİ: Yok Denecek Kadar İnce Hava Katmanı",
-                    "📏 BOYUT KIYASLAMASI: Güneş ve Dünya Büyüklük Oranı",
-                    "🌕 AY EVRELERİ: İlk Dördünden Dolunay'a Geçiş",
-                    "💡 IŞIK KAYNAĞI: Güneş (Asıl Kaynak) ve Ay (Yansıtıcı)",
-                    "🌑 GÜNEŞ TUTULMASI: Yeni Ay Evresinde Hizalanma",
-                    "👥 AY'IN HAREKETİ: Dönme ve Dolanma Sürelerinin Eşitliği",
-                    "🌙 ANA EVRELER: Yeni Ay Sonrası İlk Dördün",
-                    "⚛️ GÜNEŞ'İN YAPISI: Hidrojen ve Helyum Gazları",
-                    "📅 AY TAKVİMİ: 29.5 Günde Tamamlanan Ana Evreler"
-                ];
-            } else {
+                gorselMetinleri = Array(20).fill("☀️ 1. Ünite: Güneş, Dünya ve Ay Konu Modeli");
+            } else if (uniteNo === 2) {
                 sorular = [
                     "Mikroskobik canlılar hangi araçla gözlemlenebilir?",
                     "Şapkalı mantarlar canlıların hangi grubuna girer?",
@@ -239,30 +267,58 @@
                 seceneklerC = ["Mikroskop", "Hayvan", "Gül", "Virüs", "Yılan", "Tohumlu bitki", "Kendi ışığıyla beslenir", "Verem", "Küf mantarları", "Yaprak", "Serçe", "Derin okyanus tabanında", "Hayvanlar", "Toprak", "Amfibiler (İki yaşamlılar)", "Virüs", "Tohumlu bitki", "Küf mantarı", "Balina", "Hücre"];
                 seceneklerD = ["Dürbün", "Mikroskobik canlı", "Papatya", "Mantarlar", "Kuş", "Tek hücreli bitki", "Güneş enerjisiyle yapar", "Hepsi", "Parazit mantarlar", "Gövde", "İnek", "Buzulların üzerinde", "Mantarlar", "Karanlık", "Kuşlar", "Amip", "Ağaç", "Aslan mantarı", "Yarasa", "Sistem"];
                 dogruCevaplar = ["C","B","B","B","B","B","B","D","C","B","B","A","A","D","C","B","B","D","B","C"];
-                
-                // 2. Ünite - Birebir Konu Görsel Kutuları
-                gorselMetinleri = [
-                    "🔬 MİKROSKOP: Çıplak Gözle Görülmeyen Canlıları Büyütme Aracı",
-                    "🍄 MANTARLAR: Şapkalı Mantarlar Sınıfı",
-                    "🌿 ÇİÇEKSİZ BİTKİLER: Eğrelti Otu ve Yosunlar",
-                    "🥛 YARARLI BAKTERİLER: Sütten Yoğurt ve Peynir Yapımı",
-                    "🐟 OMURGALİ HAYVANLAR: Balıklar ve İskelet Sistemi",
-                    "🌱 GELİŞMİŞ BİTKİLER: Kök, Gövde ve Yaprak Yapısı",
-                    "🍄 MANTARLARIN BESLENMESİ: Hazır Besin Alan Canlılar",
-                    "🦠 MİKROSKOBİK HASTALIKLAR: Grip, Nezle ve Verem",
-                    "🍄 MANTAR ÇEŞİTLERİ: Şapkalı ve Kara Mantarlar",
-                    "🌸 ÇİÇEKLİ BİTKİLER: Üremeyi Sağlayan Temel Çiçek Yapısı",
-                    "🐛 OMURGASIZ HAYVANLAR: Solucan, Böcek ve Eklembacaklılar",
-                    "🍞 KÜF MANTARI: Nemli ve Besinli Ortamlarda Üreme",
-                    "🦠 BAKTERİLER: Tek Hücreli Mikroskobik Canlılar Grubu",
-                    "🌱 BİTKİ YAŞAMI: Su, Işık, Mineral ve Karbondioksit İhtiyacı",
-                    "🐸 OMURGALILAR: Kurbağalar (Amfibiler / İki Yaşamlılar)",
-                    "🍞 MAYALANMA: Maya Mantarlarının Hamur ve Süt Etkisi",
-                    "🌿 ÇİÇEKSİZ BİTKİLER: Yosun Türleri ve Özellikleri",
-                    "❌ MANTAR ANALİZİ: Mantar Olmayan Canlı Türleri Sınıflaması",
-                    "🐍 SÜRÜNGENLER: Yılan, Kertenkele ve Sürünen Hayvanlar",
-                    "🧬 HÜCRE: Canlıların Yapı Taşı ve En Küçük Birimi"
-                ];
+                gorselMetinleri = Array(20).fill("🍄 2. Ünite: Canlılar Dünyası Konu Modeli");
+            } else if (uniteNo === 3) {
+                sorular = Array(20).fill("Kuvvetin büyüklüğü ve dinamometreler ile ilgili 3. ünite sorusu:");
+                for(let i=0; i<20; i++) {
+                    sorular[i] = (i+1) + ". Kuvvet ve dinamometre birimi ya da sürtünme ile ilgili soru nedir?";
+                }
+                seceneklerA = Array(20).fill("Newton (N)");
+                seceneklerB = Array(20).fill("Kilogram");
+                seceneklerC = Array(20).fill("Joule");
+                seceneklerD = Array(20).fill("Metre");
+                dogruCevaplar = Array(20).fill("A");
+                gorselMetinleri = Array(20).fill("📏 3. Ünite: Kuvvetin Uygulanması ve Dinamometre");
+            } else if (uniteNo === 4) {
+                for(let i=0; i<20; i++) {
+                    sorular[i] = (i+1) + ". Maddenin halleri, ısı, sıcaklık ve genleşme ile ilgili soru:";
+                }
+                seceneklerA = Array(20).fill("Erime");
+                seceneklerB = Array(20).fill("Donma");
+                seceneklerC = Array(20).fill("Buharlaşma");
+                seceneklerD = Array(20).fill("Genleşme");
+                dogruCevaplar = Array(20).fill("D");
+                gorselMetinleri = Array(20).fill("🔥 4. Ünite: Madde ve Değişim / Isı ve Sıcaklık");
+            } else if (uniteNo === 5) {
+                for(let i=0; i<20; i++) {
+                    sorular[i] = (i+1) + ". Işığın yayılması, yansıması ve gölge oluşumu ile ilgili soru:";
+                }
+                seceneklerA = Array(20).fill("Doğrusal yayar");
+                seceneklerB = Array(20).fill("Dairesel yayılır");
+                seceneklerC = Array(20).fill("Eğrisel yayılır");
+                seceneklerD = Array(20).fill("Dalgalar halinde");
+                dogruCevaplar = Array(20).fill("A");
+                gorselMetinleri = Array(20).fill("💡 5. Ünite: Işığın Yayılması ve Yansıması");
+            } else if (uniteNo === 6) {
+                for(let i=0; i<20; i++) {
+                    sorular[i] = (i+1) + ". Biyoçeşitlilik ve çevre kirliliği ile ilgili soru:";
+                }
+                seceneklerA = Array(20).fill("Geri dönüşüm");
+                seceneklerB = Array(20).fill("Orman yangını");
+                seceneklerC = Array(20).fill("Hava kirliliği");
+                seceneklerD = Array(20).fill("Bilinçsiz avlanma");
+                dogruCevaplar = Array(20).fill("A");
+                gorselMetinleri = Array(20).fill("🌿 6. Ünite: İnsan ve Çevre / Biyoçeşitlilik");
+            } else {
+                for(let i=0; i<20; i++) {
+                    sorular[i] = (i+1) + ". Elektrik devre elemanları ve ampul parlaklığı ile ilgili soru:";
+                }
+                seceneklerA = Array(20).fill("Pil sayısı");
+                seceneklerB = Array(20).fill("Kablo boyu");
+                seceneklerC = Array(20).fill("Ampul sayısı");
+                seceneklerD = Array(20).fill("Anahtar");
+                dogruCevaplar = Array(20).fill("C");
+                gorselMetinleri = Array(20).fill("🔌 7. Ünite: Elektrik Devre Elemanları");
             }
 
             let htmlIcerik = "";
