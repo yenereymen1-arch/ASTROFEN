@@ -3,91 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FENX - 5. Sınıf Fen Bilimleri Oyunu</title>
+    <title>FENX - 5. Sınıf Uzay ve Fen Macerası</title>
     <style>
+        * { box-sizing: border-box; }
         body {
-            background-color: #f4f6f9;
-            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0b0d17, #1a1c2e, #2d1b4e);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            margin: 20px 0;
+            margin: 0;
+            padding: 20px;
+            color: #ffffff;
         }
         .kart {
-            background-color: white;
+            background: rgba(22, 27, 46, 0.85);
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(0, 240, 255, 0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 240, 255, 0.3);
             text-align: center;
-            max-width: 650px;
-            width: 90%;
+            max-width: 700px;
+            width: 100%;
         }
+        h1 {
+            color: #00f0ff;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        p { color: #c3c7db; }
         .buton {
-            background-color: #2563eb;
+            background: linear-gradient(90deg, #7928ca, #ff0080);
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 14px 24px;
             font-size: 16px;
-            border-radius: 8px;
+            font-weight: bold;
+            border-radius: 10px;
             cursor: pointer;
             margin-top: 15px;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(255, 0, 128, 0.4);
         }
-        .buton:hover { opacity: 0.9; }
+        .buton:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 0, 128, 0.6);
+        }
+        .buton-uzay {
+            background: linear-gradient(90deg, #00f0ff, #0072ff);
+            box-shadow: 0 4px 15px rgba(0, 240, 255, 0.4);
+            margin-bottom: 15px;
+        }
+        .buton-uzay:hover {
+            box-shadow: 0 6px 20px rgba(0, 240, 255, 0.6);
+        }
         .gizli { display: none; margin-top: 25px; text-align: left; }
         .unite {
             margin-bottom: 20px;
-            background-color: #f8fafc;
+            background: rgba(255, 255, 255, 0.05);
             padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #2563eb;
+            border-radius: 10px;
+            border-left: 4px solid #00f0ff;
         }
-        .unite h3 { margin-top: 0; color: #1e293b; font-size: 16px; }
+        .unite h3 { margin-top: 0; color: #00f0ff; font-size: 18px; }
         ul { list-style-type: none; padding: 0; margin: 0; }
-        li { color: #475569; padding: 4px 0; font-size: 14px; }
+        li { color: #e2e8f0; padding: 4px 0; font-size: 14px; }
         .soru-buton {
-            background-color: #0284c7;
-            font-size: 13px;
-            padding: 8px 14px;
+            background: linear-gradient(90deg, #10b981, #059669);
+            font-size: 14px;
+            padding: 10px 16px;
             margin-top: 10px;
             display: inline-block;
+            width: auto;
+            box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
         }
         .oyun-kutu {
-            background-color: #eff6ff;
+            background: rgba(15, 23, 42, 0.95);
             padding: 20px;
-            border-radius: 10px;
-            border: 2px dashed #2563eb;
+            border-radius: 12px;
+            border: 2px dashed #7928ca;
             margin-top: 25px;
             text-align: left;
         }
         .gorsel-kutu {
-            background: linear-gradient(135deg, #0284c7, #1e40af);
-            color: white;
+            background: linear-gradient(135deg, #1e1b4b, #312e81);
+            color: #38bdf8;
             padding: 12px 15px;
-            border-radius: 6px;
+            border-radius: 8px;
             text-align: center;
             font-weight: bold;
             font-size: 14px;
             margin: 10px 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid #4338ca;
         }
         .sonuc-bilgi {
             margin-top: 8px;
             font-size: 13px;
             font-weight: bold;
         }
+        .uzay-oyun-kutu {
+            background: rgba(88, 28, 135, 0.3);
+            border: 2px solid #ff0080;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        label { color: #f1f5f9; display: block; margin: 6px 0; cursor: pointer; }
     </style>
 </head>
 <body>
     <div class="kart">
         <h1>FENX 🚀</h1>
-        <p>5. Sınıf Fen Bilimleri 7 Ünitenin tamamını ve interaktif testleri görmek için tıkla!</p>
+        <p>5. Sınıf Uzay ve Fen Bilimleri Dünyası</p>
         
-        <!-- Ana Konuları Göster Butonu -->
-        <button id="anaButon" class="buton">Konuları Göster</button>
+        <!-- Uzay Oyunu Aç Butonu -->
+        <button id="uzayOyunButon" class="buton buton-uzay">🚀 Uzay Keşif Oyununu Oyna</button>
 
-        <!-- Açılacak Ana Liste -->
+        <!-- Ana Konuları Göster Butonu -->
+        <button id="anaButon" class="buton">📚 Fen Bilimleri Ünitelerini Göster</button>
+
+        <!-- UZAY KEŞİF OYUNU ALANI -->
+        <div id="uzayOyunAlani" class="gizli uzay-oyun-kutu">
+            <h2 style="color: #ff0080; margin-top: 0;">🌌 Uzay ve Gezegenler Oyunu</h2>
+            <p>Soruları doğru cevapla, uzay roketinle puanları topla!</p>
+            <div id="uzaySoruIcerik" style="text-align: left; margin-top: 15px;"></div>
+            <button onclick="uzayOyunKontrol()" class="buton" style="margin-top: 15px;">Roketi Ateşle & Cevabı Gönder 🎯</button>
+            <button onclick="uzayOyunKapat()" class="buton" style="background: #475569; margin-top: 10px;">Oyundan Çık ↩️</button>
+            <div id="uzaySkor" style="margin-top: 15px; font-weight: bold; font-size: 18px; color: #00f0ff;"></div>
+        </div>
+
+        <!-- Açılacak Ünite Listesi -->
         <div id="konuListesi" class="gizli">
             <h2>5. Sınıf Fen Bilimleri - Tüm Üniteler</h2>
 
@@ -166,38 +216,90 @@
                 <button onclick="oyunuAc(7)" class="buton soru-buton">🎮 7. Ünite Testini Çöz</button>
             </div>
 
-            <!-- 20 SORULUK OYUN TESTİ ALANI -->
+            <!-- 20 SORULUK TEST ALANI -->
             <div id="oyunAlani" class="gizli oyun-kutu">
-                <h3 id="oyunBaslik" style="color: #2563eb;">20 Soruluk Fen Bilimleri Testi</h3>
-                <div id="soruKutusu" style="max-height: 550px; overflow-y: auto; padding-right: 10px;">
-                    <!-- Sorular buraya yüklenecek -->
-                </div>
-                <button onclick="cevabiKontrolEt()" class="buton" style="background-color: #10b981; margin-top: 15px;">Sonuçları Gör ve Puanını Hesapla 🎯</button>
-                <button onclick="oyunuKapat()" class="buton" style="background-color: #64748b; margin-top: 10px;">Testi Kapat ↩️</button>
+                <h3 id="oyunBaslik" style="color: #00f0ff;">20 Soruluk Fen Bilimleri Testi</h3>
+                <div id="soruKutusu" style="max-height: 500px; overflow-y: auto; padding-right: 10px;"></div>
+                <button onclick="cevabiKontrolEt()" class="buton" style="background: linear-gradient(90deg, #10b981, #059669); margin-top: 15px;">Sonuçları Gör ve Puanını Hesapla 🎯</button>
+                <button onclick="oyunuKapat()" class="buton" style="background: #475569; margin-top: 10px;">Testi Kapat ↩️</button>
                 
-                <!-- Özet Sonuç Ekranı -->
-                <div id="skorYazisi" style="font-weight: bold; margin-top: 20px; font-size: 16px; line-height: 1.6; background: white; padding: 15px; border-radius: 8px; border: 2px solid #10b981; display: none;"></div>
+                <div id="skorYazisi" style="font-weight: bold; margin-top: 20px; font-size: 16px; line-height: 1.6; background: rgba(15, 23, 42, 0.9); padding: 15px; border-radius: 8px; border: 2px solid #10b981; display: none;"></div>
             </div>
         </div>
     </div>
 
     <script>
-        document.getElementById("anaButon").addEventListener("click", function() {
+        // Ünite Göster / Gizle
+        document.getElementById("anaButon").onclick = function() {
             var liste = document.getElementById("konuListesi");
             if (liste.style.display === "block") {
                 liste.style.display = "none";
-                this.innerText = "Konuları Göster";
+                this.innerText = "📚 Fen Bilimleri Ünitelerini Göster";
             } else {
                 liste.style.display = "block";
-                this.innerText = "Konuları Gizle";
+                this.innerText = "📚 Üniteleri Gizle";
             }
-        });
+        };
 
+        // Uzay Oyunu Göster / Gizle
+        document.getElementById("uzayOyunButon").onclick = function() {
+            var alan = document.getElementById("uzayOyunAlani");
+            if (alan.style.display === "block") {
+                alan.style.display = "none";
+            } else {
+                alan.style.display = "block";
+                uzayOyunYukle();
+            }
+        };
+
+        // UZAY OYUNU MANTIĞI
+        let uzaySorular = [
+            { s: "Güneş Sistemindeki en büyük gezegen hangisidir?", a: "Dünya", b: "Jüpiter", c: "Mars", d: "Venüs", dC: "B" },
+            { s: "Güneş'e en yakın gezegen hangisidir?", a: "Merkür", b: "Venüs", c: "Dünya", d: "Mars", dC: "A" },
+            { s: "Halkalarıyla ünlü gezegen hangisidir?", a: "Satürn", b: "Uranüs", c: "Neptün", d: "Mars", dC: "A" },
+            { s: "Kızıl Gezegen olarak bilinen uzay cismi hangisidir?", a: "Venüs", b: "Mars", c: "Jüpiter", d: "Merkür", dC: "B" },
+            { s: "Dünya'mızın tek doğal uydusu nedir?", a: "Güneş", b: "Ay", c: "Phobos", d: "Titan", dC: "B" }
+        ];
+
+        function uzayOyunYukle() {
+            let html = "";
+            for(let i=0; i<uzaySorular.length; i++) {
+                let u = uzaySorular[i];
+                html += `
+                    <div style="background: rgba(255,255,255,0.05); padding: 12px; margin-bottom: 10px; border-radius: 8px;">
+                        <p><strong>${i+1}. ${u.s}</strong></p>
+                        <label><input type="radio" name="uSoru${i}" value="A"> A) ${u.a}</label>
+                        <label><input type="radio" name="uSoru${i}" value="B"> B) ${u.b}</label>
+                        <label><input type="radio" name="uSoru${i}" value="C"> C) ${u.c}</label>
+                        <label><input type="radio" name="uSoru${i}" value="D"> D) ${u.d}</label>
+                    </div>
+                `;
+            }
+            document.getElementById("uzaySoruIcerik").innerHTML = html;
+        }
+
+        function uzayOyunKontrol() {
+            let puan = 0;
+            for(let i=0; i<uzaySorular.length; i++) {
+                let sec = document.querySelector(`input[name="uSoru${i}"]:checked`);
+                if(sec && sec.value === uzaySorular[i].dC) {
+                    puan += 20;
+                }
+            }
+            document.getElementById("uzaySkor").innerHTML = `🚀 Maceran Tamamlandı! Uzay Puanın: ${puan} / 100`;
+        }
+
+        function uzayOyunKapat() {
+            document.getElementById("uzayOyunAlani").style.display = "none";
+        }
+
+        // ÜNİTE TESTLERİ MANTIĞI
         function oyunuAc(uniteNo) {
             var oyunAlani = document.getElementById("oyunAlani");
             oyunAlani.style.display = "block";
             document.getElementById("oyunBaslik").innerText = uniteNo + ". Ünite - 20 Soruluk Fen Bilimleri Testi";
-            let skorKutusu = document.getElementById("skorYazisi");
+            
+            var skorKutusu = document.getElementById("skorYazisi");
             skorKutusu.style.display = "none";
             skorKutusu.innerHTML = "";
             
@@ -210,7 +312,6 @@
             let gorselMetinleri = [];
 
             if (uniteNo === 1) {
-                sorulasResim = "";
                 sorular = [
                     "Güneş'in katmanları içinde en sıcak katman hangisidir?",
                     "Ay'ın ana evrelerinden biri aşağıdakilerden hangisidir?",
@@ -238,7 +339,7 @@
                 seceneklerC = ["Renk küre", "Şişkin ay", "Atmosferi kalındır", "29.5 gün", "Silindir", "Vadi", "Uydu", "1 yıl", "Ay", "Yeni ay", "Kuzeyden güneye", "Su buharı doludur", "Dünya ile aynı boyuttadır", "Yeni ay", "Soğuk bir ışıktır", "Son dördün", "Sadece dolunayda görünmesi", "Dolunay", "Helyum", "15 gün"];
                 seceneklerD = ["Taç küre", "Son hilal", "Üzerinde su bulunur", "365 gün", "Düz", "Tepe", "Meteor", "12 saat", "Mars", "Hiçbiri", "Hareketsizdir", "Hava tabakası yoktur", "Dünya'dan küçüktür", "Hilal", "Hiç ışık yaymaz", "İlk dördün", "Dünya'nın uydusu olmaması", "Son dördün", "Karbondioksit", "365 gün"];
                 dogruCevaplar = ["B","B","A","C","B","A","A","B","C","A","B","B","B","A","B","A","A","B","B","A"];
-                gorselMetinleri = Array(20).fill("☀️ 1. Ünite: Güneş, Dünya ve Ay Konu Modeli");
+                gorselMetinleri = Array(20).fill("☀️ 1. Ünite: Güneş, Dünya ve Ay");
             } else if (uniteNo === 2) {
                 sorular = [
                     "Mikroskobik canlılar hangi araçla gözlemlenebilir?",
@@ -267,71 +368,30 @@
                 seceneklerC = ["Mikroskop", "Hayvan", "Gül", "Virüs", "Yılan", "Tohumlu bitki", "Kendi ışığıyla beslenir", "Verem", "Küf mantarları", "Yaprak", "Serçe", "Derin okyanus tabanında", "Hayvanlar", "Toprak", "Amfibiler (İki yaşamlılar)", "Virüs", "Tohumlu bitki", "Küf mantarı", "Balina", "Hücre"];
                 seceneklerD = ["Dürbün", "Mikroskobik canlı", "Papatya", "Mantarlar", "Kuş", "Tek hücreli bitki", "Güneş enerjisiyle yapar", "Hepsi", "Parazit mantarlar", "Gövde", "İnek", "Buzulların üzerinde", "Mantarlar", "Karanlık", "Kuşlar", "Amip", "Ağaç", "Aslan mantarı", "Yarasa", "Sistem"];
                 dogruCevaplar = ["C","B","B","B","B","B","B","D","C","B","B","A","A","D","C","B","B","D","B","C"];
-                gorselMetinleri = Array(20).fill("🍄 2. Ünite: Canlılar Dünyası Konu Modeli");
-            } else if (uniteNo === 3) {
-                sorular = Array(20).fill("Kuvvetin büyüklüğü ve dinamometreler ile ilgili 3. ünite sorusu:");
-                for(let i=0; i<20; i++) {
-                    sorular[i] = (i+1) + ". Kuvvet ve dinamometre birimi ya da sürtünme ile ilgili soru nedir?";
-                }
-                seceneklerA = Array(20).fill("Newton (N)");
-                seceneklerB = Array(20).fill("Kilogram");
-                seceneklerC = Array(20).fill("Joule");
-                seceneklerD = Array(20).fill("Metre");
-                dogruCevaplar = Array(20).fill("A");
-                gorselMetinleri = Array(20).fill("📏 3. Ünite: Kuvvetin Uygulanması ve Dinamometre");
-            } else if (uniteNo === 4) {
-                for(let i=0; i<20; i++) {
-                    sorular[i] = (i+1) + ". Maddenin halleri, ısı, sıcaklık ve genleşme ile ilgili soru:";
-                }
-                seceneklerA = Array(20).fill("Erime");
-                seceneklerB = Array(20).fill("Donma");
-                seceneklerC = Array(20).fill("Buharlaşma");
-                seceneklerD = Array(20).fill("Genleşme");
-                dogruCevaplar = Array(20).fill("D");
-                gorselMetinleri = Array(20).fill("🔥 4. Ünite: Madde ve Değişim / Isı ve Sıcaklık");
-            } else if (uniteNo === 5) {
-                for(let i=0; i<20; i++) {
-                    sorular[i] = (i+1) + ". Işığın yayılması, yansıması ve gölge oluşumu ile ilgili soru:";
-                }
-                seceneklerA = Array(20).fill("Doğrusal yayar");
-                seceneklerB = Array(20).fill("Dairesel yayılır");
-                seceneklerC = Array(20).fill("Eğrisel yayılır");
-                seceneklerD = Array(20).fill("Dalgalar halinde");
-                dogruCevaplar = Array(20).fill("A");
-                gorselMetinleri = Array(20).fill("💡 5. Ünite: Işığın Yayılması ve Yansıması");
-            } else if (uniteNo === 6) {
-                for(let i=0; i<20; i++) {
-                    sorular[i] = (i+1) + ". Biyoçeşitlilik ve çevre kirliliği ile ilgili soru:";
-                }
-                seceneklerA = Array(20).fill("Geri dönüşüm");
-                seceneklerB = Array(20).fill("Orman yangını");
-                seceneklerC = Array(20).fill("Hava kirliliği");
-                seceneklerD = Array(20).fill("Bilinçsiz avlanma");
-                dogruCevaplar = Array(20).fill("A");
-                gorselMetinleri = Array(20).fill("🌿 6. Ünite: İnsan ve Çevre / Biyoçeşitlilik");
+                gorselMetinleri = Array(20).fill("🍄 2. Ünite: Canlılar Dünyası");
             } else {
-                for(let i=0; i<20; i++) {
-                    sorular[i] = (i+1) + ". Elektrik devre elemanları ve ampul parlaklığı ile ilgili soru:";
+                for(let i=1; i<=20; i++) {
+                    sorular.push(uniteNo + ". Ünite Sorusu " + i + ": Lütfen bu konudaki doğru şıkkı seçiniz.");
+                    seceneklerA.push("A Şıkkı (Doğru)");
+                    seceneklerB.push("B Şıkkı");
+                    seceneklerC.push("C Şıkkı");
+                    seceneklerD.push("D Şıkkı");
+                    dogruCevaplar.push("A");
+                    gorselMetinleri.push("📌 " + uniteNo + ". Ünite Fen Konusu");
                 }
-                seceneklerA = Array(20).fill("Pil sayısı");
-                seceneklerB = Array(20).fill("Kablo boyu");
-                seceneklerC = Array(20).fill("Ampul sayısı");
-                seceneklerD = Array(20).fill("Anahtar");
-                dogruCevaplar = Array(20).fill("C");
-                gorselMetinleri = Array(20).fill("🔌 7. Ünite: Elektrik Devre Elemanları");
             }
 
             let htmlIcerik = "";
             for(let i = 0; i < 20; i++) {
                 let soruNo = i + 1;
                 htmlIcerik += `
-                    <div style="background:white; padding:15px; margin-bottom:15px; border-radius:8px; border: 1px solid #cbd5e1;">
+                    <div style="background: rgba(255,255,255,0.05); padding:15px; margin-bottom:15px; border-radius:8px; border: 1px solid #334155;">
                         <p><strong>${soruNo}. Soru: ${sorular[i]}</strong></p>
                         <div class="gorsel-kutu">${gorselMetinleri[i]}</div>
-                        <label><input type="radio" name="soru${soruNo}" value="A"> A) ${seceneklerA[i]}</label><br>
-                        <label><input type="radio" name="soru${soruNo}" value="B"> B) ${seceneklerB[i]}</label><br>
-                        <label><input type="radio" name="soru${soruNo}" value="C"> C) ${seceneklerC[i]}</label><br>
-                        <label><input type="radio" name="soru${soruNo}" value="D"> D) ${seceneklerD[i]}</label><br>
+                        <label><input type="radio" name="soru${soruNo}" value="A"> A) ${seceneklerA[i]}</label>
+                        <label><input type="radio" name="soru${soruNo}" value="B"> B) ${seceneklerB[i]}</label>
+                        <label><input type="radio" name="soru${soruNo}" value="C"> C) ${seceneklerC[i]}</label>
+                        <label><input type="radio" name="soru${soruNo}" value="D"> D) ${seceneklerD[i]}</label>
                         <div id="sonucSoru${soruNo}" class="sonuc-bilgi"></div>
                     </div>
                 `;
@@ -350,23 +410,22 @@
             for(let i = 1; i <= 20; i++) {
                 let secilen = document.querySelector('input[name="soru' + i + '"]:checked');
                 let sonucDiv = document.getElementById("sonucSoru" + i);
-                
                 let dogruHarf = dogruCevaplar[i-1];
 
                 if(secilen) {
                     if(secilen.value === dogruHarf) {
                         dogruSayisi++;
                         sonucDiv.innerHTML = "✅ Doğru! (Doğru Cevap: " + dogruHarf + ")";
-                        sonucDiv.style.color = "#16a34a";
+                        sonucDiv.style.color = "#34d399";
                     } else {
                         yanlisSayisi++;
                         sonucDiv.innerHTML = "❌ Yanlış! Doğru Cevap: " + dogruHarf;
-                        sonucDiv.style.color = "#dc2626";
+                        sonucDiv.style.color = "#f87171";
                     }
                 } else {
                     yanlisSayisi++;
                     sonucDiv.innerHTML = "⚠️ Boş bırakıldı! Doğru Cevap: " + dogruHarf;
-                    sonucDiv.style.color = "#ca8a04";
+                    sonucDiv.style.color = "#fbbf24";
                 }
             }
             
