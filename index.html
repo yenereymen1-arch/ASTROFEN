@@ -86,24 +86,13 @@
             margin-top: 25px;
             text-align: left;
         }
-        .gorsel-kutu {
-            background: linear-gradient(135deg, #1e1b4b, #312e81);
-            color: #38bdf8;
-            padding: 12px 15px;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 14px;
-            margin: 10px 0;
-            border: 1px solid #4338ca;
-        }
         .sonuc-bilgi {
             margin-top: 8px;
             font-size: 13px;
             font-weight: bold;
         }
         
-        /* 30 KARTLI HAFİZA/KART ÇEVİRMECE STİLLERİ */
+        /* 30 KARTLI HAFİZA / KART ÇEVİRMECE STİLLERİ */
         .uzay-oyun-kutu {
             background: rgba(88, 28, 135, 0.3);
             border: 2px solid #ff0080;
@@ -289,7 +278,6 @@
             kilitli = false;
             document.getElementById("uzaySkor").innerText = "Bulunan Çift: 0 / 15";
 
-            // 15 çifti 30 tek kart haline getirip karıştır
             ciftler.forEach(c => {
                 kartDizisi.push({ ciftId: c.id, metin: c.terim });
                 kartDizisi.push({ ciftId: c.id, metin: c.es });
@@ -358,7 +346,6 @@
             let sorular = [];
             let seceneklerA = [], seceneklerB = [], seceneklerC = [], seceneklerD = [];
             let dogruCevaplar = [];
-            let gorselMetinleri = [];
 
             if (uniteNo === 1) {
                 sorular = [
@@ -378,7 +365,6 @@
                 seceneklerC = ["Renk küre", "Şişkin ay", "Atmosferi kalındır", "29.5 gün", "Silindir", "Vadi", "Uydu", "1 yıl", "Ay", "Yeni ay", "Kuzeyden güneye", "Su buharı doludur", "Dünya ile aynı boyuttadır", "Yeni ay", "Soğuk bir ışıktır", "Son dördün", "Sadece dolunayda görünmesi", "Dolunay", "Helyum", "15 gün"];
                 seceneklerD = ["Taç küre", "Son hilal", "Üzerinde su bulunur", "365 gün", "Düz", "Tepe", "Meteor", "12 saat", "Mars", "Hiçbiri", "Hareketsizdir", "Hava tabakası yoktur", "Dünya'dan küçüktür", "Hilal", "Hiç ışık yaymaz", "İlk dördün", "Dünya'nın uydusu olmaması", "Son dördün", "Karbondioksit", "365 gün"];
                 dogruCevaplar = ["B","B","A","C","B","A","A","B","C","A","B","B","B","A","B","A","A","B","B","A"];
-                gorselMetinleri = Array(20).fill("☀️ 1. Ünite: Güneş, Dünya ve Ay");
             } else if (uniteNo === 2) {
                 sorular = [
                     "Mikroskobik canlılar hangi araçla gözlemlenebilir?", "Şapkalı mantarlar canlıların hangi grubuna girer?",
@@ -397,7 +383,6 @@
                 seceneklerC = ["Mikroskop", "Hayvan", "Gül", "Virüs", "Yılan", "Tohumlu bitki", "Kendi ışığıyla beslenir", "Verem", "Küf mantarları", "Yaprak", "Serçe", "Derin okyanus tabanında", "Hayvanlar", "Toprak", "Amfibiler (İki yaşamlılar)", "Virüs", "Tohumlu bitki", "Küf mantarı", "Balina", "Hücre"];
                 seceneklerD = ["Dürbün", "Mikroskobik canlı", "Papatya", "Mantarlar", "Kuş", "Tek hücreli bitki", "Güneş enerjisiyle yapar", "Hepsi", "Parazit mantarlar", "Gövde", "İnek", "Buzulların üzerinde", "Mantarlar", "Karanlık", "Kuşlar", "Amip", "Ağaç", "Aslan mantarı", "Yarasa", "Sistem"];
                 dogruCevaplar = ["C","B","B","B","B","B","B","D","C","B","B","A","A","D","C","B","B","D","B","C"];
-                gorselMetinleri = Array(20).fill("🍄 2. Ünite: Canlılar Dünyası");
             } else if (uniteNo === 3) {
                 sorular = [
                     "Kuvvetin büyüklüğünü ölçmek için kullanılan araç hangisidir?", "Dinamometrelerin yapısında ne kullanılır?",
@@ -416,7 +401,6 @@
                 seceneklerC = ["Baskül", "İp", "Joule", "Yerçekimi", "Daha hassas olur", "Dik açılıdır", "Buzda düşmek", "Kum serpmek", "Hızlanmak", "Toprak zemin", "Rengi değişir", "Yürümek", "Elektrik", "Yerçekimi", "İp çekmek", "Yukarı doğrudur", "Etkisi yoktur", "Ağırlığı artırmak", "Hızlandırmak", "Sıfırdır"];
                 seceneklerD = ["Metre", "Plastik çubuk", "Metre", "Genleşme", "Genişler", "Yönü yoktur", "Kutu sürüklemek", "Pürüz artırmak", "Güzelleşmek", "Asfalt zemin", "Küçülür", "Paraşüt açmak", "Mıknatıs", "Elektrik kuvveti", "Topa vurmak", "Aşağı doğrudur", "Isı üretmez", "Ağırlığı azaltmak", "Yön değiştirmek", "Değişkendir"];
                 dogruCevaplar = ["A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A"];
-                gorselMetinleri = Array(20).fill("📏 3. Ünite: Kuvvetin Uygulanması ve Dinamometre");
             } else if (uniteNo === 4) {
                 sorular = [
                     "Maddenin doğada en yaygın halleri hangileridir?", "Katı maddenin sıvı hale geçmesine ne denir?",
@@ -435,7 +419,6 @@
                 seceneklerC = ["Sadece sıvı", "Buharlaşma", "Naftalinin uçması", "Erime", "Erime", "Donma", "Ateş yakılması", "İkisi de kuvvettir", "Barometre", "Newton", "Katı ile gaz arasında", "Erime", "Erime", "Buz tutması", "Donma", "Donma", "Erime", "İkisi de aynıdır", "Azalır", "1 saat boyunca"];
                 seceneklerD = ["Plazma", "Yoğunlaşma", "Yağmur yağması", "Donma", "Süblimleşme", "Erime", "Kolonyanın uçması", "Sıcaklık bir enerjidir", "Metre", "Kilogram", "Tüm maddelerde", "Donma", "Donma", "Yağmur yağması", "Yoğunlaşma", "Erime", "Yoğunlaşma", "Sadece gazlarda olur", "Sıfırlanır", "Kütle eşitlenince"];
                 dogruCevaplar = ["A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A"];
-                gorselMetinleri = Array(20).fill("🔥 4. Ünite: Madde ve Değişim / Isı ve Sıcaklık");
             } else if (uniteNo === 5) {
                 sorular = [
                     "Işık nasıl yayılır?", "Aşağıdakilerden hangisi doğal ışık kaynağıdır?",
@@ -454,7 +437,6 @@
                 seceneklerC = ["Dairesel yollarla", "Mum", "Işık dalgası", "Yarı saydam", "Opak", "Saydam", "Karton", "Hava", "Soğurma", "Kırılma", "Kırılma", "Yansıma", "Sadece su", "Değişmez", "Kırılma", "Yıldız", "Eşittir", "Normal açısına", "Tahta", "Akşam vakti"];
                 seceneklerD = ["Spiralle", "Televizyon", "Çizgi", "Renkli cam", "Renkli cam", "Opak", "Taş", "Su", "Kırılma", "Soğurma", "Soğurma", "Kırılma", "Ayna", "Sıfırlanır", "Genleşme", "Ateş böceği", "Değişkendir", "Tepe açısına", "Karton", "Gece vakti"];
                 dogruCevaplar = ["A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A"];
-                gorselMetinleri = Array(20).fill("💡 5. Ünite: Işığın Yayılması ve Yansıması");
             } else if (uniteNo === 6) {
                 sorular = [
                     "Bir bölgedeki canlı türlerinin çeşitliliğine ne denir?", "Aşağıdakilerden hangisi biyoçeşitliliği olumsuz etkiler?",
@@ -473,7 +455,6 @@
                 seceneklerC = ["Habitat", "Park yapmak", "Dinozor", "Papatya", "Ağaç dikmek", "Israf etmek", "Petrol", "Yeşillendirme", "Geri dönüşüm", "Gübre atmak", "Hemen yok olur", "Avlanmayı serbest yapmak", "Yunus", "Ağaç dikmek", "Fabrika kurmak", "Evcil canlı", "Karton kutu", "Toprak kirliliği", "Bitkiler", "Suyu kirletir"];
                 seceneklerD = ["Ekosistem", "Koruma alanı", "Mamut", "Lale", "Filtre takmak", "Doğayı kirletmek", "Doğalgaz", "Bahçe yapmak", "Bisiklet sürmek", "Atık boşaltmak", "Sıfırdır", "Şehirleşmeyi artırmak", "Balina", "Filtre takmak", "Ağaç kesmek", "Zararlı tür", "Metal kutu", "Gürültü", "Doğa olayları", "Etkisi yoktur"];
                 dogruCevaplar = ["A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A"];
-                gorselMetinleri = Array(20).fill("🌿 6. Ünite: İnsan ve Çevre / Biyoçeşitlilik");
             } else {
                 sorular = [
                     "Basit bir elektrik devresinde enerji kaynağı nedir?", "Devrede elektrik akımını kontrol eden eleman hangisidir?",
@@ -492,7 +473,6 @@
                 seceneklerC = ["Kablo", "Pil", "Duy", "Ampul", "Değişmez", "Değişmez", "Cam", "Bakır", "Isınması için", "Patlar", "Kabloyu kesmek", "Gümüş", "Sadece pil markasına", "Değişmez", "Değişmez", "Duy", "Pil bittiği için", "Boyutunu", "Cam", "Flaman"];
                 seceneklerD = ["Anahtar", "Kablo", "Pil", "Anahtar", "Söner", "Söner", "Plastik", "Alüminyum", "Renkli durması için", "Kısa devre olur", "Suya kablo atmak", "Demir", "Devre tipine", "Söner", "Söner", "Kablo", "Eski olduğu için", "Rengini", "Tahta", "Anahtar"];
                 dogruCevaplar = ["A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A"];
-                gorselMetinleri = Array(20).fill("🔌 7. Ünite: Elektrik Devre Elemanları");
             }
 
             let htmlIcerik = "";
@@ -501,7 +481,6 @@
                 htmlIcerik += `
                     <div style="background: rgba(255,255,255,0.05); padding:15px; margin-bottom:15px; border-radius:8px; border: 1px solid #334155;">
                         <p><strong>${soruNo}. Soru: ${sorular[i]}</strong></p>
-                        <div class="gorsel-kutu">${gorselMetinleri[i]}</div>
                         <label><input type="radio" name="soru${soruNo}" value="A"> A) ${seceneklerA[i]}</label>
                         <label><input type="radio" name="soru${soruNo}" value="B"> B) ${seceneklerB[i]}</label>
                         <label><input type="radio" name="soru${soruNo}" value="C"> C) ${seceneklerC[i]}</label>
