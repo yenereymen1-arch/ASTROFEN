@@ -112,6 +112,28 @@
         .unite-sec-btn:hover {
             background: rgba(56, 239, 125, 0.2);
         }
+        .joker-kutu {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .joker-btn {
+            background: #e6a23c;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .joker-btn:disabled {
+            background: #555;
+            color: #888;
+            cursor: not-allowed;
+        }
         @media (max-width: 600px) {
             .kart-grid-30 {
                 grid-template-columns: repeat(5, 1fr);
@@ -127,7 +149,7 @@
         <p>5. Sınıf Uzay ve Fen Bilimleri Portalı</p>
 
         <button class="buton" onclick="kartOyununuAc()">🃏 30 Kartlı Uzay Çevirmece Oyunu</button>
-        <button class="buton buton-quiz" onclick="quiziBaslat()">🧠 Süper Eğlenceli Uzay Quizi ⚡</button>
+        <button class="buton buton-quiz" onclick="quiziBaslat()">🧠 15 Soruluk Karışık Fen Quizi (3 Jokerli) ⚡</button>
         <button class="buton buton-unite" onclick="uniteleriAc()">📚 5. Sınıf Ünite Testleri (20'şer Soru)</button>
     </div>
 
@@ -141,22 +163,27 @@
 
     <!-- 3. SÜPER EĞLENCELİ QUIZ EKRANI -->
     <div class="kart" id="quizKart" style="display: none; text-align: left;">
-        <h2 style="color: #00f0ff; text-align: center;">⚡ Uzay Macera Quizi 🚀</h2>
+        <h2 style="color: #00f0ff; text-align: center;">⚡ Karışık Fen Macera Quizi 🚀</h2>
         <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 10px; color: #ff0080;">
-            <span id="puanYazisi">Puan: ⏰ 0</span>
-            <span id="sureYazisi" style="color: #ffcc00;">Süre: 15 sn</span>
+            <span id="quizSoruNo">Soru: 1/15</span>
+            <span id="puanYazisi">Puan: 0</span>
+            <span id="sureYazisi" style="color: #ffcc00;">Süre: 20 sn</span>
         </div>
         <div style="text-align: center; margin-bottom: 12px;">
             <span id="unvanYazisi" style="color: #38ef7d; font-weight: bold; background: rgba(56,239,125,0.1); padding: 4px 12px; border-radius: 8px;">Unvan: Çaylak Astronot 👨‍🚀</span>
         </div>
         
-        <p id="soruMetni" style="font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #ffffff;"></p>
+        <p id="soruMetni" style="font-size: 17px; font-weight: bold; margin-bottom: 15px; color: #ffffff;"></p>
         <div id="seceneklerAlani" style="display: flex; flex-direction: column;"></div>
         
-        <div style="display: flex; gap: 10px; margin-top: 15px;">
-            <button onclick="jokerKullan()" id="jokerBtn" class="buton" style="background: #e6a23c; margin: 0;">💡 İpucu Jokeri (1)</button>
-            <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin: 0;">⬅️ Ana Menüye Dön</button>
+        <!-- 3 JOKER HAKKI -->
+        <div class="joker-kutu">
+            <button onclick="ipucuJokeri()" id="jokerIpucu" class="joker-btn">💡 İpucu</button>
+            <button onclick="yuzdeElliJokeri()" id="jokerElli" class="joker-btn">🌓 %50 Eleme</button>
+            <button onclick="ciftCevapJokeri()" id="jokerCift" class="joker-btn">🎯 Çift Cevap</button>
         </div>
+
+        <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 15px;">⬅️ Ana Menüye Dön</button>
     </div>
 
     <!-- 4. ÜNİTE SEÇİM EKRANI -->
@@ -246,35 +273,62 @@
             });
         }
 
-        // --- SÜPER EĞLENCELİ QUIZ MANTIĞI & SÜRE SİSTEMİ ---
-        const sorular = [
+        // --- 15 KARIŞIK SORULUK KAPSAMLI HAVUZ ---
+        const tumKarisikSorular = [
             { soru: "Güneş Sistemindeki Güneş'e en yakın gezegen hangisidir?", secenekler: ["Venüs", "Merkür", "Mars", "Dünya"], dogru: 1, ipucu: "En küçük gezegendir." },
-            { soru: "Ay'ın ana evrelerinden biri olmayan hangisidir?", secenekler: ["Yeni Ay", "Mavi Ay", "İlk Dördün", "Dolunay"], dogru: 1, ipucu: "Gökyüzünde renk isimleriyle bilinen evre ana evre değildir." },
-            { soru: "Dünya'mızın tek doğal uydusu aşağıdakilerden hangisidir?", secenekler: ["Güneş", "Ay", "Mars", "Jüpiter"], dogru: 1, ipucu: "Geceleri gökyüzünü aydınlatan komşumuz." },
-            { soru: "Güneş Sisteminin en büyük gezegeni hangisidir?", secenekler: ["Satürn", "Jüpiter", "Neptün", "Uranüs"], dogru: 1, ipucu: "Dev gaz gezegenidir." },
-            { soru: "Sürtünme kuvveti hareketi nasıl etkiler?", secenekler: ["Hızlandırır", "Yavaşlatır/Durdurur", "Etkilemez", "Yönünü değiştirmez"], dogru: 1, ipucu: "Hareketin tersi yönünde etki eder." }
+            { soru: "Ay'ın ana evrelerinden biri olmayan hangisidir?", secenekler: ["Yeni Ay", "Mavi Ay", "İlk Dördün", "Dolunay"], dogru: 1, ipucu: "Gökyüzünde renk ismiyle bilinen evre ana evre değildir." },
+            { soru: "Kuvvetin büyüklüğünü ölçmek için kullanılan araç nedir?", secenekler: ["Terazi", "Dinamometre", "Cetvel", "Termometre"], dogru: 1, ipucu: "İçinde esnek yay bulunur." },
+            { soru: "Sütten yoğurt yapılmasını sağlayan canlı grubu hangisidir?", secenekler: ["Mikroskobik canlılar", "Çiçekli bitkiler", "Omurgasızlar", "Kuşlar"], dogru: 0, ipucu: "Gözle görülmeyen bakterilerdir." },
+            { soru: "Katı bir maddenin ısı alarak sıvı hale geçmesine ne denir?", secenekler: ["Donma", "Erime", "Buharlaşma", "Yoğuşma"], dogru: 1, ipucu: "Buzun suya dönüşmesidir." },
+            { soru: "Işık hangi yollarla yayılır?", secenekler: ["Eğri yollarla", "Doğrusal yollarla", "Dairesel yollarla", "Rastgele"], dogru: 1, ipucu: "Dümdüz bir çizgi boyunca." },
+            { soru: "Basit bir elektrik devresinde enerji kaynağı hangisidir?", secenekler: ["Ampul", "Pil", "Kablo", "Anahtar"], dogru: 1, ipucu: "Üzerinde + ve - kutupları vardır." },
+            { soru: "Bir bölgedeki canlı türlerinin zenginliğine ne ad verilir?", secenekler: ["Biyoçeşitlilik", "Ekosistem", "Çevre kirliliği", "Erozyon"], dogru: 0, ipucu: "Canlı çeşitliliğidir." },
+            { soru: "Aşağıdakilerden hangisi çiçeksiz bir bitkidir?", secenekler: ["Elma ağacı", "Papatya", "Eğrelti otu", "Gül"], dogru: 2, ipucu: "Orman altlarında yetişir." },
+            { soru: "Suyun donma sıcaklığı kaç derecedir?", secenekler: ["0 °C", "50 °C", "100 °C", "-10 °C"], dogru: 0, ipucu: "Buz tutma noktasıdır." },
+            { soru: "Aşağıdakilerden hangisi yarı saydam maddedir?", secenekler: ["Tahta", "Buzlu cam", "Pencere camı", "Alüminyum folyo"], dogru: 1, ipucu: "Işığı kısmen geçirir." },
+            { soru: "Devrede akımın geçişini kontrol eden eleman hangisidir?", secenekler: ["Pil", "Anahtar", "Duy", "Ampul"], dogru: 1, ipucu: "Evdeki lamba düğmesi gibidir." },
+            { soru: "Ay'ın yüzeyindeki meteor çukurlarına ne ad verilir?", secenekler: ["Krater", "Dağ", "Vadi", "Tepe"], dogru: 0, ipucu: "Derin yuvarlak çukurlar." },
+            { soru: "Kuvvetin birimi nedir?", secenekler: ["Kilogram", "Newton (N)", "Metre", "Celsius"], dogru: 1, ipucu: "Isaac Newton'dan gelir." },
+            { soru: "Hamurun kabarmasını sağlayan mantar türü hangisidir?", secenekler: ["Küf mantarı", "Maya mantarı", "Şapkalı mantar", "Zehirli mantar"], dogru: 1, ipucu: "Ekmek yapımında kullanılır." }
         ];
 
+        let quizSorulari = [];
         let aktifSoru = 0;
         let puan = 0;
-        let jokerHakki = 1;
-        let kalanSure = 15;
+        let kalanSure = 20;
         let timerInterval;
+
+        // JOKER DURUMLARI
+        let jokerIpucuHak = true;
+        let jokerElliHak = true;
+        let jokerCiftHak = true;
+        let ciftCevapAktif = false;
 
         function quiziBaslat() {
             tumKartlariGizle();
             document.getElementById('quizKart').style.display = 'block';
+            
+            // 15 soruyu rastgele karıştır
+            quizSorulari = [...tumKarisikSorular].sort(() => Math.random() - 0.5);
             aktifSoru = 0;
             puan = 0;
-            jokerHakki = 1;
-            document.getElementById('jokerBtn').disabled = false;
-            document.getElementById('jokerBtn').innerText = "💡 İpucu Jokeri (1)";
+
+            // Jokerleri sıfırla
+            jokerIpucuHak = true;
+            jokerElliHak = true;
+            jokerCiftHak = true;
+            ciftCevapAktif = false;
+
+            document.getElementById('jokerIpucu').disabled = false;
+            document.getElementById('jokerElli').disabled = false;
+            document.getElementById('jokerCift').disabled = false;
+
             soruyuGoster();
         }
 
         function sureyiBaslat() {
             clearInterval(timerInterval);
-            kalanSure = 15;
+            kalanSure = 20;
             document.getElementById('sureYazisi').innerText = `Süre: ${kalanSure} sn`;
             
             timerInterval = setInterval(() => {
@@ -282,7 +336,7 @@
                 document.getElementById('sureYazisi').innerText = `Süre: ${kalanSure} sn`;
                 if (kalanSure <= 0) {
                     clearInterval(timerInterval);
-                    alert("⏰ Süre bitti! Maalesef bu soruyu kaçırdın.");
+                    alert("⏰ Süre bitti! Bir sonraki soruya geçiliyor.");
                     aktifSoru++;
                     soruyuGoster();
                 }
@@ -291,61 +345,105 @@
 
         function unvanGuncelle() {
             let unvan = "Çaylak Astronot 👨‍🚀";
-            if(puan >= 20) unvan = "Uzay Kaşifi 🛰️";
-            if(puan >= 40) unvan = "Galaksi Kaptanı 🚀";
-            if(puan >= 50) unvan = "Evrenin Profesörü 🌟";
+            if(puan >= 40) unvan = "Uzay Kaşifi 🛰️";
+            if(puan >= 80) unvan = "Galaksi Kaptanı 🚀";
+            if(puan >= 120) unvan = "Evrenin Profesörü 🌟";
             document.getElementById('unvanYazisi').innerText = "Unvan: " + unvan;
         }
 
         function soruyuGoster() {
             clearInterval(timerInterval);
-            if (aktifSoru < sorular.length) {
-                let q = sorular[aktifSoru];
-                document.getElementById('soruMetni').innerText = `Soru ${aktifSoru + 1}: ${q.soru}`;
+            ciftCevapAktif = false;
+
+            if (aktifSoru < 15) {
+                let q = quizSorulari[aktifSoru];
+                document.getElementById('quizSoruNo').innerText = `Soru: ${aktifSoru + 1} / 15`;
+                document.getElementById('soruMetni').innerText = q.soru;
                 let alan = document.getElementById('seceneklerAlani');
                 alan.innerHTML = "";
                 
                 q.secenekler.forEach((secenek, index) => {
                     let btn = document.createElement('button');
-                    btn.innerText = secenek;
+                    btn.innerText = `${String.fromCharCode(65 + index)}) ${secenek}`;
                     btn.className = 'secenek-btn';
+                    btn.id = `opt-${index}`;
                     btn.onclick = () => cevapVer(index);
                     alan.appendChild(btn);
                 });
+
                 document.getElementById('puanYazisi').innerText = `Puan: ${puan}`;
                 unvanGuncelle();
                 sureyiBaslat();
             } else {
                 document.getElementById('quizKart').innerHTML = `
-                    <h2 style="color: #00f0ff; text-align: center;">🎉 Tebrikler! Uzay Görevini Tamamladın! 🚀</h2>
+                    <h2 style="color: #00f0ff; text-align: center;">🎉 Tebrikler! Fen Quizini Bitirdin! 🚀</h2>
                     <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; font-size: 18px; margin: 15px 0; text-align: center;">
-                        <p style="color: #00f0ff;"><strong>Toplam Puanın:</strong> ${puan}</p>
+                        <p style="color: #00f0ff;"><strong>Toplam Puanın:</strong> ${puan} / 150</p>
                         <p style="color: #38ef7d;"><strong>Final Unvanın:</strong> ${document.getElementById('unvanYazisi').innerText.replace('Unvan: ', '')}</p>
                     </div>
-                    <button onclick="quiziBaslat()" class="buton" style="background: #38ef7d;">🔄 Tekrar Oyna</button>
+                    <button onclick="quiziBaslat()" class="buton" style="background: #38ef7d;">🔄 Yeniden Başlat</button>
                     <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 10px;">⬅️ Ana Menüye Dön</button>
                 `;
             }
         }
 
         function cevapVer(secim) {
-            clearInterval(timerInterval);
-            if (secim === sorular[aktifSoru].dogru) {
+            let q = quizSorulari[aktifSoru];
+
+            if (secim === q.dogru) {
+                clearInterval(timerInterval);
                 puan += 10;
                 alert("Harika! Doğru cevap! 🚀 (+10 Puan)");
+                aktifSoru++;
+                soruyuGoster();
             } else {
-                alert("Yanlış cevap! Olsun, öğrenmiş olduk 😊");
+                if (ciftCevapAktif) {
+                    alert("İlk hakkın yanlıştı, ama Çift Cevap jokeri sayesinde bir hakkın daha var! 🎯");
+                    document.getElementById(`opt-${secim}`).disabled = true;
+                    document.getElementById(`opt-${secim}`).style.opacity = '0.4';
+                    ciftCevapAktif = false; // İkinci hak kullanıldı
+                } else {
+                    clearInterval(timerInterval);
+                    alert(`Yanlış cevap! Doğru cevap: ${q.secenekler[q.dogru]} olmalıydı 😊`);
+                    aktifSoru++;
+                    soruyuGoster();
+                }
             }
-            aktifSoru++;
-            soruyuGoster();
         }
 
-        function jokerKullan() {
-            if(jokerHakki > 0) {
-                alert("💡 İpucu: " + sorular[aktifSoru].ipucu);
-                jokerHakki--;
-                document.getElementById('jokerBtn').disabled = true;
-                document.getElementById('jokerBtn').innerText = "💡 İpucu Jokeri Kullanıldı";
+        // --- JOKER FONKSİYONLARI ---
+        function ipucuJokeri() {
+            if (jokerIpucuHak) {
+                alert("💡 İpucu: " + quizSorulari[aktifSoru].ipucu);
+                jokerIpucuHak = false;
+                document.getElementById('jokerIpucu').disabled = true;
+            }
+        }
+
+        function yuzdeElliJokeri() {
+            if (jokerElliHak) {
+                let dogruIdx = quizSorulari[aktifSoru].dogru;
+                let elenenler = 0;
+                for (let i = 0; i < 4; i++) {
+                    if (i !== dogruIdx && elenenler < 2) {
+                        let btn = document.getElementById(`opt-${i}`);
+                        if(btn) {
+                            btn.style.display = 'none';
+                            elenenler++;
+                        }
+                    }
+                }
+                jokerElliHak = false;
+                document.getElementById('jokerElli').disabled = true;
+            }
+        }
+
+        function ciftCevapJokeri() {
+            if (jokerCiftHak) {
+                ciftCevapAktif = true;
+                alert("🎯 Çift Cevap Jokeri Aktif! Bu soruda iki defa seçim yapabilirsin.");
+                jokerCiftHak = false;
+                document.getElementById('jokerCift').disabled = true;
             }
         }
 
