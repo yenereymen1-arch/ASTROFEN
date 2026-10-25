@@ -25,7 +25,7 @@
             backdrop-filter: blur(8px);
             border: 1px solid rgba(0, 240, 255, 0.3);
             text-align: center;
-            max-width: 750px;
+            max-width: 800px;
             width: 100%;
         }
         h1 {
@@ -102,6 +102,8 @@
             font-size: 13px;
             font-weight: bold;
         }
+        
+        /* 30 KARTLI HAFİZA/KART ÇEVİRMECE STİLLERİ */
         .uzay-oyun-kutu {
             background: rgba(88, 28, 135, 0.3);
             border: 2px solid #ff0080;
@@ -110,31 +112,50 @@
             margin-bottom: 20px;
             text-align: center;
         }
-        .eslestirme-satir {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 10px 15px;
-            margin-bottom: 8px;
-            border-radius: 8px;
-            border: 1px solid rgba(0, 240, 255, 0.2);
+        .kart-izgara {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 5px;
         }
-        select {
-            background: #0f172a;
-            color: #00f0ff;
+        @media (max-width: 600px) {
+            .kart-izgara {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .cevir-kart {
+            height: 90px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
             border: 2px solid #00f0ff;
-            padding: 8px 12px;
-            border-radius: 6px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 13px;
             font-weight: bold;
-            font-size: 14px;
-            outline: none;
-            cursor: pointer;
-            max-width: 250px;
-        }
-        select option {
-            background: #0f172a;
             color: #ffffff;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.3s, background 0.3s;
+            padding: 5px;
+            text-align: center;
+        }
+        .cevir-kart:hover {
+            transform: scale(1.05);
+            border-color: #ff0080;
+        }
+        .cevir-kart.acik {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            border-color: #38bdf8;
+        }
+        .cevir-kart.eslesmis {
+            background: linear-gradient(135deg, #059669, #10b981) !important;
+            border-color: #34d399 !important;
+            cursor: default;
+            opacity: 0.8;
         }
         label { color: #f1f5f9; display: block; margin: 6px 0; cursor: pointer; }
     </style>
@@ -144,15 +165,15 @@
         <h1>FENX 🚀</h1>
         <p>5. Sınıf Uzay ve Fen Bilimleri Oyunu</p>
         
-        <button id="uzayOyunButon" class="buton buton-uzay">🪐 15 Sorulu Uzay Eşleştirme Oyunu</button>
+        <button id="uzayOyunButon" class="buton buton-uzay">🃏 30 Kartlı Uzay Çevirmece Oyunu</button>
         <button id="anaButon" class="buton">📚 Fen Bilimleri Ünitelerini Göster</button>
 
-        <!-- 15 SORULU UZAY EŞLEŞTİRME OYUNU -->
+        <!-- 30 KART ÇEVİRMECE OYUNU -->
         <div id="uzayOyunAlani" class="gizli uzay-oyun-kutu">
-            <h2 style="color: #ff0080; margin-top: 0;">🌌 Uzay Terimleri Eşleştirme Oyunu (15 Soru)</h2>
-            <p>Sol taraftaki uzay tanımını sağ taraftaki doğru kavramla eşleştir!</p>
-            <div id="uzayEslestirmeAlani" style="text-align: left; margin-top: 15px; max-height: 450px; overflow-y: auto; padding-right: 10px;"></div>
-            <button onclick="uzayEslestirmeKontrol()" class="buton" style="margin-top: 15px;">Eşleştirmeleri Kontrol Et 🎯</button>
+            <h2 style="color: #ff0080; margin-top: 0;">🌌 30 Kartlı Uzay Çevirmece & Hafıza Oyunu</h2>
+            <p>Kartlara tıkla, uzay terimleri ile eşlerini bulup 15 çifti tamamla!</p>
+            <div id="kartIzgaraAlani" class="kart-izgara"></div>
+            <button onclick="uzayOyunSifirla()" class="buton" style="margin-top: 15px;">Oyunu Yeniden Başlat 🔄</button>
             <button onclick="uzayOyunKapat()" class="buton" style="background: #475569; margin-top: 10px;">Oyundan Çık ↩️</button>
             <div id="uzaySkor" style="margin-top: 15px; font-weight: bold; font-size: 18px; color: #00f0ff;"></div>
         </div>
@@ -233,63 +254,91 @@
                 alan.style.display = "none";
             } else {
                 alan.style.display = "block";
-                uzayEslestirmeYukle();
+                uzayOyunSifirla();
             }
         };
 
-        // 15 SORULU EŞLEŞTİRME OYUNU VERİLERİ
-        let eslestirmeSorulari = [
-            { id: 1, terim: "Kızıl Gezegen", dogru: "Mars" },
-            { id: 2, terim: "Isı ve Işık Kaynağımız", dogru: "Güneş" },
-            { id: 3, terim: "Dünya'nın Tek Doğal Uydusu", dogru: "Ay" },
-            { id: 4, terim: "Güneş Sisteminin En Büyük Gezegeni", dogru: "Jüpiter" },
-            { id: 5, terim: "Belirgin Halkaları Olan Gezegen", dogru: "Satürn" },
-            { id: 6, terim: "Güneş'e En Yakın Gezegen", dogru: "Merkür" },
-            { id: 7, terim: "Ay Yüzeyindeki Büyük Çukurlar", dogru: "Krater" },
-            { id: 8, terim: "Güneş'in Kendi Ekseni Etrafındaki Yönü", dogru: "Batıdan Doğuya" },
-            { id: 9, terim: "Ay'ın Hep Aynı Yüzünün Görünme Sebebi", dogru: "Eşit Dönme Süresi" },
-            { id: 10, terim: "Ay'ın Tamamen Karanlık Göründüğü Evre", dogru: "Yeni Ay" },
-            { id: 11, terim: "Güneş'in En Sıcak Katmanı", dogru: "Çekirdek" },
-            { id: 12, terim: "Dünya'ya En Yakın Yıldız", dogru: "Güneş" },
-            { id: 13, terim: "Ay'ın D Harfi Şeklindeki Evresi", dogru: "İlk Dördün" },
-            { id: 14, terim: "Güneş Tutulmasının Gerçekleştiği Evre", dogru: "Yeni Ay Evresi" },
-            { id: 15, terim: "Ay'ın Ana Evrelerinin Dönüşüm Süresi", dogru: "29.5 Gün" }
+        // 30 KARTLI (15 ÇİFT) ÇEVİRMECE OYUNU VERİLERİ
+        const ciftler = [
+            { id: 1, terim: "Kızıl Gezegen", es: "Mars" },
+            { id: 2, terim: "Isı & Işık Kaynağı", es: "Güneş" },
+            { id: 3, terim: "Dünya'nın Uydusu", es: "Ay" },
+            { id: 4, terim: "En Büyük Gezegen", es: "Jüpiter" },
+            { id: 5, terim: "Halkalı Gezegen", es: "Satürn" },
+            { id: 6, terim: "En Yakın Gezegen", es: "Merkür" },
+            { id: 7, terim: "Ay Çukurları", es: "Krater" },
+            { id: 8, terim: "Dönüş Yönü", es: "Batıdan Doğuya" },
+            { id: 9, terim: "Sıcak Katman", es: "Çekirdek" },
+            { id: 10, terim: "Karanlık Evre", es: "Yeni Ay" },
+            { id: 11, terim: "D Şeklindeki Evre", es: "İlk Dördün" },
+            { id: 12, terim: "Yuvarlak Işıklı Evre", es: "Dolunay" },
+            { id: 13, terim: "Ters D Evresi", es: "Son Dördün" },
+            { id: 14, terim: "Ay Döngü Süresi", es: "29.5 Gün" },
+            { id: 15, terim: "Güneş Şekli", es: "Küre" }
         ];
 
-        let secenekHavuzu = [
-            "Mars", "Güneş", "Ay", "Jüpiter", "Satürn", 
-            "Merkür", "Krater", "Batıdan Doğuya", "Eşit Dönme Süresi", 
-            "Yeni Ay", "Çekirdek", "İlk Dördün", "Yeni Ay Evresi", "29.5 Gün"
-        ];
+        let kartDizisi = [];
+        let secilenKartlar = [];
+        let eslesmeSayisi = 0;
+        let kilitli = false;
 
-        function uzayEslestirmeYukle() {
-            let html = "";
-            eslestirmeSorulari.forEach((s, idx) => {
-                let secenekHTML = `<option value="">-- Eşleştir --</option>`;
-                secenekHavuzu.forEach(opt => {
-                    secenekHTML += `<option value="${opt}">${opt}</option>`;
-                });
+        function uzayOyunSifirla() {
+            kartDizisi = [];
+            secilenKartlar = [];
+            eslesmeSayisi = 0;
+            kilitli = false;
+            document.getElementById("uzaySkor").innerText = "Bulunan Çift: 0 / 15";
 
-                html += `
-                    <div class="eslestirme-satir">
-                        <span style="font-size: 14px;"><strong>${idx+1}. ${s.terim}</strong></span>
-                        <select id="eslesSelect${s.id}">${secenekHTML}</select>
-                    </div>
-                `;
+            // 15 çifti 30 tek kart haline getirip karıştır
+            ciftler.forEach(c => {
+                kartDizisi.push({ ciftId: c.id, metin: c.terim });
+                kartDizisi.push({ ciftId: c.id, metin: c.es });
             });
-            document.getElementById("uzayEslestirmeAlani").innerHTML = html;
+            kartDizisi.sort(() => Math.random() - 0.5);
+
+            let html = "";
+            kartDizisi.forEach((k, idx) => {
+                html += `<div class="cevir-kart" id="kart-${idx}" onclick="kartTikla(${idx})">❓ FENX</div>`;
+            });
+            document.getElementById("kartIzgaraAlani").innerHTML = html;
         }
 
-        function uzayEslestirmeKontrol() {
-            let dogruSayisi = 0;
-            eslestirmeSorulari.forEach(s => {
-                let secilen = document.getElementById(`eslesSelect${s.id}`).value;
-                if(secilen === s.dogru) {
-                    dogruSayisi++;
+        function kartTikla(idx) {
+            if (kilitli) return;
+            let el = document.getElementById(`kart-${idx}`);
+            if (el.classList.contains("acik") || el.classList.contains("eslesmis")) return;
+
+            el.classList.add("acik");
+            el.innerText = kartDizisi[idx].metin;
+            secilenKartlar.push({ index: idx, veri: kartDizisi[idx] });
+
+            if (secilenKartlar.length === 2) {
+                kilitli = true;
+                setTimeout(kontrolEtHafiza, 800);
+            }
+        }
+
+        function kontrolEtHafiza() {
+            let [k1, k2] = secilenKartlar;
+            let el1 = document.getElementById(`kart-${k1.index}`);
+            let el2 = document.getElementById(`kart-${k2.index}`);
+
+            if (k1.veri.ciftId === k2.veri.ciftId) {
+                el1.classList.add("eslesmis");
+                el2.classList.add("eslesmis");
+                eslesmeSayisi++;
+                document.getElementById("uzaySkor").innerText = `Bulunan Çift: ${eslesmeSayisi} / 15`;
+                if (eslesmeSayisi === 15) {
+                    document.getElementById("uzaySkor").innerText = "🎉 TEBRİKLER! Tüm 30 Kartı Başarıyla Eşleştirdin! 🏆";
                 }
-            });
-            let puan = Math.round((dogruSayisi / 15) * 100);
-            document.getElementById("uzaySkor").innerHTML = `🎯 Eşleştirme Tamamlandı! Doğru: ${dogruSayisi} / 15 | Puanın: ${puan} / 100`;
+            } else {
+                el1.classList.remove("acik");
+                el2.classList.remove("acik");
+                el1.innerText = "❓ FENX";
+                el2.innerText = "❓ FENX";
+            }
+            secilenKartlar = [];
+            kilitli = false;
         }
 
         function uzayOyunKapat() {
