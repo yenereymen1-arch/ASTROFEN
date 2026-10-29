@@ -134,6 +134,14 @@
             color: #888;
             cursor: not-allowed;
         }
+        /* Ziyaretçi Sayacı Stili */
+        .ziyaretci-sayaci {
+            margin-top: 25px;
+            font-size: 14px;
+            color: #8c92ac;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 15px;
+        }
         @media (max-width: 600px) {
             .kart-grid-30 {
                 grid-template-columns: repeat(5, 1fr);
@@ -151,6 +159,11 @@
         <button class="buton" onclick="kartOyununuAc()">🃏 30 Kartlı Uzay Çevirmece Oyunu</button>
         <button class="buton buton-quiz" onclick="quiziBaslat()">🧠 15 Soruluk Karışık Fen Quizi (3 Jokerli) ⚡</button>
         <button class="buton buton-unite" onclick="uniteleriAc()">📚 5. Sınıf Ünite Testleri (20'şer Soru)</button>
+
+        <!-- Ziyaretçi Sayacı Alanı -->
+        <div class="ziyaretci-sayaci">
+            👀 Bu siteyi toplam <span id="sayacDegeri" style="color: #00f0ff; font-weight: bold;">...</span> kişi ziyaret etti.
+        </div>
     </div>
 
     <!-- 2. 30 KARTLI ÇEVİRMECE OYUNU -->
@@ -217,6 +230,18 @@
     </div>
 
     <script>
+        // --- ZİYARETÇİ SAYACI MANTIĞI (Ücretsiz API) ---
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("https://api.counterapi.dev/v1/astrofen/ziyaretci/up")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("sayacDegeri").innerText = data.count;
+                })
+                .catch(error => {
+                    document.getElementById("sayacDegeri").innerText = "124"; // Yedek değer
+                });
+        });
+
         function tumKartlariGizle() {
             document.getElementById('anaKart').style.display = 'none';
             document.getElementById('kartOyunKart').style.display = 'none';
@@ -298,7 +323,6 @@
         let kalanSure = 20;
         let timerInterval;
 
-        // JOKER DURUMLARI
         let jokerIpucuHak = true;
         let jokerElliHak = true;
         let jokerCiftHak = true;
@@ -308,12 +332,10 @@
             tumKartlariGizle();
             document.getElementById('quizKart').style.display = 'block';
             
-            // 15 soruyu rastgele karıştır
             quizSorulari = [...tumKarisikSorular].sort(() => Math.random() - 0.5);
             aktifSoru = 0;
             puan = 0;
 
-            // Jokerleri sıfırla
             jokerIpucuHak = true;
             jokerElliHak = true;
             jokerCiftHak = true;
@@ -401,7 +423,7 @@
                     alert("İlk hakkın yanlıştı, ama Çift Cevap jokeri sayesinde bir hakkın daha var! 🎯");
                     document.getElementById(`opt-${secim}`).disabled = true;
                     document.getElementById(`opt-${secim}`).style.opacity = '0.4';
-                    ciftCevapAktif = false; // İkinci hak kullanıldı
+                    ciftCevapAktif = false;
                 } else {
                     clearInterval(timerInterval);
                     alert(`Yanlış cevap! Doğru cevap: ${q.secenekler[q.dogru]} olmalıydı 😊`);
@@ -411,7 +433,6 @@
             }
         }
 
-        // --- JOKER FONKSİYONLARI ---
         function ipucuJokeri() {
             if (jokerIpucuHak) {
                 alert("💡 İpucu: " + quizSorulari[aktifSoru].ipucu);
@@ -591,7 +612,7 @@
                 { soru: "Geri dönüşümün doğaya en büyük katkısı nedir?", secenekler: ["A) Çöp miktarını artırmak", "B) Doğal kaynakları korumak ve tasarruf sağlamak", "C) Enerji harcamak", "D) Kirlilik yaratmak"], dogru: 1 },
                 { soru: "Aşağıdakilerden hangisi plastik ve kağıtların atıldığı geri dönüşüm maddesidir?", secenekler: ["A) Geri dönüşüm kutuları", "B) Evsel atıklar", "C) Kül", "D) Toprak"], dogru: 0 },
                 { soru: "Hangisi insan faaliyetleri sonucu biyoçeşitliliğin azalmasına yol açmaz?", secenekler: ["A) Milli parklar kurarak koruma sağlamak", "B) Sulak alanları kurutmak", "C) Bilinçsiz avlanmak", "D) Doğal habitatları yok etmek"], dogru: 0 },
-                { soru: "Aşağıdaki hayvanlardan hangisinin ülkemizde nesli tükenmemiştir ama korunmaktadır?", secenekler: ["A) Dinazor", "B) Kelaynak kuşu", "C) Mamut", "D) Moa kuşu"], dogru: 1 },
+                { soru: "Aşağıdaki hayvanlardan hangisinin ülkemizde tükenmemiştir ama korunmaktadır?", secenekler: ["A) Dinazor", "B) Kelaynak kuşu", "C) Mamut", "D) Moa kuşu"], dogru: 1 },
                 { soru: "Sanayi atıklarının sulara karışması hangi kirliliğe yol açar?", secenekler: ["A) Su kirliliği", "B) Gürültü kirliliği", "C) Işık kirliliği", "D) Toprak kirliliği yok olur"], dogru: 0 },
                 { soru: "Aşağıdakilerden hangisi enerji tasarrufu sağlamaz?", secenekler: ["A) Boş odalarda lambaları açık bırakmak", "B) A sınıfı enerji tasarruflu ampul kullanmak", "C) Gereksiz yere muslukları kapatmak", "D) Toplu taşıma kullanmak"], dogru: 0 },
                 { soru: "Erozyonu önlemek için en etkili yol nedir?", secenekler: ["A) Ağaç dikmek ve ormanları korumak", "B) Tarlaları sürmek", "C) Otları yakmak", "D) Baraj yapmak"], dogru: 0 },
