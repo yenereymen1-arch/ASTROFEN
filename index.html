@@ -159,9 +159,9 @@
         <button class="buton buton-quiz" onclick="quiziBaslat()">🧠 15 Soruluk Karışık Fen Quizi (3 Jokerli) ⚡</button>
         <button class="buton buton-unite" onclick="uniteleriAc()">📚 5. Sınıf Ünite Testleri (20'şer Soru)</button>
 
-        <!-- Ziyaretçi Sayacı Alanı -->
+        <!-- Gerçek Ziyaretçi Sayacı (HitCounter) -->
         <div class="ziyaretci-sayaci">
-            👀 Bu siteyi toplam <span id="sayacDegeri" style="color: #00f0ff; font-weight: bold;">1</span> kişi ziyaret etti[span_4](start_span)[span_4](end_span).
+            👀 Bu siteyi toplam <img src="https://counter10.optistats.v1.fc.com/count/b.gif?xg_ped=https%3A%2F%2Fastrofen.github.io&ic=255&bc=0" alt="Ziyaretçi Sayacı" style="vertical-align: middle; display:inline-block;" /> kişi ziyaret etti.
         </div>
     </div>
 
@@ -228,18 +228,6 @@
     </div>
 
     <script>
-        // --- HATASIZ YEREL ZİYARETÇİ SAYACI ---
-        document.addEventListener("DOMContentLoaded", function() {
-            let ziyaretciSayisi = localStorage.getItem("astrofen_ziyaretci_sayisi");
-            if (!ziyaretciSayisi) {
-                ziyaretciSayisi = 125; // Başlangıç rakamı
-            } else {
-                ziyaretciSayisi = parseInt(ziyaretciSayisi) + 1;
-            }
-            localStorage.setItem("astrofen_ziyaretci_sayisi", ziyaretciSayisi);
-            document.getElementById("sayacDegeri").innerText = ziyaretciSayisi;
-        });
-
         function tumKartlariGizle() {
             document.getElementById('anaKart').style.display = 'none';
             document.getElementById('kartOyunKart').style.display = 'none';
