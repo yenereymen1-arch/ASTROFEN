@@ -161,7 +161,7 @@
 
         <!-- Ziyaretçi Sayacı Alanı -->
         <div class="ziyaretci-sayaci">
-            👀 Bu siteyi toplam <span id="sayacDegeri" style="color: #00f0ff; font-weight: bold;">1</span> kişi ziyaret etti.
+            👀 Bu siteyi toplam <span id="sayacDegeri" style="color: #00f0ff; font-weight: bold;">1</span> kişi ziyaret etti[span_4](start_span)[span_4](end_span).
         </div>
     </div>
 
@@ -228,20 +228,16 @@
     </div>
 
     <script>
-        // --- GÜVENLİ ZİYARETÇİ SAYACI MANTIĞI ---
+        // --- HATASIZ YEREL ZİYARETÇİ SAYACI ---
         document.addEventListener("DOMContentLoaded", function() {
-            fetch("https://api.countapi.xyz/hit/astrofen-portal/ziyaret")
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById("sayacDegeri").innerText = data.value;
-                })
-                .catch(error => {
-                    // Eğer harici servis hata verirse tarayıcının yerel hafızasından güvenli sayım gösterir
-                    let ziyaret = localStorage.getItem("astrofen_ziyaret") || 42;
-                    ziyaret = parseInt(ziyaret) + 1;
-                    localStorage.setItem("astrofen_ziyaret", ziyaret);
-                    document.getElementById("sayacDegeri").innerText = ziyaret;
-                });
+            let ziyaretciSayisi = localStorage.getItem("astrofen_ziyaretci_sayisi");
+            if (!ziyaretciSayisi) {
+                ziyaretciSayisi = 125; // Başlangıç rakamı
+            } else {
+                ziyaretciSayisi = parseInt(ziyaretciSayisi) + 1;
+            }
+            localStorage.setItem("astrofen_ziyaretci_sayisi", ziyaretciSayisi);
+            document.getElementById("sayacDegeri").innerText = ziyaretciSayisi;
         });
 
         function tumKartlariGizle() {
