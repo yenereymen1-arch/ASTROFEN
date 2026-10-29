@@ -255,7 +255,7 @@
                     <th>Puan</th>
                 </tr>
             </thead>
-            <tbody id="liderlikGgovde">
+            <tbody id="liderlikGovde">
                 <!-- Skorlar buraya gelecek -->
             </tbody>
         </table>
@@ -287,6 +287,8 @@
             document.getElementById("sayacDegeri").innerText = yerelSayi;
         }
 
+        let timerInterval = null;
+
         function tumKartlariGizle() {
             document.getElementById('anaKart').style.display = 'none';
             document.getElementById('kartOyunKart').style.display = 'none';
@@ -294,7 +296,7 @@
             document.getElementById('uniteSecimKart').style.display = 'none';
             document.getElementById('uniteTestKart').style.display = 'none';
             document.getElementById('liderlikKart').style.display = 'none';
-            clearInterval(timerInterval);
+            if (timerInterval) clearInterval(timerInterval);
         }
 
         function anaMenuyeDon() {
@@ -322,8 +324,8 @@
             ];
             
             skorlar.push({ isim: isim, puan: alinanPuan });
-            skorlar.sort((a, b) => b.puan - a.puan); // Puana göre büyükten küçüğe sırala
-            skorlar = skorlar.slice(0, 5); // Sadece ilk 5 kişiyi tut
+            skorlar.sort((a, b) => b.puan - a.puan);
+            skorlar = skorlar.slice(0, 5);
             
             localStorage.setItem("astrofen_skorlar", JSON.stringify(skorlar));
         }
@@ -335,7 +337,7 @@
                 { isim: "ÇaylakBilgin", puan: 110 }
             ];
             
-            let govde = document.getElementById("liderlikGgovde");
+            let govde = document.getElementById("liderlikGovde");
             govde.innerHTML = "";
             
             skorlar.forEach((skor, index) => {
@@ -406,7 +408,6 @@
         let aktifSoru = 0;
         let puan = 0;
         let kalanSure = 20;
-        let timerInterval;
 
         let jokerIpucuHak = true;
         let jokerElliHak = true;
@@ -434,7 +435,7 @@
         }
 
         function sureyiBaslat() {
-            clearInterval(timerInterval);
+            if (timerInterval) clearInterval(timerInterval);
             kalanSure = 20;
             document.getElementById('sureYazisi').innerText = `Süre: ${kalanSure} sn`;
             
@@ -459,7 +460,7 @@
         }
 
         function soruyuGoster() {
-            clearInterval(timerInterval);
+            if (timerInterval) clearInterval(timerInterval);
             ciftCevapAktif = false;
 
             if (aktifSoru < 15) {
@@ -482,7 +483,6 @@
                 unvanGuncelle();
                 sureyiBaslat();
             } else {
-                // Quiz bitti, oyuncudan adını isteyelim ve listeye ekleyelim
                 let oyuncuAdi = prompt("🎉 Tebrikler Quiz bitti! Liderlik tablosuna yazılmak için adını veya takma adını gir:");
                 if(!oyuncuAdi || oyuncuAdi.trim() === "") oyuncuAdi = "Gizli Astronot";
                 
@@ -505,7 +505,7 @@
             let q = quizSorulari[aktifSoru];
 
             if (secim === q.dogru) {
-                clearInterval(timerInterval);
+                if (timerInterval) clearInterval(timerInterval);
                 puan += 10;
                 alert("Harika! Doğru cevap! 🚀 (+10 Puan)");
                 aktifSoru++;
@@ -517,7 +517,7 @@
                     document.getElementById(`opt-${secim}`).style.opacity = '0.4';
                     ciftCevapAktif = false;
                 } else {
-                    clearInterval(timerInterval);
+                    if (timerInterval) clearInterval(timerInterval);
                     alert(`Yanlış cevap! Doğru cevap: ${q.secenekler[q.dogru]} olmalıydı 😊`);
                     aktifSoru++;
                     soruyuGoster();
@@ -758,7 +758,7 @@
             } else {
                 let basari = "Geliştirilebilir 🎯";
                 if(uPuan >= 50) basari = "İyi 👍";
-                if(uPuan >= 80) basari madalya = "Harika! 🌟";
+                if(uPuan >= 80) basari = "Harika! 🌟";
                 if(uPuan === 100) basari = "Mükemmel! Tam Puan! 🏆";
 
                 document.getElementById('uniteTestKart').innerHTML = `
@@ -767,6 +767,7 @@
                         <p style="color: #00f0ff;"><strong>Toplam Puanın:</strong> ${uPuan} / 100</p>
                         <p style="color: #38ef7d;"><strong>Doğru Sayısı:</strong> ${uDogru}</p>
                         <p style="color: #ff0080;"><strong>Yanlış Sayısı:</strong> ${uYanlis}</p>
+                        <p style="color: #e6a23c;"><strong>Derecen:</strong> ${basari}</p>
                     </div>
                     <button onclick="uniteleriAc()" class="buton" style="background: #38ef7d;">📚 Başka Ünite Seç</button>
                     <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 10px;">⬅️ Ana Menüye Dön</button>
