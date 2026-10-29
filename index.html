@@ -268,7 +268,7 @@
     </div>
 
     <script>
-        // --- FIREBASE BAĞLANTI AYARLARI (SENİN PROJEN) ---
+        // --- FIREBASE BAĞLANTI AYARLARI ---
         const firebaseConfig = {
             apiKey: "AIzaSyDEJR_XPFotx_alR9ZpauthDomain",
             authDomain: "astrofen-liderlik.firebaseapp.com",
@@ -357,7 +357,6 @@
                     skorlar.push(childSnapshot.val());
                 });
 
-                // En yüksek puan en üstte olacak şekilde ters çevir
                 skorlar.sort((a, b) => b.puan - a.puan);
 
                 if (skorlar.length === 0) {
@@ -816,70 +815,4 @@
         }
     </script>
 </body>
-<!-- Firebase Kütüphaneleri -->
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js">
-
-<script>
-  // Astrofen Küresel Liderlik Tablosu Firebase Bağlantısı
-  const firebaseConfig = {
-    databaseURL: "https://astrofen-liderlik-default-rtdb.firebaseio.com"
-  };
-
-  // Firebase Başlatma
-  if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-  } else {
-    firebase.app();
-  }
-
-  const database = firebase.database();
-
-  // Skoru Veritabanına Kaydetme (Gerçek Kişiler İçin)
-  function skorKaydet(kullaniciAdi, puan) {
-    const skorlarRef = database.ref('skorlar');
-    const yeniSkorRef = skorlarRef.push();
-    yeniSkorRef.set({
-      isim: kullaniciAdi,
-      puan: puan,
-      tarih: Date.now()
-    }).then(() => {
-      console.log("Skor başarıyla küresel havuza kaydedildi!");
-    }).catch((error) => {
-      console.error("Kayıt sırasında hata:", error);
-    });
-  }
-
-  // Canlı Liderlik Tablosunu Çekme (Gerçek Kişileri Listeleme)
-  function liderlikTablosunuGetir(tabloElementId) {
-    const tabloDiv = document.getElementById(tabloElementId);
-    if (!tabloDiv) return;
-
-    tabloDiv.innerHTML = "Canlı veriler yükleniyor...";
-
-    database.ref('skorlar').orderByChild('puan').limitToLast(10).on('value', (snapshot) => {
-      tabloDiv.innerHTML = "";
-      
-      if (!snapshot.exists()) {
-        tabloDiv.innerHTML = "<p>Henüz kayıtlı skor yok. İlk skoru sen kaydet!</p>";
-        return;
-      }
-
-      let skorlarListesi = [];
-      snapshot.forEach((childSnapshot) => {
-        skorlarListesi.push(childSnapshot.val());
-      });
-
-      // En yüksek puanlılar en üstte olacak şekilde sırala
-      skorlarListesi.sort((a, b) => b.puan - a.puan);
-
-      let html = "<ol style='padding-left: 20px; text-align: left;'>";
-      skorlarListesi.forEach((veri) => {
-        html += `<li style='margin-bottom: 8px;'><b>${veri.isim}</b> — ${veri.puan} Puan</li>`;
-      });
-      html += "</ol>";
-
-      tabloDiv.innerHTML = html;
-    });
-  }
-</script>                               </html>
+</html>
