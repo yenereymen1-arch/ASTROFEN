@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASTROFEN - 5. Sınıf Uzay ve Fen Macerası</title>
+    
+    <!-- Firebase SDK (Küresel Liderlik Tablosu İçin) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
     <style>
         * { box-sizing: border-box; }
         body {
@@ -174,7 +179,7 @@
         <button class="buton" onclick="kartOyununuAc()">🃏 30 Kartlı Uzay Çevirmece Oyunu</button>
         <button class="buton buton-quiz" onclick="quiziBaslat()">🧠 15 Soruluk Karışık Fen Quizi (3 Jokerli) ⚡</button>
         <button class="buton buton-unite" onclick="uniteleriAc()">📚 5. Sınıf Ünite Testleri (20'şer Soru)</button>
-        <button class="buton buton-lider" onclick="liderlikTablosunuAc()">🏆 Liderlik Tablosu (En İyi Skorlar)</button>
+        <button class="buton buton-lider" onclick="liderlikTablosunuAc()">🏆 Küresel Liderlik Tablosu</button>
 
         <div class="ziyaretci-sayaci">
             👀 Bu siteyi toplam <span id="sayacDegeri" style="color: #00f0ff; font-weight: bold;">142</span> kişi ziyaret etti.
@@ -243,10 +248,10 @@
         <button onclick="uniteleriAc()" class="buton" style="background: #6c757d; margin-top: 15px;">⬅️ Ünite Seçimine Dön</button>
     </div>
 
-    <!-- 6. LİDERLİK TABLOSU EKRANI -->
+    <!-- 6. KÜRESEL LİDERLİK TABLOSU EKRANI -->
     <div class="kart" id="liderlikKart" style="display: none;">
-        <h2 style="color: #f7b733;">🏆 ASTROFEN Liderlik Tablosu</h2>
-        <p>En yüksek puanı alan şampiyon astronotlar!</p>
+        <h2 style="color: #f7b733;">🏆 Canlı Küresel Liderlik Tablosu</h2>
+        <p>Dünyanın dört bir yanından bağlanan gerçek astronotlar!</p>
         <table class="liderlik-tablo">
             <thead>
                 <tr>
@@ -256,13 +261,29 @@
                 </tr>
             </thead>
             <tbody id="liderlikGovde">
-                <!-- Skorlar buraya gelecek -->
+                <tr><td colspan="3" style="text-align:center;">Veriler yükleniyor... 🌐</td></tr>
             </tbody>
         </table>
         <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 20px;">⬅️ Ana Menüye Dön</button>
     </div>
 
     <script>
+        // --- FIREBASE BAĞLANTI AYARLARI (SENİN PROJEN) ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyDEJR_XPFotx_alR9ZpauthDomain",
+            authDomain: "astrofen-liderlik.firebaseapp.com",
+            databaseURL: "https://astrofen-liderlik-default-rtdb.firebaseio.com",
+            projectId: "astrofen-liderlik",
+            storageBucket: "astrofen-liderlik.appspot.com",
+            messagingSenderId: "628909289882",
+            appId: "1:628909289882:web:c3f1d6",
+            measurementId: "G-N0NMCLV5HD"
+        };
+
+        // Firebase Başlatma
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
         // --- ZİYARETÇİ SAYACI ---
         document.addEventListener("DOMContentLoaded", function() {
             let siteZiyaretEdildi = sessionStorage.getItem("astrofen_oturum_acildi");
@@ -312,39 +333,44 @@
         function liderlikTablosunuAc() {
             tumKartlariGizle();
             document.getElementById('liderlikKart').style.display = 'block';
-            skorlariListele();
+            canliSkorlariGetir();
         }
 
-        // --- SKORLARI KAYDETME VE LİSTELEME MANTIĞI ---
-        function skorKaydet(isim, alinanPuan) {
-            let skorlar = JSON.parse(localStorage.getItem("astrofen_skorlar")) || [
-                { isim: "UzayKaptani5", puan: 150 },
-                { isim: "YıldızAvcısı", puan: 130 },
-                { isim: "ÇaylakBilgin", puan: 110 }
-            ];
-            
-            skorlar.push({ isim: isim, puan: alinanPuan });
-            skorlar.sort((a, b) => b.puan - a.puan);
-            skorlar = skorlar.slice(0, 5);
-            
-            localStorage.setItem("astrofen_skorlar", JSON.stringify(skorlar));
+        // --- FIREBASE İLE CANLI SKOR KAYDETME VE ÇEKME ---
+        function skorKaydetFirebase(isim, alinanPuan) {
+            let yeniSkorRef = db.ref('skorlar').push();
+            yeniSkorRef.set({
+                isim: isim,
+                puan: alinanPuan
+            });
         }
 
-        function skorlariListele() {
-            let skorlar = JSON.parse(localStorage.getItem("astrofen_skorlar")) || [
-                { isim: "UzayKaptani5", puan: 150 },
-                { isim: "YıldızAvcısı", puan: 130 },
-                { isim: "ÇaylakBilgin", puan: 110 }
-            ];
-            
+        function canliSkorlariGetir() {
             let govde = document.getElementById("liderlikGovde");
-            govde.innerHTML = "";
-            
-            skorlar.forEach((skor, index) => {
-                let tr = document.createElement("tr");
-                let madalya = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : `${index + 1}.`;
-                tr.innerHTML = `<td>${madalya}</td><td>${skor.isim}</td><td><b>${skor.puan} Puan</b></td>`;
-                govde.appendChild(tr);
+            govde.innerHTML = `<tr><td colspan="3" style="text-align:center;">Canlı veriler yükleniyor... 🌐</td></tr>`;
+
+            db.ref('skorlar').orderByChild('puan').limitToLast(10).once('value', (snapshot) => {
+                govde.innerHTML = "";
+                let skorlar = [];
+                
+                snapshot.forEach((childSnapshot) => {
+                    skorlar.push(childSnapshot.val());
+                });
+
+                // En yüksek puan en üstte olacak şekilde ters çevir
+                skorlar.sort((a, b) => b.puan - a.puan);
+
+                if (skorlar.length === 0) {
+                    govde.innerHTML = `<tr><td colspan="3" style="text-align:center;">Henüz kayıtlı skor yok. İlk skoru sen kaydet! 🚀</td></tr>`;
+                    return;
+                }
+
+                skorlar.forEach((skor, index) => {
+                    let tr = document.createElement("tr");
+                    let madalya = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : `${index + 1}.`;
+                    tr.innerHTML = `<td>${madalya}</td><td>${skor.isim}</td><td><b>${skor.puan} Puan</b></td>`;
+                    govde.appendChild(tr);
+                });
             });
         }
 
@@ -483,18 +509,19 @@
                 unvanGuncelle();
                 sureyiBaslat();
             } else {
-                let oyuncuAdi = prompt("🎉 Tebrikler Quiz bitti! Liderlik tablosuna yazılmak için adını veya takma adını gir:");
+                let oyuncuAdi = prompt("🎉 Tebrikler Quiz bitti! Küresel lige yazılmak için adını gir:");
                 if(!oyuncuAdi || oyuncuAdi.trim() === "") oyuncuAdi = "Gizli Astronot";
                 
-                skorKaydet(oyuncuAdi, puan);
+                skorKaydetFirebase(oyuncuAdi, puan);
 
                 document.getElementById('quizKart').innerHTML = `
                     <h2 style="color: #00f0ff; text-align: center;">🎉 Tebrikler! Fen Quizini Bitirdin! 🚀</h2>
                     <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; font-size: 18px; margin: 15px 0; text-align: center;">
                         <p style="color: #00f0ff;"><strong>Toplam Puanın:</strong> ${puan} / 150</p>
                         <p style="color: #38ef7d;"><strong>Final Unvanın:</strong> ${document.getElementById('unvanYazisi').innerText.replace('Unvan: ', '')}</p>
+                        <p style="color: #f7b733; font-size: 14px; margin-top: 10px;">✅ Skorun canlı küresel veritabanına kaydedildi!</p>
                     </div>
-                    <button onclick="liderlikTablosunuAc()" class="buton" style="background: #f7b733;">🏆 Liderlik Tablosunu Gör</button>
+                    <button onclick="liderlikTablosunuAc()" class="buton" style="background: #f7b733;">🏆 Küresel Liderlik Tablosunu Gör</button>
                     <button onclick="quiziBaslat()" class="buton" style="background: #38ef7d; margin-top: 10px;">🔄 Yeniden Başlat</button>
                     <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 10px;">⬅️ Ana Menüye Dön</button>
                 `;
