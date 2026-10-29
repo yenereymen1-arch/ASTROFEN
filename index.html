@@ -58,6 +58,9 @@
         .buton-unite {
             background: linear-gradient(90deg, #11998e, #38ef7d);
         }
+        .buton-lider {
+            background: linear-gradient(90deg, #f7b733, #fc4a1a);
+        }
         .secenek-btn {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(0, 240, 255, 0.4);
@@ -134,6 +137,19 @@
             color: #888;
             cursor: not-allowed;
         }
+        .liderlik-tablo {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        .liderlik-tablo th, .liderlik-tablo td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .liderlik-tablo th {
+            color: #00f0ff;
+        }
         .ziyaretci-sayaci {
             margin-top: 25px;
             font-size: 14px;
@@ -158,8 +174,8 @@
         <button class="buton" onclick="kartOyununuAc()">🃏 30 Kartlı Uzay Çevirmece Oyunu</button>
         <button class="buton buton-quiz" onclick="quiziBaslat()">🧠 15 Soruluk Karışık Fen Quizi (3 Jokerli) ⚡</button>
         <button class="buton buton-unite" onclick="uniteleriAc()">📚 5. Sınıf Ünite Testleri (20'şer Soru)</button>
+        <button class="buton buton-lider" onclick="liderlikTablosunuAc()">🏆 Liderlik Tablosu (En İyi Skorlar)</button>
 
-        <!-- Güvenli ve Hatasız Sayaç Alanı -->
         <div class="ziyaretci-sayaci">
             👀 Bu siteyi toplam <span id="sayacDegeri" style="color: #00f0ff; font-weight: bold;">142</span> kişi ziyaret etti.
         </div>
@@ -227,35 +243,42 @@
         <button onclick="uniteleriAc()" class="buton" style="background: #6c757d; margin-top: 15px;">⬅️ Ünite Seçimine Dön</button>
     </div>
 
+    <!-- 6. LİDERLİK TABLOSU EKRANI -->
+    <div class="kart" id="liderlikKart" style="display: none;">
+        <h2 style="color: #f7b733;">🏆 ASTROFEN Liderlik Tablosu</h2>
+        <p>En yüksek puanı alan şampiyon astronotlar!</p>
+        <table class="liderlik-tablo">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Astronot Adı</th>
+                    <th>Puan</th>
+                </tr>
+            </thead>
+            <tbody id="liderlikGgovde">
+                <!-- Skorlar buraya gelecek -->
+            </tbody>
+        </table>
+        <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 20px;">⬅️ Ana Menüye Dön</button>
+    </div>
+
     <script>
-        // --- GERÇEK KİŞİLERİ SAYAN BULut TABANLI SAYAC MANTIĞI ---
+        // --- ZİYARETÇİ SAYACI ---
         document.addEventListener("DOMContentLoaded", function() {
-            // Ziyaretçinin daha önce siteyi bu tarayıcıdan açıp açmadığını kontrol eder
             let siteZiyaretEdildi = sessionStorage.getItem("astrofen_oturum_acildi");
-            
-            // Eğer bu tarayıcı sekmelesinde ilk kez giriliyorsa api'ye bildirir
             let apiURL = "https://api.countapi.xyz/hit/astrofen-portal-5sinif/ziyaretci";
             
             if (!siteZiyaretEdildi) {
                 sessionStorage.setItem("astrofen_oturum_acildi", "evet");
                 fetch(apiURL)
                     .then(response => response.json())
-                    .then(data => {
-                        document.getElementById("sayacDegeri").innerText = data.value;
-                    })
-                    .catch(error => {
-                        kurtarmaSayaciGetir();
-                    });
+                    .then(data => { document.getElementById("sayacDegeri").innerText = data.value; })
+                    .catch(error => { kurtarmaSayaciGetir(); });
             } else {
-                // Zaten bu oturumda sayıldıysa sadece mevcut sayıyı çeker, artırmaz
                 fetch("https://api.countapi.xyz/get/astrofen-portal-5sinif/ziyaretci")
                     .then(response => response.json())
-                    .then(data => {
-                        document.getElementById("sayacDegeri").innerText = data.value;
-                    })
-                    .catch(error => {
-                        kurtarmaSayaciGetir();
-                    });
+                    .then(data => { document.getElementById("sayacDegeri").innerText = data.value; })
+                    .catch(error => { kurtarmaSayaciGetir(); });
             }
         });
 
@@ -270,6 +293,7 @@
             document.getElementById('quizKart').style.display = 'none';
             document.getElementById('uniteSecimKart').style.display = 'none';
             document.getElementById('uniteTestKart').style.display = 'none';
+            document.getElementById('liderlikKart').style.display = 'none';
             clearInterval(timerInterval);
         }
 
@@ -281,6 +305,45 @@
         function uniteleriAc() {
             tumKartlariGizle();
             document.getElementById('uniteSecimKart').style.display = 'block';
+        }
+
+        function liderlikTablosunuAc() {
+            tumKartlariGizle();
+            document.getElementById('liderlikKart').style.display = 'block';
+            skorlariListele();
+        }
+
+        // --- SKORLARI KAYDETME VE LİSTELEME MANTIĞI ---
+        function skorKaydet(isim, alinanPuan) {
+            let skorlar = JSON.parse(localStorage.getItem("astrofen_skorlar")) || [
+                { isim: "UzayKaptani5", puan: 150 },
+                { isim: "YıldızAvcısı", puan: 130 },
+                { isim: "ÇaylakBilgin", puan: 110 }
+            ];
+            
+            skorlar.push({ isim: isim, puan: alinanPuan });
+            skorlar.sort((a, b) => b.puan - a.puan); // Puana göre büyükten küçüğe sırala
+            skorlar = skorlar.slice(0, 5); // Sadece ilk 5 kişiyi tut
+            
+            localStorage.setItem("astrofen_skorlar", JSON.stringify(skorlar));
+        }
+
+        function skorlariListele() {
+            let skorlar = JSON.parse(localStorage.getItem("astrofen_skorlar")) || [
+                { isim: "UzayKaptani5", puan: 150 },
+                { isim: "YıldızAvcısı", puan: 130 },
+                { isim: "ÇaylakBilgin", puan: 110 }
+            ];
+            
+            let govde = document.getElementById("liderlikGgovde");
+            govde.innerHTML = "";
+            
+            skorlar.forEach((skor, index) => {
+                let tr = document.createElement("tr");
+                let madalya = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : `${index + 1}.`;
+                tr.innerHTML = `<td>${madalya}</td><td>${skor.isim}</td><td><b>${skor.puan} Puan</b></td>`;
+                govde.appendChild(tr);
+            });
         }
 
         // --- 30 KARTLI EŞLEŞTİRME OYUNU ---
@@ -320,7 +383,7 @@
             });
         }
 
-        // --- 15 KARIŞIK SORULUK KAPSAMLI HAVUZ ---
+        // --- QUIZ MANTIĞI ---
         const tumKarisikSorular = [
             { soru: "Güneş Sistemindeki Güneş'e en yakın gezegen hangisidir?", secenekler: ["Venüs", "Merkür", "Mars", "Dünya"], dogru: 1, ipucu: "En küçük gezegendir." },
             { soru: "Ay'ın ana evrelerinden biri olmayan hangisidir?", secenekler: ["Yeni Ay", "Mavi Ay", "İlk Dördün", "Dolunay"], dogru: 1, ipucu: "Gökyüzünde renk ismiyle bilinen evre ana evre değildir." },
@@ -419,13 +482,20 @@
                 unvanGuncelle();
                 sureyiBaslat();
             } else {
+                // Quiz bitti, oyuncudan adını isteyelim ve listeye ekleyelim
+                let oyuncuAdi = prompt("🎉 Tebrikler Quiz bitti! Liderlik tablosuna yazılmak için adını veya takma adını gir:");
+                if(!oyuncuAdi || oyuncuAdi.trim() === "") oyuncuAdi = "Gizli Astronot";
+                
+                skorKaydet(oyuncuAdi, puan);
+
                 document.getElementById('quizKart').innerHTML = `
                     <h2 style="color: #00f0ff; text-align: center;">🎉 Tebrikler! Fen Quizini Bitirdin! 🚀</h2>
                     <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; font-size: 18px; margin: 15px 0; text-align: center;">
                         <p style="color: #00f0ff;"><strong>Toplam Puanın:</strong> ${puan} / 150</p>
                         <p style="color: #38ef7d;"><strong>Final Unvanın:</strong> ${document.getElementById('unvanYazisi').innerText.replace('Unvan: ', '')}</p>
                     </div>
-                    <button onclick="quiziBaslat()" class="buton" style="background: #38ef7d;">🔄 Yeniden Başlat</button>
+                    <button onclick="liderlikTablosunuAc()" class="buton" style="background: #f7b733;">🏆 Liderlik Tablosunu Gör</button>
+                    <button onclick="quiziBaslat()" class="buton" style="background: #38ef7d; margin-top: 10px;">🔄 Yeniden Başlat</button>
                     <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 10px;">⬅️ Ana Menüye Dön</button>
                 `;
             }
@@ -688,7 +758,7 @@
             } else {
                 let basari = "Geliştirilebilir 🎯";
                 if(uPuan >= 50) basari = "İyi 👍";
-                if(uPuan >= 80) basari = "Harika! 🌟";
+                if(uPuan >= 80) basari madalya = "Harika! 🌟";
                 if(uPuan === 100) basari = "Mükemmel! Tam Puan! 🏆";
 
                 document.getElementById('uniteTestKart').innerHTML = `
@@ -697,7 +767,6 @@
                         <p style="color: #00f0ff;"><strong>Toplam Puanın:</strong> ${uPuan} / 100</p>
                         <p style="color: #38ef7d;"><strong>Doğru Sayısı:</strong> ${uDogru}</p>
                         <p style="color: #ff0080;"><strong>Yanlış Sayısı:</strong> ${uYanlis}</p>
-                        <p style="color: #e6a23c;"><strong>Derecen:</strong> ${basari}</p>
                     </div>
                     <button onclick="uniteleriAc()" class="buton" style="background: #38ef7d;">📚 Başka Ünite Seç</button>
                     <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 10px;">⬅️ Ana Menüye Dön</button>
