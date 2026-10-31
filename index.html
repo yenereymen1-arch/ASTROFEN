@@ -176,7 +176,7 @@
         <h1>ASTROFEN 🚀</h1>
         <p>5. Sınıf Uzay ve Fen Bilimleri Portalı</p>
         
-        <!-- Senin istediğin isim ve öğretmen bilgileri -->
+        <!-- İsmail Eymen Akturk & Elif Öznur Tokgöz -->
         <div style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0,240,255,0.2); padding: 10px; border-radius: 10px; margin: 15px 0; font-size: 14px;">
             <span style="color: #00f0ff; font-weight: bold;">Oluşturan:</span> İsmail Eymen Akturk<br>
             <span style="color: #38ef7d; font-weight: bold;">Katkı Sağlayan Öğretmen:</span> Elif Öznur Tokgöz
@@ -401,7 +401,7 @@
             });
         }
 
-        // --- 1. ÜNİTEYE ÖZEL 100 SORULUK DEV HAVUZ (HER SEFERİNDE FARKLI GELECEK) ---
+        // --- 1. ÜNİTEYE ÖZEL 100 SORULUK DEV HAVUZ ---
         const unite1YuzSoruHavuzu = [
             { soru: "Güneş'in şekli hangi gök cismine benzer?", secenekler: ["Küre", "Silindir", "Kare", "Üçgen"], dogru: 0, ipucu: "Top şeklindedir." },
             { soru: "Güneş, Dünya'mıza en yakın nedir?", secenekler: ["Yıldız", "Gezegen", "Uydu", "Meteor"], dogru: 0, ipucu: "Isı ve ışık yayar." },
@@ -437,6 +437,8 @@
         let quizSorulari = [];
         let aktifSoru = 0;
         let puan = 0;
+        let dogruSayisi = 0;
+        let yanlisSayisi = 0;
         let kalanSure = 25;
 
         let jokerIpucuHak = true;
@@ -451,6 +453,8 @@
             quizSorulari = [...unite1YuzSoruHavuzu].sort(() => Math.random() - 0.5);
             aktifSoru = 0;
             puan = 0;
+            dogruSayisi = 0;
+            yanlisSayisi = 0;
 
             jokerIpucuHak = true;
             jokerElliHak = true;
@@ -474,7 +478,8 @@
                 document.getElementById('sureYazisi').innerText = `Süre: ${kalanSure} sn`;
                 if (kalanSure <= 0) {
                     clearInterval(timerInterval);
-                    alert("⏰ Süre bitti! Bir sonraki soruya geçiliyor.");
+                    yanlisSayisi++;
+                    alert("⏰ Süre bitti! Yanlış sayıldı. Sıradaki soruya geçiliyor.");
                     aktifSoru++;
                     soruyuGoster();
                 }
@@ -483,9 +488,9 @@
 
         function unvanGuncelle() {
             let unvan = "Çaylak Astronot 👨‍🚀";
-            if(puan >= 200) unvan = "Uzay Kaşifi 🛰️";
-            if(puan >= 500) unvan = "Galaksi Kaptanı 🚀";
-            if(puan >= 800) unvan = "Evrenin Profesörü 🌟";
+            if(puan >= 100) unvan = "Uzay Kaşifi 🛰️";
+            if(puan >= 250) unvan = "Galaksi Kaptanı 🚀";
+            if(puan >= 400) unvan = "Evrenin Profesörü 🌟";
             document.getElementById('unvanYazisi').innerText = "Unvan: " + unvan;
         }
 
@@ -521,8 +526,10 @@
                 document.getElementById('quizKart').innerHTML = `
                     <h2 style="color: #00f0ff; text-align: center;">🎉 Tebrikler! 1. Ünite Quizini Bitirdin! 🚀</h2>
                     <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; font-size: 18px; margin: 15px 0; text-align: center;">
-                        <p style="color: #00f0ff;"><strong>Toplam Puanın:</strong> ${puan} / 1000</p>
-                        <p style="color: #38ef7d;"><strong>Final Unvanın:</strong> ${document.getElementById('unvanYazisi').innerText.replace('Unvan: ', '')}</p>
+                        <p style="color: #00f0ff; font-size: 20px;"><strong>Toplam Puanın:</strong> ${puan} / 500</p>
+                        <p style="color: #38ef7d;"><strong>✅ Doğru Sayısı:</strong> ${dogruSayisi}</p>
+                        <p style="color: #ff4444;"><strong>❌ Yanlış Sayısı:</strong> ${yanlisSayisi}</p>
+                        <p style="color: #38ef7d; margin-top: 10px;"><strong>Final Unvanın:</strong> ${document.getElementById('unvanYazisi').innerText.replace('Unvan: ', '')}</p>
                         <p style="color: #f7b733; font-size: 14px; margin-top: 10px;">✅ Skorun canlı küresel veritabanına kaydedildi!</p>
                     </div>
                     <button onclick="liderlikTablosunuAc()" class="buton" style="background: #f7b733;">🏆 Küresel Liderlik Tablosunu Gör</button>
@@ -537,8 +544,9 @@
 
             if (secim === q.dogru) {
                 if (timerInterval) clearInterval(timerInterval);
-                puan += 10;
-                alert("Harika! Doğru cevap! 🚀 (+10 Puan)");
+                puan += 5; // 100 soru x 5 puan = 500 Tam Puan
+                dogruSayisi++;
+                alert("Harika! Doğru cevap! 🚀 (+5 Puan)");
                 aktifSoru++;
                 soruyuGoster();
             } else {
@@ -549,6 +557,7 @@
                     ciftCevapAktif = false;
                 } else {
                     if (timerInterval) clearInterval(timerInterval);
+                    yanlisSayisi++;
                     alert(`Yanlış cevap! Doğru cevap: ${q.secenekler[q.dogru]} olmalıydı 😊`);
                     aktifSoru++;
                     soruyuGoster();
