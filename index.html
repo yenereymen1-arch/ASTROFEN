@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASTROFEN - 5. Sınıf Uzay Portalı</title>
     <style>
-        /* Uzay Teması ve Gece Mavisi Arka Plan */
         body {
             background: linear-gradient(135deg, #0b0b1a, #1a0033);
             color: #ffffff;
@@ -13,111 +12,77 @@
             text-align: center;
             margin: 0;
             padding: 20px;
-            overflow-x: hidden;
         }
 
         h1 {
             color: #00ffcc;
             font-size: 2.5rem;
-            text-shadow: 0 0 15px rgba(0, 255, 204, 0.6);
             margin-bottom: 5px;
         }
 
         .info-box {
             font-size: 1.1rem;
             color: #dddddd;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             line-height: 1.6;
         }
 
-        /* --- KENDİ ÜRETTİĞİMİZ CSS UZAY ANİMASYONU --- */
-        .space-scene {
-            position: relative;
-            width: 100%;
-            height: 250px;
+        /* --- ESKİ TUŞLAR (BUTONLAR) --- */
+        .button-container {
             display: flex;
             justify-content: center;
-            align-items: center;
-            margin: 20px 0;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
         }
 
-        /* Güneş Animasyonu (Büyüyüp Küçülme Işık Efekti) */
-        .sun {
-            width: 90px;
-            height: 90px;
-            background: radial-gradient(circle, #ffcc00, #ff6600);
-            border-radius: 50%;
-            box-shadow: 0 0 30px #ff9900, 0 0 60px #ff3300;
-            animation: sunGlow 3s infinite alternate;
-            position: absolute;
+        .btn {
+            background: linear-gradient(135deg, #00ffcc, #0088cc);
+            color: #0b0b1a;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
         }
 
-        @keyframes sunGlow {
-            0% { transform: scale(1); box-shadow: 0 0 20px #ff9900; }
-            100% { transform: scale(1.08); box-shadow: 0 0 45px #ff3300; }
+        .btn:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #fff, #00ffcc);
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.8);
         }
 
-        /* Dünya Yörüngesi ve Dönüşü */
-        .orbit {
-            position: absolute;
-            width: 220px;
-            height: 220px;
-            border: 1px dashed rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            animation: rotateOrbit 8s linear infinite;
-        }
-
-        .earth {
-            position: absolute;
-            top: 10px;
-            left: 95px;
-            width: 30px;
-            height: 30px;
-            background: radial-gradient(circle, #3399ff, #0044cc);
-            border-radius: 50%;
-            box-shadow: 0 0 10px #3399ff;
-        }
-
-        @keyframes rotateOrbit {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Ünite Bilgi Kartları Tasarımı */
+        /* Kartlar Alanı */
         .cards-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
             max-width: 800px;
-            margin: 30px auto;
+            margin: 0 auto;
         }
 
         .card {
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(0, 255, 204, 0.3);
             border-radius: 12px;
-            padding: 15px;
-            width: 220px;
-            backdrop-filter: blur(5px);
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: #00ffcc;
-            box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+            padding: 20px;
+            width: 240px;
+            text-align: left;
         }
 
         .card h3 {
             color: #00ffcc;
             margin-top: 0;
-            font-size: 1.2rem;
         }
 
         .card p {
-            font-size: 0.95rem;
             color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -130,19 +95,17 @@
       Katkı Sağlayan Öğretmen: Elif Öznur Tokgöz
     </div>
 
-    <hr style="border: 0; height: 1px; background: rgba(255,255,255,0.2); width: 60%; margin: 20px auto;">
-
-    <!-- 1. Ünite Canlı Uzay Sahnesi (Tamamen Kodla Üretildi) -->
-    <h2>Güneş, Dünya ve Ay Sistemi</h2>
-    <div class="space-scene">
-        <div class="sun" title="Güneş"></div>
-        <div class="orbit">
-            <div class="earth" title="Dünya"></div>
-        </div>
+    <!-- Eski Tuşlar / Butonlar -->
+    <div class="button-container">
+        <button class="btn" onclick="alert('Güneş, Dünya ve Ay 1. Üniteye Hoş Geldiniz!')">☀️ 1. Üniteye Git</button>
+        <button class="btn" onclick="alert('Yakında eğlenceli testler eklenecektir!')">📝 Test Çöz</button>
+        <button class="btn" onclick="alert('ASTROFEN - 5. Sınıf Fen Bilimleri Projesi')">ℹ️ Hakkında</button>
     </div>
-    <p style="font-size: 0.9rem; color: #aaa;">(Animasyon: Dünyanın Güneş çevresindeki dönüşü)</p>
 
-    <!-- 1. Ünite Özet Kartları -->
+    <hr style="border: 0; height: 1px; background: rgba(255,255,255,0.2); width: 60%; margin: 30px auto;">
+
+    <h2>1. Ünite: Güneş, Dünya ve Ay</h2>
+    
     <div class="cards-container">
         <div class="card">
             <h3>☀️ Güneş</h3>
@@ -154,7 +117,7 @@
         </div>
         <div class="card">
             <h3>🌙 Ay</h3>
-            <p>Dünyamızın tek doğal uydusudur. Dünya etrafında dönerken ana evrelerini (Yeni Ay, İlk Dördün vb.) oluşturur.</p>
+            <p>Dünyamızın tek doğal uydusudur. Dünya etrafında dönerken ana evrelerini oluşturur.</p>
         </div>
     </div>
 
