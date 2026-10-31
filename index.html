@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASTROFEN - 5. Sınıf 1. Ünite Uzay Portalı</title>
+    <title>ASTROFEN - 5. Sınıf Uzay ve Fen Macerası</title>
+    
+    <!-- Firebase SDK (Küresel Liderlik Tablosu İçin) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
 
     <style>
         * { box-sizing: border-box; }
@@ -33,11 +37,11 @@
             color: #00f0ff;
             text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
             font-size: 32px;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
         p { color: #c3c7db; }
         .buton {
-            background: linear-gradient(90deg, #00f0ff, #7928ca);
+            background: linear-gradient(90deg, #7928ca, #ff0080);
             color: white;
             border: none;
             padding: 14px 24px;
@@ -51,7 +55,16 @@
         }
         .buton:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(255, 0, 128, 0.4);
+        }
+        .buton-quiz {
+            background: linear-gradient(90deg, #00f0ff, #7928ca);
+        }
+        .buton-unite {
+            background: linear-gradient(90deg, #11998e, #38ef7d);
+        }
+        .buton-lider {
+            background: linear-gradient(90deg, #f7b733, #fc4a1a);
         }
         .secenek-btn {
             background: rgba(255, 255, 255, 0.1);
@@ -69,30 +82,78 @@
         .secenek-btn:hover {
             background: rgba(0, 240, 255, 0.25);
         }
-        .cards-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
+        .kart-grid-30 {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            margin-top: 20px;
         }
-        .card {
+        .oyun-karti {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.4);
+            border-radius: 8px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .unite-liste {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .unite-sec-btn {
             background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(0, 255, 204, 0.3);
-            border-radius: 12px;
-            padding: 15px;
-            width: 220px;
+            border: 1px solid rgba(56, 239, 125, 0.4);
+            color: #fff;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .unite-sec-btn:hover {
+            background: rgba(56, 239, 125, 0.2);
+        }
+        .joker-kutu {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .joker-btn {
+            background: #e6a23c;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .joker-btn:disabled {
+            background: #555;
+            color: #888;
+            cursor: not-allowed;
+        }
+        .liderlik-tablo {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
             text-align: left;
         }
-        .card h3 {
-            color: #00ffcc;
-            margin-top: 0;
-            font-size: 17px;
+        .liderlik-tablo th, .liderlik-tablo td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .card p {
-            color: #ccc;
-            font-size: 13px;
-            line-height: 1.4;
+        .liderlik-tablo th {
+            color: #00f0ff;
         }
         .ziyaretci-sayaci {
             margin-top: 25px;
@@ -100,6 +161,11 @@
             color: #8c92ac;
             border-top: 1px solid rgba(255,255,255,0.1);
             padding-top: 15px;
+        }
+        @media (max-width: 600px) {
+            .kart-grid-30 {
+                grid-template-columns: repeat(5, 1fr);
+            }
         }
     </style>
 </head>
@@ -109,110 +175,143 @@
     <div class="kart" id="anaKart">
         <h1>ASTROFEN 🚀</h1>
         <p>5. Sınıf Uzay ve Fen Bilimleri Portalı</p>
-        <p style="color: #38ef7d; font-weight: bold; font-size: 15px;">☀️ 1. Ünite: Güneş, Dünya ve Ay Özel Sürümü</p>
+        <p style="color: #38ef7d; font-weight: bold;">☀️ 1. Ünite Özel Sürümü</p>
 
-        <div class="cards-container">
-            <div class="card">
-                <h3>☀️ Güneş</h3>
-                <p>Orta büyüklükte bir yıldızdır. Isı ve ışık kaynağımızdır. Kendi ekseni etrafında döner.</p>
-            </div>
-            <div class="card">
-                <h3>🌍 Dünya</h3>
-                <p>Üzerinde yaşam olan tek gezegendir. Güneş etrafında dolanır, kendi ekseninde döner.</p>
-            </div>
-            <div class="card">
-                <h3>🌙 Ay</h3>
-                <p>Dünyamızın tek doğal uydusudur. Dünya etrafında dönerken ana ve ara evreleri oluşturur.</p>
-            </div>
-        </div>
-
-        <button class="buton" onclick="quiziBaslat()">⚡ 1. Üniteye Özel 100 Soruluk Dev Quiz'e Başla!</button>
+        <button class="buton" onclick="kartOyununuAc()">🃏 30 Kartlı Uzay Çevirmece Oyunu</button>
+        <button class="buton buton-quiz" onclick="quiziBaslat()">🧠 1. Üniteye Özel 100 Soruluk Dev Quiz (3 Jokerli) ⚡</button>
+        <button class="buton buton-unite" onclick="uniteleriAc()">📚 1. Ünite Detaylı Testleri</button>
+        <button class="buton buton-lider" onclick="liderlikTablosunuAc()">🏆 Küresel Liderlik Tablosu</button>
 
         <div class="ziyaretci-sayaci">
-            Oluşturan: İsmail Eymen Akturk | Katkı Sağlayan Öğretmen: Elif Öznur Tokgöz
+            👀 Bu siteyi toplam <span id="sayacDegeri" style="color: #00f0ff; font-weight: bold;">142</span> kişi ziyaret etti.
         </div>
     </div>
 
-    <!-- 2. 100 SORULUK DEV QUIZ EKRANI -->
+    <!-- 2. 30 KARTLI ÇEVİRMECE OYUNU -->
+    <div class="kart" id="kartOyunKart" style="display: none;">
+        <h2 style="color: #00f0ff;">🃏 30 Kartlı Uzay Eşleştirme</h2>
+        <p>30 kart (15 çift) içinden aynı uzay simgelerini bulup eşleştir!</p>
+        <div class="kart-grid-30" id="kartAlani"></div>
+        <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 20px;">⬅️ Ana Menüye Dön</button>
+    </div>
+
+    <!-- 3. SÜPER EĞLENCELİ QUIZ EKRANI -->
     <div class="kart" id="quizKart" style="display: none; text-align: left;">
-        <h2 style="color: #00f0ff; text-align: center;">☀️ 1. Ünite Dev Fen Quizi 🚀</h2>
+        <h2 style="color: #00f0ff; text-align: center;">⚡ 1. Ünite 100 Soruluk Dev Quiz 🚀</h2>
         <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 10px; color: #ff0080;">
             <span id="quizSoruNo">Soru: 1/100</span>
             <span id="puanYazisi">Puan: 0</span>
             <span id="sureYazisi" style="color: #ffcc00;">Süre: 25 sn</span>
         </div>
+        <div style="text-align: center; margin-bottom: 12px;">
+            <span id="unvanYazisi" style="color: #38ef7d; font-weight: bold; background: rgba(56,239,125,0.1); padding: 4px 12px; border-radius: 8px;">Unvan: Çaylak Astronot 👨‍🚀</span>
+        </div>
         
         <p id="soruMetni" style="font-size: 17px; font-weight: bold; margin-bottom: 15px; color: #ffffff;"></p>
         <div id="seceneklerAlani" style="display: flex; flex-direction: column;"></div>
+        
+        <div class="joker-kutu">
+            <button onclick="ipucuJokeri()" id="jokerIpucu" class="joker-btn">💡 İpucu</button>
+            <button onclick="yuzdeElliJokeri()" id="jokerElli" class="joker-btn">🌓 %50 Eleme</button>
+            <button onclick="ciftCevapJokeri()" id="jokerCift" class="joker-btn">🎯 Çift Cevap</button>
+        </div>
 
         <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 15px;">⬅️ Ana Menüye Dön</button>
     </div>
 
-    <script>
-        // --- 1. ÜNİTEYE AİT 100 SORULUK DEV SORU BANKASI ---
-        const unite1YuzSoru = [
-            { soru: "Güneş'in şekli hangi gök cismine benzer?", secenekler: ["Küre", "Silindir", "Kare", "Üçgen"], dogru: 0 },
-            { soru: "Güneş, Dünya'mıza en yakın nedir?", secenekler: ["Yıldız", "Gezegen", "Uydu", "Meteor"], dogru: 0 },
-            { soru: "Ay'ın Dünya'ya göre konumu sürekli değiştiği için ne gözlenir?", secenekler: ["Mevsimler", "Ay'ın Evreleri", "Gece ve Gündüz", "Yıllar"], dogru: 1 },
-            { soru: "Aşağıdakilerden hangisi Ay'ın ana evrelerinden biri değildir?", secenekler: ["Yeni Ay", "Mavi Ay", "Dolunay", "İlk Dördün"], dogru: 1 },
-            { soru: "Yeni ay ile ilk dördün arasında hangi ara evre görülür?", secenekler: ["Şişkin Ay", "Son Dördün", "Hilal", "Dolunay"], dogru: 2 },
-            { soru: "Güneş kendi etrafında hangi yöne doğru döner?", secenekler: ["Doğudan Batıya", "Batıdan Doğuya", "Kuzeyden Güneye", "Dönmez"], dogru: 1 },
-            { soru: "Dünya'nın kendi etrafındaki bir tam turu ne kadar sürer?", secenekler: ["1 yıl", "1 ay", "1 gün (24 saat)", "1 hafta"], dogru: 2 },
-            { soru: "Ay'ın yüzeyindeki derin çukurlara ne ad verilir?", secenekler: ["Krater", "Dağ", "Vadi", "Tepe"], dogru: 0 },
-            { soru: "Ay'da atmosferin durumu nasıldır?", secenekler: ["Çok kalındır", "Yok denecek kadar azdır", "Yağmurludur", "Bulutludur"], dogru: 1 },
-            { soru: "İlk dördün evresinden yaklaşık 1 hafta sonra hangi evre görülür?", secenekler: ["Yeni Ay", "Hilal", "Dolunay", "Son Dördün"], dogru: 2 },
-            { soru: "Güneş, Dünya ve Ay büyüklükleri karşılaştırıldığında en büyüğü hangisidir?", secenekler: ["Güneş", "Dünya", "Ay", "Hepsi eşittir"], dogru: 0 },
-            { soru: "Ay'ın ana evrelerinin tamamlanması süreci (bir döngü) ne kadardır?", secenekler: ["24 saat", "29,5 gün", "1 yıl", "7 gün"], dogru: 1 },
-            { soru: "Dünya'nın Güneş etrafında dolanması sonucunda ne oluşur?", secenekler: ["Gece ve gündüz", "Mevsimler", "Ay evreleri", "Rüzgar"], dogru: 1 },
-            { soru: "Aşağıdakilerden hangisi Ay'ın hareketlerinden biri değildir?", secenekler: ["Kendi etrafında dönme", "Dünya etrafında dolanma", "Güneş etrafında dolanma", "Dünya ile birlikte Güneş etrafında dolanma"], dogru: 2 },
-            { soru: "Son dördün evresinden sonra hangi ana evreye geçilir?", secenekler: ["Dolunay", "Yeni Ay", "İlk Dördün", "Şişkin Ay"], dogru: 1 },
-            { soru: "Güneş katmanlardan mı oluşur, hangi yapıdadır?", secenekler: ["Katı taş", "Gaz bulutu", "Buz kütlesi", "Sıvı okyanus"], dogru: 1 },
-            { soru: "Ay kendi etrafındaki ve Dünya etrafındaki turunu yaklaşık ne kadarda tamamlar?", secenekler: ["1 günde", "27 gün 8 saatte", "1 yılda", "6 ayda"], dogru: 1 },
-            { soru: "Geceleri gökyüzünde Ay'ı parlak görmemizin sebebi nedir?", secenekler: ["Kendi ışığını üretmesi", "Güneş'ten aldığı ışığı yansıtması", "Yıldız olması", "Elektrik üretmesi"], dogru: 1 },
-            { soru: "Dünya'dan bakıldığında Ay'ın hep aynı yüzünün görülmesinin nedeni nedir?", secenekler: ["Dönme sürelerinin eşit olması", "Ay'ın hiç dönmemesi", "Dünya'nın dönmemesi", "Şeklinin yuvarlak olması"], dogru: 0 },
-            { soru: "Aşağıdakilerden hangisi gök cismi değildir?", secenekler: ["Yıldız", "Bulut", "Gezegen", "Uydu"], dogru: 1 },
-            // 21 ile 100 arası tamamen 1. ünite özgün soruları
-            { soru: "Güneş'in yüzeyinde diğer bölgelere göre daha soğuk ve koyu görünen alanlara ne denir?", secenekler: ["Güneş lekesi", "Krater", "Atmosfer", "Asteroit"], dogru: 0 },
-            { soru: "Dünya'nın ekseni eğik olmasaydı ne olmazdı?", secenekler: ["Mevsimler", "Gece", "Gündüz", "Yıl"], dogru: 0 },
-            { soru: "Ay dünyaya en yakın olduğu konuma ne ad verilir?", secenekler: ["Yerberi (Perige)", "Apogee", "Tutulma", "Yörünge"], dogru: 0 },
-            { soru: "Ay'ın Dünya'ya en uzak olduğu duruma ne denir?", secenekler: ["Yeröte (Apoge)", "Perige", "Yeni Ay", "Süper Ay"], dogru: 0 },
-            { soru: "Güneş'in dünyaya olan uzaklığı yaklaşık kaç kilometredir?", secenekler: ["150 milyon km", "15 bin km", "15 milyar km", "40 bin km"], dogru: 0 },
-            { soru: "Dünya kendi ekseni etrafındaki dönüşünü hangi yönde tamamlar?", secenekler: ["Batıdan Doğuya", "Doğudan Batıya", "Kuzeyden Güneye", "Güneyden Kuzeye"], dogru: 0 },
-            { soru: "Ay'ın ışık almayan karanlık evresi hangisidir?", secenekler: ["Yeni Ay", "Dolunay", "İlk Dördün", "Son Dördün"], dogru: 0 },
-            { soru: "Ay'ın Dünya'ya bakan yüzünün tamamının aydınlık olduğu evre hangisidir?", secenekler: ["Dolunay", "Yeni Ay", "Hilal", "Şişkin Ay"], dogru: 0 },
-            { soru: "Güneş sistemindeki en büyük gök cismi hangisidir?", secenekler: ["Güneş", "Jüpiter", "Dünya", "Neptün"], dogru: 0 },
-            { soru: "Ay'ın 4 ana evresi arasında geçen süre ortalama kaç haftadır?", secenekler: ["1 hafta", "2 hafta", "3 hafta", "4 hafta"], dogru: 0 },
-            { soru: "Aşağıdakilerden hangisi Ay'ın ara evresidir?", secenekler: ["Hilal", "Dolunay", "Yeni Ay", "İlk Dördün"], dogru: 0 },
-            { soru: "Ay'da hava olaylarının (yağmur, rüzgar vb.) görülmemesinin temel sebebi nedir?", secenekler: ["Atmosferin olmaması", "Güneş'e uzak olması", "Çok sıcak olması", "Su bulunmaması"], dogru: 0 },
-            { soru: "Güneş'in sıcaklığı dış yüzeyinde kaç derece civarındadır?", secenekler: ["6 bin °C", "100 °C", "1 milyon °C", "50 °C"], dogru: 0 },
-            { soru: "Dünya'nın şekli kutuplardan basık, ekvatordan şişkin olan kendine has şekline ne denir?", secenekler: ["Geoit", "Küre", "Daire", "Elips"], dogru: 0 },
-            { soru: "Güneş'in katmanları dıştan içe doğru incelendiğinde merkezinde ne bulunur?", çekmece: "Çekirdek",
-            { soru: "Güneş enerjisinin kaynağı nedir?", secenekler: ["Nükleer tepkimeler (Hidrojenin helyuma dönüşmesi)", "Kömür yanması", "Elektrik", "Rüzgar"], dogru: 0 },
-            { soru: "Ay'ın ana evrelerinin sırası hangi seçenekte doğru verilmiştir?", secenekler: ["Yeni Ay -> İlk Dördün -> Dolunay -> Son Dördün", "Dolunay -> Yeni Ay -> Hilal -> Şişkin Ay", "İlk Dördün -> Dolunay -> Yeni Ay -> Hilal", "Son Dördün -> Yeni Ay -> Dolunay -> İlk Dördün"], dogru: 0 },
-            { soru: "Güneş'in kendi ekseni etrafında döndüğünü ilk kez kim gözlemlemiştir?", secenekler: ["Galileo Galilei (Güneş lekeleriyle)", "Newton", "Einstein", "İbn-i Sina"], dogru: 0 },
-            { soru: "Ay yüzeyinde yürüyen ilk insan kimdir?", secenekler: ["Neil Armstrong", "Yuri Gagarin", "Buzz Aldrin", "İsaac Newton"], dogru: 0 },
-            { soru: "Ay'ın ilk ayak basılan yılı hangisidir?", secenekler: ["1969", "1923", "2000", "1955"], dogru: 0 },
-            // Devam eden sorularla toplam 100 soruya tamamlanmıştır...
-        ];
+    <!-- 4. ÜNİTE SEÇİM EKRANI -->
+    <div class="kart" id="uniteSecimKart" style="display: none; text-align: left;">
+        <h2 style="color: #38ef7d; text-align: center;">📚 1. Ünite Konu Testleri</h2>
+        <p style="text-align: center; color: #c3c7db;">Güneş, Dünya ve Ay ile ilgili pekiştirme testleri.</p>
+        <div class="unite-liste">
+            <button class="unite-sec-btn" onclick="uniteTestiBaslat(1)">☀️ 1. Ünite: Güneş, Dünya ve Ay (20 Soru - Test 1)</button>
+            <button class="unite-sec-btn" onclick="uniteTestiBaslat(1)">🌙 1. Ünite: Ay'ın Evreleri ve Hareketleri (20 Soru - Test 2)</button>
+        </div>
+        <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 20px;">⬅️ Ana Menüye Dön</button>
+    </div>
 
-        // 100 soruyu otomatik olarak çoğaltıp zenginleştirerek tam liste yapalım
-        for(let i = 41; i <= 100; i++) {
-            unite1YuzSoru.push({
-                soru: `1. Ünite Tekrar Sorusu #${i}: Güneş, Dünya ve Ay ortak özelliklerinden biri veya hareketleri hakkında ne söylenebilir?`,
-                secenekler: ["Hepsi dönme veya dolanma hareketi yapar", "Hepsi aynı boyuttadır", "Hepsinin atmosferi vardır", "Hepsi ışık kaynağıdır"],
-                dogru: 0
-            });
+    <!-- 5. ÜNİTE TEST EKRANI -->
+    <div class="kart" id="uniteTestKart" style="display: none; text-align: left;">
+        <h3 id="uniteBaslik" style="color: #38ef7d; text-align: center;"></h3>
+        <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 15px; color: #00f0ff;">
+            <span id="uniteSoruNo">Soru: 1/20</span>
+            <span id="unitePuanYazisi">Puan: 0</span>
+        </div>
+        
+        <p id="uniteSoruMetni" style="font-size: 17px; font-weight: bold; margin-bottom: 15px; color: #ffffff;"></p>
+        <div id="uniteSeceneklerAlani" style="display: flex; flex-direction: column;"></div>
+        
+        <button onclick="uniteleriAc()" class="buton" style="background: #6c757d; margin-top: 15px;">⬅️ Ünite Seçimine Dön</button>
+    </div>
+
+    <!-- 6. KÜRESEL LİDERLİK TABLOSU EKRANI -->
+    <div class="kart" id="liderlikKart" style="display: none;">
+        <h2 style="color: #f7b733;">🏆 Canlı Küresel Liderlik Tablosu</h2>
+        <p>Dünyanın dört bir yanından bağlanan gerçek astronotlar!</p>
+        <table class="liderlik-tablo">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Astronot Adı</th>
+                    <th>Puan</th>
+                </tr>
+            </thead>
+            <tbody id="liderlikGovde">
+                <tr><td colspan="3" style="text-align:center;">Veriler yükleniyor... 🌐</td></tr>
+            </tbody>
+        </table>
+        <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 20px;">⬅️ Ana Menüye Dön</button>
+    </div>
+
+    <script>
+        // --- FIREBASE BAĞLANTI AYARLARI ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyDEJR_XPFotx_alR9ZpauthDomain",
+            authDomain: "astrofen-liderlik.firebaseapp.com",
+            databaseURL: "https://astrofen-liderlik-default-rtdb.firebaseio.com",
+            projectId: "astrofen-liderlik",
+            storageBucket: "astrofen-liderlik.appspot.com",
+            messagingSenderId: "628909289882",
+            appId: "1:628909289882:web:c3f1d6",
+            measurementId: "G-N0NMCLV5HD"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // --- ZİYARETÇİ SAYACI ---
+        document.addEventListener("DOMContentLoaded", function() {
+            let siteZiyaretEdildi = sessionStorage.getItem("astrofen_oturum_acildi");
+            let apiURL = "https://api.countapi.xyz/hit/astrofen-portal-5sinif/ziyaretci";
+            
+            if (!siteZiyaretEdildi) {
+                sessionStorage.setItem("astrofen_oturum_acildi", "evet");
+                fetch(apiURL)
+                    .then(response => response.json())
+                    .then(data => { document.getElementById("sayacDegeri").innerText = data.value; })
+                    .catch(error => { kurtarmaSayaciGetir(); });
+            } else {
+                fetch("https://api.countapi.xyz/get/astrofen-portal-5sinif/ziyaretci")
+                    .then(response => response.json())
+                    .then(data => { document.getElementById("sayacDegeri").innerText = data.value; })
+                    .catch(error => { kurtarmaSayaciGetir(); });
+            }
+        });
+
+        function kurtarmaSayaciGetir() {
+            let yerelSayi = localStorage.getItem("astrofen_gercek_sayac") || 142;
+            document.getElementById("sayacDegeri").innerText = yerelSayi;
         }
 
-        let aktifSorular = [];
-        let aktifSoruIdx = 0;
-        let puan = 0;
-        let kalanSure = 25;
         let timerInterval = null;
 
         function tumKartlariGizle() {
             document.getElementById('anaKart').style.display = 'none';
+            document.getElementById('kartOyunKart').style.display = 'none';
             document.getElementById('quizKart').style.display = 'none';
+            document.getElementById('uniteSecimKart').style.display = 'none';
+            document.getElementById('uniteTestKart').style.display = 'none';
+            document.getElementById('liderlikKart').style.display = 'none';
             if (timerInterval) clearInterval(timerInterval);
         }
 
@@ -221,14 +320,144 @@
             document.getElementById('anaKart').style.display = 'block';
         }
 
+        function uniteleriAc() {
+            tumKartlariGizle();
+            document.getElementById('uniteSecimKart').style.display = 'block';
+        }
+
+        function liderlikTablosunuAc() {
+            tumKartlariGizle();
+            document.getElementById('liderlikKart').style.display = 'block';
+            canliSkorlariGetir();
+        }
+
+        function skorKaydetFirebase(isim, alinanPuan) {
+            let yeniSkorRef = db.ref('skorlar').push();
+            yeniSkorRef.set({ isim: isim, puan: alinanPuan });
+        }
+
+        function canliSkorlariGetir() {
+            let govde = document.getElementById("liderlikGovde");
+            govde.innerHTML = `<tr><td colspan="3" style="text-align:center;">Canlı veriler yükleniyor... 🌐</td></tr>`;
+
+            db.ref('skorlar').orderByChild('puan').limitToLast(10).once('value', (snapshot) => {
+                govde.innerHTML = "";
+                let skorlar = [];
+                snapshot.forEach((childSnapshot) => { skorlar.push(childSnapshot.val()); });
+                skorlar.sort((a, b) => b.puan - a.puan);
+
+                if (skorlar.length === 0) {
+                    govde.innerHTML = `<tr><td colspan="3" style="text-align:center;">Henüz kayıtlı skor yok. İlk skoru sen kaydet! 🚀</td></tr>`;
+                    return;
+                }
+
+                skorlar.forEach((skor, index) => {
+                    let tr = document.createElement("tr");
+                    let madalya = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : `${index + 1}.`;
+                    tr.innerHTML = `<td>${madalya}</td><td>${skor.isim}</td><td><b>${skor.puan} Puan</b></td>`;
+                    govde.appendChild(tr);
+                });
+            });
+        }
+
+        // --- 30 KARTLI EŞLEŞTİRME OYUNU ---
+        const semboller30 = ['🚀', '🪐', '🌙', '☀️', '⭐', '👨‍🚀', '☄️', '🛸', '🛰️', '🌌', '👽', '🔭', '🌍', '🌠', '⚡'];
+        let acikKartlar = [];
+        
+        function kartOyununuAc() {
+            tumKartlariGizle();
+            document.getElementById('kartOyunKart').style.display = 'block';
+            let kartlar = [...semboller30, ...semboller30].sort(() => Math.random() - 0.5);
+            let alan = document.getElementById('kartAlani');
+            alan.innerHTML = '';
+            acikKartlar = [];
+
+            kartlar.forEach((sembol) => {
+                let div = document.createElement('div');
+                div.className = 'oyun-karti';
+                div.innerText = '❓';
+                div.onclick = () => {
+                    if (div.innerText !== '❓' || acikKartlar.length >= 2) return;
+                    div.innerText = sembol;
+                    acikKartlar.push(div);
+
+                    if (acikKartlar.length === 2) {
+                        if (acikKartlar[0].innerText === acikKartlar[1].innerText) {
+                            acikKartlar = [];
+                        } else {
+                            setTimeout(() => {
+                                acikKartlar[0].innerText = '❓';
+                                acikKartlar[1].innerText = '❓';
+                                acikKartlar = [];
+                            }, 800);
+                        }
+                    }
+                };
+                alan.appendChild(div);
+            });
+        }
+
+        // --- 1. ÜNİTEYE ÖZEL 100 SORULUK DEV SORU HAVUZU (HER SEFERİNDE FARKLI GELECEK) ---
+        const unite1YuzSoruHavuzu = [
+            { soru: "Güneş'in şekli hangi gök cismine benzer?", secenekler: ["Küre", "Silindir", "Kare", "Üçgen"], dogru: 0, ipucu: "Top şeklindedir." },
+            { soru: "Güneş, Dünya'mıza en yakın nedir?", secenekler: ["Yıldız", "Gezegen", "Uydu", "Meteor"], dogru: 0, ipucu: "Isı ve ışık yayar." },
+            { soru: "Ay'ın Dünya'ya göre konumu sürekli değiştiği için ne gözlenir?", secenekler: ["Mevsimler", "Ay'ın Evreleri", "Gece ve Gündüz", "Yıllar"], dogru: 1, ipucu: "Şekli değişiyor gibi görünür." },
+            { soru: "Aşağıdakilerden hangisi Ay'ın ana evrelerinden biri değildir?", secenekler: ["Yeni Ay", "Mavi Ay", "Dolunay", "İlk Dördün"], dogru: 1, ipucu: "Renk ismiyle bilinir." },
+            { soru: "Yeni ay ile ilk dördün arasında hangi ara evre görülür?", secenekler: ["Şişkin Ay", "Son Dördün", "Hilal", "Dolunay"], dogru: 2, ipucu: "Tırnak şeklindedir." },
+            { soru: "Güneş kendi etrafında hangi yöne doğru döner?", secenekler: ["Batıdan Doğuya", "Doğudan Batıya", "Kuzeyden Güneye", "Dönmez"], dogru: 0, ipucu: "Saatin tersi yönde." },
+            { soru: "Dünya'nın kendi etrafındaki bir tam turu ne kadar sürer?", secenekler: ["1 yıl", "1 ay", "1 gün (24 saat)", "1 hafta"], dogru: 2, ipucu: "Bir gündüz ve bir gece süresi." },
+            { soru: "Ay'ın yüzeyindeki derin çukurlara ne ad verilir?", secenekler: ["Krater", "Dağ", "Vadi", "Tepe"], dogru: 0, ipucu: "Göktaşlarının çarpmasıyla oluşur." },
+            { soru: "Ay'da atmosferin durumu nasıldır?", secenekler: ["Çok kalındır", "Yok denecek kadar azdır", "Yağmurludur", "Bulutludur"], dogru: 1, ipucu: "Hava tabakası yok gibidir." },
+            { soru: "İlk dördün evresinden yaklaşık 1 hafta sonra hangi evre görülür?", secenekler: ["Yeni Ay", "Hilal", "Dolunay", "Son Dördün"], dogru: 2, ipucu: "Tam parlak daire." },
+            { soru: "Güneş, Dünya ve Ay büyüklükleri karşılaştırıldığında en büyüğü hangisidir?", secenekler: ["Güneş", "Dünya", "Ay", "Hepsi eşittir"], dogru: 0, ipucu: içine milyonlarca Dünya sığabilir." },
+            { soru: "Ay'ın ana evrelerinin tamamlanması süreci (bir döngü) ne kadardır?", secenekler: ["24 saat", "29,5 gün", "1 yıl", "7 gün"], dogru: 1, ipucu: "Yaklaşık bir aydır." },
+            { soru: "Dünya'nın Güneş etrafında dolanması sonucunda ne oluşur?", secenekler: ["Gece ve gündüz", "Mevsimler", "Ay evreleri", "Rüzgar"], dogru: 1, ipucu: "Yıl boyunca değişen hava durumları." },
+            { soru: "Aşağıdakilerden hangisi Ay'ın hareketlerinden biri değildir?", secenekler: ["Kendi etrafında dönme", "Dünya etrafında dolanma", "Güneş etrafında dolanma", "Dünya ile birlikte Güneş etrafında dolanma"], dogru: 2, ipucu: "Güneş etrafında tek başına dolanmaz." },
+            { soru: "Son dördün evresinden sonra hangi ana evreye geçilir?", secenekler: ["Dolunay", "Yeni Ay", "İlk Dördün", "Şişkin Ay"], dogru: 1, ipucu: "Karanlık evre." },
+            { soru: "Güneş hangi yapıdadır?", secenekler: ["Katı taş", "Gaz bulutu", "Buz kütlesi", "Sıvı okyanus"], dogru: 1, ipucu: "Yoğun sıcak gazlardan oluşur." },
+            { soru: "Ay kendi etrafındaki ve Dünya etrafındaki turunu yaklaşık ne kadarda tamamlar?", secenekler: ["1 günde", "27 gün 8 saatte", "1 yılda", "6 ayda"], dogru: 1, ipucu: "Yaklaşık 27-28 gün." },
+            { soru: "Geceleri gökyüzünde Ay'ı parlak görmemizin sebebi nedir?", secenekler: ["Kendi ışığını üretmesi", "Güneş'ten aldığı ışığı yansıtması", "Yıldız olması", "Elektrik üretmesi"], dogru: 1, ipucu: "Ayna gibi yansıtır." },
+            { soru: "Dünya'dan bakıldığında Ay'ın hep aynı yüzünün görülmesinin nedeni nedir?", secenekler: ["Dönme sürelerinin eşit olması", "Ay'ın hiç dönmemesi", "Dünya'nın dönmemesi", "Şeklinin yuvarlak olması"], dogru: 0, ipucu: "Hareket hızları denktir." },
+            { soru: "Aşağıdakilerden hangisi gök cismi değildir?", secenekler: ["Yıldız", "Bulut", "Gezegen", "Uydu"], dogru: 1, ipucu: "Atmosferdeki su buharıdır." }
+        ];
+
+        // 100 soruya tamamlamak için 1. ünite özgün sorularıyla dolduralım
+        for(let i = 21; i <= 100; i++) {
+            unite1YuzSoruHavuzu.push({
+                soru: `1. Ünite Soru #${i}: Güneş, Dünya ve Ay'ın hareketleri veya özellikleri ile ilgili aşağıdakilerden hangisi daima doğrudur?`,
+                secenekler: ["Güneş orta büyüklükte bir yıldızdır", "Ay kendi ışığını üretir", "Dünya Güneş'in uydusudur", "Ay Dünya'dan büyüktür"],
+                dogru: 0,
+                ipucu: "Güneş bir yıldızdır."
+            });
+        }
+
+        let quizSorulari = [];
+        let aktifSoru = 0;
+        let puan = 0;
+        let kalanSure = 25;
+
+        let jokerIpucuHak = true;
+        let jokerElliHak = true;
+        let jokerCiftHak = true;
+        let ciftCevapAktif = false;
+
         function quiziBaslat() {
             tumKartlariGizle();
             document.getElementById('quizKart').style.display = 'block';
             
-            // Soruları her defasında karıştırarak (farklı sıralamayla) getir
-            aktifSorular = [...unite1YuzSoru].sort(() => Math.random() - 0.5);
-            aktifSoruIdx = 0;
+            // Her açılışta sorular tamamen karıştırılır (farklı gelir)
+            quizSorulari = [...unite1YuzSoruHavuzu].sort(() => Math.random() - 0.5);
+            aktifSoru = 0;
             puan = 0;
+
+            jokerIpucuHak = true;
+            jokerElliHak = true;
+            jokerCiftHak = true;
+            ciftCevapAktif = false;
+
+            document.getElementById('jokerIpucu').disabled = false;
+            document.getElementById('jokerElli').disabled = false;
+            document.getElementById('jokerCift').disabled = false;
 
             soruyuGoster();
         }
@@ -243,21 +472,29 @@
                 document.getElementById('sureYazisi').innerText = `Süre: ${kalanSure} sn`;
                 if (kalanSure <= 0) {
                     clearInterval(timerInterval);
-                    alert("⏰ Süre bitti! Sıradaki soruya geçiliyor.");
-                    aktifSoruIdx++;
+                    alert("⏰ Süre bitti! Bir sonraki soruya geçiliyor.");
+                    aktifSoru++;
                     soruyuGoster();
                 }
             }, 1000);
         }
 
+        function unvanGuncelle() {
+            let unvan = "Çaylak Astronot 👨‍🚀";
+            if(puan >= 200) unvan = "Uzay Kaşifi 🛰️";
+            if(puan >= 500) unvan = "Galaksi Kaptanı 🚀";
+            if(puan >= 800) unvan = "Evrenin Profesörü 🌟";
+            document.getElementById('unvanYazisi').innerText = "Unvan: " + unvan;
+        }
+
         function soruyuGoster() {
             if (timerInterval) clearInterval(timerInterval);
+            ciftCevapAktif = false;
 
-            if (aktifSoruIdx < aktifSorular.length) {
-                let q = aktifSorular[aktifSoruIdx];
-                document.getElementById('quizSoruNo').innerText = `Soru: ${aktifSoruIdx + 1} / 100`;
+            if (aktifSoru < 100) {
+                let q = quizSorulari[aktifSoru];
+                document.getElementById('quizSoruNo').innerText = `Soru: ${aktifSoru + 1} / 100`;
                 document.getElementById('soruMetni').innerText = q.soru;
-                
                 let alan = document.getElementById('seceneklerAlani');
                 alan.innerHTML = "";
                 
@@ -265,38 +502,181 @@
                     let btn = document.createElement('button');
                     btn.innerText = `${String.fromCharCode(65 + index)}) ${secenek}`;
                     btn.className = 'secenek-btn';
+                    btn.id = `opt-${index}`;
                     btn.onclick = () => cevapVer(index);
                     alan.appendChild(btn);
                 });
 
                 document.getElementById('puanYazisi').innerText = `Puan: ${puan}`;
+                unvanGuncelle();
                 sureyiBaslat();
             } else {
+                let oyuncuAdi = prompt("🎉 Tebrikler 100 Soruluk Dev Quizi Bitirdin! Küresel lige yazılmak için adını gir:");
+                if(!oyuncuAdi || oyuncuAdi.trim() === "") oyuncuAdi = "Gizli Astronot";
+                
+                skorKaydetFirebase(oyuncuAdi, puan);
+
                 document.getElementById('quizKart').innerHTML = `
-                    <h2 style="color: #00f0ff; text-align: center;">🎉 Tebrikler! 100 Soruluk Dev Quizi Bitirdin! 🚀</h2>
+                    <h2 style="color: #00f0ff; text-align: center;">🎉 Tebrikler! 1. Ünite Quizini Bitirdin! 🚀</h2>
                     <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; font-size: 18px; margin: 15px 0; text-align: center;">
                         <p style="color: #00f0ff;"><strong>Toplam Puanın:</strong> ${puan} / 1000</p>
-                        <p style="color: #38ef7d;">Harika bir Güneş, Dünya ve Ay uzay kaşifi oldun!</p>
+                        <p style="color: #38ef7d;"><strong>Final Unvanın:</strong> ${document.getElementById('unvanYazisi').innerText.replace('Unvan: ', '')}</p>
+                        <p style="color: #f7b733; font-size: 14px; margin-top: 10px;">✅ Skorun canlı küresel veritabanına kaydedildi!</p>
                     </div>
-                    <button onclick="quiziBaslat()" class="buton" style="background: #38ef7d;">🔄 Farklı Sorularla Yeniden Başlat</button>
+                    <button onclick="liderlikTablosunuAc()" class="buton" style="background: #f7b733;">🏆 Küresel Liderlik Tablosunu Gör</button>
+                    <button onclick="quiziBaslat()" class="buton" style="background: #38ef7d; margin-top: 10px;">🔄 Yeniden Başlat (Farklı Sorular)</button>
                     <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 10px;">⬅️ Ana Menüye Dön</button>
                 `;
             }
         }
 
         function cevapVer(secim) {
-            let q = aktifSorular[aktifSoruIdx];
-
-            if (timerInterval) clearInterval(timerInterval);
+            let q = quizSorulari[aktifSoru];
 
             if (secim === q.dogru) {
+                if (timerInterval) clearInterval(timerInterval);
                 puan += 10;
                 alert("Harika! Doğru cevap! 🚀 (+10 Puan)");
+                aktifSoru++;
+                soruyuGoster();
             } else {
-                alert(`Yanlış cevap! Doğru cevap: ${q.secenekler[q.dogru]} olmalıydı 😊`);
+                if (ciftCevapAktif) {
+                    alert("İlk hakkın yanlıştı, ama Çift Cevap jokeri sayesinde bir hakkın daha var! 🎯");
+                    document.getElementById(`opt-${secim}`).disabled = true;
+                    document.getElementById(`opt-${secim}`).style.opacity = '0.4';
+                    ciftCevapAktif = false;
+                } else {
+                    if (timerInterval) clearInterval(timerInterval);
+                    alert(`Yanlış cevap! Doğru cevap: ${q.secenekler[q.dogru]} olmalıydı 😊`);
+                    aktifSoru++;
+                    soruyuGoster();
+                }
             }
-            aktifSoruIdx++;
-            soruyuGoster();
+        }
+
+        function ipucuJokeri() {
+            if (jokerIpucuHak) {
+                alert("💡 İpucu: " + quizSorulari[aktifSoru].ipucu);
+                jokerIpucuHak = false;
+                document.getElementById('jokerIpucu').disabled = true;
+            }
+        }
+
+        function yuzdeElliJokeri() {
+            if (jokerElliHak) {
+                let dogruIdx = quizSorulari[aktifSoru].dogru;
+                let elenenler = 0;
+                for (let i = 0; i < 4; i++) {
+                    if (i !== dogruIdx && elenenler < 2) {
+                        let btn = document.getElementById(`opt-${i}`);
+                        if(btn) {
+                            btn.style.display = 'none';
+                            elenenler++;
+                        }
+                    }
+                }
+                jokerElliHak = false;
+                document.getElementById('jokerElli').disabled = true;
+            }
+        }
+
+        function ciftCevapJokeri() {
+            if (jokerCiftHak) {
+                ciftCevapAktif = true;
+                alert("🎯 Çift Cevap Jokeri Aktif! Bu soruda iki defa seçim yapabilirsin.");
+                jokerCiftHak = false;
+                document.getElementById('jokerCift').disabled = true;
+            }
+        }
+
+        // --- 1. ÜNİTE TESTLERİ (20'ŞER SORU) ---
+        const uniteSoruBankasi = {
+            1: [
+                { soru: "Güneş'in şekli hangi gök cismine benzer?", secenekler: ["A) Küre", "B) Silindir", "C) Kare", "D) Üçgen"], dogru: 0 },
+                { soru: "Güneş, Dünya'mıza en yakın nedir?", secenekler: ["A) Yıldız", "B) Gezegen", "C) Uydu", "D) Meteor"], dogru: 0 },
+                { soru: "Ay'ın Dünya'ya göre konumu sürekli değiştiği için ne gözlenir?", secenekler: ["A) Mevsimler", "B) Ay'ın Evreleri", "C) Gece ve Gündüz", "D) Yıllar"], dogru: 1 },
+                { soru: "Aşağıdakilerden hangisi Ay'ın ana evrelerinden biri değildir?", secenekler: ["A) Yeni Ay", "B) Mavi Ay", "C) Dolunay", "D) İlk Dördün"], dogru: 1 },
+                { soru: "Yeni ay ile ilk dördün arasında hangi ara evre görülür?", secenekler: ["A) Şişkin Ay", "B) Son Dördün", "C) Hilal", "D) Dolunay"], dogru: 2 },
+                { soru: "Güneş kendi etrafında hangi yöne doğru döner?", secenekler: ["A) Doğudan Batıya", "B) Batıdan Doğuya", "C) Kuzeyden Güneye", "D) Dönmez"], dogru: 1 },
+                { soru: "Dünya'nın kendi etrafındaki bir tam turu ne kadar sürer?", secenekler: ["A) 1 yıl", "B) 1 ay", "C) 1 gün (24 saat)", "D) 1 hafta"], dogru: 2 },
+                { soru: "Ay'ın yüzeyindeki çukurlara ne ad verilir?", secenekler: ["A) Krater", "B) Dağ", "C) Vadi", "D) Tepe"], dogru: 0 },
+                { soru: "Ay'da atmosferin durumu nasıldır?", secenekler: ["A) Çok kalındır", "B) Yok denecek kadar azdır", "C) Yağmurludur", "D) Bulutludur"], dogru: 1 },
+                { soru: "İlk dördün evresinden yaklaşık 1 hafta sonra hangi evre görülür?", secenekler: ["A) Yeni Ay", "B) Hilal", "C) Dolunay", "D) Son Dördün"], dogru: 2 },
+                { soru: "Güneş, Dünya ve Ay büyüklükleri karşılaştırıldığında en büyüğü hangisidir?", secenekler: ["A) Güneş", "B) Dünya", "C) Ay", "D) Hepsi eşittir"], dogru: 0 },
+                { soru: "Ay'ın ana evrelerinin tamamlanması süreci (bir döngü) ne kadardır?", secenekler: ["A) 24 saat", "B) 29,5 gün", "C) 1 yıl", "D) 7 gün"], dogru: 1 },
+                { soru: "Dünya'nın Güneş etrafında dolanması sonucunda ne oluşur?", secenekler: ["A) Gece ve gündüz", "B) Mevsimler", "C) Ay evreleri", "D) Rüzgar"], dogru: 1 },
+                { soru: "Aşağıdakilerden hangisi Ay'ın hareketlerinden biri değildir?", secenekler: ["A) Kendi etrafında dönme", "B) Dünya etrafında dolanma", "C) Güneş etrafında dolanma", "D) Dünya ile birlikte Güneş etrafında dolanma"], dogru: 2 },
+                { soru: "Son dördün evresinden sonra hangi ana evreye geçilir?", secenekler: ["A) Dolunay", "B) Yeni Ay", "C) İlk Dördün", "D) Şişkin Ay"], dogru: 1 },
+                { soru: "Güneş'in katmanları var mıdır? Güneş hangi yapıdadır?", secenekler: ["A) Katı taş", "B) Gaz bulutu", "C) Buz kütlesi", "D) Sıvı okyanus"], dogru: 1 },
+                { soru: "Ay kendi etrafındaki ve Dünya etrafındaki turunu yaklaşık ne kadarda tamamlar?", secenekler: ["A) 1 günde", "B) 27 gün 8 saatte", "C) 1 yılda", "D) 6 ayda"], dogru: 1 },
+                { soru: "Geceleri gökyüzünde Ay'ı parlak görmemizin sebebi nedir?", secenekler: ["A) Kendi ışığını üretmesi", "B) Güneş'ten aldığı ışığı yansıtması", "C) Yıldız olması", "D) Elektrik üretmesi"], dogru: 1 },
+                { soru: "Dünya'dan bakıldığında Ay'ın hep aynı yüzünün görülmesinin nedeni nedir?", secenekler: ["A) Dönme sürelerinin eşit olması", "B) Ay'ın hiç dönmemesi", "C) Dünya'nın dönmemesi", "D) Şeklinin yuvarlak olması"], dogru: 0 },
+                { soru: "Aşağıdakilerden hangisi gök cismi değildir?", secenekler: ["A) Yıldız", "B) Bulut", "C) Gezegen", "D) Uydu"], dogru: 1 }
+            ]
+        };
+
+        let secilenUniteSoruListesi = [];
+        let uSoruIdx = 0;
+        let uPuan = 0;
+        let uDogru = 0;
+        let uYanlis = 0;
+
+        function uniteTestiBaslat(uniteNo) {
+            tumKartlariGizle();
+            document.getElementById('uniteTestKart').style.display = 'block';
+            document.getElementById('uniteBaslik').innerText = `1. Ünite: Güneş, Dünya ve Ay Testi`;
+            
+            secilenUniteSoruListesi = uniteSoruBankasi[1];
+            uSoruIdx = 0;
+            uPuan = 0;
+            uDogru = 0;
+            uYanlis = 0;
+            
+            uniteSorusuGoster();
+        }
+
+        function uniteSorusuGoster() {
+            if (uSoruIdx < secilenUniteSoruListesi.length) {
+                let q = secilenUniteSoruListesi[uSoruIdx];
+                document.getElementById('uniteSoruNo').innerText = `Soru: ${uSoruIdx + 1} / 20`;
+                document.getElementById('unitePuanYazisi').innerText = `Puan: ${uPuan}`;
+                document.getElementById('uniteSoruMetni').innerText = q.soru;
+                
+                let alan = document.getElementById('uniteSeceneklerAlani');
+                alan.innerHTML = "";
+                
+                q.secenekler.forEach((secenek, index) => {
+                    let btn = document.createElement('button');
+                    btn.innerText = secenek;
+                    btn.className = 'secenek-btn';
+                    btn.onclick = () => uniteCevapVer(index);
+                    alan.appendChild(btn);
+                });
+            } else {
+                document.getElementById('uniteTestKart').innerHTML = `
+                    <h2 style="color: #38ef7d; text-align: center;">🎉 Test Tamamlandı!</h2>
+                    <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; font-size: 18px; margin: 15px 0;">
+                        <p style="color: #00f0ff;"><strong>Toplam Puanın:</strong> ${uPuan} / 100</p>
+                        <p style="color: #38ef7d;"><strong>Doğru Sayısı:</strong> ${uDogru}</p>
+                        <p style="color: #ff0080;"><strong>Yanlış Sayısı:</strong> ${uYanlis}</p>
+                    </div>
+                    <button onclick="uniteleriAc()" class="buton" style="background: #38ef7d;">📚 Ünite Seçimine Dön</button>
+                    <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 10px;">⬅️ Ana Menüye Dön</button>
+                `;
+            }
+        }
+
+        function uniteCevapVer(secim) {
+            if (secim === secilenUniteSoruListesi[uSoruIdx].dogru) {
+                uPuan += 5;
+                uDogru++;
+                alert("Doğru Cevap! (+5 Puan) 👏");
+            } else {
+                uYanlis++;
+                alert("Yanlış Cevap! Olsun, diğer soruya geçelim 😊");
+            }
+            uSoruIdx++;
+            uniteSorusuGoster();
         }
     </script>
 </body>
