@@ -3,75 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASTROFEN - 5. Sınıf Uzay Portalı</title>
+    <title>ASTROFEN - 5. Sınıf Uzay ve Fen Bilimleri Portalı</title>
     <style>
         body {
-            background: linear-gradient(135deg, #0b0b1a, #1a0033);
+            background: linear-gradient(135deg, #050515, #120024);
             color: #ffffff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
             margin: 0;
             padding: 20px;
+            text-align: center;
+        }
+
+        header {
+            padding: 30px 20px;
         }
 
         h1 {
             color: #00ffcc;
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 5px;
+            text-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
         }
 
         .info-box {
-            font-size: 1.1rem;
-            color: #dddddd;
-            margin-bottom: 25px;
+            font-size: 1.15rem;
+            color: #e0e0e0;
+            margin-bottom: 30px;
             line-height: 1.6;
         }
 
-        /* --- ESKİ TUŞLAR (BUTONLAR) --- */
-        .button-container {
+        /* --- ÜST MENÜ BUTONLARI --- */
+        .nav-buttons {
             display: flex;
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .btn {
             background: linear-gradient(135deg, #00ffcc, #0088cc);
-            color: #0b0b1a;
+            color: #050515;
             border: none;
-            padding: 12px 24px;
-            font-size: 1rem;
+            padding: 12px 25px;
+            font-size: 1.05rem;
             font-weight: bold;
-            border-radius: 25px;
+            border-radius: 30px;
             cursor: pointer;
             transition: 0.3s;
             box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
         }
 
         .btn:hover {
-            transform: scale(1.05);
-            background: linear-gradient(135deg, #fff, #00ffcc);
+            transform: scale(1.08);
+            background: linear-gradient(135deg, #ffffff, #00ffcc);
             box-shadow: 0 0 25px rgba(0, 255, 204, 0.8);
         }
 
-        /* Kartlar Alanı */
-        .cards-container {
+        /* --- BÖLÜMLER --- */
+        .section-container {
+            max-width: 900px;
+            margin: 0 auto 50px auto;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(0, 255, 204, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        h2 {
+            color: #00ffcc;
+            border-bottom: 2px solid rgba(0, 255, 204, 0.3);
+            padding-bottom: 10px;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .cards-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
-            max-width: 800px;
-            margin: 0 auto;
+            gap: 20px;
+            margin-top: 20px;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.07);
             border: 1px solid rgba(0, 255, 204, 0.3);
             border-radius: 12px;
             padding: 20px;
-            width: 240px;
-            text-align: left;
+            width: 260px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 255, 204, 0.2);
         }
 
         .card h3 {
@@ -80,46 +107,126 @@
         }
 
         .card p {
-            color: #ccc;
+            color: #ddd;
             font-size: 0.95rem;
             line-height: 1.5;
+        }
+
+        /* --- İNTERAKTİF TEST ALANI --- */
+        .quiz-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .quiz-question {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .quiz-options button {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid #00ffcc;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .quiz-options button:hover {
+            background: #00ffcc;
+            color: #050515;
+            font-weight: bold;
+        }
+
+        #quiz-result {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            margin-top: 40px;
+            color: #888;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
-    <h1>ASTROFEN 🚀</h1>
-    <div class="info-box">
-      5. Sınıf Uzay ve Fen Bilimleri Portalı<br><br>
-      Oluşturan: İsmail Eymen Akturk<br>
-      Katkı Sağlayan Öğretmen: Elif Öznur Tokgöz
+    <header>
+        <h1>ASTROFEN 🚀</h1>
+        <div class="info-box">
+          5. Sınıf Uzay ve Fen Bilimleri Portalı<br><br>
+          Oluşturan: İsmail Eymen Akturk<br>
+          Katkı Sağlayan Öğretmen: Elif Öznur Tokgöz
+        </div>
+
+        <!-- Üst Menü Tuşları -->
+        <div class="nav-buttons">
+            <button class="btn" onclick="scrollToSection('unite1')">☀️ 1. Ünite Konuları</button>
+            <button class="btn" onclick="scrollToSection('test-bolumu')">📝 Bilgi Testi</button>
+            <button class="btn" onclick="alert('ASTROFEN projesi 5. sınıf öğrencilerinin uzay bilimlerini eğlenerek öğrenmesi için tasarlandı!')">ℹ️ Proje Hakkında</button>
+        </div>
+    </header>
+
+    <!-- 1. Ünite Kartları -->
+    <div id="unite1" class="section-container">
+        <h2>1. Ünite: Güneş, Dünya ve Ay</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <h3>☀️ Güneş</h3>
+                <p>Orta büyüklükte bir yıldızdır. Isı ve ışık kaynağımızdır. Kendi ekseni etrafında dönme hareketi yapar.</p>
+            </div>
+            <div class="card">
+                <h3>🌍 Dünya</h3>
+                <p>Üzerinde yaşam barındıran tek gezegendir. Güneş etrafında dolanır, kendi ekseni etrafında döner.</p>
+            </div>
+            <div class="card">
+                <h3>🌙 Ay</h3>
+                <p>Dünyamızın tek doğal uydusudur. Dünya etrafında dolanırken farklı ana ve ara evreler oluşturur.</p>
+            </div>
+        </div>
     </div>
 
-    <!-- Eski Tuşlar / Butonlar -->
-    <div class="button-container">
-        <button class="btn" onclick="alert('Güneş, Dünya ve Ay 1. Üniteye Hoş Geldiniz!')">☀️ 1. Üniteye Git</button>
-        <button class="btn" onclick="alert('Yakında eğlenceli testler eklenecektir!')">📝 Test Çöz</button>
-        <button class="btn" onclick="alert('ASTROFEN - 5. Sınıf Fen Bilimleri Projesi')">ℹ️ Hakkında</button>
-    </div>
-
-    <hr style="border: 0; height: 1px; background: rgba(255,255,255,0.2); width: 60%; margin: 30px auto;">
-
-    <h2>1. Ünite: Güneş, Dünya ve Ay</h2>
-    
-    <div class="cards-container">
-        <div class="card">
-            <h3>☀️ Güneş</h3>
-            <p>Orta büyüklükte bir yıldızdır. Isı ve ışık kaynağımızdır. Kendi ekseni etrafında döner.</p>
-        </div>
-        <div class="card">
-            <h3>🌍 Dünya</h3>
-            <p>Üzerinde yaşam olan tek gezegendir. Güneş etrafında dolanma, kendi ekseni etrafında dönme hareketi yapar.</p>
-        </div>
-        <div class="card">
-            <h3>🌙 Ay</h3>
-            <p>Dünyamızın tek doğal uydusudur. Dünya etrafında dönerken ana evrelerini oluşturur.</p>
+    <!-- İnteraktif Test Bölümü -->
+    <div id="test-bolumu" class="section-container">
+        <h2>📝 Küçük Fen Testi</h2>
+        <div class="quiz-box">
+            <div class="quiz-question" id="q-text">Soru 1: Dünyamızın tek doğal uydusu hangisidir?</div>
+            <div class="quiz-options">
+                <button onclick="checkAnswer(false)">A) Güneş</button>
+                <button onclick="checkAnswer(true)">B) Ay</button>
+                <button onclick="checkAnswer(false)">C) Mars</button>
+            </div>
+            <div id="quiz-result"></div>
         </div>
     </div>
+
+    <footer>
+        <p>© 2026 ASTROFEN - Tüm Hakları Saklıdır.</p>
+    </footer>
+
+    <script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function checkAnswer(isCorrect) {
+            const resultEl = document.getElementById('quiz-result');
+            if (isCorrect) {
+                resultEl.style.color = '#00ffcc';
+                resultEl.innerText = "🎉 Tebrikler, doğru cevap!";
+            } else {
+                resultEl.style.color = '#ff4444';
+                resultEl.innerText = "❌ Yanlış cevap, tekrar dene!";
+            }
+        }
+    </script>
 
 </body>
 </html>
