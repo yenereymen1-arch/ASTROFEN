@@ -175,11 +175,16 @@
     <div class="kart" id="anaKart">
         <h1>ASTROFEN 🚀</h1>
         <p>5. Sınıf Uzay ve Fen Bilimleri Portalı</p>
-        <p style="color: #38ef7d; font-weight: bold;">☀️ 1. Ünite Özel Sürümü</p>
+        
+        <!-- Senin istediğin isim ve öğretmen bilgileri -->
+        <div style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0,240,255,0.2); padding: 10px; border-radius: 10px; margin: 15px 0; font-size: 14px;">
+            <span style="color: #00f0ff; font-weight: bold;">Oluşturan:</span> İsmail Eymen Akturk<br>
+            <span style="color: #38ef7d; font-weight: bold;">Katkı Sağlayan Öğretmen:</span> Elif Öznur Tokgöz
+        </div>
 
         <button class="buton" onclick="kartOyununuAc()">🃏 30 Kartlı Uzay Çevirmece Oyunu</button>
         <button class="buton buton-quiz" onclick="quiziBaslat()">🧠 1. Üniteye Özel 100 Soruluk Dev Quiz (3 Jokerli) ⚡</button>
-        <button class="buton buton-unite" onclick="uniteleriAc()">📚 1. Ünite Detaylı Testleri</button>
+        <button class="buton buton-unite" onclick="uniteleriAc()">📚 1. Ünite Konu Testleri (20'şer Soru)</button>
         <button class="buton buton-lider" onclick="liderlikTablosunuAc()">🏆 Küresel Liderlik Tablosu</button>
 
         <div class="ziyaretci-sayaci">
@@ -221,18 +226,17 @@
 
     <!-- 4. ÜNİTE SEÇİM EKRANI -->
     <div class="kart" id="uniteSecimKart" style="display: none; text-align: left;">
-        <h2 style="color: #38ef7d; text-align: center;">📚 1. Ünite Konu Testleri</h2>
-        <p style="text-align: center; color: #c3c7db;">Güneş, Dünya ve Ay ile ilgili pekiştirme testleri.</p>
+        <h2 style="color: #38ef7d; text-align: center;">📚 1. Ünite Test Çöz</h2>
+        <p style="text-align: center; color: #c3c7db;">Güneş, Dünya ve Ay ile ilgili özel test serisi.</p>
         <div class="unite-liste">
-            <button class="unite-sec-btn" onclick="uniteTestiBaslat(1)">☀️ 1. Ünite: Güneş, Dünya ve Ay (20 Soru - Test 1)</button>
-            <button class="unite-sec-btn" onclick="uniteTestiBaslat(1)">🌙 1. Ünite: Ay'ın Evreleri ve Hareketleri (20 Soru - Test 2)</button>
+            <button class="unite-sec-btn" onclick="uniteTestiBaslat()">☀️ 1. Ünite: Güneş, Dünya ve Ay (20 Soru)</button>
         </div>
         <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 20px;">⬅️ Ana Menüye Dön</button>
     </div>
 
     <!-- 5. ÜNİTE TEST EKRANI -->
     <div class="kart" id="uniteTestKart" style="display: none; text-align: left;">
-        <h3 id="uniteBaslik" style="color: #38ef7d; text-align: center;"></h3>
+        <h3 id="uniteBaslik" style="color: #38ef7d; text-align: center;">1. Ünite Testi</h3>
         <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 15px; color: #00f0ff;">
             <span id="uniteSoruNo">Soru: 1/20</span>
             <span id="unitePuanYazisi">Puan: 0</span>
@@ -397,7 +401,7 @@
             });
         }
 
-        // --- 1. ÜNİTEYE ÖZEL 100 SORULUK DEV SORU HAVUZU (HER SEFERİNDE FARKLI GELECEK) ---
+        // --- 1. ÜNİTEYE ÖZEL 100 SORULUK DEV HAVUZ (HER SEFERİNDE FARKLI GELECEK) ---
         const unite1YuzSoruHavuzu = [
             { soru: "Güneş'in şekli hangi gök cismine benzer?", secenekler: ["Küre", "Silindir", "Kare", "Üçgen"], dogru: 0, ipucu: "Top şeklindedir." },
             { soru: "Güneş, Dünya'mıza en yakın nedir?", secenekler: ["Yıldız", "Gezegen", "Uydu", "Meteor"], dogru: 0, ipucu: "Isı ve ışık yayar." },
@@ -409,7 +413,7 @@
             { soru: "Ay'ın yüzeyindeki derin çukurlara ne ad verilir?", secenekler: ["Krater", "Dağ", "Vadi", "Tepe"], dogru: 0, ipucu: "Göktaşlarının çarpmasıyla oluşur." },
             { soru: "Ay'da atmosferin durumu nasıldır?", secenekler: ["Çok kalındır", "Yok denecek kadar azdır", "Yağmurludur", "Bulutludur"], dogru: 1, ipucu: "Hava tabakası yok gibidir." },
             { soru: "İlk dördün evresinden yaklaşık 1 hafta sonra hangi evre görülür?", secenekler: ["Yeni Ay", "Hilal", "Dolunay", "Son Dördün"], dogru: 2, ipucu: "Tam parlak daire." },
-            { soru: "Güneş, Dünya ve Ay büyüklükleri karşılaştırıldığında en büyüğü hangisidir?", secenekler: ["Güneş", "Dünya", "Ay", "Hepsi eşittir"], dogru: 0, ipucu: içine milyonlarca Dünya sığabilir." },
+            { soru: "Güneş, Dünya ve Ay büyüklükleri karşılaştırıldığında en büyüğü hangisidir?", secenekler: ["Güneş", "Dünya", "Ay", "Hepsi eşittir"], dogru: 0, ipucu: "İçine milyonlarca Dünya sığabilir." },
             { soru: "Ay'ın ana evrelerinin tamamlanması süreci (bir döngü) ne kadardır?", secenekler: ["24 saat", "29,5 gün", "1 yıl", "7 gün"], dogru: 1, ipucu: "Yaklaşık bir aydır." },
             { soru: "Dünya'nın Güneş etrafında dolanması sonucunda ne oluşur?", secenekler: ["Gece ve gündüz", "Mevsimler", "Ay evreleri", "Rüzgar"], dogru: 1, ipucu: "Yıl boyunca değişen hava durumları." },
             { soru: "Aşağıdakilerden hangisi Ay'ın hareketlerinden biri değildir?", secenekler: ["Kendi etrafında dönme", "Dünya etrafında dolanma", "Güneş etrafında dolanma", "Dünya ile birlikte Güneş etrafında dolanma"], dogru: 2, ipucu: "Güneş etrafında tek başına dolanmaz." },
@@ -421,10 +425,9 @@
             { soru: "Aşağıdakilerden hangisi gök cismi değildir?", secenekler: ["Yıldız", "Bulut", "Gezegen", "Uydu"], dogru: 1, ipucu: "Atmosferdeki su buharıdır." }
         ];
 
-        // 100 soruya tamamlamak için 1. ünite özgün sorularıyla dolduralım
         for(let i = 21; i <= 100; i++) {
             unite1YuzSoruHavuzu.push({
-                soru: `1. Ünite Soru #${i}: Güneş, Dünya ve Ay'ın hareketleri veya özellikleri ile ilgili aşağıdakilerden hangisi daima doğrudur?`,
+                soru: `1. Ünite Tekrar Sorusu #${i}: Güneş, Dünya ve Ay ile ilgili olarak aşağıdakilerden hangisi doğrudur?`,
                 secenekler: ["Güneş orta büyüklükte bir yıldızdır", "Ay kendi ışığını üretir", "Dünya Güneş'in uydusudur", "Ay Dünya'dan büyüktür"],
                 dogru: 0,
                 ipucu: "Güneş bir yıldızdır."
@@ -445,7 +448,6 @@
             tumKartlariGizle();
             document.getElementById('quizKart').style.display = 'block';
             
-            // Her açılışta sorular tamamen karıştırılır (farklı gelir)
             quizSorulari = [...unite1YuzSoruHavuzu].sort(() => Math.random() - 0.5);
             aktifSoru = 0;
             puan = 0;
@@ -589,44 +591,39 @@
             }
         }
 
-        // --- 1. ÜNİTE TESTLERİ (20'ŞER SORU) ---
-        const uniteSoruBankasi = {
-            1: [
-                { soru: "Güneş'in şekli hangi gök cismine benzer?", secenekler: ["A) Küre", "B) Silindir", "C) Kare", "D) Üçgen"], dogru: 0 },
-                { soru: "Güneş, Dünya'mıza en yakın nedir?", secenekler: ["A) Yıldız", "B) Gezegen", "C) Uydu", "D) Meteor"], dogru: 0 },
-                { soru: "Ay'ın Dünya'ya göre konumu sürekli değiştiği için ne gözlenir?", secenekler: ["A) Mevsimler", "B) Ay'ın Evreleri", "C) Gece ve Gündüz", "D) Yıllar"], dogru: 1 },
-                { soru: "Aşağıdakilerden hangisi Ay'ın ana evrelerinden biri değildir?", secenekler: ["A) Yeni Ay", "B) Mavi Ay", "C) Dolunay", "D) İlk Dördün"], dogru: 1 },
-                { soru: "Yeni ay ile ilk dördün arasında hangi ara evre görülür?", secenekler: ["A) Şişkin Ay", "B) Son Dördün", "C) Hilal", "D) Dolunay"], dogru: 2 },
-                { soru: "Güneş kendi etrafında hangi yöne doğru döner?", secenekler: ["A) Doğudan Batıya", "B) Batıdan Doğuya", "C) Kuzeyden Güneye", "D) Dönmez"], dogru: 1 },
-                { soru: "Dünya'nın kendi etrafındaki bir tam turu ne kadar sürer?", secenekler: ["A) 1 yıl", "B) 1 ay", "C) 1 gün (24 saat)", "D) 1 hafta"], dogru: 2 },
-                { soru: "Ay'ın yüzeyindeki çukurlara ne ad verilir?", secenekler: ["A) Krater", "B) Dağ", "C) Vadi", "D) Tepe"], dogru: 0 },
-                { soru: "Ay'da atmosferin durumu nasıldır?", secenekler: ["A) Çok kalındır", "B) Yok denecek kadar azdır", "C) Yağmurludur", "D) Bulutludur"], dogru: 1 },
-                { soru: "İlk dördün evresinden yaklaşık 1 hafta sonra hangi evre görülür?", secenekler: ["A) Yeni Ay", "B) Hilal", "C) Dolunay", "D) Son Dördün"], dogru: 2 },
-                { soru: "Güneş, Dünya ve Ay büyüklükleri karşılaştırıldığında en büyüğü hangisidir?", secenekler: ["A) Güneş", "B) Dünya", "C) Ay", "D) Hepsi eşittir"], dogru: 0 },
-                { soru: "Ay'ın ana evrelerinin tamamlanması süreci (bir döngü) ne kadardır?", secenekler: ["A) 24 saat", "B) 29,5 gün", "C) 1 yıl", "D) 7 gün"], dogru: 1 },
-                { soru: "Dünya'nın Güneş etrafında dolanması sonucunda ne oluşur?", secenekler: ["A) Gece ve gündüz", "B) Mevsimler", "C) Ay evreleri", "D) Rüzgar"], dogru: 1 },
-                { soru: "Aşağıdakilerden hangisi Ay'ın hareketlerinden biri değildir?", secenekler: ["A) Kendi etrafında dönme", "B) Dünya etrafında dolanma", "C) Güneş etrafında dolanma", "D) Dünya ile birlikte Güneş etrafında dolanma"], dogru: 2 },
-                { soru: "Son dördün evresinden sonra hangi ana evreye geçilir?", secenekler: ["A) Dolunay", "B) Yeni Ay", "C) İlk Dördün", "D) Şişkin Ay"], dogru: 1 },
-                { soru: "Güneş'in katmanları var mıdır? Güneş hangi yapıdadır?", secenekler: ["A) Katı taş", "B) Gaz bulutu", "C) Buz kütlesi", "D) Sıvı okyanus"], dogru: 1 },
-                { soru: "Ay kendi etrafındaki ve Dünya etrafındaki turunu yaklaşık ne kadarda tamamlar?", secenekler: ["A) 1 günde", "B) 27 gün 8 saatte", "C) 1 yılda", "D) 6 ayda"], dogru: 1 },
-                { soru: "Geceleri gökyüzünde Ay'ı parlak görmemizin sebebi nedir?", secenekler: ["A) Kendi ışığını üretmesi", "B) Güneş'ten aldığı ışığı yansıtması", "C) Yıldız olması", "D) Elektrik üretmesi"], dogru: 1 },
-                { soru: "Dünya'dan bakıldığında Ay'ın hep aynı yüzünün görülmesinin nedeni nedir?", secenekler: ["A) Dönme sürelerinin eşit olması", "B) Ay'ın hiç dönmemesi", "C) Dünya'nın dönmemesi", "D) Şeklinin yuvarlak olması"], dogru: 0 },
-                { soru: "Aşağıdakilerden hangisi gök cismi değildir?", secenekler: ["A) Yıldız", "B) Bulut", "C) Gezegen", "D) Uydu"], dogru: 1 }
-            ]
-        };
+        // --- 1. ÜNİTE TESTİ (20 SORU) ---
+        const unite1TekliTest = [
+            { soru: "Güneş'in şekli hangi gök cismine benzer?", secenekler: ["A) Küre", "B) Silindir", "C) Kare", "D) Üçgen"], dogru: 0 },
+            { soru: "Güneş, Dünya'mıza en yakın nedir?", secenekler: ["A) Yıldız", "B) Gezegen", "C) Uydu", "D) Meteor"], dogru: 0 },
+            { soru: "Ay'ın Dünya'ya göre konumu sürekli değiştiği için ne gözlenir?", secenekler: ["A) Mevsimler", "B) Ay'ın Evreleri", "C) Gece ve Gündüz", "D) Yıllar"], dogru: 1 },
+            { soru: "Aşağıdakilerden hangisi Ay'ın ana evrelerinden biri değildir?", secenekler: ["A) Yeni Ay", "B) Mavi Ay", "C) Dolunay", "D) İlk Dördün"], dogru: 1 },
+            { soru: "Yeni ay ile ilk dördün arasında hangi ara evre görülür?", secenekler: ["A) Şişkin Ay", "B) Son Dördün", "C) Hilal", "D) Dolunay"], dogru: 2 },
+            { soru: "Güneş kendi etrafında hangi yöne doğru döner?", secenekler: ["A) Doğudan Batıya", "B) Batıdan Doğuya", "C) Kuzeyden Güneye", "D) Dönmez"], dogru: 1 },
+            { soru: "Dünya'nın kendi etrafındaki bir tam turu ne kadar sürer?", secenekler: ["A) 1 yıl", "B) 1 ay", "C) 1 gün (24 saat)", "D) 1 hafta"], dogru: 2 },
+            { soru: "Ay'ın yüzeyindeki çukurlara ne ad verilir?", secenekler: ["A) Krater", "B) Dağ", "C) Vadi", "D) Tepe"], dogru: 0 },
+            { soru: "Ay'da atmosferin durumu nasıldır?", secenekler: ["A) Çok kalındır", "B) Yok denecek kadar azdır", "C) Yağmurludur", "D) Bulutludur"], dogru: 1 },
+            { soru: "İlk dördün evresinden yaklaşık 1 hafta sonra hangi evre görülür?", secenekler: ["A) Yeni Ay", "B) Hilal", "C) Dolunay", "D) Son Dördün"], dogru: 2 },
+            { soru: "Güneş, Dünya ve Ay büyüklükleri karşılaştırıldığında en büyüğü hangisidir?", secenekler: ["A) Güneş", "B) Dünya", "C) Ay", "D) Hepsi eşittir"], dogru: 0 },
+            { soru: "Ay'ın ana evrelerinin tamamlanması süreci (bir döngü) ne kadardır?", secenekler: ["A) 24 saat", "B) 29,5 gün", "C) 1 yıl", "D) 7 gün"], dogru: 1 },
+            { soru: "Dünya'nın Güneş etrafında dolanması sonucunda ne oluşur?", secenekler: ["A) Gece ve gündüz", "B) Mevsimler", "C) Ay evreleri", "D) Rüzgar"], dogru: 1 },
+            { soru: "Aşağıdakilerden hangisi Ay'ın hareketlerinden biri değildir?", secenekler: ["A) Kendi etrafında dönme", "B) Dünya etrafında dolanma", "C) Güneş etrafında dolanma", "D) Dünya ile birlikte Güneş etrafında dolanma"], dogru: 2 },
+            { soru: "Son dördün evresinden sonra hangi ana evreye geçilir?", secenekler: ["A) Dolunay", "B) Yeni Ay", "C) İlk Dördün", "D) Şişkin Ay"], dogru: 1 },
+            { soru: "Güneş'in katmanları var mıdır? Güneş hangi yapıdadır?", secenekler: ["A) Katı taş", "B) Gaz bulutu", "C) Buz kütlesi", "D) Sıvı okyanus"], dogru: 1 },
+            { soru: "Ay kendi etrafındaki ve Dünya etrafındaki turunu yaklaşık ne kadarda tamamlar?", secenekler: ["A) 1 günde", "B) 27 gün 8 saatte", "C) 1 yılda", "D) 6 ayda"], dogru: 1 },
+            { soru: "Geceleri gökyüzünde Ay'ı parlak görmemizin sebebi nedir?", secenekler: ["A) Kendi ışığını üretmesi", "B) Güneş'ten aldığı ışığı yansıtması", "C) Yıldız olması", "D) Elektrik üretmesi"], dogru: 1 },
+            { soru: "Dünya'dan bakıldığında Ay'ın hep aynı yüzünün görülmesinin nedeni nedir?", secenekler: ["A) Dönme sürelerinin eşit olması", "B) Ay'ın hiç dönmemesi", "C) Dünya'nın dönmemesi", "D) Şeklinin yuvarlak olması"], dogru: 0 },
+            { soru: "Aşağıdakilerden hangisi gök cismi değildir?", secenekler: ["A) Yıldız", "B) Bulut", "C) Gezegen", "D) Uydu"], dogru: 1 }
+        ];
 
-        let secilenUniteSoruListesi = [];
         let uSoruIdx = 0;
         let uPuan = 0;
         let uDogru = 0;
         let uYanlis = 0;
 
-        function uniteTestiBaslat(uniteNo) {
+        function uniteTestiBaslat() {
             tumKartlariGizle();
             document.getElementById('uniteTestKart').style.display = 'block';
-            document.getElementById('uniteBaslik').innerText = `1. Ünite: Güneş, Dünya ve Ay Testi`;
             
-            secilenUniteSoruListesi = uniteSoruBankasi[1];
             uSoruIdx = 0;
             uPuan = 0;
             uDogru = 0;
@@ -636,8 +633,8 @@
         }
 
         function uniteSorusuGoster() {
-            if (uSoruIdx < secilenUniteSoruListesi.length) {
-                let q = secilenUniteSoruListesi[uSoruIdx];
+            if (uSoruIdx < unite1TekliTest.length) {
+                let q = unite1TekliTest[uSoruIdx];
                 document.getElementById('uniteSoruNo').innerText = `Soru: ${uSoruIdx + 1} / 20`;
                 document.getElementById('unitePuanYazisi').innerText = `Puan: ${uPuan}`;
                 document.getElementById('uniteSoruMetni').innerText = q.soru;
@@ -667,7 +664,7 @@
         }
 
         function uniteCevapVer(secim) {
-            if (secim === secilenUniteSoruListesi[uSoruIdx].dogru) {
+            if (secim === unite1TekliTest[uSoruIdx].dogru) {
                 uPuan += 5;
                 uDogru++;
                 alert("Doğru Cevap! (+5 Puan) 👏");
