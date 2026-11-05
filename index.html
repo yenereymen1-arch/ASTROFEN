@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASTROFEN - 5. Sınıf Uzay ve Fen Macerası</title>
     
-    <!-- Firebase SDK (Küresel Liderlik Tablosu İçin) -->
+    <!-- Firebase SDK (Küresel Liderlik Tablosu ve Sayaç İçin) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
 
@@ -188,7 +188,7 @@
         <button class="buton buton-lider" onclick="liderlikTablosunuAc()">🏆 Küresel Liderlik Tablosu</button>
 
         <div class="ziyaretci-sayaci">
-            👀 Bu siteyi toplam <span id="sayacDegeri" style="color: #00f0ff; font-weight: bold;">142</span> kişi ziyaret etti.
+            👀 Bu siteyi toplam <span id="sayacDegeri" style="color: #00f0ff; font-weight: bold;">Yükleniyor...</span> kişi ziyaret etti.
         </div>
     </div>
 
@@ -283,29 +283,29 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
-        // --- ZİYARETÇİ SAYACI ---
+        // --- FIREBASE TABANLI GERÇEK ZİYARETÇİ SAYACI ---
         document.addEventListener("DOMContentLoaded", function() {
-            let siteZiyaretEdildi = sessionStorage.getItem("astrofen_oturum_acildi");
-            let apiURL = "https://api.countapi.xyz/hit/astrofen-portal-5sinif/ziyaretci";
-            
-            if (!siteZiyaretEdildi) {
-                sessionStorage.setItem("astrofen_oturum_acildi", "evet");
-                fetch(apiURL)
-                    .then(response => response.json())
-                    .then(data => { document.getElementById("sayacDegeri").innerText = data.value; })
-                    .catch(error => { kurtarmaSayaciGetir(); });
+            let oturumAcildi = sessionStorage.getItem("astrofen_oturum_sayildi");
+            let sayacRef = db.ref("ziyaretciSayisi");
+
+            if (!oturumAcildi) {
+                // Bu tarayıcı sekməsinde ilk kez açılıyorsa sayacı 1 artır
+                sessionStorage.setItem("astrofen_oturum_sayildi", "evet");
+                sayacRef.transaction(function(currentValue) {
+                    return (currentValue || 142) + 1;
+                }, function(error, committed, snapshot) {
+                    if (!error && committed) {
+                        document.getElementById("sayacDegeri").innerText = snapshot.val();
+                    }
+                });
             } else {
-                fetch("https://api.countapi.xyz/get/astrofen-portal-5sinif/ziyaretci")
-                    .then(response => response.json())
-                    .then(data => { document.getElementById("sayacDegeri").innerText = data.value; })
-                    .catch(error => { kurtarmaSayaciGetir(); });
+                // Sadece mevcut sayıyı oku, artırma
+                sayacRef.once("value", function(snapshot) {
+                    let deger = snapshot.val() || 142;
+                    document.getElementById("sayacDegeri").innerText = deger;
+                });
             }
         });
-
-        function kurtarmaSayaciGetir() {
-            let yerelSayi = localStorage.getItem("astrofen_gercek_sayac") || 142;
-            document.getElementById("sayacDegeri").innerText = yerelSayi;
-        }
 
         let timerInterval = null;
 
