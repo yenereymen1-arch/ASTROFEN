@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+ç<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASTROFEN - 5. Sınıf Uzay ve Fen Bilimleri Portalı</title>
     
-    <!-- Tasarım dosyamızı bağlıyoruz -->
+    <!-- Tasarım dosyamız -->
     <link rel="stylesheet" href="style.css">
     
-    <!-- Firebase SDK (Compat Sürümü) -->
+    <!-- Firebase Canlı Sayaç için -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 </head>
@@ -17,12 +17,12 @@
     <h1>🚀 ASTROFEN 🪐</h1>
     <p>5. Sınıf 1. Ünite Uzay ve Fen Bilimleri Portalı</p>
 
-    <!-- Canlı Ziyaretçi Sayacı -->
+    <!-- Ziyaretçi Sayacı -->
     <div style="font-size: 14px; color: #00f0ff; margin-bottom: 10px;">
         👁️ Canlı Ziyaretçi Sayısı: <span id="ziyaretciSayisi">Yükleniyor...</span>
     </div>
 
-    <!-- Emeği Geçenler Künyesi -->
+    <!-- Künye: Kişiler ve Ekip -->
     <div class="kart" style="padding: 15px; margin: 15px auto; text-align: left;">
         <span style="color: #00f0ff; font-weight: bold;">Oluşturan:</span> İsmail Eymen Aktürk<br>
         <span style="color: #38ef7d; font-weight: bold;">Katkı Sağlayan Öğretmen:</span> Elif Öznur Tokgöz<br>
@@ -32,50 +32,59 @@
     <!-- ANA MENÜ -->
     <div class="kart" id="anaMenu">
         <h2>Ana Menü</h2>
-        <button class="buton" onclick="kartOyununuAc()">🃏 60 Kartlı Uzay Eşleştirme</button>
-        <button class="buton" onclick="quizEkraniniAc()">📝 1. Ünite 100 Soruluk Sınav</button>
+        <button class="buton" onclick="kartOyununuAc()">🃏 60 Kartlık Uzay Eşleştirme</button>
+        <button class="buton" onclick="quizEkraniniAc()">📝 1. Ünite Sınav Sistemi</button>
+        <button class="buton" onclick="videoEkraniniAc()">🎬 1. Ünite Ders Videoları</button>
     </div>
 
     <!-- 60 KARTLI EŞLEŞTİRME OYUNU EKRANI -->
     <div class="kart" id="kartOyunKart" style="display: none; max-width: 900px;">
-        <h2 style="color: #00f0ff;">🃏 60 Kartlı (30 Çift) Uzay Eşleştirme</h2>
-        <p>60 kart (30 çift) içinden aynı uzay simgelerini bulup eşleştir!</p>
+        <h2 style="color: #00f0ff;">🃏 60 Kartlık (30 Çift) Uzay Eşleştirme</h2>
+        <p>60 kart içinden aynı uzay simgelerini bulup eşleştir!</p>
         <div class="kart-grid-60" id="kartAlani"></div>
         <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d; margin-top: 20px;">⬅️ Ana Menüye Dön</button>
     </div>
 
-    <!-- 100 SORULUK QUIZ / SINAV EKRANI -->
+    <!-- QUIZ / SINAV EKRANI -->
     <div class="kart" id="quizEkran" style="display: none; max-width: 700px;">
-        <h2 style="color: #00f0ff;">📝 1. Ünite 100 Soruluk Fen Bilimleri Sınavı</h2>
-        <div id="soruAlani" style="text-align: left; margin: 20px 0; font-size: 16px;">
-            <!-- Sorular burada yüklenecek -->
-        </div>
+        <h2 style="color: #00f0ff;">📝 1. Ünite Fen Bilimleri Sınavı</h2>
+        <div id="soruAlani" style="text-align: left; margin: 20px 0; font-size: 16px;"></div>
         <div id="quizSonuc" style="font-size: 18px; color: #38ef7d; font-weight: bold; margin: 15px 0;"></div>
         <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d;">⬅️ Ana Menüye Dön</button>
     </div>
 
+    <!-- VİDEO EKRANI -->
+    <div class="kart" id="videoEkran" style="display: none; max-width: 700px;">
+        <h2 style="color: #00f0ff;">🎬 1. Ünite Video Anlatımları</h2>
+        <p>Hazırladığın ders videolarını buradan izleyebilirsin:</p>
+        <div style="margin: 20px 0;">
+            <video width="100%" controls style="border-radius: 12px; border: 1px solid rgba(0,240,255,0.3); background: #000;">
+                <source src="video1.mp4" type="video/mp4">
+                Tarayıcınız video oynatmayı desteklemiyor.
+            </video>
+        </div>
+        <button onclick="anaMenuyeDon()" class="buton" style="background: #6c757d;">⬅️ Ana Menüye Dön</button>
+    </div>
+
     <script>
-        // --- FIREBASE AYARLARI VE ZİYARETÇİ SAYACI ---
-        const firebaseConfig = {
-            databaseURL: "https://astrofen-default-rtdb.firebaseio.com/"
-        };
+        // Firebase Canlı Ziyaretçi Sayacı
+        const firebaseConfig = { databaseURL: "https://astrofen-default-rtdb.firebaseio.com/" };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
-
         const sayacRef = db.ref("ziyaretciSayisi");
         sayacRef.transaction(current => (current || 0) + 1);
         sayacRef.on("value", (snapshot) => {
             document.getElementById("ziyaretciSayisi").innerText = snapshot.val() || 1;
         });
 
-        // --- MENÜ GEÇİŞLERİ ---
         function anaMenuyeDon() {
             document.getElementById('kartOyunKart').style.display = 'none';
             document.getElementById('quizEkran').style.display = 'none';
+            document.getElementById('videoEkran').style.display = 'none';
             document.getElementById('anaMenu').style.display = 'block';
         }
 
-        // --- 60 KARTLI (30 ÇİFT) OYUN MANTIĞI ---
+        // 60 Kartlık (30 Çift) Oyun Mantığı
         const tumSemboller = [
             '🚀', '🪐', '🌙', '☀️', '⭐', '👨‍🚀', '☄️', '🛸', '🛰️', '🌌', 
             '👽', '🔭', '🌍', '🌠', '⚡', '👨‍🔬', '🛸', '🛰️', '☄️', '🌟', 
@@ -118,11 +127,11 @@
             });
         }
 
-        // --- 100 SORULUK QUIZ SİSTEMİ ALTYAPISI ---
+        // Quiz / Sınav Sistemi
         const soruBankasi = [
             {
-                soru: "1. Güneş'in şekliküresel midir, yoksa düz müdür?",
-                secenekler: ["Küre şeklindedir", "Düzdür", "Küp şeklindedir", "Üçgendir"],
+                soru: "1. Güneş'in şekli küresel midir?",
+                secenekler: ["Evet, küre şeklindedir", "Hayır, düzdür", "Küp şeklindedir", "Üçgendir"],
                 dogru: 0
             },
             {
@@ -131,11 +140,10 @@
                 dogru: 1
             },
             {
-                soru: "3. Ay kendi etrafındaki ve Dünya etrafındaki turunu yaklaşık kaç günde tamamlar?",
-                secenekler: ["24 saat", "7 gün", "29.5 gün (yaklaşık 1 ay)", "365 gün"],
-                dogru: 2
-            },
-            // 100 soruya kadar bu havuz genişletilebilir
+                soru: "3. Ay'ın ana evreleri kaç tanedir?",
+                secenekler: ["2", "4 ana, 4 ara evre", "10", "1"],
+                dogru: 1
+            }
         ];
 
         let aktifSoruIndex = 0;
@@ -160,7 +168,7 @@
                 });
                 alan.innerHTML = html;
             } else {
-                alan.innerHTML = "<h3>🎉 Sınavı Tamamladın!</h3>";
+                alan.innerHTML = "<h3>🎉 Sınavı Tamamladın! Harika iş çıkardın!</h3>";
                 document.getElementById('quizSonuc').innerText = `Toplam Doğru Sayın: ${dogruSayisi} / ${soruBankasi.length}`;
             }
         }
@@ -172,6 +180,11 @@
             }
             aktifSoruIndex++;
             soruyuGoster();
+        }
+
+        function videoEkraniniAc() {
+            document.getElementById('anaMenu').style.display = 'none';
+            document.getElementById('videoEkran').style.display = 'block';
         }
     </script>
 </body>
